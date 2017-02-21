@@ -4,13 +4,14 @@
 "use strict";
 var
     Configs = require('./config.js'),
-    IntervalManager = require('../utils/intervalmanager');
+    IntervalManager = require('../game/utils/intervalmanager');
 
 module.exports = function (configId_str, userControl_bool) {
     var
-        UserControls = require('../movement/usercontrols'),
+        UserControls = require('../game/utils/usercontrols'),
         directionPoint = {},
         description_obj = Configs(configId_str),
+
         position_rect = description_obj.position,
         updatePos = function (point) {
             for (var n in point) {
@@ -21,14 +22,14 @@ module.exports = function (configId_str, userControl_bool) {
         },
         move = function () {
             var interval = IntervalManager.set(function () {
-                   updatePos ()
-            }, 1000);
+                updatePos ({x: Number (position_rect.x) +5});
+            }, 10);
         };
+        move ();
+    console.log ("description_obj", description_obj);
     if (userControl_bool) {
 
     }
-
-
     return {
         set pos(point) {
             updatePos(point);

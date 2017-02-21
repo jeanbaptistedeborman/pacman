@@ -22,7 +22,20 @@
 </head>
 <body>
 </body>
+
 <script src="node_modules/steal/steal.js" main="js/index"></script>
+
+<script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Action to be performed when the document is read;
+        }
+    };
+    xhttp.open("GET", "test.json", true);
+    xhttp.send();
+
+</script>
 <svg width="400" height="200" viewBox="0 0 400 200">
     <rect id='player' x='5' y ='5' width="10px" height="10px"></rect>
 </svg>

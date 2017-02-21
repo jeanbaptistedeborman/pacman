@@ -15,7 +15,7 @@ module.exports = {
                 interval,
                 initinterval = function () {
                     if (remainingTime > 0) {
-                        interval = window.setinterval(fun, remainingTime);
+                        interval = window.setInterval(fun, remainingTime);
                     }
                 },
                 interval_api = {
