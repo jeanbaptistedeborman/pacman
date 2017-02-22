@@ -3,10 +3,10 @@
  */
 var
     MovingObject = require ('./movingobject');
-    playerAvatar_obj = MovingObject ('playerAvatar');
+    playerAvatar_obj = MovingObject ('playerAvatar', true);
 
 module.exports = {
     movePlayerAvatarTo : function (point) {
             playerAvatar_obj.pos = point;
     }
-}
+};
