@@ -5,6 +5,15 @@
 var
     position_point = null,
     app_el = document.getElementById('app_js'),
+    setCoordinates = function (evt) {
+        var isMouse_bool = !evt.changedTouches;
+        if (isMouse_bool) {
+            position_point = {x: evt.clientX, y: evt.clientY};
+        } else {
+            var touch = evt.changedTouches[0];
+            position_point = {x: touch.clientX, y: touch.clientY};
+        }
+    },
     stopListening = function () {
         app_el.removeEventListener("mousemove", mouseMove);
         app_el.removeEventListener("touchMove", mouseMove);
@@ -13,18 +22,25 @@ var
     mouseMove = function (evt) {
         console.log('mouseMove');
         evt.preventDefault();
-        position_point = {x: evt.clientX, y: evt.clientY};
+        setCoordinates (evt);
     },
     mouseDown = function (evt) {
-        app_el.addEventListener("touchmove", mouseMove);
         app_el.addEventListener("mousemove", mouseMove);
-        position_point = {x: evt.clientX, y: evt.clientY};
+        setCoordinates (evt);
     };
 app_el.addEventListener("mouseleave", stopListening);
+app_el.addEventListener("touchmove", mouseMove);
 app_el.addEventListener("mousedown", mouseDown);
 app_el.addEventListener("touchstart", mouseDown);
 app_el.addEventListener("mouseup", stopListening);
 app_el.addEventListener("touchend", stopListening);
+
+
+/* @todo: remove */
+var test = function (evt) {
+    console.log("touchstart received :", evt);
+};
+app_el.addEventListener("touchstart", test);
 
 module.exports = {
     get position() {

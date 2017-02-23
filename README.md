@@ -1,5 +1,5 @@
 # pacman
 A pacamanlike game on the languages in the EU.
-Previews :
+Preview urls :
 - http://linguagopreview.azurewebsites.net/
 

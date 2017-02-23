@@ -9,15 +9,21 @@
     body
     {
         margin:0;
+        touch-action: none;
     }
     rect {
-        fill:orange;
+        fill:black;
     }
     svg {
         -ms-touch-action: none;
-        background:yellow;
+        background:blue;
         width:100%;
         height:auto;
+
+
+    }
+    svg #background {
+        fill:orange;
     }
 
 </style>
@@ -29,6 +35,8 @@
 <script src="node_modules/steal/steal.js" main="js/index"></script>
 
 <svg id='app_js' width="400" height="200" viewBox="0 0 400 200">
+    <rect id='background' x='0' y ='0' width="400" height="200"></rect>
     <rect id='player' x='5' y ='5' width="10px" height="10px"></rect>
+
 </svg>
 </html>
