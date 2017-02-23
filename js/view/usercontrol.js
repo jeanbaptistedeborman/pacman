@@ -10,8 +10,8 @@
  */
 
 
-var MouseControl = require("../game/ui/mousecontrol"),
-    KeyControls = require("../game/ui/keycontrols"),
+var MouseControl = require("../game/ui/mouseandtouch"),
+    KeyControls = require("../game/ui/keyboard"),
     SvgUtils = require("../game/utils/svgutils"),
     Config = require("./config"),
     stage_el = Config("stage").dom_el;

@@ -7,19 +7,24 @@ var
     app_el = document.getElementById('app_js'),
     stopListening = function () {
         app_el.removeEventListener("mousemove", mouseMove);
+        app_el.removeEventListener("touchMove", mouseMove);
         position_point = null;
     },
     mouseMove = function (evt) {
         console.log('mouseMove');
+        evt.preventDefault();
         position_point = {x: evt.clientX, y: evt.clientY};
     },
     mouseDown = function (evt) {
+        app_el.addEventListener("touchmove", mouseMove);
         app_el.addEventListener("mousemove", mouseMove);
         position_point = {x: evt.clientX, y: evt.clientY};
     };
 app_el.addEventListener("mouseleave", stopListening);
 app_el.addEventListener("mousedown", mouseDown);
+app_el.addEventListener("touchstart", mouseDown);
 app_el.addEventListener("mouseup", stopListening);
+app_el.addEventListener("touchend", stopListening);
 
 module.exports = {
     get position() {
