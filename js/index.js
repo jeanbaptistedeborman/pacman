@@ -3,7 +3,7 @@
  */
 
 var display = require ('./view/display');
-display.movePlayerAvatarTo({x:200, y:200});
+display.movePlayerAvatarTo({x:200, y:100});
 
 
 exports = {};
