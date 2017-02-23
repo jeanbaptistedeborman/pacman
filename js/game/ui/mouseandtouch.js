@@ -6,6 +6,7 @@ var
     position_point = null,
     app_el = document.getElementById('app_js'),
     setCoordinates = function (evt) {
+        console.log ("setCoordinates", evt);
         var isMouse_bool = !evt.changedTouches;
         if (isMouse_bool) {
             position_point = {x: evt.clientX, y: evt.clientY};
@@ -14,17 +15,20 @@ var
             position_point = {x: touch.clientX, y: touch.clientY};
         }
     },
-    stopListening = function () {
+    stopListening = function (evt) {
+        evt.preventDefault();
         app_el.removeEventListener("mousemove", mouseMove);
         app_el.removeEventListener("touchMove", mouseMove);
         position_point = null;
     },
     mouseMove = function (evt) {
+        evt.preventDefault();
         console.log('mouseMove');
         evt.preventDefault();
         setCoordinates (evt);
     },
     mouseDown = function (evt) {
+        evt.preventDefault();
         app_el.addEventListener("mousemove", mouseMove);
         setCoordinates (evt);
     };
