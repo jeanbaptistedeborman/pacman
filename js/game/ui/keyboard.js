@@ -7,7 +7,6 @@ var pressedKey_str,
     body_el = document.getElementsByTagName('body')[0];
 
 body_el.onkeydown = function (evt) {
-    console.log('key :', evt);
     lastPressedKey_str = pressedKey_str = evt.key;
 };
 body_el.onkeyup = function () {

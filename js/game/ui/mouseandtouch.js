@@ -6,7 +6,6 @@ var
     position_point = null,
     app_el = document.getElementById('app_js'),
     setCoordinates = function (evt) {
-        console.log ("setCoordinates", evt);
         var isMouse_bool = !evt.changedTouches;
         if (isMouse_bool) {
             position_point = {x: evt.clientX, y: evt.clientY};
@@ -23,7 +22,6 @@ var
     },
     mouseMove = function (evt) {
         evt.preventDefault();
-        console.log('mouseMove');
         evt.preventDefault();
         setCoordinates (evt);
     },
@@ -38,13 +36,6 @@ app_el.addEventListener("mousedown", mouseDown);
 app_el.addEventListener("touchstart", mouseDown);
 app_el.addEventListener("mouseup", stopListening);
 app_el.addEventListener("touchend", stopListening);
-
-
-/* @todo: remove */
-var test = function (evt) {
-    console.log("touchstart received :", evt);
-};
-app_el.addEventListener("touchstart", test);
 
 module.exports = {
     get position() {

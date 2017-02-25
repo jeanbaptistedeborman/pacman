@@ -10,10 +10,10 @@
  */
 
 
-var MouseControl = require("../game/ui/mouseandtouch"),
-    KeyControls = require("../game/ui/keyboard"),
-    SvgUtils = require("../game/utils/svgutils"),
-    Config = require("./config"),
+var MouseControl = require("./mouseandtouch"),
+    KeyControls = require("./keyboard"),
+    SvgUtils = require("../utils/svgutils"),
+    Config = require("../../view/config"),
     stage_el = Config("stage").dom_el;
 
 module.exports = {
@@ -45,15 +45,12 @@ module.exports = {
             return direction_obj;
         }
         if (objectPosition_point && stage_el && MouseControl.position) {
-
-            console.log();
             var
                 mouseSVG_point = SvgUtils.coordinateTransform(stage_el, MouseControl.position),
                 diffs_obj = {
                     x: mouseSVG_point.x - objectPosition_point.x,
                     y: mouseSVG_point.y - objectPosition_point.y
                 };
-            console.log("diffs_ob : ", diffs_obj);
             if (Math.abs(diffs_obj.x) > Math.abs(diffs_obj.y)) {
                 return {
                     x: diffs_obj.x / Math.abs(diffs_obj.x),
