@@ -3,17 +3,18 @@
  */
 
 var
-    Config  = require ('./view/config'),
-    display = require ('./view/display');
+    Obstacle = require ('./view/obstacle');
 
 
 
-display.movePlayerAvatarTo({x:0, y:0});
+for (var n =0; n<40; n++) {
+    Obstacle.add ();
+}
+
+display = require('./view/display');
 
 
-
-
-
+display.movePlayerAvatarTo({x: 0, y: 0});
 
 
 exports = {};

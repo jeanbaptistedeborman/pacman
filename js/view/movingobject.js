@@ -6,19 +6,27 @@ var
     Config = require('./config'),
     UserControls = require('../game/ui/usercontrol'),
     IntervalManager = require('../game/utils/intervalmanager'),
+    Obstacles = require('./obstacle'),
     gridSize_num = Config('stage').gridSize;
 
 var utils = {
     isAllowed: function (point) {
-        console.log (point);
         var
             isInStage = function (point) {
                 var stage_rect = Config('stage').position,
                     isAboveMin_bool = point.x >= 0 && point.y >= 0,
                     isBelowMin_bool = point.x <= stage_rect.width && point.y <= stage_rect.height;
                 return isAboveMin_bool && isBelowMin_bool;
+            },
+            isNotObstacle = function (point) {
+                var
+                    obstacles_array = Obstacles.obstacles;
+                return obstacles_array.filter(function (obstacle_obj) {
+                        return point.x === obstacle_obj.position.x && point.y === obstacle_obj.position.y;
+                    }).length !== 1;
+
             };
-        return isInStage(point);
+        return isInStage(point) && isNotObstacle(point);
     }
 };
 
@@ -29,7 +37,6 @@ module.exports = function (configId_str, userControl_bool) {
         position_rect = description_obj.position,
         updatePos = function (point) {
             for (var n in point) {
-                var value_num = point[n];
                 position_rect[n] = point[n];
             }
             description_obj.dom_el.setAttribute("x", position_rect.x);
@@ -39,21 +46,21 @@ module.exports = function (configId_str, userControl_bool) {
             var
                 SPEED_NUM = gridSize_num,
                 setAxisPosition = function (propName_str) {
-                    if (isNaN (direction_obj[propName_str])) {
+                    if (isNaN(direction_obj[propName_str])) {
                         direction_obj[propName_str] = 0;
                     }
                     return position_rect[propName_str] + (direction_obj[propName_str] * SPEED_NUM)
                 },
                 newPos_point =
                 {
-                    x: setAxisPosition ('x'),
-                    y: setAxisPosition ('y')
+                    x: setAxisPosition('x'),
+                    y: setAxisPosition('y')
                 };
 
-            if (utils.isAllowed (newPos_point)) {
+            if (utils.isAllowed(newPos_point)) {
                 updatePos(newPos_point);
             } else {
-                console.log ('not allowed');
+                console.log('not allowed');
             }
         },
         move = function () {
