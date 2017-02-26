@@ -10,6 +10,7 @@
 <style>
     body, html {
         height:100%;
+        overflow:hidden;
     }
     body
     {
@@ -20,13 +21,13 @@
     }
     svg {
         touch-action: none;
+        user-select:none;
         background:blue;
         width:100%;
         height:100%;
     }
     svg #background {
         fill:yellow;
-        stroke:red;
     }
 
 </style>
@@ -35,7 +36,7 @@
 <body>
 <svg preserveAspectRatio="xMidYMin" id='app_js' width="400" height="300" viewBox="0 0 400 300">
     <rect id='background' x='0' y ='0' width="400" height="300"></rect>
-    <rect fill='black' id='player' x='10' y ='10' width="10" height="10"></rect>
+    <rect fill='white' id='player' x='10' y ='10' width="10" height="10"></rect>
     <line x1="0" y1="295" x2="400" y2="295" stroke-width="1" stroke="black" ></line>
 </svg>
 <script src="node_modules/steal/steal.js" main="js/index"></script>
