@@ -3,18 +3,11 @@
  */
 
 var
-    Obstacle = require ('./view/obstacle');
+    Obstacle = require('./view/obstacle'),
+    MovingObject = require('./view/movingobject'),
+    playerAvatar_obj = MovingObject('playerAvatar', true);
 
-
-
-for (var n =0; n<40; n++) {
-    Obstacle.add ();
+for (var n = 0; n < 200; n++) {
+    Obstacle.add();
 }
-
-display = require('./view/display');
-
-
-display.movePlayerAvatarTo({x: 0, y: 0});
-
-
 exports = {};
