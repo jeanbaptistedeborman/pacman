@@ -11,11 +11,12 @@ var
 
 var utils = {
     isAllowed: function (point) {
+        console.log ('isAllowed: ', point);
         var
             isInStage = function (point) {
                 var stage_rect = Config('stage').position,
                     isAboveMin_bool = point.x >= 0 && point.y >= 0,
-                    isBelowMin_bool = point.x <= stage_rect.width && point.y <= stage_rect.height;
+                    isBelowMin_bool = point.x < stage_rect.width && point.y < stage_rect.height;
                 return isAboveMin_bool && isBelowMin_bool;
             },
             isNotObstacle = function (point) {
@@ -23,8 +24,7 @@ var utils = {
                     obstacles_array = Obstacles.obstacles;
                 return obstacles_array.filter(function (obstacle_obj) {
                         return point.x === obstacle_obj.position.x && point.y === obstacle_obj.position.y;
-                    }).length !== 1;
-
+                    }).length < 1;
             };
         return isInStage(point) && isNotObstacle(point);
     }
