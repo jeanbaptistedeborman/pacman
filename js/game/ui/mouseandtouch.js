@@ -2,6 +2,8 @@
  * Created by Jean-Baptiste on 2/21/2017.
  */
 "use strict";
+
+
 var
     position_point = null,
     app_el = document.getElementById('app_js'),

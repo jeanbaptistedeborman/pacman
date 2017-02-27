@@ -13,14 +13,15 @@
 var MouseControl = require("./mouseandtouch"),
     KeyControls = require("./keyboard"),
     SvgUtils = require("../utils/svgutils"),
+    directionFromTo = require ('../directionfromto'),
     Config = require("../../view/config"),
     stage_el = Config("stage").dom_el;
 
 module.exports = {
     /**
      * @module
-     * @description Aggregates inputs from the keyboard, mouse and touch in order to give a consistent representation of user inputs.
-     * @param {Point} objectPosition_point The position of the moving object in order to compare the mouse position with the objects position.
+     * @description - Aggregates inputs from keyboard, mouse and touch in order to give a consistent representation of user inputs.
+     * @param {Point} objectPosition_point - The position of the moving object in order to compare the mouse position with the objects position.
      * @returns {Direction} - An object containing the direction to follow.
      *
      */
@@ -46,22 +47,8 @@ module.exports = {
         }
         if (objectPosition_point && stage_el && MouseControl.position) {
             var
-                mouseSVG_point = SvgUtils.coordinateTransform(stage_el, MouseControl.position),
-                diffs_obj = {
-                    x: mouseSVG_point.x - objectPosition_point.x,
-                    y: mouseSVG_point.y - objectPosition_point.y
-                };
-            if (Math.abs(diffs_obj.x) > Math.abs(diffs_obj.y)) {
-                return {
-                    x: diffs_obj.x / Math.abs(diffs_obj.x),
-                    y: 0
-                }
-            } else {
-                return {
-                    y: diffs_obj.y / Math.abs(diffs_obj.y),
-                    x: 0
-                }
-            }
+                mouseSVG_point = SvgUtils.coordinateTransform(stage_el, MouseControl.position);
+             return directionFromTo (objectPosition_point, mouseSVG_point);
         }
 
     }
