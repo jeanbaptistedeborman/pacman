@@ -12,8 +12,10 @@ var
     playerAvatar_api;
 
 var utils = {
+    isAvatar : function (point) {
+        return playerAvatar_api.position.x === point.x && playerAvatar_api.position.y === point.y;
+    },
     isAllowed: function (point) {
-        //var badGuys_array = BadGuys.itemList;
         var
             isInStage = function (point) {
                 var stage_rect = Config('stage').position,
@@ -57,11 +59,13 @@ module.exports = {
                         x: setAxisPosition('x'),
                         y: setAxisPosition('y')
                     };
+                if (config.type === 'badGuy' && utils.isAvatar(newPos_point)) {
+                    console.log ("You lost");
 
+                }
                 if (utils.isAllowed(newPos_point)) {
                     updatePos(newPos_point);
                 } else {
-                    console.log('not allowed');
                 }
             },
             moveToAvatar = function () {
@@ -71,7 +75,7 @@ module.exports = {
                     if (direction_obj) {
                         incrementPos(direction_obj);
                     }
-                }, 100);
+                }, 150);
             };
         if (userControl_bool) {
             IntervalManager.set(function () {
