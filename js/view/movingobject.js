@@ -6,13 +6,14 @@ var
     Config = require('./config'),
     UserControls = require('../game/ui/usercontrol'),
     IntervalManager = require('../game/utils/intervalmanager'),
-    Obstacles = require('./obstacle'),
-    directionFromTo = require ('../game/directionfromto'),
+    directionFromTo = require('../game/directionfromto'),
     gridSize_num = Config('stage').gridSize,
+    ItemList = require('./itemlist'),
     playerAvatar_api;
 
 var utils = {
     isAllowed: function (point) {
+        //var badGuys_array = BadGuys.itemList;
         var
             isInStage = function (point) {
                 var stage_rect = Config('stage').position,
@@ -20,22 +21,19 @@ var utils = {
                     isBelowMin_bool = point.x < stage_rect.width && point.y < stage_rect.height;
                 return isAboveMin_bool && isBelowMin_bool;
             },
-            isNotObstacle = function (point) {
+            isNotItem = function (itemType_str, point) {
                 var
-                    obstacles_array = Obstacles.obstacles;
-                return obstacles_array.filter(function (obstacle_obj) {
-                        return point.x === obstacle_obj.position.x && point.y === obstacle_obj.position.y;
+                    items_array = ItemList[itemType_str];
+                return items_array.filter(function (item_obj) {
+                        return point.x === item_obj.position.x && point.y === item_obj.position.y;
                     }).length < 1;
-            },
-            isNotBadGuy = function (point) {
-
-            } ;
-        return isInStage(point) && isNotObstacle(point);
+            };
+        return isInStage(point) && isNotItem("obstacle", point) && isNotItem("badGuy", point);
     }
 };
 
 module.exports = {
-    add:function (config, userControl_bool) {
+    add: function (config, userControl_bool) {
         var
             position_rect = config.position,
             updatePos = function (point) {
@@ -69,7 +67,7 @@ module.exports = {
             moveToAvatar = function () {
                 IntervalManager.set(function () {
                     var
-                        direction_obj = directionFromTo (position_rect, playerAvatar_api.pos);
+                        direction_obj = directionFromTo(position_rect, playerAvatar_api.position);
                     if (direction_obj) {
                         incrementPos(direction_obj);
                     }
@@ -85,13 +83,13 @@ module.exports = {
             }, 50);
         }
         if (config.type === 'badGuy') {
-            moveToAvatar ();
+            moveToAvatar();
         }
-        var api =  {
-            get pos () {
-              return config.position;
+        var api = {
+            get position() {
+                return config.position;
             },
-            set pos(point) {
+            set position(point) {
                 updatePos(point);
             },
             set moveDirection(point) {
