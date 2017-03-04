@@ -12,7 +12,7 @@ var
     playerAvatar_api;
 
 var utils = {
-    isAvatar : function (point) {
+    isAvatar: function (point) {
         return playerAvatar_api.position.x === point.x && playerAvatar_api.position.y === point.y;
     },
     isAllowed: function (point) {
@@ -45,61 +45,65 @@ module.exports = {
                 config.dom_el.setAttribute("x", position_rect.x);
                 config.dom_el.setAttribute("y", position_rect.y);
             },
-            incrementPos = function (direction_obj) {
+            findPos = function (direction_obj, step_num) {
                 var
-                    SPEED_NUM = gridSize_num,
                     setAxisPosition = function (propName_str) {
                         if (isNaN(direction_obj[propName_str])) {
                             direction_obj[propName_str] = 0;
                         }
-                        return position_rect[propName_str] + (direction_obj[propName_str] * SPEED_NUM)
-                    },
-                    newPos_point =
-                    {
-                        x: setAxisPosition('x'),
-                        y: setAxisPosition('y')
+                        return position_rect[propName_str] + (direction_obj[propName_str] * step_num);
                     };
-                if (config.type === 'badGuy' && utils.isAvatar(newPos_point)) {
-                    console.log ("You lost");
-
-                }
-                if (utils.isAllowed(newPos_point)) {
-                    updatePos(newPos_point);
-                } else {
-                }
+                return {
+                    x: setAxisPosition('x'),
+                    y: setAxisPosition('y')
+                };
             },
-            moveToAvatar = function () {
-                IntervalManager.set(function () {
-                    var
-                        direction_obj = directionFromTo(position_rect, playerAvatar_api.position);
-                    if (direction_obj) {
-                        incrementPos(direction_obj);
-                    }
-                }, 150);
-            };
-        if (userControl_bool) {
-            IntervalManager.set(function () {
-                var
-                    direction_obj = UserControls.getDirection(position_rect);
+            incrementPos = function (direction_obj) {
                 if (direction_obj) {
-                    incrementPos(direction_obj);
+                    var newPos_point = findPos(direction_obj, config.speed);
+                    updatePos(newPos_point);
                 }
-            }, 50);
-        }
-        if (config.type === 'badGuy') {
-            moveToAvatar();
-        }
-        var api = {
-            get position() {
-                return config.position;
             },
-            set position(point) {
-                updatePos(point);
-            },
-            set moveDirection(point) {
-                moveTo(point);
-            }
-        };
+            MoveManager = (function () {
+                var
+                    direction_obj,
+                    setDirection = function () {
+                        var temptativeDirection_obj = null;
+                        if (userControl_bool) {
+                            temptativeDirection_obj = UserControls.getDirection(position_rect);
+                        }
+                        if (config.type === 'badGuy') {
+                            temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
+                        }
+
+                        if (temptativeDirection_obj && utils.isAllowed(findPos(temptativeDirection_obj, gridSize_num))) {
+                            direction_obj = temptativeDirection_obj;
+                        } else {
+                            direction_obj = null;
+                        }
+                    };
+                return function () {
+                    IntervalManager.set(function () {
+                        var changeDirection_bool = config.position.x % gridSize_num === 0 && config.position.y % gridSize_num === 0;
+                        if (!direction_obj || changeDirection_bool) {
+                            setDirection();
+                        }
+                        incrementPos(direction_obj);
+                    }, 50);
+                }
+            }()),
+            api = {
+                get position() {
+                    return config.position;
+                },
+                set position(point) {
+                    updatePos(point);
+                },
+                set moveDirection(point) {
+                    moveTo(point);
+                }
+            };
+        MoveManager();
         if (config.type === 'playerAvatar') {
             playerAvatar_api = api;
         }

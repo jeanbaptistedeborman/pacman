@@ -12,7 +12,7 @@ var
 for (var n = 0; n < 100; n++) {
     Obstacle.add();
 }
-for (var n = 0; n < 3; n++) {
+for (var n = 0; n < 5; n++) {
     BadGuy.add();
 }
 exports = {};

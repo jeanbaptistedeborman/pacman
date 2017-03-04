@@ -18,9 +18,11 @@ var configs_obj = {
         position: {
             x: 0,
             y: 0,
+
             width: 10,
             height: 10
         },
+        speed:5,
         dom_el: document.querySelector('#player')
     },
     obstacle: {
@@ -33,6 +35,7 @@ var configs_obj = {
         dom_el: undefined
     },
     badGuy: {
+        speed:2,
         position: {
             x: undefined,
             y: undefined,
