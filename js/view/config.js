@@ -26,7 +26,7 @@ var configs_obj = {
             width: 10,
             height: 10
         },
-        speed:5,
+        speed:2.5,
         dom_el: document.querySelector('#player')
     },
     obstacle: {
@@ -43,7 +43,7 @@ var configs_obj = {
             x:0,
             y:0
         },
-        speed:2,
+        speed:1,
         position: {
             x: 0,
             y: 0,

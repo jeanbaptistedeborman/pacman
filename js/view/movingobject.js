@@ -9,14 +9,16 @@ var
     directionFromTo = require('../game/directionfromto'),
     gridSize_num = Config('stage').gridSize,
     ItemList = require('./itemlist'),
-    movingObjectsCounter_num = 0,
-    playerAvatar_api;
+    movingObjectsCounter_num = 0;
 
-var utils = {
+
+var CollisionManager = {
     isAvatar: function (point) {
+        var playerAvatar_api = ItemList["playerAvatar"];
         return playerAvatar_api.position.x === point.x && playerAvatar_api.position.y === point.y;
     },
     isAllowed: function (point) {
+
         var
             isInStage = function (point) {
                 var stage_rect = Config('stage').position,
@@ -78,18 +80,25 @@ module.exports = {
                     setDirection = function () {
                         var
                             temptativeDirection_obj = null,
+                            playerAvatar_api,
                             temptativePosition_point;
                         if (userControl_bool) {
                             temptativeDirection_obj = UserControls.getDirection(position_rect);
                         }
                         if (config.type === 'badGuy') {
+                            playerAvatar_api = ItemList['playerAvatar'];
                             temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
                         }
 
                         if (temptativeDirection_obj) {
                             temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
                         }
-                        if (temptativeDirection_obj && utils.isAllowed(temptativePosition_point)) {
+                        if (config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
+                            IntervalManager.clearAll();
+                            alert ('game over : refresh page to test again');
+
+                        }
+                        if (temptativeDirection_obj && CollisionManager.isAllowed(temptativePosition_point)) {
                             direction_obj = temptativeDirection_obj;
                             config.targetPosition = temptativePosition_point;
                         } else {
@@ -120,12 +129,8 @@ module.exports = {
                     moveTo(point);
                 }
             };
-        console.log (movingObjectsCounter_num);
         movingObjectsCounter_num++;
         window.setTimeout(MoveManager, movingObjectsCounter_num*3);
-        if (config.type === 'playerAvatar') {
-            playerAvatar_api = api;
-        }
         return api;
     }
 };

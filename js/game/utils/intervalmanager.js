@@ -20,7 +20,7 @@ module.exports = {
                 },
                 interval_api = {
                     clear: function () {
-                        clearinterval(interval);
+                        window.clearInterval(interval);
                     },
                     pause: function () {
                         var elapsedTime = new Date().getTime() - startdelay_num;
