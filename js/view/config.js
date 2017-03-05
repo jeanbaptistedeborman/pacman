@@ -15,6 +15,10 @@ var configs_obj = {
         dom_el: document.getElementById('app_js')
     },
     playerAvatar: {
+        targetPosition: {
+            x:undefined,
+            y:undefined
+        },
         position: {
             x: 0,
             y: 0,
@@ -35,10 +39,14 @@ var configs_obj = {
         dom_el: undefined
     },
     badGuy: {
+        targetPosition: {
+            x:0,
+            y:0
+        },
         speed:2,
         position: {
-            x: undefined,
-            y: undefined,
+            x: 0,
+            y: 0,
             width: 10,
             height: 10
         },
