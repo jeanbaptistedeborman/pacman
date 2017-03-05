@@ -89,7 +89,7 @@ module.exports = {
                             setDirection();
                         }
                         incrementPos(direction_obj);
-                    }, 50);
+                    }, 20);
                 }
             }()),
             api = {
