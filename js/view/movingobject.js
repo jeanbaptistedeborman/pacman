@@ -7,42 +7,10 @@ var
     UserControls = require('../game/ui/usercontrol'),
     IntervalManager = require('../game/utils/intervalmanager'),
     directionFromTo = require('../game/directionfromto'),
+    CollisionManager = require('./collisionmanager'),
     gridSize_num = Config('stage').gridSize,
     ItemList = require('./itemlist'),
     movingObjectsCounter_num = 0;
-
-
-var CollisionManager = {
-    isAvatar: function (point) {
-        var playerAvatar_api = ItemList["playerAvatar"];
-        return playerAvatar_api.position.x === point.x && playerAvatar_api.position.y === point.y;
-    },
-    isAllowed: function (point) {
-
-        var
-            isInStage = function (point) {
-                var stage_rect = Config('stage').position,
-                    isAboveMin_bool = point.x >= 0 && point.y >= 0,
-                    isBelowMin_bool = point.x < stage_rect.width && point.y < stage_rect.height;
-                return isAboveMin_bool && isBelowMin_bool;
-            },
-            isNotItem = function (itemType_str, point) {
-                var
-                    items_array = ItemList[itemType_str];
-                return items_array.filter(function (item_obj) {
-                    if (item_obj.targetPosition) {
-
-                        return point.x === item_obj.targetPosition.x && point.y === item_obj.targetPosition.y;
-                    } else {
-                        return point.x === item_obj.position.x && point.y === item_obj.position.y;
-
-                    }
-
-                    }).length < 1;
-            };
-        return isInStage(point) && isNotItem("obstacle", point) && isNotItem("badGuy", point);
-    }
-};
 
 module.exports = {
     add: function (config, userControl_bool) {
@@ -86,7 +54,7 @@ module.exports = {
                             temptativeDirection_obj = UserControls.getDirection(position_rect);
                         }
                         if (config.type === 'badGuy') {
-                            playerAvatar_api = ItemList['playerAvatar'];
+                            playerAvatar_api = ItemList['playerAvatar'][0];
                             temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
                         }
 
@@ -129,6 +97,10 @@ module.exports = {
                     moveTo(point);
                 }
             };
+
+        if (config.type === "playerAvatar") {
+            ItemList["playerAvatar"] = [api];
+        }
         movingObjectsCounter_num++;
         window.setTimeout(MoveManager, movingObjectsCounter_num*3);
         return api;
