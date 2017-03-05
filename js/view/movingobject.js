@@ -9,6 +9,7 @@ var
     directionFromTo = require('../game/directionfromto'),
     gridSize_num = Config('stage').gridSize,
     ItemList = require('./itemlist'),
+    movingObjectsCounter_num = 0,
     playerAvatar_api;
 
 var utils = {
@@ -119,7 +120,9 @@ module.exports = {
                     moveTo(point);
                 }
             };
-        MoveManager();
+        console.log (movingObjectsCounter_num);
+        movingObjectsCounter_num++;
+        window.setTimeout(MoveManager, movingObjectsCounter_num*3);
         if (config.type === 'playerAvatar') {
             playerAvatar_api = api;
         }
