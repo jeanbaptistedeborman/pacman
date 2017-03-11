@@ -2,18 +2,25 @@
  * Created by Jean-Baptiste on 2/21/2017.
  */
 "use strict";
-
-var configs_obj = {
-    stage: {
-        gridSize: 10,
+var stage_obj =  {
+    gridSize: 10,
         position: {
-            x: 0,
+        x: 0,
             y: 0,
             width: 400,
             height: 300
-        },
-        dom_el: document.getElementById('app_js')
     },
+    get linesNum () {
+        return Math.ceil (stage_obj.position.height/stage_obj.gridSize);
+    },
+    get columnsNum () {
+        return Math.ceil (stage_obj.position.width/stage_obj.gridSize);
+    },
+    dom_el: document.getElementById('app_js')
+};
+
+var configs_obj = {
+    stage: stage_obj,
     playerAvatar: {
         targetPosition: {
             x:undefined,
@@ -37,6 +44,12 @@ var configs_obj = {
             height: 10
         },
         dom_el: undefined
+    },
+    goodie: {
+        position:{
+            x:undefined,
+            y:undefined
+        }
     },
     badGuy: {
         targetPosition: {

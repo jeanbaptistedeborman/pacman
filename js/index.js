@@ -6,8 +6,9 @@ var
     Configs = require('./view/config'),
     Obstacle = require('./view/obstacle'),
     MovingObject = require('./view/movingobject'),
-    BadGuy =require ('./view/badguy');
-    playerAvatar_obj = MovingObject.add (Configs('playerAvatar'), true);
+    BadGuy = require('./view/badguy'),
+    Goodie = require('./view/goodie'),
+    playerAvatar_obj = MovingObject.add(Configs('playerAvatar'), true);
 
 for (var n = 0; n < 100; n++) {
     Obstacle.add();
@@ -15,4 +16,6 @@ for (var n = 0; n < 100; n++) {
 for (var n = 0; n < 5; n++) {
     BadGuy.add();
 }
+Goodie.addAll ();
+
 exports = {};

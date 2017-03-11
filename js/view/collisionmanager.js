@@ -5,9 +5,15 @@
 
 var
     Config = require('./config'),
-    ItemList = require('./itemlist');
+    ItemList = require('./itemlist'),
+    isItem = function (){
+
+    };
 module.exports = {
-    isAvatar: function (point) {
+    isGoodie: function (point) {
+
+    },
+    isAvatar: function (point)  {
         var playerAvatar_api = ItemList["playerAvatar"][0];
         return playerAvatar_api.position.x === point.x && playerAvatar_api.position.y === point.y;
     },
