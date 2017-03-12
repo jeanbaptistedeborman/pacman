@@ -10,7 +10,7 @@ var
     Goodie = require('./view/goodie'),
     playerAvatar_obj = MovingObject.add(Configs('playerAvatar'), true);
 
-for (var n = 0; n < 100; n++) {
+for (var n = 0; n < 50; n++) {
     Obstacle.add();
 }
 for (var n = 0; n < 5; n++) {

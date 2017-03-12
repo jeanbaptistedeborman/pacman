@@ -64,7 +64,15 @@ module.exports = {
                         if (config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
                             IntervalManager.clearAll();
                             alert ('game over : refresh page to test again');
-
+                        }
+                        if (config.type === "playerAvatar") {
+                            var goodie =  CollisionManager.isGoodie(temptativePosition_point);
+                            if (goodie) {
+                                var remaining_num = goodie.remove ();
+                                if (remaining_num === 0) {
+                                    alert ('Level finished : Refresh page to test again' );
+                                }
+                            }
                         }
                         if (temptativeDirection_obj && CollisionManager.isAllowed(temptativePosition_point)) {
                             direction_obj = temptativeDirection_obj;

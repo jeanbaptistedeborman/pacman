@@ -7,11 +7,12 @@ var
     ItemList = require('./itemlist'),
     SvgUtils = require('../game/utils/svgutils'),
     CollisionManager = require ('./collisionmanager'),
+    ArrayUtils = require ('../game/utils/arrayutils'),
     stageConfig = Config('stage'),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',
+    parent_el = stageConfig.dom_el,
     items_array = ItemList[ID_STR] = [],
-
     add = function (point) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
@@ -24,8 +25,14 @@ var
             x: config.position.x,
             y: config.position.y
         });
-        items_array.push(config);
-        stageConfig.dom_el.appendChild(dom_el);
+        config.remove = function () {
+            dom_el.setAttribute('fill', 'black');
+            parent_el.removeChild(dom_el);
+            items_array =  ItemList[ID_STR] =  ArrayUtils.remove(items_array, config);
+            return items_array.length;
+        };
+        items_array.push (config);
+        parent_el.appendChild(dom_el);
     };
 module.exports = {
     get itemList() {
@@ -38,7 +45,7 @@ module.exports = {
             colTotal_num = stageConfig.columnsNum;
         for (column_num = 0; column_num < colTotal_num; column_num++) {
             for (line_num = 0; line_num < lineTotal_num; line_num++) {
-               if (line_num%3 === 0 && column_num%3===  0) {
+               if (line_num%10 === 0 && column_num%10===  0) {
                    var position_point = {
                        x:column_num*gridSize_num,
                        y:line_num*gridSize_num
@@ -50,6 +57,6 @@ module.exports = {
 
             }
         }
-
+        console.log ('ItemList :', ItemList);
     }
 };
