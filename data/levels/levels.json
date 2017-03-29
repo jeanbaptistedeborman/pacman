@@ -1,0 +1,170 @@
+[
+  [
+    {
+      "id": "boite_8_",
+      "rect": {
+        "x": "6.95",
+        "y": "16.05",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "7.123",
+        "height": "0.874"
+      }
+    },
+    {
+      "id": "boite_1_",
+      "rect": {
+        "x": "3.1",
+        "y": "4.15",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "8.191",
+        "height": "0.875"
+      }
+    },
+    {
+      "id": "boite_2_",
+      "rect": {
+        "x": "11",
+        "y": "2.15",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "10.011",
+        "height": "0.875"
+      }
+    },
+    {
+      "id": "boite_12_",
+      "rect": {
+        "x": "28.95",
+        "y": "8",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1.001",
+        "height": "9.006"
+      }
+    },
+    {
+      "id": "boite_4_",
+      "rect": {
+        "x": "2",
+        "y": "7",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1.001",
+        "height": "11.025"
+      }
+    },
+    {
+      "id": "boite_3_",
+      "rect": {
+        "x": "21.45",
+        "y": "3.95",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "8.19",
+        "height": "0.874"
+      }
+    },
+    {
+      "id": "boite_6_",
+      "rect": {
+        "x": "7",
+        "y": "8",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "7.123",
+        "height": "0.874"
+      }
+    },
+    {
+      "id": "boite_7_",
+      "rect": {
+        "x": "14.2",
+        "y": "9.05",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1.003",
+        "height": "7.022"
+      }
+    },
+    {
+      "id": "boite_5_",
+      "rect": {
+        "x": "5.85",
+        "y": "9",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "0.999",
+        "height": "6.994"
+      }
+    },
+    {
+      "id": "boite_11_",
+      "rect": {
+        "x": "19.9",
+        "y": "14.85",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "5.04",
+        "height": "1.187"
+      }
+    },
+    {
+      "id": "boite_9_",
+      "rect": {
+        "x": "18.9",
+        "y": "9",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1",
+        "height": "5.935"
+      }
+    },
+    {
+      "id": "boite_10_",
+      "rect": {
+        "x": "19.9",
+        "y": "8.15",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "5.048",
+        "height": "0.999"
+      }
+    },
+    {
+      "id": "boite",
+      "rect": {
+        "x": "24.95",
+        "y": "8.9",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "0.998",
+        "height": "4.946"
+      }
+    },
+    {
+      "id": "badGuy",
+      "rect": {
+        "x": "30",
+        "y": "18",
+        "width": "1",
+        "height": "1"
+      }
+    }
+  ]
+]
+

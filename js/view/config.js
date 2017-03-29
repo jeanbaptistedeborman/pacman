@@ -7,8 +7,8 @@ var stage_obj =  {
         position: {
         x: 0,
             y: 0,
-            width: 400,
-            height: 300
+            width: 330,
+            height: 200
     },
     get linesNum () {
         return Math.ceil (stage_obj.position.height/stage_obj.gridSize);
@@ -48,7 +48,9 @@ var configs_obj = {
     goodie: {
         position:{
             x:undefined,
-            y:undefined
+            y:undefined,
+            width: 10,
+            height: 10
         }
     },
     badGuy: {

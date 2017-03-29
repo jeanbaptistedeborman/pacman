@@ -10,19 +10,19 @@ var Configs = require('./config'),
 
 module.exports = {
     itemList: items_array,
-    add: function () {
+    add: function (point) {
         var
             config = JSON.parse(JSON.stringify(Configs(ID_STR))),
             stageConfig = Configs('stage');
 
-        config.position.x = 200 + Math.floor(Math.random() * 100 / stageConfig.gridSize) * stageConfig.gridSize;
-        config.position.y = 200 + Math.floor(Math.random() * 100 / stageConfig.gridSize) * stageConfig.gridSize;
+        config.position.x = point.x * stageConfig.gridSize;
+        config.position.y = point.y * stageConfig.gridSize;
         config.dom_el = SvgUtils.createElement('rect',
             {
                 x: config.position.x,
                 y: config.position.y,
-                width: 10,
-                height: 10,
+                width: stageConfig.gridSize,
+                height: stageConfig.gridSize,
                 fill: 'black'
 
             });

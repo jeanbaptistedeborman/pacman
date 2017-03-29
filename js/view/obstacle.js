@@ -14,15 +14,19 @@ module.exports = {
     get itemList () {
       return items_array;
     },
-    add: function () {
+    add: function (rect) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
             dom_el;
-        config.position.x = Math.floor(Math.random() * (stageConfig.position.width / gridSize_num)) * gridSize_num;
-        config.position.y = Math.floor(Math.random() * (stageConfig.position.height / gridSize_num)) * gridSize_num;
+
+
+        config.position.x = rect.x * gridSize_num;
+        config.position.y = rect.y * gridSize_num;
+        config.position.width = rect.width * gridSize_num;
+        config.position.height = rect.height * gridSize_num;
         dom_el = config.dom_el = SvgUtils.createElement('rect', {
-            width: 10,
-            height: 10,
+            width: config.position.width,
+            height: config.position.height,
             fill: 'red',
             x: config.position.x,
             y: config.position.y

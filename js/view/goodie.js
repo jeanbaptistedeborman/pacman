@@ -18,6 +18,8 @@ var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
             dom_el;
         config.position = point;
+        config.position.width = gridSize_num;
+        config.position.height = gridSize_num;
         dom_el = config.dom_el = SvgUtils.createElement('rect', {
             width: 10,
             height: 10,

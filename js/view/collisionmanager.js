@@ -7,17 +7,22 @@ var
     Config = require('./config'),
     ItemList = require('./itemlist'),
     isItem = function (itemType_str, point) {
-        var result_obj,
-        items_array = ItemList[itemType_str];
+        var
+            result_obj,
+            items_array = ItemList[itemType_str];
+
         if (!point) {
             return false;
         }
+        console.log (items_array);
         result_obj = items_array.filter(function (item_obj) {
-            if (item_obj.targetPosition) {
-                return point.x === item_obj.targetPosition.x && point.y === item_obj.targetPosition.y;
-            } else {
-                return point.x === item_obj.position.x && point.y === item_obj.position.y;
-            }
+            var ref_point = item_obj.targetPosition || item_obj.position;
+
+            return point.x >= ref_point.x &&
+                point.x < ref_point.x + item_obj.position.width
+                &&
+                point.y >= ref_point.y && point.y < ref_point.y + item_obj.position.height;
+
         })[0];
         return result_obj;
     };
