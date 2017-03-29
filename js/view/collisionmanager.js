@@ -14,15 +14,12 @@ var
         if (!point) {
             return false;
         }
-        console.log (items_array);
+        console.log(items_array);
         result_obj = items_array.filter(function (item_obj) {
             var ref_point = item_obj.targetPosition || item_obj.position;
-
             return point.x >= ref_point.x &&
-                point.x < ref_point.x + item_obj.position.width
-                &&
+                point.x < ref_point.x + item_obj.position.width &&
                 point.y >= ref_point.y && point.y < ref_point.y + item_obj.position.height;
-
         })[0];
         return result_obj;
     };
