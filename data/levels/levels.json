@@ -165,6 +165,187 @@
         "height": "1"
       }
     }
+  ],
+  [
+    {
+      "id": "Layer_18",
+      "rect": {
+        "x": "30.95",
+        "y": "2.9",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1",
+        "height": "11.05"
+      }
+    },
+    {
+      "id": "Layer_17",
+      "rect": {
+        "x": "22.1",
+        "y": "10.15",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "8.2",
+        "height": "0.85"
+      }
+    },
+    {
+      "id": "Layer_16",
+      "rect": {
+        "x": "20.95",
+        "y": "2",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "8.2",
+        "height": "0.85"
+      }
+    },
+    {
+      "id": "Layer_15",
+      "rect": {
+        "x": "21.85",
+        "y": "18.05",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "10",
+        "height": "0.851"
+      }
+    },
+    {
+      "id": "Layer_14",
+      "rect": {
+        "x": "12.1",
+        "y": "6.95",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "7",
+        "height": "1"
+      }
+    },
+    {
+      "id": "Layer_13",
+      "rect": {
+        "x": "11.9",
+        "y": "2.1",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "7.1",
+        "height": "0.85"
+      }
+    },
+    {
+      "id": "Layer_12",
+      "rect": {
+        "x": "1.85",
+        "y": "2.05",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "7.1",
+        "height": "0.85"
+      }
+    },
+    {
+      "id": "Layer_11",
+      "rect": {
+        "x": "0.95",
+        "y": "6.1",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1",
+        "height": "9"
+      }
+    },
+    {
+      "id": "Layer_10",
+      "rect": {
+        "x": "11.85",
+        "y": "13.1",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "8.2",
+        "height": "0.851"
+      }
+    },
+    {
+      "id": "Layer_9",
+      "rect": {
+        "x": "10.9",
+        "y": "7.95",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1",
+        "height": "4.95"
+      }
+    },
+    {
+      "id": "Layer_8",
+      "rect": {
+        "x": "19.05",
+        "y": "7.9",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "1",
+        "height": "4.95"
+      }
+    },
+    {
+      "id": "Layer_7",
+      "rect": {
+        "x": "2.95",
+        "y": "9.95",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "6",
+        "height": "1.2"
+      }
+    },
+    {
+      "id": "Layer_6",
+      "rect": {
+        "x": "1.05",
+        "y": "17.85",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "5.05",
+        "height": "1.2"
+      }
+    },
+    {
+      "id": "Layer_5",
+      "rect": {
+        "x": "12.95",
+        "y": "17.9",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "fill": "#FF0000",
+        "width": "6",
+        "height": "1.199"
+      }
+    },
+    {
+      "id": "badGuy",
+      "rect": {
+        "x": "27",
+        "y": "15",
+        "fill-rule": "evenodd",
+        "clip-rule": "evenodd",
+        "width": "1.05",
+        "height": "1"
+      }
+    }
   ]
 ]
 
