@@ -3,11 +3,11 @@
  */
 "use strict";
 var
-    Config = require('./config'),
-    ItemList = require('./itemlist'),
-    SvgUtils = require('../game/utils/svgutils'),
-    CollisionManager = require ('./collisionmanager'),
-    ArrayUtils = require ('../game/utils/arrayutils'),
+    Config = require('../config'),
+    ItemList = require('../itemlist'),
+    SvgUtils = require('../../../game/utils/svgutils'),
+    CollisionManager = require ('../collisionmanager'),
+    ArrayUtils = require ('../../../game/utils/arrayutils'),
     stageConfig = Config('stage'),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',

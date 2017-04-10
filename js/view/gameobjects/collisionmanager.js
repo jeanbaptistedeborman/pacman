@@ -14,7 +14,6 @@ var
         if (!point) {
             return false;
         }
-        console.log(items_array);
         result_obj = items_array.filter(function (item_obj) {
             var ref_point = item_obj.targetPosition || item_obj.position;
             return point.x >= ref_point.x &&
@@ -37,7 +36,10 @@ module.exports = {
                     isAboveMin_bool = point.x >= 0 && point.y >= 0,
                     isBelowMin_bool = point.x < stage_rect.width && point.y < stage_rect.height;
                 return isAboveMin_bool && isBelowMin_bool;
-            };
+            },
+            obstacle_X = isItem("obstacle", point),
+            isItem_X = isItem("badGuy", point);
+
         return isInStage(point) && !isItem("obstacle", point) && !isItem("badGuy", point);
     }
 };

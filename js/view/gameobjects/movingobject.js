@@ -4,9 +4,9 @@
 "use strict";
 var
     Config = require('./config'),
-    UserControls = require('../game/ui/usercontrol'),
-    IntervalManager = require('../game/utils/intervalmanager'),
-    directionFromTo = require('../game/directionfromto'),
+    UserControls = require('../../game/ui/usercontrol'),
+    IntervalManager = require('../../game/utils/intervalmanager'),
+    directionFromTo = require('../../game/directionfromto'),
     CollisionManager = require('./collisionmanager'),
     gridSize_num = Config('stage').gridSize,
     ItemList = require('./itemlist'),

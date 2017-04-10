@@ -14,7 +14,7 @@ var MouseControl = require("./mouseandtouch"),
     KeyControls = require("./keyboard"),
     SvgUtils = require("../utils/svgutils"),
     directionFromTo = require ('../directionfromto'),
-    Config = require("../../view/config"),
+    Config = require("../../view/gameobjects/config"),
     stage_el = Config("stage").dom_el;
 
 module.exports = {

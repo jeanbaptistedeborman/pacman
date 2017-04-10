@@ -1,11 +1,11 @@
 /**
  * Created by Jean-Baptiste on 26/02/2017.
  */
-var Configs = require('./config'),
-    SvgUtils = require('../game/utils/svgutils'),
-    MovingObject = require('./movingobject'),
+var Configs = require('../config'),
+    SvgUtils = require('../../../game/utils/svgutils'),
+    MovingObject = require('../movingobject'),
     ID_STR = 'badGuy',
-    ItemList = require('./itemlist'),
+    ItemList = require('../itemlist'),
     items_array = ItemList[ID_STR] = [];
 
 module.exports = {
