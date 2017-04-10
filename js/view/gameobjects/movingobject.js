@@ -6,10 +6,10 @@ var
     Config = require('./config'),
     UserControls = require('../../game/ui/usercontrol'),
     IntervalManager = require('../../game/utils/intervalmanager'),
+    ObjectListManager = require('./objectlistmanager'),
     directionFromTo = require('../../game/directionfromto'),
     CollisionManager = require('./collisionmanager'),
     gridSize_num = Config('stage').gridSize,
-    ItemList = require('./itemlist'),
     movingObjectsCounter_num = 0;
 
 module.exports = {
@@ -49,23 +49,26 @@ module.exports = {
                         var
                             temptativeDirection_obj = null,
                             playerAvatar_api,
+                            iAmAvatar_bool = config.type === "playerAvatar",
+                            forbiddenDirection_obj,
                             temptativePosition_point;
                         if (userControl_bool) {
                             temptativeDirection_obj = UserControls.getDirection(position_rect);
                         }
                         if (config.type === 'badGuy') {
-                            playerAvatar_api = ItemList['playerAvatar'][0];
+                            playerAvatar_api = ObjectListManager.getList ('playerAvatar')[0];
                             temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
                         }
 
                         if (temptativeDirection_obj) {
                             temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
                         }
+
                         if (config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
                             IntervalManager.clearAll();
                             alert ('game over : refresh page to test again');
                         }
-                        if (config.type === "playerAvatar") {
+                        if (iAmAvatar_bool) {
                             var goodie =  CollisionManager.isGoodie(temptativePosition_point);
                             if (goodie) {
                                 var remaining_num = goodie.remove ();
@@ -74,10 +77,15 @@ module.exports = {
                                 }
                             }
                         }
-                        if (temptativeDirection_obj && CollisionManager.isAllowed(temptativePosition_point)) {
+                        forbiddenDirection_obj = CollisionManager.isForbidden(temptativePosition_point);
+                        if (temptativeDirection_obj && !forbiddenDirection_obj) {
                             direction_obj = temptativeDirection_obj;
                             config.targetPosition = temptativePosition_point;
                         } else {
+                            if (iAmAvatar_bool && forbiddenDirection_obj && forbiddenDirection_obj.type === 'obstacle') {
+                                forbiddenDirection_obj.openDoor ();
+                            }
+
                             direction_obj = null;
                         }
                     };
@@ -107,7 +115,8 @@ module.exports = {
             };
 
         if (config.type === "playerAvatar") {
-            ItemList["playerAvatar"] = [api];
+            ObjectListManager.createList('playerAvatar');
+            ObjectListManager.pushItem('playerAvatar', api);
         }
         movingObjectsCounter_num++;
         window.setTimeout(MoveManager, movingObjectsCounter_num*3);

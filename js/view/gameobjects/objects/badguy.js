@@ -2,11 +2,11 @@
  * Created by Jean-Baptiste on 26/02/2017.
  */
 var Configs = require('../config'),
+    ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
     MovingObject = require('../movingobject'),
     ID_STR = 'badGuy',
-    ItemList = require('../itemlist'),
-    items_array = ItemList[ID_STR] = [];
+    items_array = ObjectListManager.createList(ID_STR);
 
 module.exports = {
     itemList: items_array,
@@ -28,7 +28,6 @@ module.exports = {
             });
         stageConfig.dom_el.appendChild(config.dom_el);
         var badGuy_obj = MovingObject.add(config);
-
-        items_array.push(badGuy_obj);
+        ObjectListManager.pushItem(ID_STR, badGuy_obj);
     }
 };

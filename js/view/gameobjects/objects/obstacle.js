@@ -3,14 +3,16 @@
  */
 "use strict";
 var
-    fake_array = String("A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z").split(','),
     Config = require('../config'),
-    ItemList = require('../itemlist'),
+    ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
+    TimeoutManager = require('../../../game/utils/timeoutmanager'),
     stageConfig = Config('stage'),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'obstacle',
-    items_array = ItemList[ID_STR] = [];
+    fake_array = String("A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z").split(','),
+    items_array = ObjectListManager.createList(ID_STR);
+
 module.exports = {
     get itemList() {
         return items_array;
@@ -19,8 +21,6 @@ module.exports = {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
             dom_el;
-
-        config.brick_array = [];
         config.position.x = rect.x * gridSize_num;
         config.position.y = rect.y * gridSize_num;
         config.position.width = rect.width * gridSize_num;
@@ -55,25 +55,36 @@ module.exports = {
             });
             dom_el.appendChild(brick_el);
             dom_el.appendChild(text_el);
-            config.brick_array.push (
-            {
-                brick_el:brick_el,
-                text_el:text_el
-            });
+            config.brick_array.push(
+                {
+                    brick_el: brick_el,
+                    text_el: text_el
+                });
         }
         config.openDoor = function (openOrLock_bool) {
+
             var openOrLock_bool = Math.random() > .5;
-            config.brick_array.forEach(function (brick_obj) {
+
+            if (!config.blocked) {
                 if (openOrLock_bool) {
-                    brick_obj.brick_el.setAttribute('fill', 'white');
+                    ObjectListManager.removeItem(ID_STR, config);
                 } else {
-                    brick_obj.brick_el.setAttribute('fill', 'black');
+                    config.blocked = true;
                 }
-            });
+                config.brick_array.forEach(function (brick_obj, index) {
+                    TimeoutManager.set(function () {
+                        if (openOrLock_bool) {
+                            brick_obj.brick_el.setAttribute('fill', 'white');
+                        } else {
+                            brick_obj.brick_el.setAttribute('fill', 'black');
+                        }
+                    }, 100 + (100 * index));
+                });
+            }
         }
         ;
 
-
+        ObjectListManager.pushItem(ID_STR, config);
         items_array.push(config);
         stageConfig.dom_el.appendChild(dom_el);
     }

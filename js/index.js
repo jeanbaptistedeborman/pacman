@@ -3,10 +3,9 @@
  */
 
 var
-    levels_array = require('../../data/levels/levels.json');
-    Configs = require('./view/gameobjects/config');
-
-Obstacle = require('./view/gameobjects/objects/obstacle'),
+    levels_array = require('../../data/levels/levels.json'),
+    Configs = require('./view/gameobjects/config'),
+    Obstacle = require('./view/gameobjects/objects/obstacle'),
     MovingObject = require('./view/gameobjects/movingobject'),
     BadGuy = require('./view/gameobjects/objects/badguy'),
     Goodie = require('./view/gameobjects/objects/goodie'),
@@ -23,12 +22,10 @@ Obstacle = require('./view/gameobjects/objects/obstacle'),
         });
 
     badGuys_array.forEach(function (element) {
-
         BadGuy.add({
             x: Math.round(element.rect.x),
             y: Math.round(element.rect.y)
         });
-
     });
 
     obstacles_array.forEach(function (element) {
@@ -39,15 +36,12 @@ Obstacle = require('./view/gameobjects/objects/obstacle'),
             x: Math.round(element.rect.x),
             y: Math.round(element.rect.y)
         });
-
     });
 
 }());
 
 
 Goodie.addAll();
-
-
 
 
 exports = {};

@@ -37,6 +37,8 @@ var configs_obj = {
         dom_el: document.querySelector('#player')
     },
     obstacle: {
+        brick_array:[],
+        blocked:false,
         position: {
             x: undefined,
             y: undefined,

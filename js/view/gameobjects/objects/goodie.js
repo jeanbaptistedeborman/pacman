@@ -4,15 +4,14 @@
 "use strict";
 var
     Config = require('../config'),
-    ItemList = require('../itemlist'),
+    ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
     CollisionManager = require ('../collisionmanager'),
-    ArrayUtils = require ('../../../game/utils/arrayutils'),
     stageConfig = Config('stage'),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',
     parent_el = stageConfig.dom_el,
-    items_array = ItemList[ID_STR] = [],
+    items_array = ObjectListManager.createList(ID_STR),
     add = function (point) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
@@ -28,9 +27,10 @@ var
             y: config.position.y
         });
         config.remove = function () {
+            console.log ('REMOVE !');
             dom_el.setAttribute('fill', 'black');
             parent_el.removeChild(dom_el);
-            items_array =  ItemList[ID_STR] =  ArrayUtils.remove(items_array, config);
+            ObjectListManager.removeItem (ID_STR, config);
             return items_array.length;
         };
         items_array.push (config);
@@ -52,13 +52,13 @@ module.exports = {
                        x:column_num*gridSize_num,
                        y:line_num*gridSize_num
                    };
-                    if (CollisionManager.isAllowed(position_point)) {
+                   console.log (CollisionManager.isForbidden(position_point));
+                    if (!CollisionManager.isForbidden(position_point)) {
                         add (position_point);
                    }
                }
 
             }
         }
-        console.log ('ItemList :', ItemList);
     }
 };
