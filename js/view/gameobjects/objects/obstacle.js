@@ -21,14 +21,14 @@ module.exports = {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
             dom_el;
+        config.direction = rect.width > rect.height ? 'width' : 'height';
         config.position.x = rect.x * gridSize_num;
         config.position.y = rect.y * gridSize_num;
         config.position.width = rect.width * gridSize_num;
         config.position.height = rect.height * gridSize_num;
         dom_el = config.dom_el = SvgUtils.createElement('g');
 
-        var directionProp_str = rect.width > rect.height ? 'width' : 'height';
-        for (var n = 0; n < rect[directionProp_str]; n++) {
+        for (var n = 0; n < rect[config.direction]; n++) {
 
             var text_el = SvgUtils.createElement('text',
                 {
@@ -38,8 +38,8 @@ module.exports = {
                     "font-family": "Arial narrow",
                     "font-size": "10.5",
                     "alignment-baseline": "hanging",
-                    x: 1 + config.position.x + n * gridSize_num * Number(directionProp_str === 'width'),
-                    y: 1 + config.position.y + n * gridSize_num * Number(directionProp_str === 'height')
+                    x: 1 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
+                    y: 1 + config.position.y + n * gridSize_num * Number(config.direction === 'height')
                 }
                 ),
                 text_node = document.createTextNode(fake_array.shift());
@@ -50,8 +50,8 @@ module.exports = {
                 width: gridSize_num,
                 height: gridSize_num,
                 fill: 'red',
-                x: config.position.x + n * gridSize_num * Number(directionProp_str === 'width'),
-                y: config.position.y + n * gridSize_num * Number(directionProp_str === 'height')
+                x: config.position.x + n * gridSize_num * Number(config.direction === 'width'),
+                y: config.position.y + n * gridSize_num * Number(config.direction === 'height')
             });
             dom_el.appendChild(brick_el);
             dom_el.appendChild(text_el);
@@ -62,9 +62,6 @@ module.exports = {
                 });
         }
         config.openDoor = function (openOrLock_bool) {
-
-            var openOrLock_bool = Math.random() > .5;
-
             if (!config.blocked) {
                 if (openOrLock_bool) {
                     ObjectListManager.removeItem(ID_STR, config);

@@ -29,9 +29,7 @@ module.exports = {
         getList(listId_str).push(item_obj);
     },
     removeItem: function (listId_str, item_obj) {
-        console.log ("BEFORE REMOVAL : ", getList(listId_str));
         createList(listId_str, ArrayUtils.remove(getList(listId_str), item_obj));
-        console.log ("AFTER REMOVAL : ", getList(listId_str));
     }
 };
 

@@ -9,7 +9,9 @@ var
     ObjectListManager = require('./objectlistmanager'),
     directionFromTo = require('../../game/directionfromto'),
     CollisionManager = require('./collisionmanager'),
+    QuestionPopup = require('../ui/questionpopup'),
     gridSize_num = Config('stage').gridSize,
+    playing_bool = true,
     movingObjectsCounter_num = 0;
 
 module.exports = {
@@ -38,7 +40,7 @@ module.exports = {
             },
             incrementPos = function (direction_obj) {
                 if (direction_obj) {
-                    var newPos_point = findPos(direction_obj, config.speed);
+                    var newPos_point = findPos(direction_obj, config.speed * Boolean(playing_bool));
                     updatePos(newPos_point);
                 }
             },
@@ -46,17 +48,21 @@ module.exports = {
                 var
                     direction_obj,
                     setDirection = function () {
+                        /*
+                         * @todo: Refactor : Probably better if each type provided his own movement function as parameter
+                         *
+                         * */
                         var
                             temptativeDirection_obj = null,
                             playerAvatar_api,
                             iAmAvatar_bool = config.type === "playerAvatar",
-                            forbiddenDirection_obj,
+                            forbidden_obj,
                             temptativePosition_point;
                         if (userControl_bool) {
                             temptativeDirection_obj = UserControls.getDirection(position_rect);
                         }
                         if (config.type === 'badGuy') {
-                            playerAvatar_api = ObjectListManager.getList ('playerAvatar')[0];
+                            playerAvatar_api = ObjectListManager.getList('playerAvatar')[0];
                             temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
                         }
 
@@ -66,26 +72,35 @@ module.exports = {
 
                         if (config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
                             IntervalManager.clearAll();
-                            alert ('game over : refresh page to test again');
+                            alert('game over : refresh page to test again');
                         }
                         if (iAmAvatar_bool) {
-                            var goodie =  CollisionManager.isGoodie(temptativePosition_point);
+                            var goodie = CollisionManager.isGoodie(temptativePosition_point);
                             if (goodie) {
-                                var remaining_num = goodie.remove ();
+                                var remaining_num = goodie.remove();
                                 if (remaining_num === 0) {
-                                    alert ('Level finished : Refresh page to test again' );
+                                    alert('Level finished : Refresh page to test again');
                                 }
                             }
                         }
-                        forbiddenDirection_obj = CollisionManager.isForbidden(temptativePosition_point);
-                        if (temptativeDirection_obj && !forbiddenDirection_obj) {
+                        forbidden_obj = CollisionManager.isForbidden(temptativePosition_point);
+                        if (temptativeDirection_obj && !forbidden_obj) {
                             direction_obj = temptativeDirection_obj;
                             config.targetPosition = temptativePosition_point;
                         } else {
-                            if (iAmAvatar_bool && forbiddenDirection_obj && forbiddenDirection_obj.type === 'obstacle') {
-                                forbiddenDirection_obj.openDoor ();
+                            if (iAmAvatar_bool &&
+                                forbidden_obj &&
+                                forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
+                                playing_bool = false;
+                                QuestionPopup(forbidden_obj,
+                                    function (answer_bool) {
+                                        if (answer_bool !== undefined) {
+                                            forbidden_obj.openDoor(answer_bool);
+                                        }
+                                        playing_bool = true;
+                                    }
+                                );
                             }
-
                             direction_obj = null;
                         }
                     };
@@ -104,7 +119,7 @@ module.exports = {
                     return config.position;
                 },
                 get targetPosition() {
-                        return config.targetPosition;
+                    return config.targetPosition;
                 },
                 set position(point) {
                     updatePos(point);
@@ -119,7 +134,7 @@ module.exports = {
             ObjectListManager.pushItem('playerAvatar', api);
         }
         movingObjectsCounter_num++;
-        window.setTimeout(MoveManager, movingObjectsCounter_num*3);
+        window.setTimeout(MoveManager, movingObjectsCounter_num * 3);
         return api;
     }
 };

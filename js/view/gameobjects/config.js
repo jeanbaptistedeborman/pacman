@@ -2,19 +2,19 @@
  * Created by Jean-Baptiste on 2/21/2017.
  */
 "use strict";
-var stage_obj =  {
+var stage_obj = {
     gridSize: 10,
-        position: {
+    position: {
         x: 0,
-            y: 0,
-            width: 330,
-            height: 200
+        y: 0,
+        width: 330,
+        height: 200
     },
-    get linesNum () {
-        return Math.ceil (stage_obj.position.height/stage_obj.gridSize);
+    get linesNum() {
+        return Math.ceil(stage_obj.position.height / stage_obj.gridSize);
     },
-    get columnsNum () {
-        return Math.ceil (stage_obj.position.width/stage_obj.gridSize);
+    get columnsNum() {
+        return Math.ceil(stage_obj.position.width / stage_obj.gridSize);
     },
     dom_el: document.getElementById('app_js')
 };
@@ -23,8 +23,8 @@ var configs_obj = {
     stage: stage_obj,
     playerAvatar: {
         targetPosition: {
-            x:undefined,
-            y:undefined
+            x: undefined,
+            y: undefined
         },
         position: {
             x: 0,
@@ -33,12 +33,13 @@ var configs_obj = {
             width: 10,
             height: 10
         },
-        speed:2.5,
+        speed: 2.5,
         dom_el: document.querySelector('#player')
     },
     obstacle: {
-        brick_array:[],
-        blocked:false,
+        brick_array: [],
+        blocked: false,
+        direction: undefined,
         position: {
             x: undefined,
             y: undefined,
@@ -48,19 +49,19 @@ var configs_obj = {
         dom_el: undefined
     },
     goodie: {
-        position:{
-            x:undefined,
-            y:undefined,
+        position: {
+            x: undefined,
+            y: undefined,
             width: 10,
             height: 10
         }
     },
     badGuy: {
         targetPosition: {
-            x:0,
-            y:0
+            x: 0,
+            y: 0
         },
-        speed:1,
+        speed: 1,
         position: {
             x: 0,
             y: 0,

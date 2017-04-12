@@ -27,7 +27,6 @@ var
             y: config.position.y
         });
         config.remove = function () {
-            console.log ('REMOVE !');
             dom_el.setAttribute('fill', 'black');
             parent_el.removeChild(dom_el);
             ObjectListManager.removeItem (ID_STR, config);

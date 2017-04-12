@@ -21,11 +21,18 @@ module.exports = {
      * @param dom_svg
      * @returns {SVGPoint}
      */
-    coordinateTransform: function (dom_svg, point) {
+    convertCoordinateFromDOMToSVG: function (dom_svg, point) {
         var
             CTM = dom_svg.getScreenCTM(),
             svg_point = PointConversion.pointToSVG(dom_svg, point),
             converted_point = svg_point.matrixTransform(CTM.inverse());
+        return PointConversion.SVGToPoint(converted_point);
+    },
+    convertCoordinateFromSVGToDOM: function (dom_svg, svgCoordinate_point) {
+        var
+            CTM = dom_svg.getScreenCTM(),
+            svg_point = PointConversion.pointToSVG(dom_svg, svgCoordinate_point),
+            converted_point = svg_point.matrixTransform(CTM);
         return PointConversion.SVGToPoint(converted_point);
     },
     createElement: function (svgTagName_str, params_obj) {
