@@ -1,0 +1,99 @@
+
+  [
+    {
+      "id": "bg",
+      "label": "български"
+    },
+    {
+      "id": "cs",
+      "label": "čeština"
+    },
+    {
+      "id": "da",
+      "label": "dansk"
+    },
+    {
+      "id": "de",
+      "label": "Deutsch"
+    },
+    {
+      "id": "et",
+      "label": "eesti"
+    },
+    {
+      "id": "el",
+      "label": "ελληνικά"
+    },
+    {
+      "id": "en",
+      "label": "English"
+    },
+    {
+      "id": "es",
+      "label": "español"
+    },
+    {
+      "id": "fr",
+      "label": "français"
+    },
+    {
+      "id": "ga",
+      "label": "Gaeilge"
+    },
+    {
+      "id": "it",
+      "label": "italiano"
+    },
+    {
+      "id": "lv",
+      "label": "latviešu"
+    },
+    {
+      "id": "lt",
+      "label": "lietuvių"
+    },
+    {
+      "id": "hu",
+      "label": "magyar"
+    },
+    {
+      "id": "hr",
+      "label": "hrvatski"
+    },
+    {
+      "id": "mt",
+      "label": "Malti"
+    },
+    {
+      "id": "nl",
+      "label": "Nederlands"
+    },
+    {
+      "id": "pl",
+      "label": "polski"
+    },
+    {
+      "id": "pt",
+      "label": "português"
+    },
+    {
+      "id": "ro",
+      "label": "română"
+    },
+    {
+      "id": "sk",
+      "label": "slovenčina"
+    },
+    {
+      "id": "sl",
+      "label": "slovenščina"
+    },
+    {
+      "id": "fi",
+      "label": "suomi"
+    },
+    {
+      "id": "sv",
+      "label": "svenska"
+    }
+  ]

@@ -37,14 +37,15 @@ var configs_obj = {
         dom_el: document.querySelector('#player')
     },
     obstacle: {
+        language: undefined,
         brick_array: [],
         blocked: false,
         direction: undefined,
         position: {
             x: undefined,
             y: undefined,
-            width: 10,
-            height: 10
+            width: undefined,
+            height: undefined
         },
         dom_el: undefined
     },

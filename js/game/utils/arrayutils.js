@@ -7,5 +7,8 @@ module.exports = {
             return element !== item;
         });
         return array;
+    },
+    getRandomCel: function (array) {
+        return array[Math.floor(Math.random()*array.length)];
     }
 };
