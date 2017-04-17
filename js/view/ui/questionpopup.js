@@ -2,7 +2,9 @@
  * Created by Jean-Baptiste on 11/04/2017.
  */
 var
+    Labels = require('../../datatransform/labels'),
     SvgUtils = require('../../game/utils/svgutils'),
+    ArrayUtils = require('../../game/utils/arrayutils'),
     Config = require('../gameobjects/config'),
     UserControls = require('../../game/ui/usercontrol'),
     stage_el = document.body,
@@ -16,26 +18,30 @@ var
         stage_el.removeChild(popup_el);
         callback_fun(correct_bool);
     },
-    open_bool = false;
+    open_bool = false,
+    buildAnswers = function (obstacle_obj) {
+        var languages_array = ArrayUtils.convertObjectToArray(Labels.data.langues),
+            correctLanguage_obj = languages_array.filter(function (language_obj) {
+                    return obstacle_obj.language === language_obj.id;
+                }
+            )[0];
+        ArrayUtils.remove (languages_array, correctLanguage_obj);
+        correctLanguage_obj.correct = true;
+        languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
+        languageSelection_array.push (correctLanguage_obj);
+        languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
+        return languageSelection_array;
+    };
+
 
 UserControls.onDirectionChange = function () {
     if (open_bool) {
         closePopup();
     }
 };
-
 module.exports = function (obstacle_obj, p_callback_fun) {
     var
         margin_num = gridSize_num / 2,
-        answers_array = [
-            {
-                label: 'Right answer',
-                correct: true
-            },
-            {
-                label: 'Wrong answer',
-                correct: false
-            }],
         obstacleTL_point = SvgUtils.convertCoordinateFromSVGToDOM(
             gameStage_el,
             {
@@ -51,7 +57,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
             }
         ),
         questionTitle_el = document.createElement('h2'),
-        questionTitleText_node = document.createTextNode('MOCK QUESTION'),
+        questionTitleText_node = document.createTextNode(Labels.data.question),
         placePopup = function () {
             var size_rect = popup_el.getBoundingClientRect();
             if (obstacle_obj.position.y < gameStage_obj.position.height / 2) {
@@ -70,6 +76,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
         };
     callback_fun = p_callback_fun;
     if (!open_bool) {
+        var answers_array = buildAnswers (obstacle_obj);
         popup_el = document.createElement('div');
         open_bool = true;
         answers_el = document.createElement('ul');
@@ -80,18 +87,18 @@ module.exports = function (obstacle_obj, p_callback_fun) {
         popup_el.setAttribute('class', 'question_popup');
         questionTitle_el.setAttribute('class', 'question_title');
         answers_el.setAttribute('class', 'answers');
-        answers_array.forEach(function (element) {
+        answers_array.forEach(function (element, index) {
             var
                 answer_el = document.createElement('li'),
-                text_node = document.createTextNode(element.label);
+                text_node = document.createTextNode(element.value);
+            answer_el.setAttribute('tabindex',index+1);
             answer_el.appendChild(text_node);
             answer_el.setAttribute('class', 'answer');
             answer_el.addEventListener('click', function () {
-                closePopup(element.correct);
+                closePopup(element.id === obstacle_obj.language);
             });
             answers_el.appendChild(answer_el);
         });
-
         placePopup();
     }
 };
