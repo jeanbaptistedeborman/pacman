@@ -10,7 +10,7 @@ var
     stageConfig = Config('stage'),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'obstacle',
-    Languages = require ('../../../datatransform/languages'),
+    Languages = require('../../../datatransform/languages'),
     fake_array = String("A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z").split(','),
     items_array = ObjectListManager.createList(ID_STR);
 
@@ -51,18 +51,17 @@ module.exports = {
             dom_el.appendChild(brick_el);
             if (string_array) {
                 var
-
+                    textHeight_num = 9,
                     text_el = SvgUtils.createElement('text',
-                    {
-                        width: gridSize_num,
-                        height: gridSize_num,
-                        fill: 'black',
-                        "font-family": "Arial narrow",
-                        "font-size": "10.5",
-                        "alignment-baseline": "hanging",
-                        x: 1 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
-                        y: 1 + config.position.y + n * gridSize_num * Number(config.direction === 'height')
-                    }
+                        {
+                            width: gridSize_num,
+                            height: gridSize_num,
+                            fill: 'black',
+                            "font-family": "Arial narrow",
+                            "font-size": "10.5",
+                            x: 1 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
+                            y: textHeight_num + config.position.y + n * gridSize_num * Number(config.direction === 'height')
+                        }
                     ),
                     text_node = document.createTextNode(string_array.shift());
 
