@@ -44,18 +44,23 @@ module.exports = {
 
     getDirection: function (objectPosition_point) {
         var direction_obj = null;
+
         if (KeyControls.pressedKey) {
             direction_obj = {x:0,y:0};
             switch (KeyControls.pressedKey) {
+                case "Right":
                 case "ArrowRight":
                     direction_obj.x = 1;
                     break;
+                case "Left":
                 case "ArrowLeft":
                     direction_obj.x = -1;
                     break;
+                case "Up":
                 case "ArrowUp":
                     direction_obj.y = -1;
                     break;
+                case "Down":
                 case "ArrowDown":
                     direction_obj.y = 1;
                     break;
