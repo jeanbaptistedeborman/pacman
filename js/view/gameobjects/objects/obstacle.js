@@ -11,7 +11,6 @@ var
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'obstacle',
     Languages = require('../../../datatransform/languages'),
-    fake_array = String("A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z,A,B,C,D,E,F,G,H,I,J,K,L,M,O,P,Q,R,S,T,U,V,W,X,Y,Z").split(','),
     items_array = ObjectListManager.createList(ID_STR);
 
 module.exports = {
@@ -64,12 +63,9 @@ module.exports = {
                         }
                     ),
                     text_node = document.createTextNode(string_array.shift());
-
                 text_el.appendChild(text_node);
                 dom_el.appendChild(text_el);
             }
-
-
             config.brick_array.push(
                 {
                     brick_el: brick_el,
@@ -90,11 +86,10 @@ module.exports = {
                         } else {
                             brick_obj.brick_el.setAttribute('fill', 'black');
                         }
-                    }, 100 + (100 * index));
+                    }, 50 + (100 * index));
                 });
             }
-        }
-        ;
+        };
 
         ObjectListManager.pushItem(ID_STR, config);
         items_array.push(config);

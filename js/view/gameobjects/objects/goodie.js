@@ -51,7 +51,6 @@ module.exports = {
                        x:column_num*gridSize_num,
                        y:line_num*gridSize_num
                    };
-                   console.log (CollisionManager.isForbidden(position_point));
                     if (!CollisionManager.isForbidden(position_point)) {
                         add (position_point);
                    }

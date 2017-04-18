@@ -7,8 +7,6 @@ var
     languages_array = require('../../data/languages.json'),
     ArrayUtils = require('../game/utils/arrayutils'),
     languages_map = [];
-console.log (languages_map);
-
 languages_array.forEach(function (element) {
     var
         length_num = element.label.length,
