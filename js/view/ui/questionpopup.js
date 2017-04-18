@@ -25,10 +25,10 @@ var
                     return obstacle_obj.language === language_obj.id;
                 }
             )[0];
-        ArrayUtils.remove (languages_array, correctLanguage_obj);
+        ArrayUtils.remove(languages_array, correctLanguage_obj);
         correctLanguage_obj.correct = true;
         languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
-        languageSelection_array.push (correctLanguage_obj);
+        languageSelection_array.push(correctLanguage_obj);
         languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
         return languageSelection_array;
     };
@@ -76,7 +76,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
         };
     callback_fun = p_callback_fun;
     if (!open_bool) {
-        var answers_array = buildAnswers (obstacle_obj);
+        var answers_array = buildAnswers(obstacle_obj);
         popup_el = document.createElement('div');
         open_bool = true;
         answers_el = document.createElement('ul');
@@ -90,11 +90,12 @@ module.exports = function (obstacle_obj, p_callback_fun) {
         answers_array.forEach(function (element, index) {
             var
                 answer_el = document.createElement('li'),
+                button_el = document.createElement('button'),
                 text_node = document.createTextNode(element.value);
-            answer_el.setAttribute('tabindex',index+1);
-            answer_el.appendChild(text_node);
-            answer_el.setAttribute('class', 'answer');
-            answer_el.addEventListener('click', function () {
+            answer_el.appendChild(button_el);
+            button_el.appendChild(text_node);
+            button_el.setAttribute('class', 'answer');
+            button_el.addEventListener('click', function () {
                 closePopup(element.id === obstacle_obj.language);
             });
             answers_el.appendChild(answer_el);
