@@ -26,5 +26,8 @@ module.exports = {
     },
     get data() {
         return labels_json;
+    },
+    getLabel: function (labelId_str) {
+        return labels_json[labelId_str];
     }
 };

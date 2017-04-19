@@ -6,8 +6,9 @@ var
     Config = require('../config'),
     ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
-    CollisionManager = require ('../collisionmanager'),
+    CollisionManager = require('../collisionmanager'),
     stageConfig = Config('stage'),
+    onCollected_fun,
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',
     parent_el = stageConfig.dom_el,
@@ -27,15 +28,21 @@ var
             y: config.position.y
         });
         config.remove = function () {
-            dom_el.setAttribute('fill', 'black');
             parent_el.removeChild(dom_el);
-            ObjectListManager.removeItem (ID_STR, config);
+            items_array = ObjectListManager.disableItemFromList(ID_STR, config);
+            if (items_array.length === 0 && onCollected_fun) {
+                onCollected_fun();
+            }
             return items_array.length;
         };
-        items_array.push (config);
+        items_array.push(config);
         parent_el.appendChild(dom_el);
     };
 module.exports = {
+    set onCollected(fun) {
+        onCollected_fun = fun;
+
+    },
     get itemList() {
         return items_array;
     },
@@ -46,15 +53,15 @@ module.exports = {
             colTotal_num = stageConfig.columnsNum;
         for (column_num = 0; column_num < colTotal_num; column_num++) {
             for (line_num = 0; line_num < lineTotal_num; line_num++) {
-               if (line_num%10 === 0 && column_num%10===  0) {
-                   var position_point = {
-                       x:column_num*gridSize_num,
-                       y:line_num*gridSize_num
-                   };
+                if (line_num % 20 === 0 && column_num % 20 === 0) {
+                    var position_point = {
+                        x: column_num * gridSize_num,
+                        y: line_num * gridSize_num
+                    };
                     if (!CollisionManager.isForbidden(position_point)) {
-                        add (position_point);
-                   }
-               }
+                        add(position_point);
+                    }
+                }
 
             }
         }

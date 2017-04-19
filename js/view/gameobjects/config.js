@@ -34,7 +34,7 @@ var configs_obj = {
             height: 10
         },
         speed: 2.5,
-        dom_el: document.querySelector('#player')
+        dom_el: undefined
     },
     obstacle: {
         language: undefined,
@@ -74,11 +74,15 @@ var configs_obj = {
 };
 
 
-module.exports = function (id_str) {
+module.exports = function (id_str, clone_bool) {
     var result_obj = configs_obj[id_str];
     if (result_obj) {
         result_obj.type = id_str;
-        return result_obj;
+        if (!clone_bool) {
+            return result_obj;
+        } else {
+            return JSON.parse(JSON.stringify(result_obj));
+        }
     } else {
         throw (new Error("No config found for id : " + id_str));
     }

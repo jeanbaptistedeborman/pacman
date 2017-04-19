@@ -12,6 +12,7 @@ var
     QuestionPopup = require('../ui/questionpopup'),
     gridSize_num = Config('stage').gridSize,
     playing_bool = true,
+    ScoreManager = require ('../../game/scoremanager'),
     movingObjectsCounter_num = 0;
 
 module.exports = {
@@ -20,10 +21,14 @@ module.exports = {
             position_rect = config.position,
             updatePos = function (point) {
                 for (var n in point) {
-                    position_rect[n] = point[n];
+                    if (point.hasOwnProperty(n)) {
+                        position_rect[n] = point[n];
+                    }
                 }
-                config.dom_el.setAttribute("x", position_rect.x);
-                config.dom_el.setAttribute("y", position_rect.y);
+                if (config.dom_el) {
+                    config.dom_el.setAttribute("x", position_rect.x);
+                    config.dom_el.setAttribute("y", position_rect.y);
+                }
             },
             findPos = function (direction_obj, step_num) {
                 var
@@ -79,7 +84,7 @@ module.exports = {
                             if (goodie) {
                                 var remaining_num = goodie.remove();
                                 if (remaining_num === 0) {
-                                    alert('Level finished : Refresh page to test again');
+                                    IntervalManager.clearAll();
                                 }
                             }
                         }
@@ -115,6 +120,9 @@ module.exports = {
                 }
             }()),
             api = {
+                get dom_el() {
+                    return config.dom_el;
+                },
                 get position() {
                     return config.position;
                 },
@@ -126,6 +134,9 @@ module.exports = {
                 },
                 set moveDirection(point) {
                     moveTo(point);
+                },
+                update: function () {
+                    updatePos(config.position);
                 }
             };
 

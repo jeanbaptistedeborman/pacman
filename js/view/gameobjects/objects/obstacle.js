@@ -37,9 +37,7 @@ module.exports = {
             config.language = language_obj.id;
             string_array = language_obj.label.split('');
         }
-
         for (var n = 0; n < rect[config.direction]; n++) {
-
             var brick_el = SvgUtils.createElement('rect', {
                 width: gridSize_num,
                 height: gridSize_num,
@@ -75,7 +73,7 @@ module.exports = {
         config.openDoor = function (openOrLock_bool) {
             if (!config.blocked) {
                 if (openOrLock_bool) {
-                    ObjectListManager.removeItem(ID_STR, config);
+                    ObjectListManager.disableItemFromList(ID_STR, config);
                 } else {
                     config.blocked = true;
                 }

@@ -1,7 +1,7 @@
 /**
  * Created by Jean-Baptiste on 11/04/2017.
  */
-Module.exports = function () {
+module.exports = function () {
     var
         display_el = document.querySelector('.whq_score .value'),
         updateDisplay = function (score_num) {

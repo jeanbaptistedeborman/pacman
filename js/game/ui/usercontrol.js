@@ -19,16 +19,11 @@ var MouseControl = require("./mouseandtouch"),
     previousDirection_obj = {x: 0, y: 0},
     onDirectionChange_fun,
     addChangeInfo = function (newDirection_obj) {
-        console.log("addChangeInfo :   ");
-
         newDirection_obj.directionChange =
             previousDirection_obj &&
             (newDirection_obj.x !== 0 || newDirection_obj.y !== 0) &&
             (previousDirection_obj.x !== newDirection_obj.x ||
             previousDirection_obj.y !== newDirection_obj.y);
-        console.log("newDirection_obj.x !== 0 || newDirection_obj.y !== 0 : ", newDirection_obj.x !== 0 || newDirection_obj.y !== 0);
-        console.log("newDirection_obj : ", newDirection_obj);
-
         if (newDirection_obj.directionChange && onDirectionChange_fun) {
             onDirectionChange_fun(newDirection_obj);
         }

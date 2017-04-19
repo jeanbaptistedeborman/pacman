@@ -67,10 +67,18 @@ svg #background {
     fill: yellow;
 }
 
-.question_popup {
+
+
+.gameover_popup, .question_popup {
     position: absolute;
     background-color: white;
     padding: 10px;
+}
+
+.gameover_popup {
+    min-width:200px;
+    top:100px;
+    left:100px;
 }
 
 .answer {
