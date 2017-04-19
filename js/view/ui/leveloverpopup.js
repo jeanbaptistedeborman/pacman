@@ -3,7 +3,6 @@
  */
 var
     Labels = require('../../datatransform/labels'),
-    Config = require('../gameobjects/config'),
     stage_el = document.body,
     callback_fun,
     popup_el,
@@ -13,8 +12,6 @@ var
         callback_fun();
     },
     open_bool = false;
-
-console.log ('level over');
 
 module.exports = function (p_callback_fun) {
     callback_fun = p_callback_fun;

@@ -10,9 +10,10 @@ var
     directionFromTo = require('../../game/directionfromto'),
     CollisionManager = require('./collisionmanager'),
     QuestionPopup = require('../ui/questionpopup'),
+    ScoreManager = require('../../game/scoremanager'),
+    LivesManager = require('../../game/livemanager'),
     gridSize_num = Config('stage').gridSize,
     playing_bool = true,
-    ScoreManager = require ('../../game/scoremanager'),
     movingObjectsCounter_num = 0;
 
 module.exports = {
@@ -54,12 +55,12 @@ module.exports = {
                     direction_obj,
                     setDirection = function () {
                         /*
-                         * @todo: Refactor : Probably better if each type provided his own movement function as parameter
+                         * @todo: Refactor :  Better if each type provided his own movement function as parameter
                          *
                          * */
                         var
                             temptativeDirection_obj = null,
-                            playerAvatar_api,
+                            playerAvatar_api = ObjectListManager.getList('playerAvatar')[0],
                             iAmAvatar_bool = config.type === "playerAvatar",
                             forbidden_obj,
                             temptativePosition_point;
@@ -67,21 +68,28 @@ module.exports = {
                             temptativeDirection_obj = UserControls.getDirection(position_rect);
                         }
                         if (config.type === 'badGuy') {
-                            playerAvatar_api = ObjectListManager.getList('playerAvatar')[0];
-                            temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
+                            playerAvatar_api =
+                                temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
                         }
 
                         if (temptativeDirection_obj) {
                             temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
                         }
 
-                        if (config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
-                            IntervalManager.clearAll();
-                            alert('game over : refresh page to test again');
+                        if (playing_bool && config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
+                            playerAvatar_api = CollisionManager.isAvatar(temptativePosition_point);
+                            playing_bool = false;
+                            window.setTimeout(function () {
+                                playerAvatar_api.position = {x: 0, y: 0};
+                                LivesManager.decrement();
+                                playing_bool = true;
+                            }, 500);
+
                         }
                         if (iAmAvatar_bool) {
                             var goodie = CollisionManager.isGoodie(temptativePosition_point);
                             if (goodie) {
+                                ScoreManager.increment();
                                 var remaining_num = goodie.remove();
                                 if (remaining_num === 0) {
                                     IntervalManager.clearAll();
@@ -130,12 +138,14 @@ module.exports = {
                     return config.targetPosition;
                 },
                 set position(point) {
+                    console.log('position');
                     updatePos(point);
                 },
                 set moveDirection(point) {
                     moveTo(point);
                 },
                 update: function () {
+                    console.log('update');
                     updatePos(config.position);
                 }
             };

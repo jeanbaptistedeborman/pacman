@@ -15,11 +15,13 @@ labelsManager.fetch('en', function () {
         Goodie = require('./view/gameobjects/objects/goodie'),
         LevelOverPopup = require('./view/ui/leveloverpopup'),
         GameOverPopup = require('./view/ui/gameoverpopup'),
+        ScoreManager = require ('./game/scoremanager'),
+        LiveManager = require ('./game/livemanager'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
         playerAvatar_obj,
         level_num = 0,
         newGame = function () {
-            console.log('start new game');
+            ScoreManager.reset ();
             level_num = 0;
             createLevel();
         },
@@ -51,6 +53,9 @@ labelsManager.fetch('en', function () {
             Goodie.addAll();
         };
     createLevel();
+    LiveManager.onLivesLost = function () {
+        GameOverPopup(newGame);
+    };
     Goodie.onCollected = function () {
         if (level_num < levels_array.length) {
             LevelOverPopup(createLevel);
