@@ -2,17 +2,18 @@
  * Created by Jean-Baptiste on 2/22/2017.
  */
 "use strict";
-var PointConversion = {
-    SVGToPoint: function (SVGPoint) {
-        return {x: SVGPoint.x, y: SVGPoint.y};
-    },
-    pointToSVG: function (svg_el, point) {
-        var svg_point = svg_el.createSVGPoint();
-        svg_point.x = point.x;
-        svg_point.y = point.y;
-        return svg_point;
-    }
-};
+var
+    PointConversion = {
+        SVGToPoint: function (SVGPoint) {
+            return {x: SVGPoint.x, y: SVGPoint.y};
+        },
+        pointToSVG: function (svg_el, point) {
+            var svg_point = svg_el.createSVGPoint();
+            svg_point.x = point.x;
+            svg_point.y = point.y;
+            return svg_point;
+        }
+    };
 module.exports = {
     /**
      *
@@ -35,13 +36,24 @@ module.exports = {
             converted_point = svg_point.matrixTransform(CTM);
         return PointConversion.SVGToPoint(converted_point);
     },
-    createElement: function (svgTagName_str, params_obj) {
+    createElement: function (svgTagName_str, params_obj, namespaceParams_array) {
+        console.log('createElement');
         var el = document.createElementNS("http://www.w3.org/2000/svg", svgTagName_str);
-        for (var n in params_obj) {
-                el.setAttribute(n,  params_obj[n]);
+        if (params_obj) {
+            for (var n in params_obj) {
+                if (params_obj.hasOwnProperty(n)) {
+                    el.setAttribute(n, params_obj[n]);
+                }
+            }
+        }
+        if (namespaceParams_array) {
+            namespaceParams_array.forEach(function (attr) {
+                el.setAttributeNS(attr.nameSpace, attr.name, attr.value);
+            });
         }
         return el;
     }
+
 };
 
 
