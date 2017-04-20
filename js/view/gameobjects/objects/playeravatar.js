@@ -14,9 +14,10 @@ module.exports = {
 
         // <use xlink:href="#avatar"  width="95.406" height="95.406" x="-47.703" y="-47.703" /> -->
         config.dom_el = SvgUtils.createElement('use', {
-            width: "10",
-            height: "10",
-        overflow: "visible"
+            width: "12",
+            height: "12",
+            transform:'translate(-1,-1)',
+            overflow: "visible"
         }, [
             {
                 nameSpace: "http://www.w3.org/1999/xlink",

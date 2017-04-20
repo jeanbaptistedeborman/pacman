@@ -20,13 +20,18 @@ var
         config.position = point;
         config.position.width = gridSize_num;
         config.position.height = gridSize_num;
-        dom_el = config.dom_el = SvgUtils.createElement('rect', {
+        dom_el = config.dom_el = SvgUtils.createElement('use', {
             width: 10,
             height: 10,
-            fill: 'blue',
             x: config.position.x,
             y: config.position.y
-        });
+        }, [
+            {
+                nameSpace: "http://www.w3.org/1999/xlink",
+                name: "href",
+                value: "#goodie"
+            }]);
+
         config.remove = function () {
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
@@ -53,7 +58,7 @@ module.exports = {
             colTotal_num = stageConfig.columnsNum;
         for (column_num = 0; column_num < colTotal_num; column_num++) {
             for (line_num = 0; line_num < lineTotal_num; line_num++) {
-                if (line_num % 20 === 0 && column_num % 20 === 0) {
+                if (line_num % 15 === 0 && column_num % 15 === 0) {
                     var position_point = {
                         x: column_num * gridSize_num,
                         y: line_num * gridSize_num

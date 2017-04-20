@@ -17,15 +17,18 @@ module.exports = {
 
         config.position.x = point.x * stageConfig.gridSize;
         config.position.y = point.y * stageConfig.gridSize;
-        config.dom_el = SvgUtils.createElement('rect',
+        config.dom_el = SvgUtils.createElement('use', {
+            width: "14",
+            height: "14",
+            transform:'translate(-2,-2)',
+            overflow: "visible"
+        }, [
             {
-                x: config.position.x,
-                y: config.position.y,
-                width: stageConfig.gridSize,
-                height: stageConfig.gridSize,
-                fill: 'black'
-
-            });
+                nameSpace: "http://www.w3.org/1999/xlink",
+                name: "href",
+                value: "#badguy"
+            }
+        ]);
         stageConfig.dom_el.appendChild(config.dom_el);
         var badGuy_obj = MovingObject.add(config);
         ObjectListManager.pushItem(ID_STR, badGuy_obj);
