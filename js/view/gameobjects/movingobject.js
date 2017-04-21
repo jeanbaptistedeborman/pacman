@@ -79,11 +79,16 @@ module.exports = {
                         if (playing_bool && config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
                             playerAvatar_api = CollisionManager.isAvatar(temptativePosition_point);
                             playing_bool = false;
+                            console.log('playerAvatar_api : ', playerAvatar_api);
+                            playerAvatar_api.config.avatarLost ();
+                            config.show (false);
                             window.setTimeout(function () {
                                 playerAvatar_api.position = {x: 0, y: 0};
+                                config.show (true);
+                                playerAvatar_api.config.restoreDefaultLook ();
                                 LivesManager.decrement();
                                 playing_bool = true;
-                            }, 500);
+                            }, 2000);
 
                         }
                         if (iAmAvatar_bool) {
@@ -105,11 +110,21 @@ module.exports = {
                                 forbidden_obj &&
                                 forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
                                 playing_bool = false;
+                                config.changeFrame('#avatarQuestion');
                                 QuestionPopup(forbidden_obj,
                                     function (answer_bool) {
                                         if (answer_bool !== undefined) {
+                                            console.log("answer_bool : " + answer_bool);
+                                            if (answer_bool) {
+                                                config.restoreDefaultLook ();
+                                            } else {
+                                                config.changeFrame('#avatarSad', 2000);
+                                            }
                                             forbidden_obj.openDoor(answer_bool);
+                                        } else {
+                                            config.changeFrame('#avatar');
                                         }
+
                                         playing_bool = true;
                                     }
                                 );
@@ -128,8 +143,12 @@ module.exports = {
                 }
             }()),
             api = {
+                /*@ todo :  harmonise : every call to condfig should go through config*/
                 get dom_el() {
                     return config.dom_el;
+                },
+                get config() {
+                    return config;
                 },
                 get position() {
                     return config.position;

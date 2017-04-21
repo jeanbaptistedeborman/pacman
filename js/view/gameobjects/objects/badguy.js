@@ -29,6 +29,17 @@ module.exports = {
                 value: "#badguy"
             }
         ]);
+        config.show = function (visible_bool) {
+            if (!visible_bool) {
+                SvgUtils.applyAttributes(config.dom_el, {
+                    'display':'none'
+                });
+            } else {
+                SvgUtils.applyAttributes(config.dom_el, {
+                    'display':'inline'
+                });
+            }
+        };
         stageConfig.dom_el.appendChild(config.dom_el);
         var badGuy_obj = MovingObject.add(config);
         ObjectListManager.pushItem(ID_STR, badGuy_obj);
