@@ -28,7 +28,6 @@ var
                 point.x < ref_point.x + item_obj.position.width &&
                 point.y >= ref_point.y && point.y < ref_point.y + item_obj.position.height;
         })[0];
-
         return result_obj;
     };
 module.exports = {
