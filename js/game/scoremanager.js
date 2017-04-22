@@ -5,9 +5,9 @@ var
     score_num = 0,
     updateView = function (score_num) {
         var display_text = document.getElementById('score');
-        display_text.textContent = "score : " + score_num;
+        display_text.textContent = score_num;
     };
-    updateView ();
+    updateView (0);
 
 module.exports = {
     get score() {
