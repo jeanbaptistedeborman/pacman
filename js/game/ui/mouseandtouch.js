@@ -18,8 +18,8 @@ var
     },
     stopListening = function (evt) {
         evt.preventDefault();
-        app_el.removeEventListener("mousemove", mouseMove);
-        app_el.removeEventListener("touchMove", mouseMove);
+        document.removeEventListener("mousemove", mouseMove);
+        document.removeEventListener("touchMove", mouseMove);
         position_point = null;
     },
     mouseMove = function (evt) {
@@ -28,7 +28,7 @@ var
     },
     mouseDown = function (evt) {
         evt.preventDefault();
-        app_el.addEventListener("mousemove", mouseMove);
+        document.addEventListener("mousemove", mouseMove);
         setCoordinates(evt);
     };
 document.addEventListener("mouseleave", stopListening);
