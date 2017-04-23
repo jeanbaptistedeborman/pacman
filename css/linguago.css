@@ -54,7 +54,7 @@ body {
     margin: 0;
     touch-action: none;
     height: 99%;
-    background-color: orange;
+    background-color: #0071c0;
 
 }
 
@@ -73,7 +73,6 @@ svg {
 
 svg #background {
     fill:#0071c0;
-    fill:lightGreen;
 }
 
 
