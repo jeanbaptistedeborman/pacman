@@ -43,12 +43,16 @@
 html {
     height:100%;
 }
+html, body {
+    overflow:hidden;
+}
 
 body {
     margin: 0;
     touch-action: none;
     height: 99%;
     background-color: orange;
+
 }
 
 ul {
@@ -66,7 +70,7 @@ svg {
 }
 
 svg #background {
-    fill:blue;
+    fill:magenta;
 }
 
 
