@@ -16,7 +16,7 @@ var stage_obj = {
     get columnsNum() {
         return Math.ceil(stage_obj.position.width / stage_obj.gridSize);
     },
-    dom_el: document.getElementById('app_js')
+    dom_el: document.getElementById('game_js')
 };
 
 var configs_obj = {
