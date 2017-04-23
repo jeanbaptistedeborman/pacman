@@ -67,13 +67,12 @@ ul {
 svg {
     user-select: none;
     background:#0071c0;
-    background:orange;
     width: 100%;
     height: 100%;
 }
 
 svg #background {
-    fill:white;
+    fill:#0071c0;
 }
 
 

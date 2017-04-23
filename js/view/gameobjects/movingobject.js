@@ -89,7 +89,6 @@ module.exports = {
                                 LivesManager.decrement();
                                 playing_bool = true;
                             }, 2000);
-
                         }
                         if (iAmAvatar_bool) {
                             var goodie = CollisionManager.isGoodie(temptativePosition_point);
