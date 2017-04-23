@@ -77,9 +77,9 @@ module.exports = {
                         }
 
                         if (playing_bool && config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
+                            console.log ("arrete playerAvatar_api : ", playerAvatar_api);
                             playerAvatar_api = CollisionManager.isAvatar(temptativePosition_point);
                             playing_bool = false;
-                            console.log('playerAvatar_api : ', playerAvatar_api);
                             playerAvatar_api.config.avatarLost ();
                             config.show (false);
                             window.setTimeout(function () {
