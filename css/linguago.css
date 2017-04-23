@@ -40,12 +40,14 @@
 .wipeFromLeft {
     animation: wipeFromLeft_kf .5s;
 }
-
+html {
+    height:100%;
+}
 
 body {
     margin: 0;
     touch-action: none;
-    height: 100%;
+    height: 99%;
     background-color: orange;
 }
 
