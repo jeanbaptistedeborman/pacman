@@ -3,17 +3,20 @@
  */
 module.exports = function (from_point, to_point) {
     var diffs_obj = {
-        x: to_point.x - from_point.x,
-        y: to_point.y - from_point.y
-    };
-    if (Math.abs(diffs_obj.x) > Math.abs(diffs_obj.y)) {
+            x: to_point.x - from_point.x,
+            y: to_point.y - from_point.y
+        },
+        MINIMUM_NUM = 10,
+        biggestDifProp_str = Math.abs(diffs_obj.x) > Math.abs(diffs_obj.y) ? 'x' : 'y',
+        value_num = (Math.abs(diffs_obj[biggestDifProp_str]) > MINIMUM_NUM) ? diffs_obj[biggestDifProp_str] / Math.abs(diffs_obj[biggestDifProp_str]) : 0;
+    if (biggestDifProp_str === 'x') {
         return {
-            x: diffs_obj.x / Math.abs(diffs_obj.x),
+            x: value_num,
             y: 0
         }
     } else {
         return {
-            y: diffs_obj.y / Math.abs(diffs_obj.y),
+            y: value_num,
             x: 0
         }
     }
