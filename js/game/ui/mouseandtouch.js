@@ -7,7 +7,7 @@ var preventDefaults = function (evt) {
     evt.preventDefault();
 };
 document.addEventListener("touchMove", preventDefaults);
-
+document.body.addEventListener("touchMove", preventDefaults);
 var
     position_point = null,
     app_el = document.getElementById('game_js'),
