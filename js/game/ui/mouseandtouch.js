@@ -3,6 +3,10 @@
  */
 "use strict";
 
+var preventDefaults = function (evt) {
+    evt.preventDefault();
+};
+document.addEventListener("touchMove", preventDefaults);
 
 var
     position_point = null,
@@ -18,8 +22,8 @@ var
     },
     stopListening = function (evt) {
         evt.preventDefault();
-        document.removeEventListener("mousemove", mouseMove);
-        document.removeEventListener("touchMove", mouseMove);
+        app_el.removeEventListener("mousemove", mouseMove);
+        app_el.removeEventListener("touchMove", mouseMove);
         position_point = null;
     },
     mouseMove = function (evt) {
@@ -28,15 +32,15 @@ var
     },
     mouseDown = function (evt) {
         evt.preventDefault();
-        document.addEventListener("mousemove", mouseMove);
+        app_el.addEventListener("mousemove", mouseMove);
         setCoordinates(evt);
     };
-document.addEventListener("mouseleave", stopListening);
-document.addEventListener("touchmove", mouseMove);
-document.addEventListener("mousedown", mouseDown);
-document.addEventListener("touchstart", mouseDown);
-document.addEventListener("mouseup", stopListening);
-document.addEventListener("touchend", stopListening);
+app_el.addEventListener("mouseleave", stopListening);
+app_el.addEventListener("touchmove", mouseMove);
+app_el.addEventListener("mousedown", mouseDown);
+app_el.addEventListener("touchstart", mouseDown);
+app_el.addEventListener("mouseup", stopListening);
+app_el.addEventListener("touchend", stopListening);
 
 module.exports = {
     get position() {
