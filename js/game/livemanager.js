@@ -2,10 +2,10 @@
  * Created by Jean-Baptiste on 11/04/2017.
  */
 var
-    LIFES_NUM = 5,
-    lives_num = LIFES_NUM,
+    LIVES_NUM = 5,
+    lives_num = LIVES_NUM,
     updateView = function (lives_num) {
-        var display_text = document.getElementById('lives'),
+        var
             livesEl_array = document.getElementsByClassName('liveIcon'),
             n;
         for (n = 0; n < livesEl_array.length; n++) {
@@ -16,9 +16,8 @@ var
                 el.setAttribute('display', 'none');
             }
         }
-        display_text.textContent = "lives : " + lives_num;
     };
-updateView(LIFES_NUM);
+updateView(LIVES_NUM);
 module.exports = {
     decrement: function () {
         updateView(--lives_num);

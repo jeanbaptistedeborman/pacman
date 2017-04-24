@@ -6,17 +6,22 @@ var Configs = require('../config'),
     SvgUtils = require('../../../game/utils/svgutils'),
     MovingObject = require('../movingobject'),
     ID_STR = 'badGuy',
+
     items_array = ObjectListManager.createList(ID_STR);
 
 module.exports = {
     itemList: items_array,
     add: function (point) {
         var
+            origin_point = point,
             config = JSON.parse(JSON.stringify(Configs(ID_STR))),
+            applyOriginPoint = function (){
+                config.position.x = origin_point.x * stageConfig.gridSize;
+                config.position.y = origin_point.y * stageConfig.gridSize;
+            },
             stageConfig = Configs('stage');
 
-        config.position.x = point.x * stageConfig.gridSize;
-        config.position.y = point.y * stageConfig.gridSize;
+        applyOriginPoint ();
         config.dom_el = SvgUtils.createElement('use', {
             width: "14",
             height: "14",
@@ -29,6 +34,10 @@ module.exports = {
                 value: "#badguy"
             }
         ]);
+        config.reset = function (){
+            applyOriginPoint ();
+
+        },
         config.show = function (visible_bool) {
             if (!visible_bool) {
                 SvgUtils.applyAttributes(config.dom_el, {
@@ -43,5 +52,10 @@ module.exports = {
         stageConfig.dom_el.appendChild(config.dom_el);
         var badGuy_obj = MovingObject.add(config);
         ObjectListManager.pushItem(ID_STR, badGuy_obj);
+    },
+    resetToOrigins:function () {
+        items_array.forEach(function (el) {
+            el.reset ();
+        });
     }
 };

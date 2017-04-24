@@ -15,6 +15,7 @@ labelsManager.fetch('en', function () {
         Goodie = require('./view/gameobjects/objects/goodie'),
         LevelOverPopup = require('./view/ui/leveloverpopup'),
         GameOverPopup = require('./view/ui/gameoverpopup'),
+        IntervalManager = require ('./game/utils/intervalmanager'),
         ScoreManager = require ('./game/scoremanager'),
         LiveManager = require ('./game/livemanager'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
@@ -22,6 +23,7 @@ labelsManager.fetch('en', function () {
         level_num = 0,
         newGame = function () {
             ScoreManager.reset ();
+            LiveManager.reset();
             level_num = 0;
             createLevel();
         },
@@ -54,6 +56,7 @@ labelsManager.fetch('en', function () {
         };
     createLevel();
     LiveManager.onLivesLost = function () {
+        IntervalManager.clearAll();
         GameOverPopup(newGame);
     };
     Goodie.onCollected = function () {

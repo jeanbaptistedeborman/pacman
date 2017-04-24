@@ -37,6 +37,8 @@ module.exports = {
     isAvatar: function (point) {
         return isItem("playerAvatar", point);
     },
+
+    /* @todo: rename as 'isOccuppied' */
     isForbidden: function (point) {
         if (point) {
             var

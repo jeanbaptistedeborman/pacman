@@ -77,14 +77,17 @@ module.exports = {
                         }
 
                         if (playing_bool && config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
-                            console.log ("arrete playerAvatar_api : ", playerAvatar_api);
                             playerAvatar_api = CollisionManager.isAvatar(temptativePosition_point);
                             playing_bool = false;
                             playerAvatar_api.config.avatarLost ();
                             config.show (false);
                             window.setTimeout(function () {
+                                var badGuys_array = ObjectListManager.getList('badGuy');
                                 playerAvatar_api.position = {x: 0, y: 0};
                                 config.show (true);
+                                badGuys_array.forEach(function (badGuy_mo){
+                                    badGuy_mo.config.reset();
+                                });
                                 playerAvatar_api.config.restoreDefaultLook ();
                                 LivesManager.decrement();
                                 playing_bool = true;
@@ -113,7 +116,6 @@ module.exports = {
                                 QuestionPopup(forbidden_obj,
                                     function (answer_bool) {
                                         if (answer_bool !== undefined) {
-                                            console.log("answer_bool : " + answer_bool);
                                             if (answer_bool) {
                                                 config.restoreDefaultLook ();
                                             } else {
@@ -142,7 +144,7 @@ module.exports = {
                 }
             }()),
             api = {
-                /*@ todo :  harmonise : every call to condfig should go through config*/
+                /*@ todo :  harmonise : every call to config should go through config.*/
                 get dom_el() {
                     return config.dom_el;
                 },
@@ -156,14 +158,12 @@ module.exports = {
                     return config.targetPosition;
                 },
                 set position(point) {
-                    console.log('position');
                     updatePos(point);
                 },
                 set moveDirection(point) {
                     moveTo(point);
                 },
                 update: function () {
-                    console.log('update');
                     updatePos(config.position);
                 }
             };
