@@ -3,10 +3,14 @@
  */
 "use strict";
 
-
+var preventDefaults = function (evt) {
+    evt.preventDefault();
+};
+document.addEventListener("touchMove", preventDefaults);
+document.body.addEventListener("touchMove", preventDefaults);
 var
     position_point = null,
-    app_el = document.getElementById('app_js'),
+    app_el = document.getElementById('game_js'),
     setCoordinates = function (evt) {
         var isMouse_bool = !evt.changedTouches;
         if (isMouse_bool) {
@@ -24,13 +28,12 @@ var
     },
     mouseMove = function (evt) {
         evt.preventDefault();
-        evt.preventDefault();
-        setCoordinates (evt);
+        setCoordinates(evt);
     },
     mouseDown = function (evt) {
         evt.preventDefault();
         app_el.addEventListener("mousemove", mouseMove);
-        setCoordinates (evt);
+        setCoordinates(evt);
     };
 app_el.addEventListener("mouseleave", stopListening);
 app_el.addEventListener("touchmove", mouseMove);

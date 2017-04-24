@@ -6,12 +6,12 @@ var pressedKey_str,
     lastPressedKey_str,
     body_el = document.getElementsByTagName('body')[0];
 
-body_el.onkeydown = function (evt) {
+document.addEventListener('keydown', function (evt) {
     lastPressedKey_str = pressedKey_str = evt.key;
-};
-body_el.onkeyup = function () {
+});
+document.addEventListener ('keyup', function () {
     pressedKey_str = null;
-};
+});
 module.exports = {
     get pressedKey() {
         return pressedKey_str;

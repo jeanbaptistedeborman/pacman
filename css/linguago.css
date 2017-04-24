@@ -1,0 +1,103 @@
+
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+@keyframes wipeFromRight_kf {
+    0% {
+        opacity: 0;
+        transform: translate(-15px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes wipeFromLeft_kf {
+    0% {
+        opacity: 0;
+        transform: translate(-15px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.wipeFromRight {
+    animation: wipeFromRight_kf .5s;
+}
+
+.wipeFromLeft {
+    animation: wipeFromLeft_kf .5s;
+}
+html {
+
+}
+html, body {
+    position: fixed;
+    height:100%;
+    width:100%
+
+}
+
+body {
+    margin: 0;
+    touch-action: none;
+    height: 99%;
+    background-color: #0071c0;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+svg {
+    user-select: none;
+    background:#0071c0;
+    width: 100%;
+    height: 100%;
+}
+
+svg #background {
+    fill:#0071c0;
+}
+
+
+
+.gameover_popup, .question_popup {
+    position: absolute;
+    background-color: white;
+    padding: 10px;
+}
+
+.gameover_popup {
+    min-width:200px;
+    top:100px;
+    left:100px;
+}
+
+.answer {
+    border: 1px solid black;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.answer:hover {
+    background-color: lightskyblue;
+}
+.live_icon {
+    fill:'red'
+}
