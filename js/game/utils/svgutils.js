@@ -53,7 +53,6 @@ module.exports = {
     },
     applyAttributes:applyAttributes,
     createElement: function (svgTagName_str, params_obj, namespaceParams_array) {
-        console.log('createElement');
         var el = document.createElementNS("http://www.w3.org/2000/svg", svgTagName_str);
         applyAttributes (el, params_obj, namespaceParams_array);
         return el;
