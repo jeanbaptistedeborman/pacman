@@ -70,7 +70,7 @@ module.exports = {
         }
         if (objectPosition_point && stage_el && MouseControl.position) {
 
-            var mouseSVG_point = SvgUtils.coordinateTransform(stage_el, MouseControl.position),
+            var mouseSVG_point = SvgUtils.convertCoordinateFromDOMToSVG(stage_el, MouseControl.position),
                 gridSize_num = Config('stage').gridSize;
             if (mouseSVG_point.x >= objectPosition_point.x
              && mouseSVG_point.y >= objectPosition_point.y
