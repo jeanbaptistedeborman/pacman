@@ -44,7 +44,7 @@ module.exports = {
 
     getDirection: function (objectPosition_point) {
         var
-            direction_obj = null;
+            direction_obj;
         if (KeyControls.pressedKey) {
             direction_obj = {x: 0, y: 0};
             switch (KeyControls.pressedKey) {
@@ -70,15 +70,16 @@ module.exports = {
         }
         if (objectPosition_point && stage_el && MouseControl.position) {
 
-            var mouseSVG_point = SvgUtils.convertCoordinateFromDOMToSVG(stage_el, MouseControl.position),
+            var
+                mouseSVG_point = SvgUtils.convertCoordinateFromDOMToSVG(stage_el, MouseControl.position),
                 gridSize_num = Config('stage').gridSize;
             if (mouseSVG_point.x >= objectPosition_point.x
              && mouseSVG_point.y >= objectPosition_point.y
              && mouseSVG_point.x < objectPosition_point.x + gridSize_num
              && mouseSVG_point.y < objectPosition_point.y + gridSize_num) {
-              return {x: 0, y: 0};
+                direction_obj = {x: 0, y: 0};
             } else {
-              return directionFromTo ({x: objectPosition_point.x + gridSize_num / 2,
+                direction_obj = directionFromTo ({x: objectPosition_point.x + gridSize_num / 2,
                                        y: objectPosition_point.y + gridSize_num / 2}, mouseSVG_point);
             }
             addChangeInfo(direction_obj);
