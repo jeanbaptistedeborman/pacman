@@ -69,7 +69,7 @@ module.exports = {
                         }
                         if (config.type === 'badGuy') {
                             playerAvatar_api =
-                                temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.targetPosition);
+                                temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
                         }
 
                         if (temptativeDirection_obj) {
