@@ -69,8 +69,18 @@ module.exports = {
             return direction_obj;
         }
         if (objectPosition_point && stage_el && MouseControl.position) {
-            var mouseSVG_point = SvgUtils.convertCoordinateFromDOMToSVG(stage_el, MouseControl.position);
-            direction_obj = directionFromTo(objectPosition_point, mouseSVG_point);
+
+            var mouseSVG_point = SvgUtils.coordinateTransform(stage_el, MouseControl.position),
+                gridSize_num = Config('stage').gridSize;
+            if (mouseSVG_point.x >= objectPosition_point.x
+             && mouseSVG_point.y >= objectPosition_point.y
+             && mouseSVG_point.x < objectPosition_point.x + gridSize_num
+             && mouseSVG_point.y < objectPosition_point.y + gridSize_num) {
+              return {x: 0, y: 0};
+            } else {
+              return directionFromTo ({x: objectPosition_point.x + gridSize_num / 2,
+                                       y: objectPosition_point.y + gridSize_num / 2}, mouseSVG_point);
+            }
             addChangeInfo(direction_obj);
             return direction_obj;
         }
