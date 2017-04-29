@@ -10,8 +10,8 @@ var
     directionFromTo = require('../../game/directionfromto'),
     CollisionManager = require('./collisionmanager'),
     QuestionPopup = require('../ui/questionpopup'),
-    ScoreManager = require('../../game/scoremanager'),
-    LivesManager = require('../../game/livemanager'),
+    ScoreManager = require('../counters/scoremanager'),
+    LivesManager = require('../counters/livemanager'),
     gridSize_num = Config('stage').gridSize,
     playing_bool = true,
     movingObjectsCounter_num = 0;

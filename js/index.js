@@ -16,8 +16,9 @@ labelsManager.fetch('en', function () {
         LevelOverPopup = require('./view/ui/leveloverpopup'),
         GameOverPopup = require('./view/ui/gameoverpopup'),
         IntervalManager = require ('./game/utils/intervalmanager'),
-        ScoreManager = require ('./game/scoremanager'),
-        LiveManager = require ('./game/livemanager'),
+        ScoreManager = require ('./view/counters/scoremanager'),
+        LiveManager = require ('./view/counters/livemanager'),
+        LevelCounter = require ('./view/counters/levelcounter'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
         playerAvatar_obj,
         level_num = 0,
@@ -36,6 +37,8 @@ labelsManager.fetch('en', function () {
                 badGuys_array = level_array.filter(function (element) {
                     return element.id === 'badGuy';
                 });
+
+            LevelCounter.set (level_num);
             ObjectlistManager.cleanAll();
             playerAvatar_obj = PlayerAvatar.add();
             badGuys_array.forEach(function (element) {

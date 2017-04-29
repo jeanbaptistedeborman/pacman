@@ -31,7 +31,6 @@ module.exports = {
             shades_array = [],
             n;
 
-
         config.direction = rect.width > rect.height ? 'width' : 'height';
         config.position.x = rect.x * gridSize_num;
         config.position.y = rect.y * gridSize_num;
@@ -39,7 +38,6 @@ module.exports = {
         config.position.height = rect.height * gridSize_num;
         dom_el = config.dom_el = SvgUtils.createElement('g');
         blocks_num = rect[config.direction];
-
 
         language_obj = Languages.getRandomLanguageOfLength(blocks_num);
         if (language_obj) {
