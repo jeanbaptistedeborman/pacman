@@ -1,7 +1,9 @@
 # pacman
 A pacamanlike game on the languages in the EU.
+
 **** Preview URL (Master branch) :
 - http://linguagopreview.azurewebsites.net/
+
 **** Dev / test URL  (Dev branch) :
 - http://devlinguago.azurewebsites.net/
 
