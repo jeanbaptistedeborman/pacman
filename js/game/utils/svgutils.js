@@ -3,7 +3,14 @@
  */
 "use strict";
 var
-    applyAttributes = function (el, params_obj, namespaceParams_array){
+    polarToCartesian = function (centerX, centerY, radius, angleInDegrees) {
+        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+        return {
+            x: centerX + (radius * Math.cos(angleInRadians)),
+            y: centerY + (radius * Math.sin(angleInRadians))
+        };
+    },
+    applyAttributes = function (el, params_obj, namespaceParams_array) {
         if (params_obj) {
             for (var n in params_obj) {
                 if (params_obj.hasOwnProperty(n)) {
@@ -16,7 +23,32 @@ var
                 el.setAttributeNS(attr.nameSpace, attr.name, attr.value);
             });
         }
+    },
+    createElement = function (svgTagName_str, params_obj, namespaceParams_array) {
+        var el = document.createElementNS("http://www.w3.org/2000/svg", svgTagName_str);
+        applyAttributes(el, params_obj, namespaceParams_array);
+        return el;
+    },
+    getSliceAttribute = function (centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle) {
+        var startAngle = p_startAngle,
+            endAngle = p_endAngle,
+            externalCurve_obj = getArc(centerX, centerY, radius, startAngle, endAngle),
+            internalCurve_obj = getArc(centerX, centerY, holeRadius, endAngle, startAngle, true), intToExtPath_str = " L" + externalCurve_obj.startPoint + " ", extToIntPath_str = "L" + internalCurve_obj.startPoint + " ";
+        return internalCurve_obj.path + intToExtPath_str + externalCurve_obj.path + extToIntPath_str;
 
+    },
+    getArc = function (x, y, radius, startAngle, endAngle, inverseArc_bool) {
+        var start = polarToCartesian(x, y, radius, endAngle),
+            end = polarToCartesian(x, y, radius, startAngle),
+            arcSweep = (endAngle - startAngle >180) ?1:0,
+            //Number(Boolean(Math.abs(endAngle - startAngle) <= 180)),
+            inverseArc = isNaN(inverseArc_bool) ? 0 : Number(inverseArc_bool),
+            d_string = ["M", start.x, start.y, "A", radius, radius, 0, arcSweep, inverseArc, end.x, end.y].join(" ");
+        return {
+            path: d_string,
+            endPoint: end.x + " " + end.y,
+            startPoint: start.x + " " + start.y
+        };
     },
     PointConversion = {
         SVGToPoint: function (SVGPoint) {
@@ -44,6 +76,12 @@ module.exports = {
             converted_point = svg_point.matrixTransform(CTM.inverse());
         return PointConversion.SVGToPoint(converted_point);
     },
+    getSliceAttribute: getSliceAttribute,
+    getSlice: function (centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle) {
+        var path = createElement("path");
+        path.setAttribute("d", getSliceAttribute(centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle));
+        return path;
+    },
     convertCoordinateFromSVGToDOM: function (dom_svg, svgCoordinate_point) {
         var
             CTM = dom_svg.getScreenCTM(),
@@ -51,12 +89,8 @@ module.exports = {
             converted_point = svg_point.matrixTransform(CTM);
         return PointConversion.SVGToPoint(converted_point);
     },
-    applyAttributes:applyAttributes,
-    createElement: function (svgTagName_str, params_obj, namespaceParams_array) {
-        var el = document.createElementNS("http://www.w3.org/2000/svg", svgTagName_str);
-        applyAttributes (el, params_obj, namespaceParams_array);
-        return el;
-    }
+    applyAttributes: applyAttributes,
+    createElement: createElement
 };
 
 

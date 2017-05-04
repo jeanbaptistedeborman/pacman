@@ -5,7 +5,6 @@
 var labelsManager = require('./datatransform/labels');
 
 labelsManager.fetch('en', function () {
-
     var
         levels_array = require('../../data/levels/levels.json'),
         Configs = require('./view/gameobjects/config'),
@@ -17,6 +16,7 @@ labelsManager.fetch('en', function () {
         GameOverPopup = require('./view/ui/gameoverpopup'),
         IntervalManager = require ('./game/utils/intervalmanager'),
         ScoreManager = require ('./view/counters/scoremanager'),
+        Timer = require ('./view/counters/timer'),
         LiveManager = require ('./view/counters/livemanager'),
         LevelCounter = require ('./view/counters/levelcounter'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
@@ -25,7 +25,9 @@ labelsManager.fetch('en', function () {
         newGame = function () {
             ScoreManager.reset ();
             LiveManager.reset();
+
             level_num = 0;
+
             createLevel();
         },
         createLevel = function () {
@@ -37,6 +39,8 @@ labelsManager.fetch('en', function () {
                 badGuys_array = level_array.filter(function (element) {
                     return element.id === 'badGuy';
                 });
+
+            Timer.start (60*(level_num));
 
             LevelCounter.set (level_num);
             ObjectlistManager.cleanAll();
@@ -57,8 +61,8 @@ labelsManager.fetch('en', function () {
             });
             Goodie.addAll();
         };
-    createLevel();
-    LiveManager.onLivesLost = function () {
+    newGame();
+    Timer.onTimeElapsed =  LiveManager.onLivesLost = function () {
         IntervalManager.clearAll();
         GameOverPopup(newGame);
     };
