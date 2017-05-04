@@ -12,6 +12,7 @@ var
     ArrayUtils = require('../../../game/utils/arrayutils'),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'obstacle',
+    playSound = require('../../../game/utils/playsound'),
     Languages = require('../../../datatransform/languages'),
     COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#006830'],
     items_array = ObjectListManager.createList(ID_STR);
@@ -44,48 +45,48 @@ module.exports = {
             config.language = language_obj.id;
             string_array = language_obj.label.split('');
         }
-        for (n = 0;  n< blocks_num; n++) {
-            shades_array.push (1 + (0.15 * n));
+        for (n = 0; n < blocks_num; n++) {
+            shades_array.push(1 + (0.15 * n));
         }
-        if (Math.random ()> .5)  {
-            shades_array.reverse ();
+        if (Math.random() > .5) {
+            shades_array.reverse();
         }
-        for (n = 0; n< blocks_num; n++) {
-            (function (){
-            var brick_el = SvgUtils.createElement('rect', {
-                width: gridSize_num,
-                height: gridSize_num,
-                fill: ColorUtils.multiply(color_hex, shades_array[n]),
-                x: config.position.x + n * gridSize_num * Number(config.direction === 'width'),
-                y: config.position.y + n * gridSize_num * Number(config.direction === 'height')
-            });
-            if (string_array) {
-                var
-                    textHeight_num = 9,
-                    text_el = SvgUtils.createElement('text',
-                        {
-                            width: gridSize_num,
-                            height: gridSize_num,
-                            fill: 'white',
-                            "font-family": "Arial narrow",
-                            "font-size": "10.5",
-                            x: 1 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
-                            y: textHeight_num + config.position.y + n * gridSize_num * Number(config.direction === 'height')
-                        }
-                    ),
-                    text_node = document.createTextNode(string_array.shift().toUpperCase());
-                text_el.appendChild(text_node);
-
-            }
-            config.brick_array.push(
-                {
-                    brick_el: brick_el,
-                    text_el: text_el
+        for (n = 0; n < blocks_num; n++) {
+            (function () {
+                var brick_el = SvgUtils.createElement('rect', {
+                    width: gridSize_num,
+                    height: gridSize_num,
+                    fill: ColorUtils.multiply(color_hex, shades_array[n]),
+                    x: config.position.x + n * gridSize_num * Number(config.direction === 'width'),
+                    y: config.position.y + n * gridSize_num * Number(config.direction === 'height')
                 });
-            TimeoutManager.set(function () {
-                dom_el.appendChild(brick_el);
-                dom_el.appendChild(text_el);
-            }, 1 + 50 * n);
+                if (string_array) {
+                    var
+                        textHeight_num = 9,
+                        text_el = SvgUtils.createElement('text',
+                            {
+                                width: gridSize_num,
+                                height: gridSize_num,
+                                fill: 'white',
+                                "font-family": "Arial narrow",
+                                "font-size": "10.5",
+                                x: 1 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
+                                y: textHeight_num + config.position.y + n * gridSize_num * Number(config.direction === 'height')
+                            }
+                        ),
+                        text_node = document.createTextNode(string_array.shift().toUpperCase());
+                    text_el.appendChild(text_node);
+
+                }
+                config.brick_array.push(
+                    {
+                        brick_el: brick_el,
+                        text_el: text_el
+                    });
+                TimeoutManager.set(function () {
+                    dom_el.appendChild(brick_el);
+                    dom_el.appendChild(text_el);
+                }, 1 + 50 * n);
             }());
         }
         config.openDoor = function (openOrLock_bool) {
@@ -99,13 +100,18 @@ module.exports = {
                     TimeoutManager.set(function () {
                         if (openOrLock_bool) {
                             brick_obj.brick_el.setAttribute('fill', '#ffffff');
-                            brick_obj.text_el.setAttribute('fill','#eeeeee');
+                            brick_obj.text_el.setAttribute('fill', '#eeeeee');
                         } else {
-                            brick_obj.brick_el.setAttribute('fill', ColorUtils.multiply('#111111', shades_array[index]*2));
-                            brick_obj.text_el.setAttribute('fill','#333333');
+                            brick_obj.brick_el.setAttribute('fill', ColorUtils.multiply('#111111', shades_array[index]));
+                            brick_obj.text_el.setAttribute('fill', '#333333');
                         }
                     }, 50 + (100 * index));
                 });
+                if (openOrLock_bool) {
+                    TimeoutManager.set(function () {
+                        playSound(config.language);
+                    }, 100 * config.brick_array.length);
+                }
             }
         };
 
