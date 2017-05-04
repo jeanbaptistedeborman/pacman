@@ -19,6 +19,7 @@ labelsManager.fetch('en', function () {
         Timer = require ('./view/counters/timer'),
         LiveManager = require ('./view/counters/livemanager'),
         LevelCounter = require ('./view/counters/levelcounter'),
+        playSound = require ('./game/utils/playsound'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
         playerAvatar_obj,
         level_num = 0,
@@ -27,7 +28,7 @@ labelsManager.fetch('en', function () {
             LiveManager.reset();
 
             level_num = 0;
-
+            playSound ('sounds/bg.mp3');
             createLevel();
         },
         createLevel = function () {
