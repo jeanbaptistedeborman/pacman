@@ -107,7 +107,7 @@ module.exports = {
                             brick_obj.brick_el.setAttribute('fill', ColorUtils.multiply('#111111', shades_array[index]));
                             brick_obj.text_el.setAttribute('fill', '#333333');
                         }
-                    }, 500 + (100 * index));
+                    }, 50 +  (100 * index));
                 });
                 if (openOrLock_bool) {
                     playSound('bon_1');
