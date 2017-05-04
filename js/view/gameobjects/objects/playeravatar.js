@@ -6,9 +6,9 @@ var
     MovingObject = require('../movingobject'),
     TimoutManager = require('../../../game/utils/timeoutmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
+    playSound = require ('../../../game/utils/playsound'),
     Configs = require('../config'),
     DEFAULT_FRAME_STR = '#avatar',
-
     XLINK_STR = "http://www.w3.org/1999/xlink",
     defaultParams_obj = {
         attr: {
@@ -65,6 +65,7 @@ module.exports = {
         };
         config.restoreDefaultLook = restoreDefaultLook,
             config.avatarLost = function () {
+                playSound ('mauvais_1');
                 SvgUtils.applyAttributes(config.dom_el, lostParams_obj.attr, lostParams_obj.attrNS);
             };
         playerAvatar_obj = MovingObject.add(config, true);

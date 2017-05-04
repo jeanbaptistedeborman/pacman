@@ -5,7 +5,6 @@
 var labelsManager = require('./datatransform/labels');
 
 labelsManager.fetch('en', function () {
-
     var
         levels_array = require('../../data/levels/levels.json'),
         Configs = require('./view/gameobjects/config'),
@@ -16,14 +15,18 @@ labelsManager.fetch('en', function () {
         LevelOverPopup = require('./view/ui/leveloverpopup'),
         GameOverPopup = require('./view/ui/gameoverpopup'),
         IntervalManager = require ('./game/utils/intervalmanager'),
-        ScoreManager = require ('./game/scoremanager'),
-        LiveManager = require ('./game/livemanager'),
+        ScoreManager = require ('./view/counters/scoremanager'),
+        Timer = require ('./view/counters/timer'),
+        LiveManager = require ('./view/counters/livemanager'),
+        LevelCounter = require ('./view/counters/levelcounter'),
+        playSound = require ('./game/utils/playsound'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
         playerAvatar_obj,
         level_num = 0,
         newGame = function () {
             ScoreManager.reset ();
             LiveManager.reset();
+
             level_num = 0;
             createLevel();
         },
@@ -36,6 +39,10 @@ labelsManager.fetch('en', function () {
                 badGuys_array = level_array.filter(function (element) {
                     return element.id === 'badGuy';
                 });
+
+            Timer.start (60*(level_num));
+
+            LevelCounter.set (level_num);
             ObjectlistManager.cleanAll();
             playerAvatar_obj = PlayerAvatar.add();
             badGuys_array.forEach(function (element) {
@@ -54,8 +61,8 @@ labelsManager.fetch('en', function () {
             });
             Goodie.addAll();
         };
-    createLevel();
-    LiveManager.onLivesLost = function () {
+    newGame();
+    Timer.onTimeElapsed =  LiveManager.onLivesLost = function () {
         IntervalManager.clearAll();
         GameOverPopup(newGame);
     };

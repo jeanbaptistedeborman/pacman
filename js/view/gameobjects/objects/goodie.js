@@ -6,6 +6,7 @@ var
     Config = require('../config'),
     ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
+    playSound = require('../../../game/utils/playsound'),
     CollisionManager = require('../collisionmanager'),
     stageConfig = Config('stage'),
     onCollected_fun,
@@ -21,16 +22,17 @@ var
         config.position.width = gridSize_num;
         config.position.height = gridSize_num;
         dom_el = config.dom_el = SvgUtils.createElement('use', {
-            width: 10,
-            height: 10,
-            x: config.position.x,
-            y: config.position.y
-        }, [
-            {
-                nameSpace: "http://www.w3.org/1999/xlink",
-                name: "href",
-                value: "#goodie"
-            }]);
+                width: 10,
+                height: 10,
+                x: config.position.x,
+                y: config.position.y
+            },
+            [
+                {
+                    nameSpace: "http://www.w3.org/1999/xlink",
+                    name: "href",
+                    value: "#goodie"
+                }]);
 
         config.remove = function () {
             parent_el.removeChild(dom_el);
@@ -38,6 +40,7 @@ var
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
             }
+            playSound('bon_2');
             return items_array.length;
         };
         items_array.push(config);

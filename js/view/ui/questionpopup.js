@@ -5,6 +5,7 @@ var
     Labels = require('../../datatransform/labels'),
     SvgUtils = require('../../game/utils/svgutils'),
     ArrayUtils = require('../../game/utils/arrayutils'),
+    playSound = require('../../game/utils/playsound'),
     Config = require('../gameobjects/config'),
     UserControls = require('../../game/ui/usercontrol'),
     stage_el = document.body,
@@ -77,6 +78,8 @@ module.exports = function (obstacle_obj, p_callback_fun) {
     callback_fun = p_callback_fun;
     if (!open_bool) {
         var answers_array = buildAnswers(obstacle_obj);
+
+        playSound ('question');
         popup_el = document.createElement('div');
         open_bool = true;
         answers_el = document.createElement('ul');

@@ -13,7 +13,7 @@ module.exports = {
                 remainingTime = delay_num,
                 startdelay_num = new Date().getTime(),
                 interval,
-                initinterval = function () {
+                initInterval = function () {
                     if (remainingTime > 0) {
                         interval = window.setInterval(fun, remainingTime);
                     }
@@ -29,10 +29,10 @@ module.exports = {
                     },
                     reStart: function () {
                         startdelay_num = new Date().getTime();
-                        initinterval();
+                        initInterval();
                     }
                 };
-            initinterval();
+            initInterval();
             interval_array.push(interval_api);
             return interval_api;
         }());
