@@ -29,8 +29,6 @@ countDown = function () {
 },
     display = function (remainTime_num) {
         var angle_num = 360 - (360 * (remainTime_num / startTime_num));
-        console.log(remainTime_num + " / " + startTime_num);
-        console.log("angle_num : ", angle_num);
         clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
         text_el.textContent = remainTime_num;
         /*

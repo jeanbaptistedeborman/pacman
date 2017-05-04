@@ -28,7 +28,6 @@ labelsManager.fetch('en', function () {
             LiveManager.reset();
 
             level_num = 0;
-            playSound ('bg.mp3');
             createLevel();
         },
         createLevel = function () {
