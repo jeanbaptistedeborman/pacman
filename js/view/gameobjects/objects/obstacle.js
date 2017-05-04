@@ -101,13 +101,16 @@ module.exports = {
                         if (openOrLock_bool) {
                             brick_obj.brick_el.setAttribute('fill', '#ffffff');
                             brick_obj.text_el.setAttribute('fill', '#eeeeee');
+
                         } else {
+                            playSound('mauvais_2');
                             brick_obj.brick_el.setAttribute('fill', ColorUtils.multiply('#111111', shades_array[index]));
                             brick_obj.text_el.setAttribute('fill', '#333333');
                         }
                     }, 50 + (100 * index));
                 });
                 if (openOrLock_bool) {
+                    playSound('bon_1');
                     TimeoutManager.set(function () {
                         playSound(config.language);
                     }, 100 * config.brick_array.length);
