@@ -115,9 +115,6 @@ module.exports = {
                         playSound(config.language);
                     }, 100 * (config.brick_array.length-1));
                 }
-                else {
-                    playSound('mauvais_2');
-                }
             }
         };
 

@@ -19,6 +19,7 @@ labelsManager.fetch('en', function () {
         Timer = require ('./view/counters/timer'),
         LiveManager = require ('./view/counters/livemanager'),
         LevelCounter = require ('./view/counters/levelcounter'),
+        pauseButton = require ('./view/ui/pausebutton'),
         playSound = require ('./game/utils/playsound'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
         playerAvatar_obj,
@@ -26,7 +27,6 @@ labelsManager.fetch('en', function () {
         newGame = function () {
             ScoreManager.reset ();
             LiveManager.reset();
-
             level_num = 0;
             createLevel();
         },
@@ -41,7 +41,6 @@ labelsManager.fetch('en', function () {
                 });
 
             Timer.start (60*(level_num));
-
             LevelCounter.set (level_num);
             ObjectlistManager.cleanAll();
             playerAvatar_obj = PlayerAvatar.add();
@@ -50,6 +49,7 @@ labelsManager.fetch('en', function () {
                     x: Math.round(element.rect.x),
                     y: Math.round(element.rect.y)
                 });
+                playSound('bon_1');
             });
             obstacles_array.forEach(function (element) {
                 Obstacle.add({

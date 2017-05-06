@@ -11,6 +11,8 @@
 
 
 
+
+
 @keyframes wipeFromRight_kf {
     0% {
         opacity: 0;
@@ -33,16 +35,15 @@
     }
 }
 
-.wipeFromRight {
+#linguagoApplication .wipeFromRight {
     animation: wipeFromRight_kf .5s;
 }
 
-.wipeFromLeft {
+#linguagoApplication .wipeFromLeft {
     animation: wipeFromLeft_kf .5s;
 }
-html {
 
-}
+
 html, body {
     position: fixed;
     height:100%;
@@ -58,46 +59,70 @@ body {
 
 }
 
-ul {
+#linguagoApplication {
+    height:100%;
+    width:100%;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+}
+
+#linguagoApplication *:focus {
+    outline:none;
+}
+
+#linguagoApplication .button {
+    cursor: pointer;
+}
+
+#linguagoApplication .button:hover .background,
+#linguagoApplication .button:focus .background
+#linguagoApplication .button[aria-selected='true'] .background
+{
+    opacity: .9;
+}
+#linguagoApplication .button[aria-selected='true'] .background {
+    opacity:.8;
+}
+
+#linguagoApplication ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-svg {
+#linguagoApplication svg {
     user-select: none;
     background:#0071c0;
     width: 100%;
     height: 100%;
 }
 
-svg #background {
+#linguagoApplication  #background {
     fill:#0071c0;
 }
 
 
 
-.gameover_popup, .question_popup {
+#linguagoApplication .gameover_popup, .question_popup {
     position: absolute;
     background-color: white;
     padding: 10px;
 }
 
-.gameover_popup {
+#linguagoApplication .gameover_popup {
     min-width:200px;
     top:100px;
     left:100px;
 }
 
-.answer {
+#linguagoApplication .answer {
     border: 1px solid black;
     margin: 5px;
     cursor: pointer;
 }
 
-.answer:hover {
+#linguagoApplication .answer:hover {
     background-color: lightskyblue;
 }
-.live_icon {
+#linguagoApplication .live_icon {
     fill:'red'
 }

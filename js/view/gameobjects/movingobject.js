@@ -6,15 +6,18 @@ var
     Config = require('./config'),
     UserControls = require('../../game/ui/usercontrol'),
     IntervalManager = require('../../game/utils/intervalmanager'),
+    playSound = require('../../game/utils/playsound'),
+    PauseManager = require('../../game/utils/pausemanager'),
     ObjectListManager = require('./objectlistmanager'),
     directionFromTo = require('../../game/directionfromto'),
     CollisionManager = require('./collisionmanager'),
     QuestionPopup = require('../ui/questionpopup'),
     ScoreManager = require('../counters/scoremanager'),
     LivesManager = require('../counters/livemanager'),
+
     gridSize_num = Config('stage').gridSize,
-    playing_bool = true,
     movingObjectsCounter_num = 0;
+
 
 module.exports = {
     add: function (config, userControl_bool) {
@@ -46,7 +49,7 @@ module.exports = {
             },
             incrementPos = function (direction_obj) {
                 if (direction_obj) {
-                    var newPos_point = findPos(direction_obj, config.speed * Boolean(playing_bool));
+                    var newPos_point = findPos(direction_obj, config.speed * Boolean(PauseManager.playing));
                     updatePos(newPos_point);
                 }
             },
@@ -75,22 +78,21 @@ module.exports = {
                         if (temptativeDirection_obj) {
                             temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
                         }
-
-                        if (playing_bool && config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
+                        if (PauseManager.playing && config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
                             playerAvatar_api = CollisionManager.isAvatar(temptativePosition_point);
-                            playing_bool = false;
-                            playerAvatar_api.config.avatarLost ();
-                            config.show (false);
+                            PauseManager.playing = false;
+                            playerAvatar_api.config.avatarLost();
+                            config.show(false);
                             window.setTimeout(function () {
                                 var badGuys_array = ObjectListManager.getList('badGuy');
                                 playerAvatar_api.position = {x: 0, y: 0};
-                                config.show (true);
-                                badGuys_array.forEach(function (badGuy_mo){
+                                config.show(true);
+                                badGuys_array.forEach(function (badGuy_mo) {
                                     badGuy_mo.config.reset();
                                 });
-                                playerAvatar_api.config.restoreDefaultLook ();
+                                playerAvatar_api.config.restoreDefaultLook();
                                 LivesManager.decrement();
-                                playing_bool = true;
+                                PauseManager.playing = true;
                             }, 2000);
                         }
                         if (iAmAvatar_bool) {
@@ -111,13 +113,13 @@ module.exports = {
                             if (iAmAvatar_bool &&
                                 forbidden_obj &&
                                 forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
-                                playing_bool = false;
+                                PauseManager.playing = false;
                                 config.changeFrame('#avatarQuestion');
                                 QuestionPopup(forbidden_obj,
                                     function (answer_bool) {
                                         if (answer_bool !== undefined) {
                                             if (answer_bool) {
-                                                config.restoreDefaultLook ();
+                                                config.restoreDefaultLook();
                                             } else {
                                                 config.changeFrame('#avatarSad', 2000);
                                             }
@@ -125,10 +127,11 @@ module.exports = {
                                         } else {
                                             config.changeFrame('#avatar');
                                         }
-
-                                        playing_bool = true;
+                                        PauseManager.playing = true;
                                     }
                                 );
+                            } else if (iAmAvatar_bool && forbidden_obj && forbidden_obj.blocked) {
+                                playSound('mauvais_2');
                             }
                             direction_obj = null;
                         }
