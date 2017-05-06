@@ -3,7 +3,8 @@
  */
 var
     Labels = require('../../datatransform/labels'),
-    stage_el = document.body,
+    Config = require ('../gameobjects/config'),
+    stage_el = Config('app').dom_el,
     callback_fun,
     popup_el,
     closePopup = function () {

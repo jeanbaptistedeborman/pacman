@@ -2,6 +2,10 @@
  * Created by Jean-Baptiste on 2/21/2017.
  */
 "use strict";
+
+var app_obj = {
+    dom_el: document.getElementById('linguagoApplication')
+};
 var stage_obj = {
     gridSize: 10,
     position: {
@@ -19,7 +23,12 @@ var stage_obj = {
     dom_el: document.getElementById('app_js')
 };
 
+console.log ("app_obj.dom_el : ", app_obj.dom_el);
 var configs_obj = {
+    app: app_obj,
+    interface: {
+        dom_el: app_obj.dom_el.querySelector('.interface')
+    },
     stage: stage_obj,
     playerAvatar: {
         targetPosition: {
@@ -29,7 +38,6 @@ var configs_obj = {
         position: {
             x: 0,
             y: 0,
-
             width: 10,
             height: 10
         },

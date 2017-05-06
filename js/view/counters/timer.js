@@ -3,6 +3,7 @@
  */
 var
     IntervalManager = require('../../game/utils/intervalmanager'),
+    PauseManager = require('../../game/utils/pausemanager'),
     SvgUtils = require('../../game/utils/svgutils'),
     startTime_num,
     time_num = 0,
@@ -22,28 +23,19 @@ clock_el.setAttribute('fill', '#b0b0b0');
 container_el.appendChild(clock_el);
 
 countDown = function () {
-    display(--time_num);
-    if (time_num === 0 && onTimeElapsed_fun) {
-        onTimeElapsed_fun();
+    if (PauseManager.playing) {
+        display(--time_num);
+        if (time_num === 0 && onTimeElapsed_fun) {
+            onTimeElapsed_fun();
+        }
     }
 },
     display = function (remainTime_num) {
-        var angle_num = 360 - (360 * (remainTime_num / startTime_num));
-        clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
-        text_el.textContent = remainTime_num;
-        /*
-         var
-         livesEl_array = document.getElementsByClassName('liveIcon'),
-         n;
-         for (n = 0; n < livesEl_array.length; n++) {
-         var el = livesEl_array[n];
-         if (n < lives_num) {
-         el.setAttribute('display', 'inline');
-         } else {
-         el.setAttribute('display', 'none');
-         }x
-         }
-         */
+        if (remainTime_num) {
+            var angle_num = 360 - (360 * (remainTime_num / startTime_num));
+            clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
+            text_el.textContent = remainTime_num;
+        }
     };
 module.exports = {
     start: function (p_startTime_num) {
