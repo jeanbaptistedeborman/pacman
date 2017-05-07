@@ -1,240 +1,406 @@
- [
-      {
-        "id": "boite",
-        "rect": {
-          "x": "23.9",
-          "y": "9.2",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "7.1",
-          "height": "0.85"
-        }
-      },
-      {
-        "id": "boite_1_",
-        "rect": {
-          "x": "2",
-          "y": "18.35",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "9",
-          "height": "0.851"
-        }
-      },
-      {
-        "id": "boite_2_",
-        "rect": {
-          "x": "1.15",
-          "y": "1.95",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "7"
-        }
-      },
-      {
-        "id": "boite_3_",
-        "rect": {
-          "x": "0.9",
-          "y": "10.7",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "7.95"
-        }
-      },
-      {
-        "id": "boite_4_",
-        "rect": {
-          "x": "31",
-          "y": "2.05",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "7"
-        }
-      },
-      {
-        "id": "boite_5_",
-        "rect": {
-          "x": "14.05",
-          "y": "1.1",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "8.2",
-          "height": "0.85"
-        }
-      },
-      {
-        "id": "boite_6_",
-        "rect": {
-          "x": "2.1",
-          "y": "1.2",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "9",
-          "height": "0.85"
-        }
-      },
-      {
-        "id": "boite_7_",
-        "rect": {
-          "x": "13.95",
-          "y": "18.05",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "7.1",
-          "height": "0.851"
-        }
-      },
-      {
-        "id": "boite_8_",
-        "rect": {
-          "x": "21.05",
-          "y": "9.05",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "9"
-        }
-      },
-      {
-        "id": "boite_9_",
-        "rect": {
-          "x": "23.95",
-          "y": "1.15",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "7.1",
-          "height": "0.85"
-        }
-      },
-      {
-        "id": "boite_10_",
-        "rect": {
-          "x": "13",
-          "y": "1.85",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "7"
-        }
-      },
-      {
-        "id": "boite_11_",
-        "rect": {
-          "x": "2.1",
-          "y": "10.2",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "10",
-          "height": "0.85"
-        }
-      },
-      {
-        "id": "boite_12_",
-        "rect": {
-          "x": "30.85",
-          "y": "10.05",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "7.95"
-        }
-      },
-      {
-        "id": "badGuy",
-        "rect": {
-          "x": "27.15",
-          "y": "5.05",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "width": "0.949",
-          "height": "0.95"
-        }
-      },
-      {
-        "id": "boite_13_",
-        "rect": {
-          "x": "25.95",
-          "y": "17.95",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "5.05",
-          "height": "1.2"
-        }
-      },
-      {
-        "id": "boite_14_",
-        "rect": {
-          "x": "14.1",
-          "y": "8.95",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "6",
-          "height": "1.2"
-        }
-      },
-      {
-        "id": "boite_15_",
-        "rect": {
-          "x": "10.9",
-          "y": "2.15",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "4.95"
-        }
-      },
-      {
-        "id": "boite_16_",
-        "rect": {
-          "x": "23",
-          "y": "2.2",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "4.95"
-        }
-      },
-      {
-        "id": "badGuy_1_",
-        "rect": {
-          "x": "5.6",
-          "y": "14.35",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "width": "0.95",
-          "height": "0.95"
-        }
-      },
-      {
-        "id": "boite_17_",
-        "rect": {
-          "x": "13.15",
-          "y": "12.95",
-          "-fill-rule": "evenodd",
-          "-clip-rule": "evenodd",
-          "-fill": "#FF0000",
-          "width": "1",
-          "height": "4.95"
-        }
-      }
-    ]
+[
+  {
+    "id": "boite",
+    "rect": {
+      "x": "10.85",
+      "y": "2",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "7"
+    }
+  },
+  {
+    "id": "boite_1_",
+    "rect": {
+      "x": "30.05",
+      "y": "0.9",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "7.95"
+    }
+  },
+  {
+    "id": "boite_2_",
+    "rect": {
+      "x": "14.95",
+      "y": "1.2",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "11.05"
+    }
+  },
+  {
+    "id": "boite_3_",
+    "rect": {
+      "x": "19.05",
+      "y": "12.05",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "7"
+    }
+  },
+  {
+    "id": "boite_4_",
+    "rect": {
+      "x": "18.95",
+      "y": "0.95",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "9"
+    }
+  },
+  {
+    "id": "boite_5_",
+    "rect": {
+      "x": "1.9",
+      "y": "10.05",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "9",
+      "height": "0.85"
+    }
+  },
+  {
+    "id": "boite_6_",
+    "rect": {
+      "x": "21.05",
+      "y": "10.2",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "10",
+      "height": "0.85"
+    }
+  },
+  {
+    "id": "boite_7_",
+    "rect": {
+      "x": "10.85",
+      "y": "12.1",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "7"
+    }
+  },
+  {
+    "id": "boite_8_",
+    "rect": {
+      "x": "2.85",
+      "y": "3.75",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "4.05"
+    }
+  },
+  {
+    "id": "boite_9_",
+    "rect": {
+      "x": "15.1",
+      "y": "13.05",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "5.95"
+    }
+  },
+  {
+    "id": "BadGuy",
+    "rect": {
+      "x": "4.55",
+      "y": "4.15",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "width": "1",
+      "height": "1"
+    }
+  },
+  {
+    "id": "boite_10_",
+    "rect": {
+      "x": "4.8",
+      "y": "5.5",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "1.3"
+    }
+  },
+  {
+    "id": "boite_11_",
+    "rect": {
+      "x": "3.8",
+      "y": "2.8",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "2",
+      "height": "1.15"
+    }
+  },
+  {
+    "id": "boite_12_",
+    "rect": {
+      "x": "5.7",
+      "y": "3.75",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "2.15"
+    }
+  },
+  {
+    "id": "boite_13_",
+    "rect": {
+      "x": "4.05",
+      "y": "7.85",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "3.7",
+      "height": "1.15"
+    }
+  },
+  {
+    "id": "boite_14_",
+    "rect": {
+      "x": "29.05",
+      "y": "14",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "4.05"
+    }
+  },
+  {
+    "id": "BadGuy_1_",
+    "rect": {
+      "x": "27.75",
+      "y": "14.35",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "width": "1",
+      "height": "1"
+    }
+  },
+  {
+    "id": "boite_15_",
+    "rect": {
+      "x": "26.9",
+      "y": "15.95",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "1.1"
+    }
+  },
+  {
+    "id": "boite_16_",
+    "rect": {
+      "x": "26.95",
+      "y": "13",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "2.1",
+      "height": "1.15"
+    }
+  },
+  {
+    "id": "boite_17_",
+    "rect": {
+      "x": "25.95",
+      "y": "14.05",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "2.15"
+    }
+  },
+  {
+    "id": "boite_18_",
+    "rect": {
+      "x": "25.1",
+      "y": "18.1",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "3.851",
+      "height": "1.15"
+    }
+  },
+  {
+    "id": "boite_19_",
+    "rect": {
+      "x": "7.65",
+      "y": "2",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "5.95"
+    }
+  },
+  {
+    "id": "boite_20_",
+    "rect": {
+      "x": "22.05",
+      "y": "4.95",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "2.9"
+    }
+  },
+  {
+    "id": "BadGuy_2_",
+    "rect": {
+      "x": "23.5",
+      "y": "5.55",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "width": "1",
+      "height": "1"
+    }
+  },
+  {
+    "id": "boite_21_",
+    "rect": {
+      "x": "25.05",
+      "y": "5.2",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "1.65"
+    }
+  },
+  {
+    "id": "boite_22_",
+    "rect": {
+      "x": "23",
+      "y": "4",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "2.2",
+      "height": "1.3"
+    }
+  },
+  {
+    "id": "boite_23_",
+    "rect": {
+      "x": "23.35",
+      "y": "7.85",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "3.7",
+      "height": "1.15"
+    }
+  },
+  {
+    "id": "boite_24_",
+    "rect": {
+      "x": "27.05",
+      "y": "3",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "4.85"
+    }
+  },
+  {
+    "id": "boite_25_",
+    "rect": {
+      "x": "7.05",
+      "y": "14.8",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "3.05"
+    }
+  },
+  {
+    "id": "BadGuy_3_",
+    "rect": {
+      "x": "5.45",
+      "y": "15.7",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "width": "1",
+      "height": "1"
+    }
+  },
+  {
+    "id": "boite_26_",
+    "rect": {
+      "x": "3.85",
+      "y": "14.95",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "1.3"
+    }
+  },
+  {
+    "id": "boite_27_",
+    "rect": {
+      "x": "4.7",
+      "y": "13.9",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "2.2",
+      "height": "1.3"
+    }
+  },
+  {
+    "id": "boite_28_",
+    "rect": {
+      "x": "3.05",
+      "y": "17.85",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "4.05",
+      "height": "1.15"
+    }
+  },
+  {
+    "id": "boite_29_",
+    "rect": {
+      "x": "2",
+      "y": "13.2",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd",
+      "fill": "#FF0000",
+      "width": "1",
+      "height": "4.75"
+    }
+  }
+]

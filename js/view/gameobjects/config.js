@@ -68,7 +68,7 @@ var configs_obj = {
             x: 0,
             y: 0
         },
-        speed: 2,
+        speed: 1.5,
         position: {
             x: 0,
             y: 0,
