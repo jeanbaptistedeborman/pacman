@@ -8,7 +8,7 @@ var
     playSound = require('../../game/utils/playsound'),
     Config = require('../gameobjects/config'),
     UserControls = require('../../game/ui/usercontrol'),
-    stage_el = document.body,
+    stage_el = Config('app').dom_el,
     gameStage_obj = Config("stage"),
     gameStage_el = gameStage_obj.dom_el,
     gridSize_num = gameStage_obj.gridSize,
