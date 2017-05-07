@@ -14,7 +14,7 @@ var
     ID_STR = 'obstacle',
     playSound = require('../../../game/utils/playsound'),
     Languages = require('../../../datatransform/languages'),
-    COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#006830'],
+    COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#ff5a19', '#006830'],
     items_array = ObjectListManager.createList(ID_STR);
 
 module.exports = {
@@ -48,7 +48,11 @@ module.exports = {
             config.blocked = true;
         }
         for (n = 0; n < blocks_num; n++) {
-            shades_array.push(1 + (0.15 * n));
+            var baseShade_num = 1;
+            if (blocks_num < 5) {
+                baseShade_num = 1.5;
+            }
+            shades_array.push(baseShade_num + (0.15 * n));
         }
         if (Math.random() > .5) {
             shades_array.reverse();
