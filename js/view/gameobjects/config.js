@@ -22,8 +22,6 @@ var stage_obj = {
     },
     dom_el: document.getElementById('app_js')
 };
-
-console.log ("app_obj.dom_el : ", app_obj.dom_el);
 var configs_obj = {
     app: app_obj,
     interface: {

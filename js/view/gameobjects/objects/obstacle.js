@@ -44,6 +44,8 @@ module.exports = {
         if (language_obj) {
             config.language = language_obj.id;
             string_array = language_obj.label.split('');
+        } else {
+            config.blocked = true;
         }
         for (n = 0; n < blocks_num; n++) {
             shades_array.push(1 + (0.15 * n));
@@ -85,7 +87,9 @@ module.exports = {
                     });
                 TimeoutManager.set(function () {
                     dom_el.appendChild(brick_el);
-                    dom_el.appendChild(text_el);
+                    if (string_array) {
+                        dom_el.appendChild(text_el);
+                    }
                 }, 1 + 50 * n);
             }());
         }
@@ -107,13 +111,13 @@ module.exports = {
                             brick_obj.brick_el.setAttribute('fill', ColorUtils.multiply('#111111', shades_array[index]));
                             brick_obj.text_el.setAttribute('fill', '#333333');
                         }
-                    }, 50 +  (100 * index));
+                    }, 50 + (100 * index));
                 });
                 if (openOrLock_bool) {
                     playSound('bon_1');
                     TimeoutManager.set(function () {
                         playSound(config.language);
-                    }, 100 * (config.brick_array.length-1));
+                    }, 100 * (config.brick_array.length - 1));
                 }
             }
         };

@@ -32,12 +32,13 @@ labelsManager.fetch('en', function () {
         },
         createLevel = function () {
             var
-                level_array = levels_array[level_num++],
+                level_array = levels_array[levels_array.length-1],
+                //level_array = levels_array[level_num++],
                 obstacles_array = level_array.filter(function (element) {
-                    return element.id !== 'badGuy';
+                    return element.id.indexOf('badGuy') === -1;
                 }),
                 badGuys_array = level_array.filter(function (element) {
-                    return element.id === 'badGuy';
+                    return element.id.indexOf('badGuy') !== -1;
                 });
 
             Timer.start (60*(level_num));
