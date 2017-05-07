@@ -14,7 +14,7 @@ var
     ID_STR = 'obstacle',
     playSound = require('../../../game/utils/playsound'),
     Languages = require('../../../datatransform/languages'),
-    COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#ff5a19', '#006830'],
+    COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#006830'],
     items_array = ObjectListManager.createList(ID_STR);
 
 module.exports = {
