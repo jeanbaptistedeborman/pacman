@@ -3,15 +3,16 @@
  */
 
 var labelsManager = require('./datatransform/labels');
+require ('./view/ui/pausebutton');
 
 labelsManager.fetch('en', function () {
     var
         levels_array = require('../../data/levels/levels.json'),
-        Configs = require('./view/gameobjects/config'),
         Obstacle = require('./view/gameobjects/objects/obstacle'),
+        Goodie = require('./view/gameobjects/objects/goodie'),
         BadGuy = require('./view/gameobjects/objects/badguy'),
         PlayerAvatar = require('./view/gameobjects/objects/playeravatar'),
-        Goodie = require('./view/gameobjects/objects/goodie'),
+
         LevelOverPopup = require('./view/ui/leveloverpopup'),
         GameOverPopup = require('./view/ui/gameoverpopup'),
         IntervalManager = require ('./game/utils/intervalmanager'),
@@ -19,7 +20,6 @@ labelsManager.fetch('en', function () {
         Timer = require ('./view/counters/timer'),
         LiveManager = require ('./view/counters/livemanager'),
         LevelCounter = require ('./view/counters/levelcounter'),
-        pauseButton = require ('./view/ui/pausebutton'),
         playSound = require ('./game/utils/playsound'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
         playerAvatar_obj,
@@ -43,14 +43,7 @@ labelsManager.fetch('en', function () {
             Timer.start (60*(level_num));
             LevelCounter.set (level_num);
             ObjectlistManager.cleanAll();
-            playerAvatar_obj = PlayerAvatar.add();
-            badGuys_array.forEach(function (element) {
-                BadGuy.add({
-                    x: Math.round(element.rect.x),
-                    y: Math.round(element.rect.y)
-                });
-                playSound('bon_1');
-            });
+
             obstacles_array.forEach(function (element) {
                 Obstacle.add({
                     width: Math.round(element.rect.width),
@@ -58,6 +51,14 @@ labelsManager.fetch('en', function () {
                     x: Math.round(element.rect.x),
                     y: Math.round(element.rect.y)
                 });
+            });
+            playerAvatar_obj = PlayerAvatar.add();
+            badGuys_array.forEach(function (element) {
+                BadGuy.add({
+                    x: Math.round(element.rect.x),
+                    y: Math.round(element.rect.y)
+                });
+                playSound('bon_1');
             });
             Goodie.addAll();
         };

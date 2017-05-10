@@ -4,15 +4,22 @@
 "use strict";
 var
     Config = require('../config'),
+    stageConfig = Config('stage'),
     ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
     playSound = require('../../../game/utils/playsound'),
     CollisionManager = require('../collisionmanager'),
-    stageConfig = Config('stage'),
+    layer_g = SvgUtils.createElement('g'),
+
+
+
+
+
+
     onCollected_fun,
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',
-    parent_el = stageConfig.dom_el,
+    parent_el = layer_g,
     items_array = ObjectListManager.createList(ID_STR),
     add = function (point) {
         var
@@ -46,6 +53,9 @@ var
         items_array.push(config);
         parent_el.appendChild(dom_el);
     };
+
+stageConfig.dom_el.appendChild (layer_g);
+
 module.exports = {
     set onCollected(fun) {
         onCollected_fun = fun;
