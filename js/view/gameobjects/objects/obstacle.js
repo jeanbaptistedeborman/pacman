@@ -12,10 +12,13 @@ var
     ArrayUtils = require('../../../game/utils/arrayutils'),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'obstacle',
+    layer_g = SvgUtils.createElement('g'),
     playSound = require('../../../game/utils/playsound'),
     Languages = require('../../../datatransform/languages'),
     COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#006830'],
     items_array = ObjectListManager.createList(ID_STR);
+
+stageConfig.dom_el.appendChild (layer_g);
 
 module.exports = {
     get itemList() {
@@ -38,6 +41,8 @@ module.exports = {
         config.position.width = rect.width * gridSize_num;
         config.position.height = rect.height * gridSize_num;
         dom_el = config.dom_el = SvgUtils.createElement('g');
+
+
         blocks_num = rect[config.direction];
 
         language_obj = Languages.getRandomLanguageOfLength(blocks_num);
@@ -128,7 +133,7 @@ module.exports = {
 
         ObjectListManager.pushItem(ID_STR, config);
         items_array.push(config);
-        stageConfig.dom_el.appendChild(dom_el);
+        layer_g.appendChild(dom_el);
     }
 }
 ;
