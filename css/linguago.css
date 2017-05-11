@@ -74,7 +74,7 @@ body {
 }
 
 #linguagoApplication .button:hover .background,
-#linguagoApplication .button:focus .background
+#linguagoApplication .button:focus .background,
 #linguagoApplication .button[aria-selected='true'] .background
 {
     opacity: .9;
@@ -120,6 +120,7 @@ body {
     cursor: pointer;
 }
 
+#linguagoApplication .answer:focus,
 #linguagoApplication .answer:hover {
     background-color: lightskyblue;
 }
