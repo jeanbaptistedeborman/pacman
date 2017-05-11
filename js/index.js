@@ -73,6 +73,6 @@ labelsManager.fetch('en', function () {
         } else {
             GameOverPopup(newGame);
         }
-    }
+    };
 });
 exports = {};
