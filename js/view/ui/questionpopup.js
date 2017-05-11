@@ -90,19 +90,22 @@ module.exports = function (obstacle_obj, p_callback_fun) {
         popup_el.setAttribute('class', 'question_popup');
         questionTitle_el.setAttribute('class', 'question_title');
         answers_el.setAttribute('class', 'answers');
-        answers_array.forEach(function (element, index) {
+        answers_array.forEach(function (element) {
             var
                 answer_el = document.createElement('li'),
                 button_el = document.createElement('button'),
                 text_node = document.createTextNode(element.value);
+            answers_el.appendChild(answer_el);
             answer_el.appendChild(button_el);
             button_el.appendChild(text_node);
             button_el.setAttribute('class', 'answer');
+            button_el.setAttribute('tabindex',0);
             button_el.addEventListener('click', function () {
                 closePopup(element.id === obstacle_obj.language);
             });
-            answers_el.appendChild(answer_el);
+
         });
+
         placePopup();
     }
 };
