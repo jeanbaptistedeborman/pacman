@@ -117,7 +117,7 @@ module.exports = {
                             brick_obj.text_el.setAttribute('fill', 'rgba(255,255,255,0.2)');
 
                         } else {
-                            playSound('mauvais_2');
+                            playSound('mauvais_2', true);
                             brick_obj.brick_el.setAttribute('fill', ColorUtils.multiply('#111111', shades_array[index]));
                             brick_obj.text_el.setAttribute('fill', '#333333');
                         }
