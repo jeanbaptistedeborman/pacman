@@ -26,7 +26,7 @@ var
                     return obstacle_obj.language === language_obj.id;
                 }
             )[0];
-        ArrayUtils.remove(languages_array, correctLanguage_obj);
+        languages_array =  ArrayUtils.remove(languages_array, correctLanguage_obj);
         correctLanguage_obj.correct = true;
         languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
         languageSelection_array.push(correctLanguage_obj);
