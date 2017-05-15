@@ -47,9 +47,7 @@ module.exports = {
                 temptativeDirection_obj = directionFromTo(config.position, playerAvatar_api.position);
 
 
-            if (temptativeDirection_obj) {
-                temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
-            }
+            temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
             if (PauseManager.playing && CollisionManager.isAvatar(temptativePosition_point)) {
                 playerAvatar_api = CollisionManager.isAvatar(temptativePosition_point);
                 PauseManager.playing = false;
@@ -73,14 +71,21 @@ module.exports = {
                 direction_obj = temptativeDirection_obj;
                 config.targetPosition = temptativePosition_point;
             } else {
-                direction_obj = null;
+                temptativeDirection_obj = directionFromTo(config.position, playerAvatar_api.position, true);
+                temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
+                forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
+                if (temptativeDirection_obj && !forbidden_obj) {
+                    direction_obj = temptativeDirection_obj;
+                    config.targetPosition = temptativePosition_point;
+                } else {
+                    direction_obj = null;
+                }
             }
             return direction_obj;
         };
 
         config.reset = function () {
             applyOriginPoint();
-
         };
         config.show = function (visible_bool) {
             if (!visible_bool) {

@@ -46,12 +46,12 @@ module.exports = {
                 }
             },
             MoveManager = (function () {
-                /*
-                @todo:avoid passing findPos as an argument
-                 */
                 var
                     direction_obj,
                     setDirection = function () {
+                        /*
+                         @todo:avoid passing findPos as an argument
+                         */
                         direction_obj = config.setDirection(findPos);
                     };
                 return function () {
