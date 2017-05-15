@@ -105,7 +105,7 @@ module.exports = {
                                 }
                             }
                         }
-                        forbidden_obj = CollisionManager.isForbidden(temptativePosition_point);
+                        forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
                         if (temptativeDirection_obj && !forbidden_obj) {
                             direction_obj = temptativeDirection_obj;
                             config.targetPosition = temptativePosition_point;
