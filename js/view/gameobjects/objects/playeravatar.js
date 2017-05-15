@@ -4,10 +4,19 @@
 
 var
     MovingObject = require('../movingobject'),
+    UserControls = require('../../../game/ui/usercontrol'),
+    QuestionPopup = require('../../ui/questionpopup'),
+    IntervalManager = require('../../../game/utils/intervalmanager'),
+    ScoreManager =  require('../../counters/scoremanager'),
+    CollisionManager = require('../collisionmanager'),
     TimoutManager = require('../../../game/utils/timeoutmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
     playSound = require ('../../../game/utils/playsound'),
+    PauseManager = require('../../../game/utils/pausemanager'),
     Configs = require('../config'),
+    gridSize_num = Configs('stage').gridSize,
+
+
     DEFAULT_FRAME_STR = '#avatar',
     XLINK_STR = "http://www.w3.org/1999/xlink",
     defaultParams_obj = {
@@ -29,7 +38,7 @@ var
         attr: {
             width: "30",
             height: "30",
-            transform: 'translate(-10,-10)',
+            transform: 'translate(-10,-10)'
         },
         attrNS: [
             {
@@ -63,7 +72,62 @@ module.exports = {
                 }, duration_num);
             }
         };
-        config.restoreDefaultLook = restoreDefaultLook,
+        config.setDirection = function (findPos) {
+            var
+                forbidden_obj,
+                direction_obj,
+                temptativePosition_point;
+
+                temptativeDirection_obj = UserControls.getDirection(config.position);
+
+
+
+            if (temptativeDirection_obj) {
+                temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
+            }
+
+                var goodie = CollisionManager.isGoodie(temptativePosition_point);
+                if (goodie) {
+                    ScoreManager.increment();
+                    var remaining_num = goodie.remove();
+                    if (remaining_num === 0) {
+                        IntervalManager.clearAll();
+                    }
+                }
+
+            forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
+            if (temptativeDirection_obj && !forbidden_obj) {
+                direction_obj = temptativeDirection_obj;
+                config.targetPosition = temptativePosition_point;
+            } else {
+                if (
+                    forbidden_obj &&
+                    forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
+                    PauseManager.playing = false;
+                    config.changeFrame('#avatarQuestion');
+                    QuestionPopup(forbidden_obj,
+                        function (answer_bool) {
+                            if (answer_bool !== undefined) {
+                                if (answer_bool) {
+                                    config.restoreDefaultLook();
+                                } else {
+                                    config.changeFrame('#avatarSad', 2000);
+                                }
+                                forbidden_obj.openDoor(answer_bool);
+                            } else {
+                                config.changeFrame('#avatar');
+                            }
+                            PauseManager.playing = true;
+                        }
+                    );
+                } else if (forbidden_obj && forbidden_obj.blocked) {
+                    playSound('mauvais_2');
+                }
+                direction_obj = null;
+            }
+            return (direction_obj);
+        };
+        config.restoreDefaultLook = restoreDefaultLook;
             config.avatarLost = function () {
                 playSound ('mauvais_1');
                 SvgUtils.applyAttributes(config.dom_el, lostParams_obj.attr, lostParams_obj.attrNS);

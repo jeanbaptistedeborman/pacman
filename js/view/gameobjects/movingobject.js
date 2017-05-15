@@ -4,23 +4,15 @@
 "use strict";
 var
     Config = require('./config'),
-    UserControls = require('../../game/ui/usercontrol'),
     IntervalManager = require('../../game/utils/intervalmanager'),
-    playSound = require('../../game/utils/playsound'),
     PauseManager = require('../../game/utils/pausemanager'),
     ObjectListManager = require('./objectlistmanager'),
-    directionFromTo = require('../../game/directionfromto'),
-    CollisionManager = require('./collisionmanager'),
-    QuestionPopup = require('../ui/questionpopup'),
-    ScoreManager = require('../counters/scoremanager'),
-    LivesManager = require('../counters/livemanager'),
-
     gridSize_num = Config('stage').gridSize,
     movingObjectsCounter_num = 0;
 
 
 module.exports = {
-    add: function (config, userControl_bool) {
+    add: function (config) {
         var
             position_rect = config.position,
             updatePos = function (point) {
@@ -54,87 +46,13 @@ module.exports = {
                 }
             },
             MoveManager = (function () {
+                /*
+                @todo:avoid passing findPos as an argument
+                 */
                 var
                     direction_obj,
                     setDirection = function () {
-                        /*
-                         * @todo: Refactor :  Better if each type provided his own movement function as parameter
-                         *
-                         * */
-                        var
-                            temptativeDirection_obj = null,
-                            playerAvatar_api = ObjectListManager.getList('playerAvatar')[0],
-                            iAmAvatar_bool = config.type === "playerAvatar",
-                            forbidden_obj,
-                            temptativePosition_point;
-                        if (userControl_bool) {
-                            temptativeDirection_obj = UserControls.getDirection(position_rect);
-                        }
-                        if (config.type === 'badGuy') {
-                            playerAvatar_api =
-                                temptativeDirection_obj = directionFromTo(position_rect, playerAvatar_api.position);
-                        }
-
-                        if (temptativeDirection_obj) {
-                            temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
-                        }
-                        if (PauseManager.playing && config.type === "badGuy" && CollisionManager.isAvatar(temptativePosition_point)) {
-                            playerAvatar_api = CollisionManager.isAvatar(temptativePosition_point);
-                            PauseManager.playing = false;
-                            playerAvatar_api.config.avatarLost();
-                            config.show(false);
-                            window.setTimeout(function () {
-                                var badGuys_array = ObjectListManager.getList('badGuy');
-                                playerAvatar_api.position = {x: 0, y: 0};
-                                config.show(true);
-                                badGuys_array.forEach(function (badGuy_mo) {
-                                    badGuy_mo.config.reset();
-                                });
-                                playerAvatar_api.config.restoreDefaultLook();
-                                LivesManager.decrement();
-                                PauseManager.playing = true;
-                            }, 2000);
-                        }
-                        if (iAmAvatar_bool) {
-                            var goodie = CollisionManager.isGoodie(temptativePosition_point);
-                            if (goodie) {
-                                ScoreManager.increment();
-                                var remaining_num = goodie.remove();
-                                if (remaining_num === 0) {
-                                    IntervalManager.clearAll();
-                                }
-                            }
-                        }
-                        forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
-                        if (temptativeDirection_obj && !forbidden_obj) {
-                            direction_obj = temptativeDirection_obj;
-                            config.targetPosition = temptativePosition_point;
-                        } else {
-                            if (iAmAvatar_bool &&
-                                forbidden_obj &&
-                                forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
-                                PauseManager.playing = false;
-                                config.changeFrame('#avatarQuestion');
-                                QuestionPopup(forbidden_obj,
-                                    function (answer_bool) {
-                                        if (answer_bool !== undefined) {
-                                            if (answer_bool) {
-                                                config.restoreDefaultLook();
-                                            } else {
-                                                config.changeFrame('#avatarSad', 2000);
-                                            }
-                                            forbidden_obj.openDoor(answer_bool);
-                                        } else {
-                                            config.changeFrame('#avatar');
-                                        }
-                                        PauseManager.playing = true;
-                                    }
-                                );
-                            } else if (iAmAvatar_bool && forbidden_obj && forbidden_obj.blocked) {
-                                playSound('mauvais_2');
-                            }
-                            direction_obj = null;
-                        }
+                        direction_obj = config.setDirection(findPos);
                     };
                 return function () {
                     IntervalManager.set(function () {
