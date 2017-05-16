@@ -25,8 +25,8 @@ var
         result_obj = items_array.filter(function (item_obj) {
             var ref_point = item_obj.targetPosition || item_obj.position;
             return point.x >= ref_point.x &&
-                point.x < ref_point.x + item_obj.position.width &&
-                point.y >= ref_point.y && point.y < ref_point.y + item_obj.position.height;
+            point.x < ref_point.x + item_obj.position.width &&
+            point.y >= ref_point.y && point.y < ref_point.y + item_obj.position.height;
         })[0];
         return result_obj;
     };
@@ -39,7 +39,7 @@ module.exports = {
     },
 
     /* @todo: rename as 'isOccuppied' */
-    isForbidden: function (point) {
+    isOccupied: function (point) {
         if (point) {
             var
                 isInStage = function (point) {
