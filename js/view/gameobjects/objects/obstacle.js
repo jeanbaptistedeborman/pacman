@@ -118,8 +118,7 @@ module.exports = {
 
                         } else {
                             playSound('mauvais_2', true);
-                            brick_obj.brick_el.setAttribute('fill', ColorUtils.multiply('#111111', shades_array[index]));
-                            brick_obj.text_el.setAttribute('fill', '#333333');
+                            brick_obj.brick_el.setAttribute('fill', '#c5c5c5');
                         }
                     }, 50 + (100 * index));
                 });
