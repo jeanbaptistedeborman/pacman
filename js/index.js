@@ -5,9 +5,8 @@
 var labelsManager = require('./datatransform/labels');
 require('./view/ui/pausebutton');
 
-labelsManager.fetch('en', function () {
+labelsManager.fetch('pl', function () {
     var
-
         Obstacle = require('./view/gameobjects/objects/obstacle'),
         Goodie = require('./view/gameobjects/objects/goodie'),
         BadGuy = require('./view/gameobjects/objects/badguy'),
