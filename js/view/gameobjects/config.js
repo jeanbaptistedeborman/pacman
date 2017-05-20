@@ -4,26 +4,30 @@
 "use strict";
 
 var app_obj = {
-    dom_el: document.getElementById('linguagoApplication')
-};
-var stage_obj = {
-    gridSize: 10,
-    position: {
-        x: 0,
-        y: 0,
-        width: 330,
-        height: 200
+        dom_el: document.getElementById('linguagoApplication')
     },
-    get linesNum() {
-        return Math.ceil(stage_obj.position.height / stage_obj.gridSize);
+    game_obj = {
+        dom_el: document.getElementById('game_js')
     },
-    get columnsNum() {
-        return Math.ceil(stage_obj.position.width / stage_obj.gridSize);
-    },
-    dom_el: document.getElementById('app_js')
-};
+    stage_obj = {
+        gridSize: 10,
+        position: {
+            x: 0,
+            y: 0,
+            width: 330,
+            height: 200
+        },
+        get linesNum() {
+            return Math.ceil(stage_obj.position.height / stage_obj.gridSize);
+        },
+        get columnsNum() {
+            return Math.ceil(stage_obj.position.width / stage_obj.gridSize);
+        },
+        dom_el: document.getElementById('app_js')
+    };
 var configs_obj = {
     app: app_obj,
+    game:game_obj,
     interface: {
         dom_el: app_obj.dom_el.querySelector('.interface')
     },

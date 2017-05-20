@@ -18,7 +18,7 @@ var
     },
     container_el = document.getElementById('game_js'),
     clock_el = SvgUtils.getSlice(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, 0);
-
+console.log ("container_el : " + container_el);
 clock_el.setAttribute('fill', '#b0b0b0');
 container_el.appendChild(clock_el);
 
