@@ -98,14 +98,16 @@ body {
     fill: #0071c0;
 }
 
-#linguagoApplication .gameover_popup, .question_popup {
+.question_popup {
     position: absolute;
+    min-height:60px;
     background-color: #ffffff;
     padding: 0;
 }
 
 .question_popup .question_title, .question_popup .answer {
     font-size: 20px;
+
     padding: 0 20px;
     color: #0071bc;
     display: block;
@@ -182,8 +184,6 @@ body {
 }
 
 #linguagoApplication .answer {
-    /* border: 1px solid black; */
-    /* margin: 5px; */
     cursor: pointer;
 }
 

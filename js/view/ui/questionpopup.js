@@ -101,7 +101,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
             TimeoutManager.set(function () {
 
                 answers_el.appendChild(answer_el);
-            }, 50*index);
+            }, 500 + 50*index);
             answer_el.appendChild(button_el);
             button_el.appendChild(text_node);
             button_el.setAttribute('class', 'answer');
