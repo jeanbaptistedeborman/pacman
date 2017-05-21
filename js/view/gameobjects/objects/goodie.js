@@ -71,7 +71,7 @@ module.exports = {
             colTotal_num = stageConfig.columnsNum;
         for (column_num = 0; column_num < colTotal_num; column_num++) {
             for (line_num = 0; line_num < lineTotal_num; line_num++) {
-                if (line_num % 20 === 0 && column_num % 20 === 0) {
+                if (line_num % 6 === 0 && column_num % 6 === 0) {
                     var position_point = {
                         x: column_num * gridSize_num,
                         y: line_num * gridSize_num
