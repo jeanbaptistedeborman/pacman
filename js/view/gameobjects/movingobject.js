@@ -56,11 +56,17 @@ module.exports = {
                     };
                 return function () {
                     IntervalManager.set(function () {
-                        var changeDirection_bool = config.position.x % gridSize_num === 0 && config.position.y % gridSize_num === 0;
-                        if (!direction_obj || changeDirection_bool) {
+                        var getNewDirection_bool = config.position.x % gridSize_num === 0 && config.position.y % gridSize_num === 0;
+
+                        if (!direction_obj || getNewDirection_bool) {
+                            
                             setDirection();
+                            incrementPos(direction_obj);
                         }
-                        incrementPos(direction_obj);
+
+                            incrementPos(direction_obj);
+
+
                     }, 20);
                 }
             }()),

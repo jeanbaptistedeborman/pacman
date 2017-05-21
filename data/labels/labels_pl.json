@@ -1,0 +1,293 @@
+{
+  "instructions": "Uciekaj przed pająkiem, zbieraj punkty i podaj odpowiednią nazwę języka, aby przejść przez mur. Poruszaj się, używając strzałek na klawiaturze.",
+  "question": "Co to za język?",
+  "nextlevel": "Brawo! Przejdź na kolejny poziom.",
+  "premiereLangue": "",
+  "secondeLangue": "Będzie trudniej: wybierz inny język, w którym możesz kontynuować grę.",
+  "finDuJeu": "Brawo! Twój wynik to %score%.",
+  "envoieScore": "Zapisz swój wynik",
+  "bonusTemps": "Czas bonusowy:",
+  "live": "Życia:",
+  "score": "Wynik:",
+  "boutonScore": "WYŚLIJ",
+  "inscription": "Zostań członkiem EuropaGO!",
+  "boutonSinscrire": "ZAMÓW HASŁO",
+  "position": "Brawo! Twój wynik to %score%. Jesteś na %position% pozycji!",
+  "boutonContinuer": "DALEJ",
+  "boutonEnvoie": "ZAPISZ SWÓJ WYNIK",
+  "boutonJouer": "ROZPOCZNIJ GRĘ!",
+  "boutonRejouer": "ZAGRAJ JESZCZE RAZ!",
+  "erreurExiste": "Ten nick %pseudo% już istnieje, wybierz inny.",
+  "erreurPass": "Hasło jest nieprawidłowe",
+  "erreurPseudo": "Podany nick %pseudo% nie istnieje",
+  "erreurMailExiste": "This email is still used",
+  "labelPass": "Hasło:",
+  "labelPseudo": [
+    "Nick:",
+    "Nick:"
+  ],
+  "labelPrenom": "Imię:",
+  "labelEmail": "E-mail:",
+  "labelPays": "Kraj:",
+  "labelConditions": {
+    "a": {
+      "u": "warunkami korzystania ze strony EuropaGO",
+      "_href": "/europago/footer/copyright.jsp"
+    },
+    "text": "Tak, zapoznałem(-am) się z",
+    "toString": [
+      null
+    ]
+  },
+  "loginLabel": "Twój nick:",
+  "passLabel": "Twoje hasło:",
+  "labelSexe": "Płeć:",
+  "labelMasculin": "Mężczyzna",
+  "labelFeminin": "Kobieta",
+  "labelNews": "Biuletyn informacyjny:",
+  "labelNewsTRUE": "Chcę otrzymywać informacje o aktualnościach",
+  "labelNewsFALSE": "Nie chcę otrzymywać informacji o aktualnościach",
+  "labelCondition2": "Warunki korzystania ze strony:",
+  "labelObligatoire": "*Pola obowiązkowe",
+  "labelDDN": "Data urodzenia:",
+  "labelExDDN": "(np.: 20/05/1991)",
+  "labelRetape": "Powtórz hasło:",
+  "pays": {
+    "BG": {
+      "id": "21",
+      "text": "Bułgaria",
+      "toString": [
+        null
+      ]
+    },
+    "CZ": {
+      "id": "13",
+      "text": "Czechy",
+      "toString": [
+        null
+      ]
+    },
+    "DK": {
+      "id": "1",
+      "text": "Dania",
+      "toString": [
+        null
+      ]
+    },
+    "DE": {
+      "id": "4",
+      "text": "Niemcy",
+      "toString": [
+        null
+      ]
+    },
+    "EE": {
+      "id": "9",
+      "text": "Estonia",
+      "toString": [
+        null
+      ]
+    },
+    "GR": {
+      "id": "5",
+      "text": "Grecja",
+      "toString": [
+        null
+      ]
+    },
+    "GB": {
+      "id": "24",
+      "text": "Wielka Brytania",
+      "toString": [
+        null
+      ]
+    },
+    "FR": {
+      "id": "27",
+      "text": "Francja",
+      "toString": [
+        null
+      ]
+    },
+    "IE": {
+      "id": "26",
+      "text": "Irlandia",
+      "toString": [
+        null
+      ]
+    },
+    "IT": {
+      "id": "6",
+      "text": "Włochy",
+      "toString": [
+        null
+      ]
+    },
+    "LV": {
+      "id": "17",
+      "text": "Łotwa",
+      "toString": [
+        null
+      ]
+    },
+    "LT": {
+      "id": "16",
+      "text": "Litwa",
+      "toString": [
+        null
+      ]
+    },
+    "HU": {
+      "id": "18",
+      "text": "Węgry",
+      "toString": [
+        null
+      ]
+    },
+    "MT": {
+      "id": "15",
+      "text": "Malta",
+      "toString": [
+        null
+      ]
+    },
+    "ES": {
+      "id": "2",
+      "text": "Hiszpania",
+      "toString": [
+        null
+      ]
+    },
+    "NL": {
+      "id": "25",
+      "text": "Holandia",
+      "toString": [
+        null
+      ]
+    },
+    "PL": {
+      "id": "14",
+      "text": "Polska",
+      "toString": [
+        null
+      ]
+    },
+    "PT": {
+      "id": "7",
+      "text": "Portugalia",
+      "toString": [
+        null
+      ]
+    },
+    "RO": {
+      "id": "22",
+      "text": "Rumunia",
+      "toString": [
+        null
+      ]
+    },
+    "SK": {
+      "id": "12",
+      "text": "Słowacja",
+      "toString": [
+        null
+      ]
+    },
+    "SI": {
+      "id": "11",
+      "text": "Słowenia",
+      "toString": [
+        null
+      ]
+    },
+    "FI": {
+      "id": "3",
+      "text": "Finlandia",
+      "toString": [
+        null
+      ]
+    },
+    "SE": {
+      "id": "19",
+      "text": "Szwecja",
+      "toString": [
+        null
+      ]
+    },
+    "AT": {
+      "id": "29",
+      "text": "Austria",
+      "toString": [
+        null
+      ]
+    },
+    "BE": {
+      "id": "28",
+      "text": "Belgia",
+      "toString": [
+        null
+      ]
+    },
+    "CY": {
+      "id": "23",
+      "text": "Cypr",
+      "toString": [
+        null
+      ]
+    },
+    "HR": {
+      "id": "31",
+      "text": "Chorwacja",
+      "toString": [
+        null
+      ]
+    },
+    "TR": {
+      "id": "10",
+      "text": "Turcja",
+      "toString": [
+        null
+      ]
+    },
+    "LU": {
+      "id": "8",
+      "text": "Luksemburg",
+      "toString": [
+        null
+      ]
+    },
+    "OTHER": {
+      "id": "20",
+      "text": "Inny kraj",
+      "toString": [
+        null
+      ]
+    }
+  },
+  "langues": {
+    "bg": "bułgarski",
+    "cs": "czeski",
+    "da": "duński",
+    "de": "niemiecki",
+    "et": "estoński",
+    "el": "grecki",
+    "en": "angielski",
+    "fr": "francuski",
+    "ga": "irlandzki",
+    "it": "włoski",
+    "lv": "łotewski",
+    "lt": "litewski",
+    "hu": "węgierski",
+    "hr": "chorwacki",
+    "mt": "maltański",
+    "es": "hiszpański",
+    "nl": "niderlandzki",
+    "pl": "polski",
+    "pt": "portugalski",
+    "ro": "rumuński",
+    "sk": "słowacki",
+    "sl": "słoweński",
+    "fi": "fiński",
+    "sv": "szwedzki"
+  }
+}
