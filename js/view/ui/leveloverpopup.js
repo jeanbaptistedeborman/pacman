@@ -18,6 +18,7 @@ var
     },
     textBlock,
     open_bool = false;
+    popup_el.removeAttribute('style');
     popup_el.parentNode.removeChild(popup_el);
 
 
