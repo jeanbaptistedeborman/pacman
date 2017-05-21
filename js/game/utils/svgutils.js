@@ -62,6 +62,69 @@ var
         }
     };
 module.exports = {
+
+    getSliceAttribute: getSliceAttribute,
+    getSlice: function (centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle) {
+        var path = createElement("path");
+        path.setAttribute("d", getSliceAttribute(centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle));
+        return path;
+    },
+    getMultilineText: function (parentSvg_el, text_str, params) {
+        var
+            container_g = createElement('svg',{
+                x:params.x,
+                y:params.y
+            }),
+            line_num = 0,
+            text_array = text_str.split(' '),
+            createTextBlock = function () {
+                var line_span = createElement('text', {
+                    x:params.width/2,
+                    'width':params.width,
+                    'text-anchor':params['text-anchor'],
+                    'font-size': params['font-size'],
+                    'dy': params.lineHeight * line_num + 7
+                });
+                container_g.appendChild(line_span);
+                line_num++;
+                return line_span;
+            },
+            line_str = '',
+            previousLineContent_str = '',
+            lineContent_str = '',
+            block_el = createTextBlock();
+        parentSvg_el.appendChild(container_g);
+
+        text_array.forEach(function (word) {
+            lineContent_str += word + ' ';
+            block_el.textContent = lineContent_str;
+            console.log ('block_el.textContent : ', block_el.textContent);
+            console.log ();
+            if (block_el.getComputedTextLength() >  params.width) {
+                block_el.textContent = previousLineContent_str;
+                block_el = createTextBlock();
+                lineContent_str = word + ' ';
+                block_el.textContent = lineContent_str;
+            }
+            previousLineContent_str = lineContent_str;
+        });
+        return container_g;
+    },
+    simulateEnterClick: function (svg_el, fun) {
+        var handleKey = function (evt) {
+                if (evt.key === "Enter") {
+                    fun();
+                }
+            },
+            listenEnter = function () {
+                svg_el.addEventListener('keydown', handleKey);
+            },
+            stopListen = function () {
+                svg_el.addEventListener('keydown', handleKey);
+            };
+        svg_el.addEventListener('focus', listenEnter);
+        svg_el.addEventListener('blur', stopListen);
+    },
     /**
      *
      * Source: https://msdn.microsoft.com/en-us/library/hh535760(v=vs.85).aspx
@@ -75,27 +138,6 @@ module.exports = {
             svg_point = PointConversion.pointToSVG(dom_svg, point),
             converted_point = svg_point.matrixTransform(CTM.inverse());
         return PointConversion.SVGToPoint(converted_point);
-    },
-    getSliceAttribute: getSliceAttribute,
-    getSlice: function (centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle) {
-        var path = createElement("path");
-        path.setAttribute("d", getSliceAttribute(centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle));
-        return path;
-    },
-    simulateEnterClick: function (svg_el, fun) {
-        var handleKey = function (evt) {
-                if (evt.key === "Enter") {
-                    fun ();
-                }
-            },
-            listenEnter = function () {
-                svg_el.addEventListener('keydown', handleKey);
-            },
-            stopListen = function () {
-                svg_el.addEventListener('keydown', handleKey);
-            };
-        svg_el.addEventListener('focus', listenEnter);
-        svg_el.addEventListener('blur', stopListen);
     },
     convertCoordinateFromSVGToDOM: function (dom_svg, svgCoordinate_point) {
         var
