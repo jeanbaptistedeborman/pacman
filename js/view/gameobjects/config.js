@@ -37,13 +37,14 @@ var configs_obj = {
             x: undefined,
             y: undefined
         },
+        moveFrequency:10,
         position: {
             x: 0,
             y: 0,
             width: 10,
             height: 10
         },
-        speed: 2.5,
+        speed: 2,
         dom_el: undefined
     },
     obstacle: {
@@ -72,6 +73,7 @@ var configs_obj = {
             x: 0,
             y: 0
         },
+        moveFrequency:20,
         speed: 1,
         position: {
             x: 0,
