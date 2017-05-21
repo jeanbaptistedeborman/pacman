@@ -14,6 +14,7 @@ labelsManager.fetch('en', function () {
         LevelOverPopup = require('./view/ui/leveloverpopup'),
         GameOverPopup = require('./view/ui/gameoverpopup'),
         IntervalManager = require('./game/utils/intervalmanager'),
+        TimeoutManager = require('./game/utils/timeoutmanager'),
         SvgUtils = require('./game/utils/svgutils'),
         ScoreManager = require('./view/counters/scoremanager'),
         Timer = require('./view/counters/timer'),
@@ -39,7 +40,7 @@ labelsManager.fetch('en', function () {
                 badGuys_array = level_array.filter(function (element) {
                     return element.id.indexOf('badGuy') !== -1;
                 });
-            Timer.start(60 * (level_num));
+            Timer.start(30 + (30 * (level_num)));
             LevelCounter.set(level_num);
             ObjectlistManager.cleanAll();
             obstacles_array.forEach(function (element) {
@@ -53,12 +54,12 @@ labelsManager.fetch('en', function () {
             playerAvatar_obj = PlayerAvatar.add();
             badGuys_array.forEach(function (element) {
                 for (var n = 0; n <= Math.floor(level_num / 3);n++) {
+
                     BadGuy.add({
                         x: Math.round(element.rect.x),
                         y: Math.round(element.rect.y)
                     });
-                }
-
+                                    }
                 playSound('bon_1');
             });
             Goodie.addAll();
@@ -66,8 +67,11 @@ labelsManager.fetch('en', function () {
 
     newGame();
     Timer.onTimeElapsed = LiveManager.onLivesLost = function () {
+        console.log ("LiveManager.onLivesLost : ", LiveManager.onLivesLost);
         IntervalManager.clearAll();
+        ObjectlistManager.cleanAll();
         GameOverPopup(newGame);
+
     };
     Goodie.onCollected = function () {
         if (LevelsManager.remaining > 0) {
