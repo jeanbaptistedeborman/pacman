@@ -6,15 +6,21 @@
 var
     paused_bool = false,
     Config = require('../gameobjects/config'),
+
     PauseManager = require('../../game/utils/pausemanager'),
-    pauseButton = Config('interface').dom_el.getElementsByClassName('pauseButton')[0];
+    SvgUtils = require('../../game/utils/svgutils'),
+    pauseButton = Config('interface').dom_el.getElementsByClassName('pauseButton')[0],
+    togglePause = function () {
+            paused_bool = !paused_bool;
+            PauseManager.playing = !paused_bool;
+            pauseButton.setAttribute('aria-selected', paused_bool);
+    };
 
 
-pauseButton.addEventListener('mousedown', function () {
-    paused_bool = !paused_bool;
-    PauseManager.playing = !paused_bool;
-    pauseButton.setAttribute('aria-selected', paused_bool);
 
-});
+pauseButton.addEventListener('mousedown', togglePause);
+SvgUtils.simulateEnterClick(pauseButton, togglePause);
+
+
 
 module.exports = {};

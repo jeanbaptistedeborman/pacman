@@ -20,8 +20,8 @@ labelsManager.fetch('pl', function () {
         LevelCounter = require('./view/counters/levelcounter'),
         playSound = require('./game/utils/playsound'),
         ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
-        LevelsManager = require ('./view/levelsmanager'),
-    playerAvatar_obj,
+        LevelsManager = require('./view/levelsmanager'),
+        playerAvatar_obj,
         level_num = 0,
         newGame = function () {
             ScoreManager.reset();
@@ -31,7 +31,7 @@ labelsManager.fetch('pl', function () {
         },
         createLevel = function () {
             var
-                level_array = LevelsManager.get (level_num++),
+                level_array = LevelsManager.get(level_num++),
                 obstacles_array = level_array.filter(function (element) {
                     return element.id.indexOf('badGuy') === -1;
                 }),

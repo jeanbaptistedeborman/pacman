@@ -5,6 +5,7 @@ var
     Labels = require('../../datatransform/labels'),
     Config = require ('../gameobjects/config'),
     stage_el = Config('game').dom_el,
+    SvgUtils = require ('../../game/utils/svgutils'),
     callback_fun,
     popup_el = document.getElementsByClassName('levelPopup')[0],
         closePopup = function () {
@@ -21,6 +22,7 @@ module.exports = function (p_callback_fun) {
     if (!open_bool) {
         var
         continueButton_el = popup_el.getElementsByClassName('goButton')[0];
+        SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         open_bool = true;
         stage_el.appendChild(popup_el);
         continueButton_el.addEventListener('click', closePopup);

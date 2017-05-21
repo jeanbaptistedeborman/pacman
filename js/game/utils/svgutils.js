@@ -40,7 +40,7 @@ var
     getArc = function (x, y, radius, startAngle, endAngle, inverseArc_bool) {
         var start = polarToCartesian(x, y, radius, endAngle),
             end = polarToCartesian(x, y, radius, startAngle),
-            arcSweep = (endAngle - startAngle >180) ?1:0,
+            arcSweep = (endAngle - startAngle > 180) ? 1 : 0,
             //Number(Boolean(Math.abs(endAngle - startAngle) <= 180)),
             inverseArc = isNaN(inverseArc_bool) ? 0 : Number(inverseArc_bool),
             d_string = ["M", start.x, start.y, "A", radius, radius, 0, arcSweep, inverseArc, end.x, end.y].join(" ");
@@ -81,6 +81,21 @@ module.exports = {
         var path = createElement("path");
         path.setAttribute("d", getSliceAttribute(centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle));
         return path;
+    },
+    simulateEnterClick: function (svg_el, fun) {
+        var handleKey = function (evt) {
+                if (evt.key === "Enter") {
+                    fun ();
+                }
+            },
+            listenEnter = function () {
+                svg_el.addEventListener('keydown', handleKey);
+            },
+            stopListen = function () {
+                svg_el.addEventListener('keydown', handleKey);
+            };
+        svg_el.addEventListener('focus', listenEnter);
+        svg_el.addEventListener('blur', stopListen);
     },
     convertCoordinateFromSVGToDOM: function (dom_svg, svgCoordinate_point) {
         var

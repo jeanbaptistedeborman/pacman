@@ -18,10 +18,10 @@
     }
 }
 
-@keyframes wipeFromLeft_kf {
+@keyframes wipeFromLeft_kf  {
     0% {
         opacity: 0;
-        transform: translate(-15px, 0);
+        transform: translate(15px, 0);
     }
     100% {
         opacity: 1;
@@ -67,14 +67,18 @@ body {
     display: block;
 }
 
+#linguagoApplication .button:focus .background {
+    stroke:white;
+    stroke-width: 1px;
+}
+
 #linguagoApplication .button:hover .background,
-#linguagoApplication .button:focus .background,
-#linguagoApplication .button[aria-selected='true'] .background {
+#linguagoApplication .button:focus .background {
     opacity: .9;
 }
 
 #linguagoApplication .button[aria-selected='true'] .background {
-    opacity: .8;
+    opacity: .2;
 }
 
 #linguagoApplication ul {
