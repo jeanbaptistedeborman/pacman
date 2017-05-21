@@ -79,11 +79,15 @@ module.exports = {
             text_array = text_str.split(' '),
             createTextBlock = function () {
                 var line_span = createElement('text', {
-                    x:params.width/2,
+                    x: (params['text-anchor'] ===  'middle')?params.width/2:0,
                     'width':params.width,
                     'text-anchor':params['text-anchor'],
                     'font-size': params['font-size'],
-                    'dy': params.lineHeight * line_num + 7
+                    'fill':params.color,
+                    'stroke':params.stroke || null,
+                    'font-weight':params['font-weight'] || null,
+                    'stroke-width':params['stroke-width'] || null,
+                    'dy': (params.lineHeight * line_num) + params.lineHeight
                 });
                 container_g.appendChild(line_span);
                 line_num++;
@@ -99,7 +103,7 @@ module.exports = {
             lineContent_str += word + ' ';
             block_el.textContent = lineContent_str;
             console.log ('block_el.textContent : ', block_el.textContent);
-            console.log ();
+            console.log ('block_el.getComputedTextLength() ', block_el.getComputedTextLength());
             if (block_el.getComputedTextLength() >  params.width) {
                 block_el.textContent = previousLineContent_str;
                 block_el = createTextBlock();
