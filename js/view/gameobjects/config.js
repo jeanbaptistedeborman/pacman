@@ -43,7 +43,7 @@ var configs_obj = {
             width: 10,
             height: 10
         },
-        speed: 2,
+        speed: 2.5,
         dom_el: undefined
     },
     obstacle: {

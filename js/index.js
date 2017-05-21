@@ -52,10 +52,13 @@ labelsManager.fetch('en', function () {
             });
             playerAvatar_obj = PlayerAvatar.add();
             badGuys_array.forEach(function (element) {
-                BadGuy.add({
-                    x: Math.round(element.rect.x),
-                    y: Math.round(element.rect.y)
-                });
+                for (var n = 0; n <= Math.floor(level_num / 3);n++) {
+                    BadGuy.add({
+                        x: Math.round(element.rect.x),
+                        y: Math.round(element.rect.y)
+                    });
+                }
+
                 playSound('bon_1');
             });
             Goodie.addAll();
