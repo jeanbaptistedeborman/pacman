@@ -100,7 +100,7 @@ body {
 
 .question_popup {
     position: absolute;
-    min-height:60px;
+    min-height:80px;
     background-color: #ffffff;
     padding: 0;
 }

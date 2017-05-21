@@ -27,9 +27,9 @@ var
                     return obstacle_obj.language === language_obj.id;
                 }
             )[0];
-        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
+        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj),
+            languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
         correctLanguage_obj.correct = true;
-        languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
         languageSelection_array.push(correctLanguage_obj);
         languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
         return languageSelection_array;
@@ -64,11 +64,11 @@ module.exports = function (obstacle_obj, p_callback_fun) {
             var size_rect = popup_el.getBoundingClientRect();
             if (obstacle_obj.position.y < gameStage_obj.position.height / 2) {
                 popup_el.style.top = Math.round(obstacleTL_point.y) + 'px';
-                popup_el.classList.add ('top');
+                popup_el.classList.add('top');
 
             } else {
                 popup_el.style.top = Math.round(obstacleTL_point.y - size_rect.height) + 'px';
-                popup_el.classList.add ('bottom');
+                popup_el.classList.add('bottom');
             }
             if (obstacle_obj.position.x < gameStage_obj.position.width / 2) {
                 popup_el.style.left = Math.round(obstacleTR_point.x) + 'px';
@@ -101,7 +101,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
             TimeoutManager.set(function () {
 
                 answers_el.appendChild(answer_el);
-            }, 500 + 50*index);
+            }, 300 + 50 * index);
             answer_el.appendChild(button_el);
             button_el.appendChild(text_node);
             button_el.setAttribute('class', 'answer');
