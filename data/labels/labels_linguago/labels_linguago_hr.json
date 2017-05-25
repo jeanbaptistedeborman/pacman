@@ -1,0 +1,16 @@
+{
+  "Id": "HR",
+  "what_language": "Koji je ovo jezik?",
+  "choose_another_language": "Da igra bude teža, odaberi drugi jezik.",
+  "you_did_it": "To! Uspjelo ti je!",
+  "nice_try": "Dobar pokušaj, ali ti još nije uspjelo. Želiš li ponovno igrati?",
+  "try_again": "Pokušaj ponovno",
+  "play_again": "Igraj ponovno",
+  "you_scored": "Osvojio/osvojila si XXX bodova!",
+  "this_will_end": "Prekinut ćeš igru: zbilja želiš završiti?",
+  "score": "Rezultat",
+  "level": "Razina",
+  "nice_work": "Bravo! Prijeđi na sljedeću razinu!",
+  "game_paused": "Prekid igre",
+  "go": "KRENI!"
+}

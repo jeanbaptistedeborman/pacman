@@ -1,0 +1,16 @@
+{
+  "Id": "HU",
+  "what_language": "Melyik nyelv ez?",
+  "choose_another_language": "Nehezítsünk egy kicsit: válassz ki egy másik nyelvet, amelyen képesnek érzed magad a játék folytatására.",
+  "you_did_it": "Igen! Sikerült!",
+  "nice_try": "Jól játszottál, de ezúttal nem voltál sikeres. Szeretnél újra próbálkozni?",
+  "try_again": "Új próbálkozás",
+  "play_again": "Új játék",
+  "you_scored": "XXX pontot szereztél!",
+  "this_will_end": "Ezzel a lépéssel véget ér a játék: tényleg abba akarod hagyni?",
+  "score": "Pontszám",
+  "level": "Szint",
+  "nice_work": "Bravó! Lépj a következő szintre!",
+  "game_paused": "Játék szüneteltetve",
+  "go": "MEHET!"
+}

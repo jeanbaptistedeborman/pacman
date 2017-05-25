@@ -1,0 +1,16 @@
+{
+  "Id": "ET",
+  "what_language": "Mis keel see on?",
+  "choose_another_language": "Et mängu raskemaks muuta, vali mõni muu keel, mida arvad oskavat.",
+  "you_did_it": "Jah! Said hakkama!",
+  "nice_try": "Hästi tehtud, aga sa pole veel võitnud. Kas soovid uuesti mängida?",
+  "try_again": "Proovi uuesti",
+  "play_again": "Mängi uuesti",
+  "you_scored": "Sul on XXX punkt(i)!",
+  "this_will_end": "Mäng katkestatakse. Kas oled kindel?",
+  "score": "Punktisumma",
+  "level": "Tase",
+  "nice_work": "Tubli! Liigu järgmisele tasemele!",
+  "game_paused": "Mäng on peatatud",
+  "go": "LÄKS!"
+}

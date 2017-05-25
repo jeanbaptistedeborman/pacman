@@ -1,0 +1,16 @@
+{
+  "Id": "LT",
+  "what_language": "Kokia tai kalba?",
+  "choose_another_language": "Kad žaidimas būtų šiek tiek sudėtingesnis, pasirink kitą kalbą, kuria, tavo nuomone, sugebėtum žaisti",
+  "you_did_it": "Puiku! Tau pavyko!",
+  "nice_try": "Neblogai, bet dar nepavyko. Ar nori žaisti dar kartą?",
+  "try_again": "Bandyti dar kartą",
+  "play_again": "Žaisti dar kartą",
+  "you_scored": "Surinktų taškų skaičius: XXX",
+  "this_will_end": "Ar tikrai nori baigti žaidimą?",
+  "score": "Rezultatai",
+  "level": "Lygis",
+  "nice_work": "Šauniai padirbėta! Pereik į kitą lygį!",
+  "game_paused": "Pertrauka",
+  "go": "PRADĖTI"
+}

@@ -833,7 +833,6 @@
 
         <rect class='interfaceBG' fill="#170C59" width="500" x='-100' height="37"/>
         <svg class='interface' width="340" height="37">
-
             <symbol id="live_x5F_icon" viewBox="-5.541 -7.476 11.082 14.952">
                 <path fill="#253B8C" d="M-0.88,6.153l-0.725-0.409c-0.19-0.113-0.229-0.368,0.177-0.551c0.406-0.184,0.916-0.135,0.916-0.135
 		l0.144,1.118L-0.88,6.153z"/>
@@ -987,7 +986,6 @@
                 <path fill="#00FFFF" d="M0.202,7.476h-0.417c-0.399,0-0.722-0.323-0.722-0.722V6.15c0-0.035,0.029-0.064,0.064-0.064H0.86
 		c0.036,0,0.064,0.029,0.064,0.064v0.604C0.924,7.153,0.601,7.476,0.202,7.476"/>
             </symbol>
-
             <g class='button pauseButton' tabindex=0>
                 <path  fill="#F4911E" class="background" d="M300.093,18.103c0,6.423-5.207,11.63-11.629,11.63c-6.423,0-11.63-5.207-11.63-11.63
 		s5.207-11.629,11.63-11.629C294.886,6.473,300.093,11.68,300.093,18.103"/>
@@ -1011,13 +1009,13 @@
 			320.601,26.982 324.666,25.904 324.666,16.456 		"/>
                 </g>
             </g>
-            <text transform="matrix(1 0 0 1 95.9844 9.8887)" fill="#FFFFFF" 
-                  font-size="4.3164">Score
+            <text class='scoreLabel' transform="matrix(1 0 0 1 95.9844 9.8887)" fill="#FFFFFF"
+                  font-size="4.3164">
             </text>
             <path fill="#FFFFFF" d="M106.405,22.915H81.67c-3.023,0-5.473-2.45-5.473-5.472c0-3.023,2.45-5.473,5.473-5.473h24.734
 	c3.022,0,5.472,2.45,5.472,5.473C111.877,20.464,109.427,22.915,106.405,22.915"/>
-            <text transform="matrix(1 0 0 1 150.1064 9.8887)" fill="#FFFFFF" 
-                  font-size="4.3164">Level
+            <text class='levelLabel' transform="matrix(1 0 0 1 150.1064 9.8887)" fill="#FFFFFF"
+                  font-size="4.3164">
             </text>
             <path fill="#FFFFFF" d="M158.519,22.915h-6.129c-3.022,0-5.473-2.45-5.473-5.472c0-3.023,2.45-5.473,5.473-5.473h6.129
 	c3.022,0,5.472,2.45,5.472,5.473C163.99,20.464,161.541,22.915,158.519,22.915"/>
@@ -1492,6 +1490,11 @@
     </svg>
 
 </div>
+
+<script>
+    var hash_str = window.location.hash.split ('#')[1];
+    document.querySelector('html').setAttribute('lang', hash_str);
+</script>
 <script src="node_modules/steal/steal.js" main="js/index"></script>
 </body>
 </html>

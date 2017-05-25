@@ -1,0 +1,16 @@
+{
+  "Id": "SV",
+  "what_language": "Vilket språk är det?",
+  "choose_another_language": "För att göra spelet lite svårare, välj ett annat språk att spela på.",
+  "you_did_it": "Ja! Du klarade det!",
+  "nice_try": "Bra försök, men du har inte lyckats än. Vill du spela igen?",
+  "try_again": "Försök igen",
+  "play_again": "Spela igen",
+  "you_scored": "Du fick XXX poäng!",
+  "this_will_end": "Vill du avsluta spelet?",
+  "score": "Poäng",
+  "level": "Nivå",
+  "nice_work": "Bra jobbat! Gå till nästa nivå!",
+  "game_paused": "Spelet är pausat",
+  "go": "KÖR!"
+}

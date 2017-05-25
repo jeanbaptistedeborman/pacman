@@ -30,7 +30,7 @@ module.exports = function (p_callback_fun) {
             continueButton_el = popup_el.getElementsByClassName('goButton')[0];
         stage_el.appendChild(popup_el);
         if (!textBlock) {
-            textBlock = SvgUtils.getMultilineText(popup_el, Labels.getLabel('nextlevel'),
+            textBlock = SvgUtils.getMultilineText(popup_el, Labels.getLabel('nice_work'),
                 {
                     x: 125,
                     y: 132,

@@ -1,0 +1,16 @@
+{
+  "Id": "CS",
+  "what_language": "Co je to za jazyk?",
+  "choose_another_language": "Aby byla hra trochu těžší, vyber si jiný jazyk, kterému rozumíš",
+  "you_did_it": "Super! Podařilo se ti to!",
+  "nice_try": "Dobrý pokus, ale chtělo by to znovu. Chceš ještě hrát?",
+  "try_again": "Zkusit znovu",
+  "play_again": "Hrát znovu",
+  "you_scored": "Počet získaných bodů: XXX",
+  "this_will_end": "Tím hra skončí. Opravdu to chceš?",
+  "score": "Skóre",
+  "level": "Level",
+  "nice_work": "Sláva! Přejdi do dalšího levelu!",
+  "game_paused": "Hra přerušena",
+  "go": "START!"
+}
