@@ -13,10 +13,11 @@ var LabelsManager = require('./datatransform/labels'),
         console.log("levelLabel: ", levelLabel_el);
         scoreLabel_el.textContent =  LabelsManager.getLabel('score');
         levelLabel_el.textContent = LabelsManager.getLabel('level');
-    };
+    },
+    pageLanguage_str = document.querySelector('html').getAttribute('lang');
 
-LabelsManager.fetchLabels('en', function () {
-    LabelsManager.fetchLanguages('en', function () {
+LabelsManager.fetchLabels(pageLanguage_str, function () {
+    LabelsManager.fetchLanguages(pageLanguage_str, function () {
         var
             Obstacle = require('./view/gameobjects/objects/obstacle'),
             Goodie = require('./view/gameobjects/objects/goodie'),

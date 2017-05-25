@@ -1490,6 +1490,11 @@
     </svg>
 
 </div>
+
+<script>
+    var hash_str = window.location.hash.split ('#')[1];
+    document.querySelector('html').setAttribute('lang', hash_str);
+</script>
 <script src="node_modules/steal/steal.js" main="js/index"></script>
 </body>
 </html>
