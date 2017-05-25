@@ -1,20 +1,25 @@
 /**
  * Created by Jean-Baptiste on 2/20/2017.
  */
+"use strict";
+
 require('./view/ui/pausebutton');
 
 
 var LabelsManager = require('./datatransform/labels'),
     setLabels = function () {
-    console.log ('setLabels');
+        console.log('setLabels');
         var
             scoreLabel_el = document.querySelector('#linguagoApplication .scoreLabel'),
             levelLabel_el = document.querySelector('#linguagoApplication .levelLabel');
-        console.log("levelLabel: ", levelLabel_el);
-        scoreLabel_el.textContent =  LabelsManager.getLabel('score');
+        scoreLabel_el.textContent = LabelsManager.getLabel('score');
         levelLabel_el.textContent = LabelsManager.getLabel('level');
     },
     pageLanguage_str = document.querySelector('html').getAttribute('lang');
+if (String(pageLanguage_str) === 'undefined') {
+    pageLanguage_str = 'en';
+}
+
 
 LabelsManager.fetchLabels(pageLanguage_str, function () {
     LabelsManager.fetchLanguages(pageLanguage_str, function () {
@@ -91,7 +96,8 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
             }
 
         };
-        setLabels ();
+        setLabels();
     });
 });
-exports = {};
+
+module.exports = {};
