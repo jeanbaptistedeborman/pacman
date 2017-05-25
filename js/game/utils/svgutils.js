@@ -71,10 +71,13 @@ module.exports = {
     },
     getMultilineText: function (parentSvg_el, text_str, params) {
         var
+            forceLineBreakChar = params.forceLineBreakChar,
+            forceLineBreakBool,
             container_g = createElement('svg',{
                 x:params.x,
                 y:params.y
             }),
+
             line_num = 0,
             text_array = text_str.split(' '),
             createTextBlock = function () {
@@ -93,7 +96,6 @@ module.exports = {
                 line_num++;
                 return line_span;
             },
-            line_str = '',
             previousLineContent_str = '',
             lineContent_str = '',
             block_el = createTextBlock();
@@ -102,14 +104,14 @@ module.exports = {
         text_array.forEach(function (word) {
             lineContent_str += word + ' ';
             block_el.textContent = lineContent_str;
-            console.log ('block_el.textContent : ', block_el.textContent);
-            console.log ('block_el.getComputedTextLength() ', block_el.getComputedTextLength());
-            if (block_el.getComputedTextLength() >  params.width) {
+            console.log ("forceLineBreakBool :" , forceLineBreakBool);
+            if (block_el.getComputedTextLength() >  params.width || forceLineBreakBool) {
                 block_el.textContent = previousLineContent_str;
                 block_el = createTextBlock();
                 lineContent_str = word + ' ';
                 block_el.textContent = lineContent_str;
             }
+            forceLineBreakBool = word.indexOf(forceLineBreakChar) !== -1;
             previousLineContent_str = lineContent_str;
         });
         return container_g;

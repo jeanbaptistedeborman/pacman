@@ -22,12 +22,12 @@ var
     },
     open_bool = false,
     buildAnswers = function (obstacle_obj) {
-        var languages_array = ArrayUtils.convertObjectToArray(Labels.data.langues),
+        var languages_array = ArrayUtils.convertObjectToArray(Labels.getCurrentLanguages()),
             correctLanguage_obj = languages_array.filter(function (language_obj) {
                     return obstacle_obj.language === language_obj.id;
                 }
             )[0];
-        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj),
+        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
             languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
         correctLanguage_obj.correct = true;
         languageSelection_array.push(correctLanguage_obj);
@@ -59,7 +59,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
             }
         ),
         questionTitle_el = document.createElement('h2'),
-        questionTitleText_node = document.createTextNode(Labels.data.question),
+        questionTitleText_node = document.createTextNode(Labels.getLabel ('what_language')),
         placePopup = function () {
             var size_rect = popup_el.getBoundingClientRect();
             if (obstacle_obj.position.y < gameStage_obj.position.height / 2) {
@@ -99,7 +99,6 @@ module.exports = function (obstacle_obj, p_callback_fun) {
                 button_el = document.createElement('button'),
                 text_node = document.createTextNode(element.value);
             TimeoutManager.set(function () {
-
                 answers_el.appendChild(answer_el);
             }, 300 + 50 * index);
             answer_el.appendChild(button_el);

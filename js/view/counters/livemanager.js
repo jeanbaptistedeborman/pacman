@@ -2,7 +2,7 @@
  * Created by Jean-Baptiste on 11/04/2017.
  */
 var
-    LIVES_NUM = 5,
+    LIVES_NUM = 1,
     lives_num = LIVES_NUM,
     display = function (lives_num) {
         var

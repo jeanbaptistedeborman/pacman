@@ -1,0 +1,16 @@
+{
+  "Id": "FR",
+  "what_language": "Quelle est cette langue?",
+  "choose_another_language": "Pour corser un peu le jeu, choisis une autre langue dans laquelle tu penses être capable de jouer.",
+  "you_did_it": "Bravo, tu as réussi!",
+  "nice_try": "Bien essayé, mais tu n’as pas encore gagné. Veux-tu rejouer?",
+  "try_again": "Réessayer",
+  "play_again": "Rejouer",
+  "you_scored": "Tu as obtenu XXX points!",
+  "this_will_end": "Veux-tu vraiment mettre fin à ta partie?",
+  "score": "Score",
+  "level": "Niveau",
+  "nice_work": "Bien joué! Passe au niveau suivant!",
+  "game_paused": "Jeu en pause",
+  "go": "GO!"
+}

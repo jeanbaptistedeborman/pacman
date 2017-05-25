@@ -1,0 +1,16 @@
+{
+  "Id": "FI",
+  "what_language": "Mikä kieli tämä on?",
+  "choose_another_language": "Vaikeustaso nousee: valitse toinen kieli, jolla jatkat pelaamista.",
+  "you_did_it": "Hienoa!",
+  "nice_try": "Harmi, peli päättyi etkä päässyt loppuun. Haluatko pelata uudestaan?",
+  "try_again": "Yritä uudestaan",
+  "play_again": "Pelaa uudestaan",
+  "you_scored": "Sait XXX pistettä.",
+  "this_will_end": "Jos käytät tätä toimintoa, peli päättyy. Haluatko varmasti lopettaa?",
+  "score": "Pisteet",
+  "level": "Taso",
+  "nice_work": "Hienoa! Pääset seuraavalle tasolle.",
+  "game_paused": "Peli on keskeytetty",
+  "go": "PELAA!"
+}

@@ -1,0 +1,16 @@
+{
+  "Id": "RO",
+  "what_language": "Ce limbă este aceasta?",
+  "choose_another_language": "Pentru a face jocul și mai interesant, alege altă limbă în care crezi că poți juca.",
+  "you_did_it": "Bravo! Ai reușit!",
+  "nice_try": "Bună încercare, dar mai ai până să reușești. Vrei să mai joci o dată?",
+  "try_again": "Mai încearcă o dată",
+  "play_again": "Joacă din nou",
+  "you_scored": "Ai [XXX]puncte!",
+  "this_will_end": "Închizi jocul, sigur vrei să faci asta?",
+  "score": "Punctaj",
+  "level": "Nivel",
+  "nice_work": "Bine! Treci la nivelul următor!",
+  "game_paused": "Pauză",
+  "go": "START!"
+}

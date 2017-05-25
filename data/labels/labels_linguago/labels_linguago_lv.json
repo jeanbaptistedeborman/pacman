@@ -1,0 +1,16 @@
+{
+  "Id": "LV",
+  "what_language": "Kas tā par valodu?",
+  "choose_another_language": "Lai spēle neliktos pārāk viegla, izvēlies citu valodu, kuru zini pietiekoši labi.",
+  "you_did_it": "Jā! Tev izdevās!",
+  "nice_try": "Nebija slikti, tomēr īsti nesanāca. Gribi uzspēlēt vēlreiz?",
+  "try_again": "Mēģināt vēlreiz",
+  "play_again": "Spēlēt vēlreiz",
+  "you_scored": "Tev ir XXX punkti!",
+  "this_will_end": "Spēle tad beigsies — vai tiešām piekrīti?",
+  "score": "Rezultāts",
+  "level": "Līmenis",
+  "nice_work": "Malacis! Dodies uz nākamo līmeni!",
+  "game_paused": "Spēle apturēta",
+  "go": "STARTS!"
+}

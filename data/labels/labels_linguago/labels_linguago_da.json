@@ -1,0 +1,16 @@
+{
+  "Id": "DA",
+  "what_language": "Hvilket sprog er det?",
+  "choose_another_language": "Er spillet for let? Så prøv på et andet sprog.",
+  "you_did_it": "Ja! Du klarede det!",
+  "nice_try": "Godt forsøgt, men det er desværre ikke godt nok. Vil du spille igen?",
+  "try_again": "Forsøg igen.",
+  "play_again": "Spil igen.",
+  "you_scored": "Du har scoret XXX points!",
+  "this_will_end": "Er du sikker på, at du vil afslutte spillet?",
+  "score": "Point",
+  "level": "Niveau",
+  "nice_work": "Flot klaret! Fortsæt til næste niveau!",
+  "game_paused": "Spillet er sat på pause.",
+  "go": "SÆT IGANG!"
+}

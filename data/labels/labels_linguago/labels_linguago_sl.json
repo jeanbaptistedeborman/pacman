@@ -1,0 +1,16 @@
+{
+  "Id": "SL",
+  "what_language": "Kateri je ta jezik?",
+  "choose_another_language": "Če želiš igrati na težji stopnji, izberi drug jezik.",
+  "you_did_it": "Tako! Uspelo ti je.",
+  "nice_try": "Dober poskus, vendar ti še ni uspelo. Nova igra?",
+  "try_again": "Poskusi znova.",
+  "play_again": "Nova igra",
+  "you_scored": "Rezultat: XXX točk",
+  "this_will_end": "To bo končalo igro. Res želiš končati?",
+  "score": "Rezultat",
+  "level": "Stopnja",
+  "nice_work": "Dobro ti je šlo! Nadaljuj na naslednji stopnji.",
+  "game_paused": "Prekinitev igre",
+  "go": "ZAČNI"
+}
