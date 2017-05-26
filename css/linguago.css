@@ -52,6 +52,15 @@ body {
 
 }
 
+#linguagoApplication .pauseButton {
+    pointer-events: none;
+}
+#linguagoApplication.playing .pauseButton {
+    pointer-events:auto;
+}
+
+
+
 #linguagoApplication {
     height: 100%;
     width: 100%;

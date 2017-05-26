@@ -8,7 +8,6 @@ require('./view/ui/pausebutton');
 
 var LabelsManager = require('./datatransform/labels'),
     setLabels = function () {
-        console.log('setLabels');
         var
             scoreLabel_el = document.querySelector('#linguagoApplication .scoreLabel'),
             levelLabel_el = document.querySelector('#linguagoApplication .levelLabel');
@@ -28,6 +27,7 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
             Goodie = require('./view/gameobjects/objects/goodie'),
             BadGuy = require('./view/gameobjects/objects/badguy'),
             PlayerAvatar = require('./view/gameobjects/objects/playeravatar'),
+            Config = require('./view/gameobjects/config'),
             LevelOverPopup = require('./view/ui/leveloverpopup'),
             GameOverPopup = require('./view/ui/gameoverscreen'),
             IntervalManager = require('./game/utils/intervalmanager'),
@@ -38,6 +38,7 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
             playSound = require('./game/utils/playsound'),
             ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
             LevelsManager = require('./view/levelsmanager'),
+            app_el = Config('app').dom_el,
             playerAvatar_obj,
             level_num = 0,
             newGame = function () {
@@ -45,6 +46,18 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
                 LiveManager.reset();
                 level_num = 0;
                 createLevel();
+
+            },
+            togglePauseButton = function (enable_bool) {
+                console.log ('togglePauseButton :', enable_bool);
+                var pauseButton_el = app_el.querySelector('.pauseButton');
+                if (enable_bool) {
+                    app_el.classList.add ('playing');
+                    pauseButton_el.setAttribute('tabindex', 0);
+                } else {
+                    app_el.classList.remove ('playing');
+                    pauseButton_el.setAttribute('tabindex', -1);
+                }
             },
             createLevel = function () {
                 var
@@ -55,6 +68,7 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
                     badGuys_array = level_array.filter(function (element) {
                         return element.id.indexOf('badGuy') !== -1;
                     });
+                togglePauseButton (true);
                 Timer.start(30 + (30 * (level_num)));
                 LevelCounter.set(level_num);
                 ObjectlistManager.cleanAll();
@@ -69,7 +83,6 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
                 playerAvatar_obj = PlayerAvatar.add();
                 badGuys_array.forEach(function (element) {
                     for (var n = 0; n <= Math.floor(level_num / 3); n++) {
-
                         BadGuy.add({
                             x: Math.round(element.rect.x),
                             y: Math.round(element.rect.y)
@@ -82,13 +95,14 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
 
         newGame();
         Timer.onTimeElapsed = LiveManager.onLivesLost = function () {
-            console.log("LiveManager.onLivesLost : ", LiveManager.onLivesLost);
+            togglePauseButton (false);
             IntervalManager.clearAll();
             ObjectlistManager.cleanAll();
             GameOverPopup(newGame);
 
         };
         Goodie.onCollected = function () {
+            togglePauseButton (false);
             if (LevelsManager.remaining > 0) {
                 LevelOverPopup(createLevel);
             } else {
