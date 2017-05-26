@@ -103,6 +103,7 @@ LabelsManager.fetchLabels(pageLanguage_str, function () {
         };
         Goodie.onCollected = function () {
             togglePauseButton (false);
+            ScoreManager.add (Timer.remaining);
             if (LevelsManager.remaining > 0) {
                 LevelOverPopup(createLevel);
             } else {
