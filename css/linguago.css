@@ -114,6 +114,11 @@ body {
     padding: 0;
 }
 
+.pauseButtonTriggered .question_popup  .answer  {
+    pointer-events: none;
+}
+
+
 .question_popup .question_title, .question_popup .answer {
     font-size: 20px;
 
