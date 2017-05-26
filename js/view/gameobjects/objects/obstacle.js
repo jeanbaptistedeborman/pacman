@@ -78,11 +78,12 @@ module.exports = {
                             {
                                 width: gridSize_num,
                                 height: gridSize_num,
+                                'text-anchor':'middle',
                                 fill: 'white',
                                 "font-family": "Arial narrow",
-                                "font-size": "10.5",
-                                x: 1 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
-                                y: textHeight_num + config.position.y + n * gridSize_num * Number(config.direction === 'height')
+                                "font-size": "9",
+                                x: gridSize_num/2 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
+                                y: textHeight_num-0.7 + config.position.y + n * gridSize_num * Number(config.direction === 'height')
                             }
                         ),
                         text_node = document.createTextNode(string_array.shift().toUpperCase());
