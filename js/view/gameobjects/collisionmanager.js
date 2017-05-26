@@ -23,10 +23,18 @@ var
             return false;
         }
         result_obj = items_array.filter(function (item_obj) {
-            var ref_point = item_obj.targetPosition || item_obj.position;
-            return point.x >= ref_point.x &&
-            point.x < ref_point.x + item_obj.position.width &&
-            point.y >= ref_point.y && point.y < ref_point.y + item_obj.position.height;
+            var testPoint = function (ref_point) {
+                    return point.x >= ref_point.x &&
+                        point.x < ref_point.x + item_obj.position.width &&
+                        point.y >= ref_point.y && point.y < ref_point.y + item_obj.position.height;
+
+                },
+                result1 = testPoint(item_obj.position);
+            if (result1) {
+                return result1;
+            } else if (item_obj.targetPosition) {
+                return testPoint(item_obj.targetPosition);
+            }
         })[0];
         return result_obj;
     };
@@ -38,7 +46,6 @@ module.exports = {
         return isItem("playerAvatar", point);
     },
 
-    /* @todo: rename as 'isOccuppied' */
     isOccupied: function (point) {
         if (point) {
             var
