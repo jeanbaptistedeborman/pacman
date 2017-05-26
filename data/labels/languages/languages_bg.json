@@ -1,1 +1,26 @@
-{"Id":"bg","CS":"Bulharština","DA":"Bulgarsk","DE":"Bulgarisch","EL":"Βουλγαρικά","EN":"Bulgarian","ES":"Búlgaro","ET":"Bulgaaria","FI":"Bulgaria","FR":"Bulgare","GA":"Bulgáiris","HR":"Bugarski","HU":"Bolgár","IT":"Bulgaro","LT":"Bulgarų","LV":"Bulgāru","MT":"Bulgaru","NL":"Bulgaars","PL":"Bułgarski","PT":"Búlgaro","RO":"Bulgară","SK":"Bulharčina","SL":"Bolgarščina","SV":"Bulgariska"}
+{
+  "Id": "bg",
+  "CS": "Bulharština",
+  "DA": "Bulgarsk",
+  "DE": "Bulgarisch",
+  "EL": "Βουλγαρικά",
+  "EN": "Bulgarian",
+  "ES": "Búlgaro",
+  "ET": "Bulgaaria",
+  "FI": "Bulgaria",
+  "FR": "Bulgare",
+  "GA": "Bulgáiris",
+  "HR": "Bugarski",
+  "HU": "Bolgár",
+  "IT": "Bulgaro",
+  "LT": "Bulgarų",
+  "LV": "Bulgāru",
+  "MT": "Bulgaru",
+  "NL": "Bulgaars",
+  "PL": "Bułgarski",
+  "PT": "Búlgaro",
+  "RO": "Bulgară",
+  "SK": "Bulharčina",
+  "SL": "Bolgarščina",
+  "SV": "Bulgariska"
+}

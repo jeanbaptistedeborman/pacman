@@ -29,6 +29,9 @@ module.exports = {
         loadJSON('data/labels/languages/languages_' + lg_str + '.json',
             function (labels_data) {
                 languages_json = JSON.parse(labels_data);
+
+                delete languages_json.Id;
+                console.log ('languages_json', languages_json);
                 callback_fun(labels_json);
             }
         );
