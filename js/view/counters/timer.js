@@ -46,6 +46,9 @@ module.exports = {
         startTime_num = time_num = p_startTime_num;
         interval = IntervalManager.set(countDown, 1000);
     },
+    get remaining (){
+        return time_num;
+    },
     set onTimeElapsed(fun) {
         onTimeElapsed_fun = fun;
     }

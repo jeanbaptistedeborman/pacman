@@ -6,7 +6,8 @@ var Configs = require('../config'),
     SvgUtils = require('../../../game/utils/svgutils'),
     MovingObject = require('../movingobject'),
     directionFromTo = require('../../../game/directionfromto'),
-    LivesManager = require('../../counters/livemanager'),
+    PlayerAvatar = require('./playeravatar');
+LivesManager = require('../../counters/livemanager'),
     PauseManager = require('../../../game/utils/pausemanager'),
     CollisionManager = require('../collisionmanager'),
     ID_STR = 'badGuy',
@@ -81,7 +82,9 @@ module.exports = {
                     direction_obj = null;
                 }
             }
-            return direction_obj;
+            if (PlayerAvatar.isStarted()) {
+                return direction_obj;
+            }
         };
 
         config.reset = function () {

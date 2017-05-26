@@ -29,6 +29,10 @@ module.exports = {
         loadJSON('data/labels/languages/languages_' + lg_str + '.json',
             function (labels_data) {
                 languages_json = JSON.parse(labels_data);
+                if (languages_json.Id) {
+                    delete languages_json.Id;
+                }
+                console.log('languages_json', languages_json);
                 callback_fun(labels_json);
             }
         );
@@ -39,7 +43,7 @@ module.exports = {
 
     getLabel: function (labelId_str) {
         var result_str = labels_json[labelId_str];
-        console.log ("result_str : ", result_str);
+        console.log("result_str : ", result_str);
         if (result_str) {
             return labels_json[labelId_str];
         } else {

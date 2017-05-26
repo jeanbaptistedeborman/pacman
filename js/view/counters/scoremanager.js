@@ -17,6 +17,10 @@ module.exports = {
         score_num = 0;
         display (score_num);
     },
+    add:function (num) {
+       score_num += num;
+       display (score_num);
+    },
     increment: function () {
         display(++score_num);
     }

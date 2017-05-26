@@ -15,7 +15,7 @@ var
     PauseManager = require('../../../game/utils/pausemanager'),
     Configs = require('../config'),
     gridSize_num = Configs('stage').gridSize,
-
+    started_bool = false,
 
     DEFAULT_FRAME_STR = '#avatar',
     XLINK_STR = "http://www.w3.org/1999/xlink",
@@ -50,12 +50,16 @@ var
     },
     avatar;
 module.exports = {
+    isStarted:function () {
+        return started_bool;
+    },
     add: function () {
         var
             config = Configs('playerAvatar', true),
             restoreDefaultLook = function () {
                 SvgUtils.applyAttributes(config.dom_el, defaultParams_obj.attr, defaultParams_obj.attrNS);
             };
+        started_bool = false;
         config.dom_el = SvgUtils.createElement('use', defaultParams_obj.attr, defaultParams_obj.attrNS);
         Configs('stage').dom_el.appendChild(config.dom_el);
         config.changeFrame = function (frameId_str, duration_num) {
@@ -97,6 +101,7 @@ module.exports = {
 
             forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
             if (temptativeDirection_obj && !forbidden_obj) {
+                started_bool = true;
                 direction_obj = temptativeDirection_obj;
                 config.targetPosition = temptativePosition_point;
             } else {

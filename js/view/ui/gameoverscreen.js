@@ -69,7 +69,7 @@ module.exports = function (p_callback_fun) {
         if (!playAgain_block) {
             playAgain_block = SvgUtils.getMultilineText(popup_el, Labels.getLabel("play_again"),
                 {
-                    x: TEXT_MARGIN_NUM + 22,
+                    x: TEXT_MARGIN_NUM + 24,
                     y: 176, color: '#ffffff',
                     'text-anchor': 'left',
                     width: 20,
