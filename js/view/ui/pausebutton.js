@@ -10,7 +10,7 @@ var
     pauseButton = Config('interface').dom_el.querySelector('.pauseButton'),
     togglePause = function () {
             paused_bool = !paused_bool;
-            PauseManager.playing = !paused_bool;
+            PauseManager.pauseButton = paused_bool;
             pauseButton.setAttribute('aria-selected', paused_bool);
     };
 pauseButton.addEventListener('mousedown', togglePause);

@@ -78,7 +78,7 @@ body {
 
 #linguagoApplication .button:focus .background {
     stroke:white;
-    stroke-width: 1px;
+    stroke-width: .5px;
 }
 
 #linguagoApplication .button:hover .background,
@@ -113,6 +113,11 @@ body {
     background-color: #ffffff;
     padding: 0;
 }
+
+.pauseButtonTriggered .question_popup  .answer  {
+    pointer-events: none;
+}
+
 
 .question_popup .question_title, .question_popup .answer {
     font-size: 20px;

@@ -7,17 +7,15 @@ var
     UserControls = require('../../../game/ui/usercontrol'),
     QuestionPopup = require('../../ui/questionpopup'),
     IntervalManager = require('../../../game/utils/intervalmanager'),
-    ScoreManager =  require('../../counters/scoremanager'),
+    ScoreManager = require('../../counters/scoremanager'),
     CollisionManager = require('../collisionmanager'),
     TimoutManager = require('../../../game/utils/timeoutmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
-    playSound = require ('../../../game/utils/playsound'),
+    playSound = require('../../../game/utils/playsound'),
     PauseManager = require('../../../game/utils/pausemanager'),
     Configs = require('../config'),
     gridSize_num = Configs('stage').gridSize,
     started_bool = false,
-
-    DEFAULT_FRAME_STR = '#avatar',
     XLINK_STR = "http://www.w3.org/1999/xlink",
     defaultParams_obj = {
         attr: {
@@ -50,7 +48,7 @@ var
     },
     avatar;
 module.exports = {
-    isStarted:function () {
+    isStarted: function () {
         return started_bool;
     },
     add: function () {
@@ -82,13 +80,13 @@ module.exports = {
                 direction_obj,
                 temptativePosition_point;
 
+            if (PauseManager.pauseButton) {
                 temptativeDirection_obj = UserControls.getDirection(config.position);
 
 
-
-            if (temptativeDirection_obj) {
-                temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
-            }
+                if (temptativeDirection_obj) {
+                    temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
+                }
 
                 var goodie = CollisionManager.isGoodie(temptativePosition_point);
                 if (goodie) {
@@ -98,45 +96,45 @@ module.exports = {
                         IntervalManager.clearAll();
                     }
                 }
-
-            forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
-            if (temptativeDirection_obj && !forbidden_obj) {
-                started_bool = true;
-                direction_obj = temptativeDirection_obj;
-                config.targetPosition = temptativePosition_point;
-            } else {
-                if (
-                    forbidden_obj &&
-                    forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
-                    PauseManager.playing = false;
-                    config.changeFrame('#avatarQuestion');
-                    QuestionPopup(forbidden_obj,
-                        function (answer_bool) {
-                            if (answer_bool !== undefined) {
-                                if (answer_bool) {
-                                    config.restoreDefaultLook();
+                forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
+                if (temptativeDirection_obj && !forbidden_obj) {
+                    started_bool = true;
+                    direction_obj = temptativeDirection_obj;
+                    config.targetPosition = temptativePosition_point;
+                } else {
+                    if (
+                        forbidden_obj &&
+                        forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
+                        PauseManager.playing = false;
+                        config.changeFrame('#avatarQuestion');
+                        QuestionPopup(forbidden_obj,
+                            function (answer_bool) {
+                                if (answer_bool !== undefined) {
+                                    if (answer_bool) {
+                                        config.restoreDefaultLook();
+                                    } else {
+                                        config.changeFrame('#avatarSad', 2000);
+                                    }
+                                    forbidden_obj.openDoor(answer_bool);
                                 } else {
-                                    config.changeFrame('#avatarSad', 2000);
+                                    config.changeFrame('#avatar');
                                 }
-                                forbidden_obj.openDoor(answer_bool);
-                            } else {
-                                config.changeFrame('#avatar');
+                                PauseManager.playing = true;
                             }
-                            PauseManager.playing = true;
-                        }
-                    );
-                } else if (forbidden_obj && forbidden_obj.blocked) {
-                    playSound('mauvais_2');
+                        );
+                    } else if (forbidden_obj && forbidden_obj.blocked) {
+                        playSound('mauvais_2');
+                    }
+                    direction_obj = null;
                 }
-                direction_obj = null;
+                return (direction_obj);
             }
-            return (direction_obj);
         };
         config.restoreDefaultLook = restoreDefaultLook;
-            config.avatarLost = function () {
-                playSound ('mauvais_1');
-                SvgUtils.applyAttributes(config.dom_el, lostParams_obj.attr, lostParams_obj.attrNS);
-            };
+        config.avatarLost = function () {
+            playSound('mauvais_1');
+            SvgUtils.applyAttributes(config.dom_el, lostParams_obj.attr, lostParams_obj.attrNS);
+        };
         playerAvatar_obj = MovingObject.add(config, true);
         playerAvatar_obj.update();
         return playerAvatar_obj;

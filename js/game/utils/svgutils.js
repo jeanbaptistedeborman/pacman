@@ -104,7 +104,6 @@ module.exports = {
         text_array.forEach(function (word) {
             lineContent_str += word + ' ';
             block_el.textContent = lineContent_str;
-            console.log ("forceLineBreakBool :" , forceLineBreakBool);
             if (block_el.getComputedTextLength() >  params.width || forceLineBreakBool) {
                 block_el.textContent = previousLineContent_str;
                 block_el = createTextBlock();

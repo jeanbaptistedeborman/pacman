@@ -18,8 +18,6 @@ var
     cel_array.push(element);
 });
 languagesClone_map = JSON.parse(JSON.stringify(languages_map));
-
-console.log('language_map :', languages_map);
 module.exports = {
     getRandomLanguageOfLength: function (length_num) {
         var
@@ -28,7 +26,7 @@ module.exports = {
             return null;
         }
         if (possibleLanguages_array.length === 0) {
-            possibleLanguages_array = languagesClone_map[length_num] = languages_map[length_num];
+            possibleLanguages_array = languagesClone_map[length_num] = JSON.parse (JSON.stringify(languages_map[length_num]));
         }
         return ArrayUtils.getRandomCel(possibleLanguages_array, true);
     },
