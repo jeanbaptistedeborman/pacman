@@ -28,11 +28,15 @@ var
                 }
             )[0];
         languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
-            languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
+        languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
         correctLanguage_obj.correct = true;
         languageSelection_array.push(correctLanguage_obj);
         languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
+        if (languageSelection_array.length > 5) {
+            console.log('WARNING : more than 5 els in list');
+        }
         return languageSelection_array;
+
     };
 
 
@@ -59,7 +63,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
             }
         ),
         questionTitle_el = document.createElement('h2'),
-        questionTitleText_node = document.createTextNode(Labels.getLabel ('what_language')),
+        questionTitleText_node = document.createTextNode(Labels.getLabel('what_language')),
         placePopup = function () {
             var size_rect = popup_el.getBoundingClientRect();
             if (obstacle_obj.position.y < gameStage_obj.position.height / 2) {
@@ -108,9 +112,10 @@ module.exports = function (obstacle_obj, p_callback_fun) {
             button_el.addEventListener('click', function () {
                 closePopup(element.id === obstacle_obj.language);
             });
-
         });
-
+        if (answers_el.querySelector('>li').length > 5) {
+            throw (new Error('WARNING : more than 5 els in list'));
+        }
         placePopup();
     }
 };
