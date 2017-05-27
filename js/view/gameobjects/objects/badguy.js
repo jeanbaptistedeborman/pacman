@@ -45,6 +45,9 @@ module.exports = {
                 playerAvatar_api = ObjectListManager.getList('playerAvatar')[0],
                 forbidden_obj,
                 temptativePosition_point,
+                isMySelf = function () {
+                    return forbidden_obj.config === config;
+                };
                 temptativeDirection_obj = directionFromTo(config.position, playerAvatar_api.position);
 
 
@@ -68,6 +71,9 @@ module.exports = {
             }
 
             forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
+            if (forbidden_obj  && isMySelf (forbidden_obj)) {
+                forbidden_obj = null;
+            }
             if (temptativeDirection_obj && !forbidden_obj) {
                 direction_obj = temptativeDirection_obj;
                 config.targetPosition = temptativePosition_point;
