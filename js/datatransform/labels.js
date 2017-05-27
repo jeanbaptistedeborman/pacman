@@ -32,7 +32,6 @@ module.exports = {
                 if (languages_json.Id) {
                     delete languages_json.Id;
                 }
-                console.log('languages_json', languages_json);
                 callback_fun(labels_json);
             }
         );
@@ -40,10 +39,8 @@ module.exports = {
     getCurrentLanguages: function () {
         return languages_json;
     },
-
     getLabel: function (labelId_str) {
         var result_str = labels_json[labelId_str];
-        console.log("result_str : ", result_str);
         if (result_str) {
             return labels_json[labelId_str];
         } else {

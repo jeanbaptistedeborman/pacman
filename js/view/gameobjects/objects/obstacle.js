@@ -113,10 +113,8 @@ module.exports = {
                 config.brick_array.forEach(function (brick_obj, index) {
                     TimeoutManager.set(function () {
                         if (openOrLock_bool) {
-
                             brick_obj.brick_el.setAttribute('fill', 'rgba(255,255,255,0.2)');
                             brick_obj.text_el.setAttribute('fill', 'rgba(255,255,255,0.2)');
-
                         } else {
                             playSound('mauvais_2', true);
                             brick_obj.brick_el.setAttribute('fill', '#c5c5c5');

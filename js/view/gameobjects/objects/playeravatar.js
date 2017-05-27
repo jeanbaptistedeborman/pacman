@@ -96,7 +96,6 @@ module.exports = {
                         IntervalManager.clearAll();
                     }
                 }
-
                 forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
                 if (temptativeDirection_obj && !forbidden_obj) {
                     started_bool = true;
