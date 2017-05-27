@@ -78,7 +78,7 @@ body {
 
 #linguagoApplication .button:focus .background {
     stroke:white;
-    stroke-width: 1px;
+    stroke-width: .5px;
 }
 
 #linguagoApplication .button:hover .background,
