@@ -113,9 +113,7 @@ module.exports = function (obstacle_obj, p_callback_fun) {
                 closePopup(element.id === obstacle_obj.language);
             });
         });
-        if (answers_el.querySelector('>li').length > 5) {
-            throw (new Error('WARNING : more than 5 els in list'));
-        }
+
         placePopup();
     }
 };

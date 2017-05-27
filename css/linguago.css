@@ -52,12 +52,19 @@ body {
 
 }
 
+#linguagoApplication .languageChoice_popup .button[aria-disabled=true] {
+    pointer-events: none;
+    opacity: .8;
+}
+
+
 #linguagoApplication .pauseButton {
     pointer-events: none;
 }
 #linguagoApplication.playing .pauseButton {
     pointer-events:auto;
 }
+
 
 
 
