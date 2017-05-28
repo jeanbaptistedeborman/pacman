@@ -40,6 +40,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
             playSound = require('./game/utils/playsound'),
             ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
             LevelsManager = require('./view/levelsmanager'),
+            Languages = require ('./datatransform/languages'),
             app_el = Config('app').dom_el,
             playerAvatar_obj,
             level_num = 0,
@@ -69,6 +70,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
                     badGuys_array = level_array.filter(function (element) {
                         return element.id.indexOf('badGuy') !== -1;
                     });
+                Languages.refresh();
                 togglePauseButton(true);
                 Timer.start(30 + (30 * (level_num)));
                 LevelCounter.set(level_num);

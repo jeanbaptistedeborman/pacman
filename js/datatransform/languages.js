@@ -2,13 +2,17 @@
  * Created by Jean-Baptiste on 13/04/2017.
  */
 
-
+"use strict";
 var
     languages_array = require('../../data/languages.json'),
     ArrayUtils = require('../game/utils/arrayutils'),
     languages_map = [],
-    languagesClone_map;
-    languages_array.forEach(function (element) {
+    languagesClone_map,
+    refresh = function () {
+    console.log ('REFERSH !');
+        languagesClone_map = JSON.parse(JSON.stringify(languages_map));
+    };
+languages_array.forEach(function (element) {
     var
         length_num = element.label.length,
         cel_array = languages_map[length_num];
@@ -17,8 +21,10 @@ var
     }
     cel_array.push(element);
 });
-languagesClone_map = JSON.parse(JSON.stringify(languages_map));
+refresh();
+
 module.exports = {
+    refresh: refresh,
     getRandomLanguageOfLength: function (length_num) {
         var
             possibleLanguages_array = languagesClone_map[length_num];
@@ -26,7 +32,7 @@ module.exports = {
             return null;
         }
         if (possibleLanguages_array.length === 0) {
-            possibleLanguages_array = languagesClone_map[length_num] = JSON.parse (JSON.stringify(languages_map[length_num]));
+            possibleLanguages_array = languagesClone_map[length_num] = JSON.parse(JSON.stringify(languages_map[length_num]));
         }
         return ArrayUtils.getRandomCel(possibleLanguages_array, true);
     },
