@@ -1,6 +1,7 @@
 /**
  * Created by Jean-Baptiste on 11/04/2017.
  */
+"use strict";
 var
     Labels = require('../../datatransform/labels'),
     SvgUtils = require('../../game/utils/svgutils'),
@@ -16,9 +17,9 @@ var
     callback_fun,
     popup_el,
     closePopup = function (correct_bool) {
-        open_bool = false;
         stage_el.removeChild(popup_el);
         callback_fun(correct_bool);
+        open_bool = false;
     },
     open_bool = false,
     buildAnswers = function (obstacle_obj) {
@@ -26,9 +27,11 @@ var
             correctLanguage_obj = languages_array.filter(function (language_obj) {
                     return obstacle_obj.language === language_obj.id;
                 }
-            )[0];
-        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
+            )[0],
+            languageSelection_array;
+        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj),
         languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
+
         correctLanguage_obj.correct = true;
         languageSelection_array.push(correctLanguage_obj);
         languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
@@ -46,50 +49,50 @@ UserControls.onDirectionChange = function () {
     }
 };
 module.exports = function (obstacle_obj, p_callback_fun) {
-    var
-        margin_num = gridSize_num,
-        obstacleTL_point = SvgUtils.convertCoordinateFromSVGToDOM(
-            gameStage_el,
-            {
-                x: obstacle_obj.position.x - margin_num,
-                y: obstacle_obj.position.y - margin_num
-            }
-        ),
-        obstacleTR_point = SvgUtils.convertCoordinateFromSVGToDOM(
-            gameStage_el,
-            {
-                x: obstacle_obj.position.x + obstacle_obj.position.width + margin_num,
-                y: obstacle_obj.position.y - margin_num
-            }
-        ),
-        questionTitle_el = document.createElement('h2'),
-        questionTitleText_node = document.createTextNode(Labels.getLabel('what_language')),
-        placePopup = function () {
-            var size_rect = popup_el.getBoundingClientRect();
-            if (obstacle_obj.position.y < gameStage_obj.position.height / 2) {
-                popup_el.style.top = Math.round(obstacleTL_point.y) + 'px';
-                popup_el.classList.add('top');
+        var answers_array,
+            margin_num = gridSize_num,
+            answers_el = document.createElement('ul'),
+            obstacleTL_point = SvgUtils.convertCoordinateFromSVGToDOM(
+                gameStage_el,
+                {
+                    x: obstacle_obj.position.x - margin_num,
+                    y: obstacle_obj.position.y - margin_num
+                }
+            ),
+            obstacleTR_point = SvgUtils.convertCoordinateFromSVGToDOM(
+                gameStage_el,
+                {
+                    x: obstacle_obj.position.x + obstacle_obj.position.width + margin_num,
+                    y: obstacle_obj.position.y - margin_num
+                }
+            ),
+            questionTitle_el = document.createElement('h2'),
+            questionTitleText_node = document.createTextNode(Labels.getLabel('what_language')),
+            placePopup = function () {
+                var size_rect = popup_el.getBoundingClientRect();
+                if (obstacle_obj.position.y < gameStage_obj.position.height / 2) {
+                    popup_el.style.top = Math.round(obstacleTL_point.y) + 'px';
+                    popup_el.classList.add('top');
 
-            } else {
-                popup_el.style.top = Math.round(obstacleTL_point.y - size_rect.height) + 'px';
-                popup_el.classList.add('bottom');
-            }
-            if (obstacle_obj.position.x < gameStage_obj.position.width / 2) {
-                popup_el.style.left = Math.round(obstacleTR_point.x) + 'px';
-                popup_el.classList.add('wipeFromRight');
-            } else {
-                popup_el.style.left = Math.round(obstacleTL_point.x - size_rect.width) + 'px';
-                popup_el.classList.add('wipeFromLeft');
-            }
-        };
-    callback_fun = p_callback_fun;
+                } else {
+                    popup_el.style.top = Math.round(obstacleTL_point.y - size_rect.height) + 'px';
+                    popup_el.classList.add('bottom');
+                }
+                if (obstacle_obj.position.x < gameStage_obj.position.width / 2) {
+                    popup_el.style.left = Math.round(obstacleTR_point.x) + 'px';
+                    popup_el.classList.add('wipeFromRight');
+                } else {
+                    popup_el.style.left = Math.round(obstacleTL_point.x - size_rect.width) + 'px';
+                    popup_el.classList.add('wipeFromLeft');
+                }
+            };
+
     if (!open_bool) {
-        var answers_array = buildAnswers(obstacle_obj);
-
+        open_bool = true;
+        callback_fun = p_callback_fun;
+       answers_array = buildAnswers(obstacle_obj);
         playSound('question');
         popup_el = document.createElement('div');
-        open_bool = true;
-        answers_el = document.createElement('ul');
         questionTitle_el.appendChild(questionTitleText_node);
         stage_el.appendChild(popup_el);
         popup_el.appendChild(questionTitle_el);
