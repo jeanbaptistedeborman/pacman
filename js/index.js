@@ -50,7 +50,6 @@ Labels.fetchLabels(pageLanguage_str, function () {
                 createLevel();
             },
             togglePauseButton = function (enable_bool) {
-                console.log('togglePauseButton :', enable_bool);
                 var pauseButton_el = app_el.querySelector('.pauseButton');
                 if (enable_bool) {
                     app_el.classList.add('playing');
@@ -103,11 +102,13 @@ Labels.fetchLabels(pageLanguage_str, function () {
 
         };
         Goodie.onCollected = function () {
+
             togglePauseButton(false);
             ScoreManager.add(Timer.remaining);
 
             LevelOverPopup(function () {
                     if (level_num%4 === 0) {
+                        ObjectlistManager.cleanAll();
                         languageChoice.display(createLevel);
                     } else {
                         createLevel();

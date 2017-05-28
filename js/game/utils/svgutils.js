@@ -11,7 +11,7 @@ var
         };
     },
     applyAttributes = function (el, params_obj, namespaceParams_array) {
-        if (params_obj) {
+    if (params_obj) {
             for (var n in params_obj) {
                 if (params_obj.hasOwnProperty(n)) {
                     el.setAttribute(n, params_obj[n]);
@@ -70,6 +70,7 @@ module.exports = {
         return path;
     },
     getMultilineText: function (parentSvg_el, text_str, params) {
+        console.log ('params multiline : ', params);
         var
             forceLineBreakChar = params.forceLineBreakChar,
             forceLineBreakBool,
@@ -92,6 +93,7 @@ module.exports = {
                     'stroke-width':params['stroke-width'] || null,
                     'dy': (params.lineHeight * line_num) + params.lineHeight
                 });
+
                 container_g.appendChild(line_span);
                 line_num++;
                 return line_span;
