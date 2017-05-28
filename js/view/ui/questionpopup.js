@@ -35,9 +35,6 @@ var
         correctLanguage_obj.correct = true;
         languageSelection_array.push(correctLanguage_obj);
         languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
-        if (languageSelection_array.length > 5) {
-            console.log('WARNING : more than 5 els in list');
-        }
         return languageSelection_array;
 
     };
