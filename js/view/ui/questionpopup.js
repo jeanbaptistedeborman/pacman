@@ -17,7 +17,10 @@ var
     callback_fun,
     popup_el,
     closePopup = function (correct_bool) {
-        stage_el.removeChild(popup_el);
+        if (stage_el.contains(popup_el)) {
+            stage_el.removeChild(popup_el);
+        }
+
         callback_fun(correct_bool);
         open_bool = false;
     },
@@ -35,7 +38,6 @@ var
         languageSelection_array.push(correctLanguage_obj);
         languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
         return languageSelection_array;
-
     };
 
 
@@ -44,7 +46,13 @@ UserControls.onDirectionChange = function () {
         closePopup();
     }
 };
-module.exports = function (obstacle_obj, p_callback_fun) {
+module.exports = {
+    remove: function () {
+        callback_fun = function () {
+        };
+        closePopup();
+    },
+    open: function (obstacle_obj, p_callback_fun) {
         var answers_array,
             margin_num = gridSize_num,
             answers_el = document.createElement('ul'),
@@ -83,37 +91,38 @@ module.exports = function (obstacle_obj, p_callback_fun) {
                 }
             };
 
-    if (!open_bool) {
-        open_bool = true;
-        callback_fun = p_callback_fun;
-       answers_array = buildAnswers(obstacle_obj);
-        playSound('question');
-        popup_el = document.createElement('div');
-        questionTitle_el.appendChild(questionTitleText_node);
-        stage_el.appendChild(popup_el);
-        popup_el.appendChild(questionTitle_el);
-        popup_el.appendChild(answers_el);
-        popup_el.setAttribute('class', 'question_popup');
-        questionTitle_el.setAttribute('class', 'question_title');
-        answers_el.setAttribute('class', 'answers');
-        answers_array.forEach(function (element, index) {
-            var
-                answer_el = document.createElement('li'),
-                button_el = document.createElement('button'),
-                text_node = document.createTextNode(element.value);
-            TimeoutManager.set(function () {
-                answers_el.appendChild(answer_el);
-            }, 300 + 50 * index);
-            answer_el.appendChild(button_el);
-            button_el.appendChild(text_node);
-            button_el.setAttribute('class', 'answer');
-            button_el.setAttribute('tabindex', 0);
-            button_el.addEventListener('click', function () {
-                closePopup(element.id === obstacle_obj.language);
+        if (!open_bool) {
+            open_bool = true;
+            callback_fun = p_callback_fun;
+            answers_array = buildAnswers(obstacle_obj);
+            playSound('question');
+            popup_el = document.createElement('div');
+            questionTitle_el.appendChild(questionTitleText_node);
+            stage_el.appendChild(popup_el);
+            popup_el.appendChild(questionTitle_el);
+            popup_el.appendChild(answers_el);
+            popup_el.setAttribute('class', 'question_popup');
+            questionTitle_el.setAttribute('class', 'question_title');
+            answers_el.setAttribute('class', 'answers');
+            answers_array.forEach(function (element, index) {
+                var
+                    answer_el = document.createElement('li'),
+                    button_el = document.createElement('button'),
+                    text_node = document.createTextNode(element.value);
+                TimeoutManager.set(function () {
+                    answers_el.appendChild(answer_el);
+                }, 300 + 50 * index);
+                answer_el.appendChild(button_el);
+                button_el.appendChild(text_node);
+                button_el.setAttribute('class', 'answer');
+                button_el.setAttribute('tabindex', 0);
+                button_el.addEventListener('click', function () {
+                    closePopup(element.id === obstacle_obj.language);
+                });
             });
-        });
 
-        placePopup();
+            placePopup();
+        }
     }
 };
 

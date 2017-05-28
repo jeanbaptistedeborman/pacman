@@ -30,6 +30,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
             PlayerAvatar = require('./view/gameobjects/objects/playeravatar'),
             Config = require('./view/gameobjects/config'),
             LevelOverPopup = require('./view/ui/leveloverpopup'),
+            QuestionPopup = require('./view/ui/questionpopup'),
             GameOverPopup = require('./view/ui/gameoverscreen'),
             IntervalManager = require('./game/utils/intervalmanager'),
             ScoreManager = require('./view/counters/scoremanager'),
@@ -96,6 +97,8 @@ Labels.fetchLabels(pageLanguage_str, function () {
         newGame();
         Timer.onTimeElapsed = LiveManager.onLivesLost = function () {
             togglePauseButton(false);
+            QuestionPopup.remove();
+            PauseManager.playing = true;
             IntervalManager.clearAll();
             ObjectlistManager.cleanAll();
             GameOverPopup(newGame);

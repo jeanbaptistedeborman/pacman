@@ -22,7 +22,7 @@ clock_el.setAttribute('fill', '#b0b0b0');
 container_el.appendChild(clock_el);
 
 countDown = function () {
-    if (PauseManager.playing) {
+    if (PauseManager.pauseButton) {
         display(--time_num);
         if (time_num === 0 && onTimeElapsed_fun) {
             onTimeElapsed_fun();
