@@ -132,6 +132,7 @@ module.exports = {
         };
         config.restoreDefaultLook = restoreDefaultLook;
         config.avatarLost = function () {
+            started_bool = false;
             playSound('mauvais_1');
             SvgUtils.applyAttributes(config.dom_el, lostParams_obj.attr, lostParams_obj.attrNS);
         };

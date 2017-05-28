@@ -32,7 +32,9 @@ module.exports = {
                 if (languages_json.Id) {
                     delete languages_json.Id;
                 }
-                callback_fun(labels_json);
+                if (callback_fun) {
+                    callback_fun(labels_json);
+                }
             }
         );
     },
