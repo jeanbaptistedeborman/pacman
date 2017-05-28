@@ -29,9 +29,8 @@ var
                 }
             )[0],
             languageSelection_array;
-        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj),
+        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
         languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
-
         correctLanguage_obj.correct = true;
         languageSelection_array.push(correctLanguage_obj);
         languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
