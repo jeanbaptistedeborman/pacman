@@ -20,8 +20,8 @@ module.exports = {
         var vibrate = (function () {
                 var STEP = 0.2,
                     direction = {
-                        x:Math.random()>.5?-1:1,
-                        y:Math.random()>.5?-1:1
+                        x: Math.random() > .5 ? -1 : 1,
+                        y: Math.random() > .5 ? -1 : 1
                     },
                     move = {
                         x: -2,
@@ -29,16 +29,16 @@ module.exports = {
                     };
                 return function (vibration_num) {
                     if (vibration_num) {
-                        move.x = -2 +vibration_num;
-                        move.y = -2 +vibration_num;
+                        move.x = -2 + vibration_num;
+                        move.y = -2 + vibration_num;
                     } else {
                         move.x += STEP * direction.x,
-                        move.y += STEP * direction.y;
-                        if (Math.abs (move.y +2) > STEP*5) {
-                            direction.y*=-1;
+                            move.y += STEP * direction.y;
+                        if (Math.abs(move.y + 2) > STEP * 5) {
+                            direction.y *= -1;
                         }
-                        if (Math.abs (move.x +2) > STEP*10) {
-                            direction.x*=-1;
+                        if (Math.abs(move.x + 2) > STEP * 10) {
+                            direction.x *= -1;
                         }
                     }
                     config.dom_el.setAttribute('transform', 'translate(' + move.x + ',' + move.y + ')');
@@ -49,6 +49,10 @@ module.exports = {
             applyOriginPoint = function () {
                 config.position.x = origin_point.x * stageConfig.gridSize;
                 config.position.y = origin_point.y * stageConfig.gridSize;
+                if (config.dom_el) {
+                    config.dom_el.setAttribute('x', config.position.x);
+                    config.dom_el.setAttribute('y', config.position.y);
+                }
             },
             stageConfig = Configs('stage');
         applyOriginPoint();
@@ -117,7 +121,7 @@ module.exports = {
             if (!direction_obj || !PlayerAvatar.isStarted()) {
                 vibrate();
             } else {
-                vibrate (0);
+                vibrate(0);
             }
             if (PlayerAvatar.isStarted()) {
                 return direction_obj;
