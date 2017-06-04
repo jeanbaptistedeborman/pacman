@@ -6234,14 +6234,15 @@ module.exports = [
  */
 
 var pressedKey_str,
-    lastPressedKey_str,
-    body_el = document.getElementsByTagName('body')[0];
+    lastPressedKey_str;
 
 document.addEventListener('keydown', function (evt) {
     lastPressedKey_str = pressedKey_str = evt.key;
 });
-document.addEventListener ('keyup', function () {
-    pressedKey_str = null;
+document.addEventListener ('keyup', function (evt) {
+    if (pressedKey_str === evt.key) {
+        pressedKey_str = null;
+    }
 });
 module.exports = {
     get pressedKey() {
