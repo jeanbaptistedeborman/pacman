@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- PREVENTS CACHING FROM MOILE DEVIOCES. @todo: REMOVE IN PRODUCTION -->
-    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-    <!-- END REMOVE -->
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <!--  <link rel="stylesheet" type="text/css" href="css/linguago.css"> -->
-
-</head>
-<body>
-
-<div id="linguagoApplication">
-    <svg id='game_js' viewBox="0 0 336 244" preserveAspectRatio="xMidYMin" width="336" version="1.1"
+  <svg id='game_js' viewBox="0 0 336 244" preserveAspectRatio="xMidYMin" width="336" version="1.1"
          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="244">
         <symbol id="linguagoLogo" viewBox="0 -35.583 132.996 35.583">
             <path fill="#FDD302"
@@ -196,7 +181,7 @@
 		c-0.385,0.101-0.735,0.243-1.059,0.363c-0.319,0.134-0.608,0.26-0.858,0.389c-0.25,0.129-0.467,0.24-0.637,0.344
 		C5.647-24.854,5.455-24.729,5.455-24.729"/>
         </symbol>
-        <svg id='app_js' overflow="visible" width="330" height="200" x="3" y="40">
+        <svg id="app_js" overflow="visible" width="330" height="200" x="3" y="40">
             <rect id='background' width="500" y='-100' x='-100' height="344"></rect>
             <symbol id="lgButton" viewBox="-25.043 -5.537 50.087 11.075">
                 <path fill="#689B4A" d="M23.908-3.779h-42.279c-0.627,0-1.136,0.509-1.136,1.136v5.622c0,0.627,0.508,1.136,1.136,1.136h42.279
@@ -1198,7 +1183,7 @@
                 <path fill="#00FFFF" d="M0.202,7.476h-0.417c-0.399,0-0.722-0.323-0.722-0.722V6.15c0-0.035,0.029-0.064,0.064-0.064H0.86
 		c0.036,0,0.064,0.029,0.064,0.064v0.604C0.924,7.153,0.601,7.476,0.202,7.476"/>
             </symbol>
-            <g class='button pauseButton' tabindex=0>
+            <g class='button pauseButton'>
                 <path fill="#F4911E" class="background" d="M300.093,18.103c0,6.423-5.207,11.63-11.629,11.63c-6.423,0-11.63-5.207-11.63-11.63
 		s5.207-11.629,11.63-11.629C294.886,6.473,300.093,11.68,300.093,18.103"/>
                 <g>
@@ -1212,7 +1197,7 @@
                     </g>
                 </g>
             </g>
-            <g class='button homeButton' tabindex=0>
+            <g class='button homeButton'>
                 <path fill="#F4911E" class="background" d="M330.406,18.103c0,6.423-5.207,11.63-11.63,11.63c-6.422,0-11.629-5.207-11.629-11.63
 		s5.207-11.629,11.629-11.629C325.2,6.473,330.406,11.68,330.406,18.103"/>
                 <g>
@@ -1221,7 +1206,7 @@
 			320.601,26.982 324.666,25.904 324.666,16.456 		"/>
                 </g>
             </g>
-            <text class='scoreLabel' x="94" y="10" width='200' text-anchor='middle' fill="#FFFFFF" font-size="4.3164">
+            <text class='scoreLabel' x="94" y="10" text-anchor='middle' fill="#FFFFFF" font-size="4.3164">
             </text>
             <path fill="#FFFFFF" d="M106.405,22.915H81.67c-3.023,0-5.473-2.45-5.473-5.472c0-3.023,2.45-5.473,5.473-5.473h24.734
 	c3.022,0,5.472,2.45,5.472,5.473C111.877,20.464,109.427,22.915,106.405,22.915"/>
@@ -1243,7 +1228,7 @@
 		c4.171,0,7.565,3.394,7.565,7.565C31.678,21.867,28.284,25.26,24.113,25.26z M24.113,12.757c-2.723,0-4.939,2.215-4.939,4.938
 		c0,2.724,2.216,4.938,4.939,4.938c2.723,0,4.938-2.215,4.938-4.938C29.051,14.972,26.835,12.757,24.113,12.757z"/>
             </g>
-            <path id=clockBackground fill="#eb1c24" d="M30.364,17.695c0,3.453-2.799,6.252-6.251,6.252c-3.453,0-6.252-2.799-6.252-6.252s2.799-6.252,6.252-6.252
+            <path id="clockBackground" fill="#eb1c24" d="M30.364,17.695c0,3.453-2.799,6.252-6.251,6.252c-3.453,0-6.252-2.799-6.252-6.252s2.799-6.252,6.252-6.252
 	C27.565,11.443,30.364,14.242,30.364,17.695"/>
             <g>
                 <rect x="23.451" y="7.202" fill="#B0B0B0" width="1.323" height="2.327"/>
@@ -1259,7 +1244,7 @@
             <text id="score" text-anchor='middle' x="94" y="20" fill="#666666"
                   font-size="7.88">0
             </text>
-            <text id='level' x=153 y=20 fill="#666666" font-size="7.88">1</text>
+            <text id='level' x="153" y="20" fill="#666666" font-size="7.88">1</text>
             <use xlink:href="#live_x5F_icon" class="liveIcon" width="11.082" height="14.952" x="-5.541" y="-7.476"
                  transform="matrix(1 0 0 -1 177.4878 16.0083)" overflow="visible"/>
             <use xlink:href="#live_x5F_icon" class="liveIcon" width="11.082" height="14.952" x="-5.541" y="-7.476"
@@ -1449,7 +1434,7 @@
 		c0-0.32-0.259-0.579-0.579-0.579C171.293,69.22,171.034,69.479,171.034,69.799"/>
                 <path fill="#00FFFF" d="M165.848,41.756h-2.184c-2.085,0-3.776,1.69-3.776,3.775v3.16c0,0.185,0.149,0.332,0.333,0.332h9.07
 		c0.184,0,0.332-0.147,0.332-0.332v-3.16C169.624,43.446,167.934,41.756,165.848,41.756"/>
-                <g class="goButton button" tabindex='0'>
+                <g class="goButton button">
                     <path fill="#9DC44D" class='background' d="M174.857,117.131c0,5.559-4.507,10.065-10.066,10.065c-5.561,0-10.067-4.507-10.067-10.065
 			c0-5.56,4.507-10.066,10.067-10.066C170.35,107.064,174.857,111.571,174.857,117.131"/>
                     <path fill="#FFFFFF" d="M161.697,113.534c-0.59-0.157-1.183-0.044-1.777,0.343c-0.595,0.385-1.088,0.965-1.481,1.734
@@ -1649,7 +1634,7 @@
 		s-0.773-4.488,0.273-4.896S150.367,114.726,151.262,117.021"/>
                 <path fill="#F3D332" d="M164.27,121.759c0,1.99-1.613,3.603-3.603,3.603s-3.603-1.613-3.603-3.603s1.613-3.603,3.603-3.603
 		S164.27,119.77,164.27,121.759"/>
-                <svg class="button playAgain" tabindex="0">
+                <svg class="button playAgain">
                     <path fill="white" class='background' d="M160.788,186.008c1.998,0,2.738,0.238,3.337,0.653c0.17,0.118,0.657,0.572,1.631,1.48
 		c1,0.932,1.192,1.139,1.631,1.279c0.08,0.026,1.156,0.353,2.007-0.226c0.328-0.222,0.777-0.685,1.004-2.208
 		c0.384-2.579-0.396-4.687-0.552-5.094c-0.222-0.578-1.723-4.495-3.689-4.441c-0.483,0.013-1.134,0.27-1.606,0.552
@@ -1706,13 +1691,3 @@
             </g>
         </svg>
     </svg>
-
-</div>
-
-<script>
-    var hash_str = window.location.hash.split('#')[1];
-    document.querySelector('html').setAttribute('lang', hash_str);
-</script>
-<script src="dist/linguago_bundle.js" main="js/index"></script>
-</body>
-</html>

@@ -3,9 +3,14 @@
  */
 "use strict";
 
-require('./view/ui/pausebutton');
 
-var languageChoice = require('./view/ui/langageChoice'),
+
+
+require('./view/ui/pausebutton');
+require ('../css/linguago.css');
+
+
+  var  languageChoice = require('./view/ui/langageChoice'),
     Labels = require('./datatransform/labels'),
     setLabels = function () {
         var
@@ -19,6 +24,18 @@ if (String(pageLanguage_str) === 'undefined') {
     pageLanguage_str = 'en';
 }
 languageChoice.registerLanguage(pageLanguage_str);
+
+/*
+bundling of SVG  - does not work.
+var svgContent = require ('../img/svgcontent.txt');
+var svg_xml = (new DOMParser().parseFromString(svgContent, "application/xml"));
+
+svg_xml = document.importNode(svg_xml.documentElement,true);
+
+var app_el = document.getElementById('linguagoApplication');
+app_el.innerHTML ='';
+app_el.appendChild(svg_xml);
+*/
 
 
 Labels.fetchLabels(pageLanguage_str, function () {

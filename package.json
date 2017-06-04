@@ -1,4 +1,16 @@
 {
   "name": "Linguagogame",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "scripts": {
+    "webpack": "webpack --watch"
+  },
+  "dependencies": {
+    "webpack": "^2.6.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.4",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.18.1",
+    "uglifyjs-webpack-plugin": "^0.4.3"
+  }
 }

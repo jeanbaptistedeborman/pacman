@@ -1,7 +1,10 @@
 /**
  * Created by Jean-Baptiste on 11/04/2017.
  */
+
+console.log ("score : ", document.getElementById ('score'));
 var
+
     score_num = 0,
     display = function (score_num) {
         var display_text = document.getElementById('score');
