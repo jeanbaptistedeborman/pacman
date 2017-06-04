@@ -27,7 +27,7 @@ module.exports = function (p_callback_fun) {
 
     if (!open_bool) {
         var
-            continueButton_el = popup_el.getElementsByClassName('goButton')[0];
+            continueButton_el = popup_el.querySelector('.goButton');
         stage_el.appendChild(popup_el);
         if (!textBlock) {
             textBlock = SvgUtils.getMultilineText(popup_el, Labels.getLabel('nice_work'),
