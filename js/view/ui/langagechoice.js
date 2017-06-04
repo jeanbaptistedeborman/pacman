@@ -95,8 +95,6 @@ languages_array.forEach(function (element, index) {
     });
     dom_el.setAttribute('class', 'languageChoice_popup');
     dom_el.appendChild(button_el);
-
-
 });
 
 module.exports = {

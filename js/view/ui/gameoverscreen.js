@@ -12,7 +12,7 @@ var
     yesYouDidiIt_block,
     yourScore_block,
     playAgain_block,
-    popup_el = document.getElementsByClassName('endScreen')[0],
+    popup_el = document.querySelector('.endScreen'),
     closePopup = function () {
         open_bool = false;
         stage_el.removeChild(popup_el);
@@ -94,7 +94,7 @@ module.exports = function (p_callback_fun) {
             )
         }
 
-        continueButton_el = popup_el.getElementsByClassName('playAgain')[0];
+        continueButton_el = popup_el.querySelector('.playAgain');
         open_bool = true;
 
         SvgUtils.simulateEnterClick(continueButton_el, closePopup);
