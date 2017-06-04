@@ -44,7 +44,7 @@ var languages_array = require('../../../data/languages.json'),
                     index_num = index;
                 }
             });
-            return dom_el.children[index_num];
+            return dom_el.childNodes[index_num];
         }());
         button_el.setAttribute('aria-disabled', true);
         button_el.setAttribute('tabindex', -1);
@@ -95,8 +95,6 @@ languages_array.forEach(function (element, index) {
     });
     dom_el.setAttribute('class', 'languageChoice_popup');
     dom_el.appendChild(button_el);
-
-
 });
 
 module.exports = {
