@@ -8,10 +8,11 @@ var
     PauseManager = require('../../game/utils/pausemanager'),
     SvgUtils = require('../../game/utils/svgutils'),
     pauseButton = Config('interface').dom_el.querySelector('.pauseButton'),
-    togglePause = function () {
+    togglePause = function (evt) {
             paused_bool = !paused_bool;
             PauseManager.pauseButton = paused_bool;
             pauseButton.setAttribute('aria-selected', paused_bool);
+            evt.stopPropagation();
     };
 pauseButton.addEventListener('mousedown', togglePause);
 pauseButton.addEventListener('touchstart', togglePause);
