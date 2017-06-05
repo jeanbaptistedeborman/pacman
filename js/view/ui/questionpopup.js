@@ -70,7 +70,7 @@ module.exports = {
                 gameStage_el,
                 {
                     x: obstacle_obj.position.x + obstacle_obj.position.width + margin_num,
-                    y: obstacle_obj.position.y - margin_num
+                    y: obstacle_obj.position.y + margin_num
                 }
             ),
 
@@ -83,7 +83,7 @@ module.exports = {
                     popup_el.classList.add('top');
 
                 } else {
-                    popup_el.style.top = Math.round(obstacleTL_point.y - size_rect.height) + 'px';
+                    popup_el.style.top = Math.round(50 + obstacleTL_point.y - size_rect.height) + 'px';
                     popup_el.classList.add('bottom');
                 }
                 if (obstacle_obj.position.x < gameStage_obj.position.width / 2) {
