@@ -13,12 +13,12 @@ var
     stage_el = Config('app').dom_el,
     gameStage_obj = Config("stage"),
     gameStage_el = gameStage_obj.dom_el,
-    gridSize_num = gameStage_obj.gridSize,
+        gridSize_num = gameStage_obj.gridSize,
     callback_fun,
     popup_el,
     closePopup = function (correct_bool) {
-        if (stage_el.contains(popup_el)) {
-            stage_el.removeChild(popup_el);
+        if (document.body.contains(popup_el)) {
+            document.body.removeChild(popup_el);
         }
 
         callback_fun(correct_bool);
@@ -56,6 +56,9 @@ module.exports = {
         var answers_array,
             margin_num = gridSize_num,
             answers_el = document.createElement('ul'),
+            obstacle_rect = obstacle_obj.dom_el.getBoundingClientRect(),
+
+
             obstacleTL_point = SvgUtils.convertCoordinateFromSVGToDOM(
                 gameStage_el,
                 {
@@ -70,6 +73,7 @@ module.exports = {
                     y: obstacle_obj.position.y - margin_num
                 }
             ),
+
             questionTitle_el = document.createElement('h2'),
             questionTitleText_node = document.createTextNode(Labels.getLabel('what_language')),
             placePopup = function () {
@@ -91,6 +95,7 @@ module.exports = {
                 }
             };
 
+
         if (!open_bool) {
             open_bool = true;
             callback_fun = p_callback_fun;
@@ -98,7 +103,7 @@ module.exports = {
             playSound('question');
             popup_el = document.createElement('div');
             questionTitle_el.appendChild(questionTitleText_node);
-            stage_el.appendChild(popup_el);
+            document.body.appendChild(popup_el);
             popup_el.appendChild(questionTitle_el);
             popup_el.appendChild(answers_el);
             popup_el.setAttribute('class', 'question_popup');
@@ -111,7 +116,7 @@ module.exports = {
                     text_node = document.createTextNode(element.value);
                 TimeoutManager.set(function () {
                     answers_el.appendChild(answer_el);
-                }, 300 + 50 * index);
+                }, 300 + 30 * index);
                 answer_el.appendChild(button_el);
                 button_el.appendChild(text_node);
                 button_el.setAttribute('class', 'answer');

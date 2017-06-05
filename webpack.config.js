@@ -9,7 +9,7 @@ module.exports = {
 
     output: {
         filename: 'linguago_bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist_linguago')
     },
     module: {
         rules: [

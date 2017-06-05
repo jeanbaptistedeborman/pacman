@@ -14,6 +14,8 @@ var
     playAgain_block,
     popup_el = document.querySelector('.endScreen'),
     closePopup = function () {
+        continueButton_el.removeEventListener('click', closePopup);
+        continueButton_el.removeEventListener('touchstart', closePopup);
         open_bool = false;
         stage_el.removeChild(popup_el);
         callback_fun();
@@ -99,6 +101,7 @@ module.exports = function (p_callback_fun) {
 
         SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
+        continueButton_el.addEventListener('touchstart', closePopup);
     }
 }
 ;

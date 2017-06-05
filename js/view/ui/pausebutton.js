@@ -14,5 +14,6 @@ var
             pauseButton.setAttribute('aria-selected', paused_bool);
     };
 pauseButton.addEventListener('mousedown', togglePause);
+pauseButton.addEventListener('touchstart', togglePause);
 SvgUtils.simulateEnterClick(pauseButton, togglePause);
 module.exports = {};
