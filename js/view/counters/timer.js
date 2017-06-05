@@ -23,9 +23,12 @@ container_el.appendChild(clock_el);
 
 countDown = function () {
     if (PauseManager.pauseButton) {
-        display(--time_num);
+
         if (time_num === 0 && onTimeElapsed_fun) {
+            display(time_num);
             onTimeElapsed_fun();
+        } else {
+            display(--time_num);
         }
     }
 },

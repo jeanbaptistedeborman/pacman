@@ -3,7 +3,7 @@
  */
 
 var
-    FOLDER_STR = 'sounds/',
+    FOLDER_STR = 'dist_linguago/sounds/',
     cache = {},
     loadSound = function (name_str, doNotUseCache_bool) {
         var audio = doNotUseCache_bool ? null : cache[name_str];

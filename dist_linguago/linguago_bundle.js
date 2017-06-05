@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1356,8 +1356,8 @@ module.exports = function (from_point, to_point, longestPath_bool) {
  */
 
 
-var MouseControl = __webpack_require__(33),
-    KeyControls = __webpack_require__(32),
+var MouseControl = __webpack_require__(32),
+    KeyControls = __webpack_require__(31),
     SvgUtils = __webpack_require__(1),
     directionFromTo = __webpack_require__(16),
     Config = __webpack_require__(0),
@@ -1905,7 +1905,7 @@ var
     stageConfig = Config('stage'),
     ObjectListManager = __webpack_require__(2),
     SvgUtils = __webpack_require__(1),
-    ColorUtils = __webpack_require__(34),
+    ColorUtils = __webpack_require__(33),
     TimeoutManager = __webpack_require__(9),
     ArrayUtils = __webpack_require__(5),
     gridSize_num = stageConfig.gridSize,
@@ -2044,7 +2044,7 @@ module.exports = {
  * Created by Jean-Baptiste on 14/05/2017.
  */
 var
-    levels_array = __webpack_require__(31),
+    levels_array = __webpack_require__(30),
     ArrayUtils = __webpack_require__(5),
     randomLevels_array,
     setRandomArray = function () {
@@ -2395,22 +2395,21 @@ module.exports = {};
 
 
 /***/ }),
-/* 29 */,
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(36);
+var content = __webpack_require__(35);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {}
-options.transform = transform
+var options = {};
+options.transform = transform;
 // add the styles to the DOM
-var update = __webpack_require__(38)(content, options);
+var update = __webpack_require__(37)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -2427,7 +2426,7 @@ if(false) {
 }
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -6234,7 +6233,7 @@ module.exports = [
 ];
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6263,7 +6262,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6317,7 +6316,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports) {
 
 /**
@@ -6349,7 +6348,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6362,7 +6361,7 @@ module.exports = {
 
 
 __webpack_require__(28);
-__webpack_require__ (30);
+__webpack_require__ (29);
 
 
   var  languageChoice = __webpack_require__(26),
@@ -6499,10 +6498,10 @@ Labels.fetchLabels(pageLanguage_str, function () {
 module.exports = {};
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(37)(undefined);
+exports = module.exports = __webpack_require__(36)(undefined);
 // imports
 
 
@@ -6513,7 +6512,7 @@ exports.push([module.i, "@keyframes fade {\r\n    0% {\r\n        opacity: 0;\r\
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports) {
 
 /*
@@ -6595,7 +6594,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -6641,7 +6640,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(39);
+var	fixUrls = __webpack_require__(38);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -6741,7 +6740,7 @@ function listToStyles (list, options) {
 }
 
 function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
+	var target = getElement(options.insertInto);
 
 	if (!target) {
 		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
@@ -6954,7 +6953,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports) {
 
 

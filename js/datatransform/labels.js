@@ -18,7 +18,7 @@ function loadJSON(url_str, callback_fun) {
 
 module.exports = {
     fetchLabels: function (lg_str, callback_fun) {
-        loadJSON('data/labels/labels_linguago/labels_linguago_' + lg_str + '.json',
+        loadJSON('dist_linguago/labels/labels_linguago/labels_linguago_' + lg_str + '.json',
             function (labels_data) {
                 labels_json = JSON.parse(labels_data);
                 callback_fun(labels_json);
@@ -26,7 +26,7 @@ module.exports = {
         );
     },
     fetchLanguages: function (lg_str, callback_fun) {
-        loadJSON('data/labels/languages/languages_' + lg_str + '.json',
+        loadJSON('dist_linguago/labels/languages/languages_' + lg_str + '.json',
             function (labels_data) {
                 languages_json = JSON.parse(labels_data);
                 if (languages_json.Id) {
