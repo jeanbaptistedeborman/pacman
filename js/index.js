@@ -114,7 +114,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
             };
 
         newGame();
-        Timer.onTimeElapsed = LiveManager.onLivesLost = function () {
+     LiveManager.onLivesLost = function () {
             togglePauseButton(false);
             QuestionPopup.remove();
             PauseManager.playing = true;
