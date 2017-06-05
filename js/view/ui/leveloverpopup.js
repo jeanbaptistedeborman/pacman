@@ -14,6 +14,8 @@ var
         open_bool = false;
         stage_el.removeChild(popup_el);
         callback_fun();
+        continueButton_el.removeEventListener('click', closePopup);
+        continueButton_el.removeEventListener('touchstart', closePopup);
     },
     textBlock,
     open_bool = false;
@@ -41,11 +43,10 @@ module.exports = function (p_callback_fun) {
                 }
             )
         }
-
-
         open_bool = true;
         SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
+        continueButton_el.addEventListener('touchstart', closePopup);
     }
 };
 

@@ -1576,16 +1576,18 @@ module.exports = {
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /**
  * Created by Jean-Baptiste on 11/04/2017.
  */
+
+
 var
     IntervalManager = __webpack_require__(7),
     PauseManager = __webpack_require__(6),
     SvgUtils = __webpack_require__(1),
     startTime_num,
     time_num = 0,
-    clockBackground_el = document.getElementById('clockBackground'),
     text_el = document.getElementById('time'),
     interval,
     onTimeElapsed_fun,
@@ -1596,10 +1598,7 @@ var
         radius: 6.2515
     },
     container_el = document.getElementById('game_js'),
-    clock_el = SvgUtils.getSlice(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, 0);
-clock_el.setAttribute('fill', '#b0b0b0');
-container_el.appendChild(clock_el);
-
+    clock_el = SvgUtils.getSlice(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, 0),
 countDown = function () {
     if (PauseManager.pauseButton) {
 
@@ -1615,9 +1614,15 @@ countDown = function () {
 },
     display = function (remainTime_num) {
         var angle_num = 360 - (360 * (remainTime_num / startTime_num));
+        if (remainTime_num) {
         clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
+        }
         text_el.textContent = remainTime_num;
     };
+
+clock_el.setAttribute('fill', '#b0b0b0');
+container_el.appendChild(clock_el);
+
 module.exports = {
     start: function (p_startTime_num) {
         if (interval) {
@@ -2094,6 +2099,8 @@ var
     playAgain_block,
     popup_el = document.querySelector('.endScreen'),
     closePopup = function () {
+        continueButton_el.removeEventListener('click', closePopup);
+        continueButton_el.removeEventListener('touchstart', closePopup);
         open_bool = false;
         stage_el.removeChild(popup_el);
         callback_fun();
@@ -2179,6 +2186,7 @@ module.exports = function (p_callback_fun) {
 
         SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
+        continueButton_el.addEventListener('touchstart', closePopup);
     }
 }
 ;
@@ -2333,6 +2341,8 @@ var
         open_bool = false;
         stage_el.removeChild(popup_el);
         callback_fun();
+        continueButton_el.removeEventListener('click', closePopup);
+        continueButton_el.removeEventListener('touchstart', closePopup);
     },
     textBlock,
     open_bool = false;
@@ -2360,11 +2370,10 @@ module.exports = function (p_callback_fun) {
                 }
             )
         }
-
-
         open_bool = true;
         SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
+        continueButton_el.addEventListener('touchstart', closePopup);
     }
 };
 
@@ -2391,6 +2400,7 @@ var
             pauseButton.setAttribute('aria-selected', paused_bool);
     };
 pauseButton.addEventListener('mousedown', togglePause);
+pauseButton.addEventListener('touchstart', togglePause);
 SvgUtils.simulateEnterClick(pauseButton, togglePause);
 module.exports = {};
 
