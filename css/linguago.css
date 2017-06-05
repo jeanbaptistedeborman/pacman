@@ -29,11 +29,11 @@
     }
 }
 
-#linguagoApplication .wipeFromRight {
+.wipeFromRight {
     animation: wipeFromRight_kf .5s;
 }
 
-#linguagoApplication .wipeFromLeft {
+.wipeFromLeft {
     animation: wipeFromLeft_kf .5s;
 }
 
@@ -41,7 +41,6 @@ html, body {
     position: fixed;
     height: 100%;
     width: 100%
-
 }
 
 body {
@@ -97,10 +96,13 @@ body {
     opacity: .2;
 }
 
-#linguagoApplication ul {
+.question_popup ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+.question_popup ul li {
+margin:0;
 }
 
 #linguagoApplication svg {
@@ -115,6 +117,8 @@ body {
 }
 
 .question_popup {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    width:170px;
     position: absolute;
     min-height:80px;
     background-color: #ffffff;
@@ -127,8 +131,7 @@ body {
 
 
 .question_popup .question_title, .question_popup .answer {
-    font-size: 20px;
-
+    font-size: 1em;
     padding: 0 20px;
     color: #0071bc;
     display: block;
@@ -144,6 +147,8 @@ body {
     border-radius: 30px;
     padding-bottom: 30px;
     border:1px solid #ffffff;
+    line-height: 15px;
+    font-size: 15px;
 }
 
 .question_popup:before {
@@ -181,12 +186,12 @@ body {
 }
 
 .question_popup .answer {
-    line-height: 30px;
-    background:white;
+    cursor: pointer;
+    background: white;
     border: 1px solid lightGrey;
     border-left:none;
     border-right:none;
-    margin-top:-1px;
+    margin:-1px 0 0 0;
     text-align: left;
     width: 100%;
     animation: fade 1s;
@@ -204,12 +209,9 @@ body {
     left: 100px;
 }
 
-#linguagoApplication .answer {
-    cursor: pointer;
-}
 
-#linguagoApplication .answer:focus,
-#linguagoApplication .answer:hover {
+.answer:focus,
+.answer:hover {
     background-color: #0071bc;
 }
 

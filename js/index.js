@@ -121,7 +121,6 @@ Labels.fetchLabels(pageLanguage_str, function () {
             IntervalManager.clearAll();
             ObjectlistManager.cleanAll();
             GameOverPopup(newGame);
-
         };
         Goodie.onCollected = function () {
 
