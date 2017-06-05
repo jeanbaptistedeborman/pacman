@@ -1588,6 +1588,7 @@ var
     clockBackground_el = document.getElementById('clockBackground'),
     text_el = document.getElementById('time'),
     interval,
+    onTimeElapsed_fun,
     clockPos = {
         x: 24.112,
         y: 17.695,
@@ -1602,20 +1603,20 @@ container_el.appendChild(clock_el);
 countDown = function () {
     if (PauseManager.pauseButton) {
 
-        if (time_num === 0 && onTimeElapsed_fun) {
+        if (time_num === 0) {
             display(time_num);
-            onTimeElapsed_fun();
+            if (onTimeElapsed_fun) {
+                onTimeElapsed_fun();
+            }
         } else {
             display(--time_num);
         }
     }
 },
     display = function (remainTime_num) {
-        if (remainTime_num) {
-            var angle_num = 360 - (360 * (remainTime_num / startTime_num));
-            clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
-            text_el.textContent = remainTime_num;
-        }
+        var angle_num = 360 - (360 * (remainTime_num / startTime_num));
+        clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
+        text_el.textContent = remainTime_num;
     };
 module.exports = {
     start: function (p_startTime_num) {
@@ -1626,7 +1627,7 @@ module.exports = {
         startTime_num = time_num = p_startTime_num;
         interval = IntervalManager.set(countDown, 1000);
     },
-    get remaining (){
+    get remaining() {
         return time_num;
     },
     set onTimeElapsed(fun) {
@@ -2407,8 +2408,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {}
-options.transform = transform
+var options = {};
+options.transform = transform;
 // add the styles to the DOM
 var update = __webpack_require__(38)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -6741,7 +6742,7 @@ function listToStyles (list, options) {
 }
 
 function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
+	var target = getElement(options.insertInto);
 
 	if (!target) {
 		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
