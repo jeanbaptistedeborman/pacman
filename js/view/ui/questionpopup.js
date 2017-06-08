@@ -104,8 +104,11 @@ module.exports = {
             popup_el = document.createElement('div');
             questionTitle_el.appendChild(questionTitleText_node);
             document.body.appendChild(popup_el);
+            popup_el.setAttribute('tabindex', 0);
+            popup_el.focus ();
             popup_el.appendChild(questionTitle_el);
             popup_el.appendChild(answers_el);
+
             popup_el.setAttribute('class', 'question_popup');
             questionTitle_el.setAttribute('class', 'question_title');
             answers_el.setAttribute('class', 'answers');
@@ -117,6 +120,7 @@ module.exports = {
                 TimeoutManager.set(function () {
                     answers_el.appendChild(answer_el);
                 }, 300 + 30 * index);
+
                 answer_el.appendChild(button_el);
                 button_el.appendChild(text_node);
                 button_el.setAttribute('class', 'answer');
