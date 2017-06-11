@@ -11,6 +11,7 @@ require ('../css/linguago.css');
 
 
   var  languageChoice = require('./view/ui/langageChoice'),
+
     Labels = require('./datatransform/labels'),
     setLabels = function () {
         var
@@ -20,10 +21,12 @@ require ('../css/linguago.css');
         levelLabel_el.textContent = Labels.getLabel('level');
     },
     pageLanguage_str = document.querySelector('html').getAttribute('lang');
+
 if (String(pageLanguage_str) === 'undefined') {
     pageLanguage_str = 'en';
 }
 languageChoice.registerLanguage(pageLanguage_str);
+
 
 /*
 bundling of SVG  - does not work.
@@ -114,6 +117,9 @@ Labels.fetchLabels(pageLanguage_str, function () {
             };
 
         newGame();
+        app_el.querySelector('.homeButton').addEventListener('mousedown', function (evt) {
+            evt.stopPropagation();
+        });
      LiveManager.onLivesLost = function () {
             togglePauseButton(false);
             QuestionPopup.remove();
