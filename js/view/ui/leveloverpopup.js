@@ -7,8 +7,8 @@ var
     stage_el = Config('game').dom_el,
     SvgUtils = require('../../game/utils/svgutils'),
     callback_fun,
-
-
+    continueButton_el,
+    removeEnterClick_fun,
     popup_el = document.getElementsByClassName('levelPopup')[0],
     closePopup = function () {
         open_bool = false;
@@ -31,11 +31,8 @@ popup_el.parentNode.removeChild(popup_el);
 
 module.exports = function (p_callback_fun) {
     callback_fun = p_callback_fun;
-
-
     if (!open_bool) {
-        var
-            continueButton_el = popup_el.querySelector('.goButton');
+        continueButton_el = popup_el.querySelector('.goButton');
         stage_el.appendChild(popup_el);
         if (!textBlock) {
             textBlock = SvgUtils.getMultilineText(popup_el, Labels.getLabel('nice_work'),
@@ -50,7 +47,7 @@ module.exports = function (p_callback_fun) {
             )
         }
         open_bool = true;
-        SvgUtils.simulateEnterClick(continueButton_el, closePopup);
+        removeEnterClick_fun =  SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
         continueButton_el.addEventListener('touchstart', closePopup);
         document.body.addEventListener('keydown',listenKey);

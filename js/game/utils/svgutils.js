@@ -118,8 +118,14 @@ module.exports = {
         return container_g;
     },
     simulateEnterClick: function (svg_el, fun) {
-        var handleKey = function (evt) {
+        var
+            removeEnterClick = function () {
+                svg_el.removeEventListener('focus', listenEnter);
+                svg_el.removeEventListener('blur', stopListen);
+            },
+            handleKey = function (evt) {
                 if (evt.key === "Enter") {
+                    removeEnterClickremoveEnterClick ();
                     fun();
                 }
             },
@@ -131,6 +137,8 @@ module.exports = {
             };
         svg_el.addEventListener('focus', listenEnter);
         svg_el.addEventListener('blur', stopListen);
+        return removeEnterClick;
+
     },
     /**
      *
