@@ -425,7 +425,6 @@ var labels_json,
 
 function loadJSON(url_str, callback_fun) {
     var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
     xobj.open('GET', url_str, true);
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
@@ -6409,6 +6408,7 @@ module.exports = {
 
 __webpack_require__(28);
 __webpack_require__ (29);
+__webpack_require__ (39);
 
 
   var  languageChoice = __webpack_require__(26),
@@ -7099,6 +7099,73 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+/**
+ * Created by Jean-Baptiste on 11/06/2017.
+ */
+// Source: https://gist.github.com/k-gun/c2ea7c49edf7b757fe9561ba37cb19ca
+(function() {
+    // helpers
+    var regExp = function(name) {
+        return new RegExp('(^| )'+ name +'( |$)');
+    };
+    var forEach = function(list, fn, scope) {
+        for (var i = 0; i < list.length; i++) {
+            fn.call(scope, list[i]);
+        }
+    };
+
+    // class list object with basic methods
+    function ClassList(element) {
+        this.element = element;
+    }
+
+    ClassList.prototype = {
+        add: function() {
+            forEach(arguments, function(name) {
+                if (!this.contains(name)) {
+                    this.element.className += this.element.className.length > 0 ? ' ' + name : name;
+                }
+            }, this);
+        },
+        remove: function() {
+            forEach(arguments, function(name) {
+                this.element.className =
+                    this.element.className.replace(regExp(name), '');
+            }, this);
+        },
+        toggle: function(name) {
+            return this.contains(name)
+                ? (this.remove(name), false) : (this.add(name), true);
+        },
+        contains: function(name) {
+            return regExp(name).test(this.element.className);
+        },
+        // bonus..
+        replace: function(oldName, newName) {
+            this.remove(oldName), this.add(newName);
+        }
+    };
+
+    // IE8/9, Safari
+    if (!('classList' in Element.prototype)) {
+        Object.defineProperty(Element.prototype, 'classList', {
+            get: function() {
+                return new ClassList(this);
+            }
+        });
+    }
+
+    // replace() support for others
+    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
+        DOMTokenList.prototype.replace = ClassList.prototype.replace;
+    }
+})();
+module.exports = {};
 
 /***/ })
 /******/ ]);

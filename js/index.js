@@ -8,6 +8,7 @@
 
 require('./view/ui/pausebutton');
 require ('../css/linguago.css');
+require ('./polyfill/classlist');
 
 
   var  languageChoice = require('./view/ui/langageChoice'),
