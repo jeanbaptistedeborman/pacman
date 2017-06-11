@@ -7,15 +7,12 @@ var
     stageConfig = Config('stage'),
     ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
+    LiveManager = require('../../counters/livemanager'),
+    ScoreManager = require('../../counters/scoremanager'),
     playSound = require('../../../game/utils/playsound'),
+
     CollisionManager = require('../collisionmanager'),
     layer_g = SvgUtils.createElement('g'),
-
-
-
-
-
-
     onCollected_fun,
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',
@@ -24,10 +21,12 @@ var
     add = function (point) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
+            bonusLive_bool = Math.random() < (LiveManager.maxLives - LiveManager.lives)/100,
             dom_el;
         config.position = point;
         config.position.width = gridSize_num;
         config.position.height = gridSize_num;
+        console.log('bonusLive_bool', bonusLive_bool);
         dom_el = config.dom_el = SvgUtils.createElement('use', {
                 width: 10,
                 height: 10,
@@ -38,23 +37,34 @@ var
                 {
                     nameSpace: "http://www.w3.org/1999/xlink",
                     name: "href",
-                    value: "#goodie"
-                }]);
-
+                    value: bonusLive_bool ? "#earth" : "#goodie"
+                }]
+        )
+        ;
         config.remove = function () {
+
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
+
+            if (!bonusLive_bool) {
+                ScoreManager.increment();
+
+            } else {
+                LiveManager.increment();
+            }
+
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
+
+                playSound('bon_2');
+                return items_array.length;
             }
-            playSound('bon_2');
-            return items_array.length;
         };
         items_array.push(config);
         parent_el.appendChild(dom_el);
     };
 
-stageConfig.dom_el.appendChild (layer_g);
+stageConfig.dom_el.appendChild(layer_g);
 
 module.exports = {
     set onCollected(fun) {

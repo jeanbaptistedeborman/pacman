@@ -26,10 +26,18 @@ module.exports = {
         }
     },
     increment: function () {
+        if (lives_num < LIVES_NUM) {
         display(++lives_num);
+        }
     },
     set onLivesLost(fun) {
         onLivesLost_fun = fun;
+    },
+    get maxLives () {
+      return LIVES_NUM;
+    },
+    get lives (){
+      return lives_num;
     },
     reset: function () {
         lives_num = LIVES_NUM;

@@ -90,7 +90,6 @@ module.exports = {
 
                 var goodie = CollisionManager.isGoodie(temptativePosition_point);
                 if (goodie) {
-                    ScoreManager.increment();
                     var remaining_num = goodie.remove();
                     if (remaining_num === 0) {
                         IntervalManager.clearAll();
