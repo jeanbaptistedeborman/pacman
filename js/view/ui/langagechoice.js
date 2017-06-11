@@ -28,8 +28,7 @@ var languages_array = require('../../../data/languages.json'),
             x: "0",
             y: "-35.583",
             transform: "scale (1,-1)",
-            overflow: "visible",
-            tabindex:'0'
+            overflow: "visible"
         },
         [
             {
