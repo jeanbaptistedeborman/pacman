@@ -299,8 +299,14 @@ module.exports = {
         return container_g;
     },
     simulateEnterClick: function (svg_el, fun) {
-        var handleKey = function (evt) {
+        var
+            removeEnterClick = function () {
+                svg_el.removeEventListener('focus', listenEnter);
+                svg_el.removeEventListener('blur', stopListen);
+            },
+            handleKey = function (evt) {
                 if (evt.key === "Enter") {
+                    removeEnterClickremoveEnterClick ();
                     fun();
                 }
             },
@@ -312,6 +318,8 @@ module.exports = {
             };
         svg_el.addEventListener('focus', listenEnter);
         svg_el.addEventListener('blur', stopListen);
+        return removeEnterClick;
+
     },
     /**
      *
@@ -417,7 +425,6 @@ var labels_json,
 
 function loadJSON(url_str, callback_fun) {
     var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
     xobj.open('GET', url_str, true);
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
@@ -902,10 +909,18 @@ module.exports = {
         }
     },
     increment: function () {
+        if (lives_num < LIVES_NUM) {
         display(++lives_num);
+        }
     },
     set onLivesLost(fun) {
         onLivesLost_fun = fun;
+    },
+    get maxLives () {
+      return LIVES_NUM;
+    },
+    get lives (){
+      return lives_num;
     },
     reset: function () {
         lives_num = LIVES_NUM;
@@ -1012,7 +1027,6 @@ module.exports = {
 
                 var goodie = CollisionManager.isGoodie(temptativePosition_point);
                 if (goodie) {
-                    ScoreManager.increment();
                     var remaining_num = goodie.remove();
                     if (remaining_num === 0) {
                         IntervalManager.clearAll();
@@ -1821,15 +1835,12 @@ var
     stageConfig = Config('stage'),
     ObjectListManager = __webpack_require__(2),
     SvgUtils = __webpack_require__(1),
+    LiveManager = __webpack_require__(12),
+    ScoreManager = __webpack_require__(8),
     playSound = __webpack_require__(4),
+
     CollisionManager = __webpack_require__(10),
     layer_g = SvgUtils.createElement('g'),
-
-
-
-
-
-
     onCollected_fun,
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',
@@ -1838,10 +1849,12 @@ var
     add = function (point) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
+            bonusLive_bool = Math.random() < (LiveManager.maxLives - LiveManager.lives)/100,
             dom_el;
         config.position = point;
         config.position.width = gridSize_num;
         config.position.height = gridSize_num;
+        console.log('bonusLive_bool', bonusLive_bool);
         dom_el = config.dom_el = SvgUtils.createElement('use', {
                 width: 10,
                 height: 10,
@@ -1852,23 +1865,34 @@ var
                 {
                     nameSpace: "http://www.w3.org/1999/xlink",
                     name: "href",
-                    value: "#goodie"
-                }]);
-
+                    value: bonusLive_bool ? "#earth" : "#goodie"
+                }]
+        )
+        ;
         config.remove = function () {
+
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
+
+            if (!bonusLive_bool) {
+                ScoreManager.increment();
+
+            } else {
+                LiveManager.increment();
+            }
+
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
+
+                playSound('bon_2');
+                return items_array.length;
             }
-            playSound('bon_2');
-            return items_array.length;
         };
         items_array.push(config);
         parent_el.appendChild(dom_el);
     };
 
-stageConfig.dom_el.appendChild (layer_g);
+stageConfig.dom_el.appendChild(layer_g);
 
 module.exports = {
     set onCollected(fun) {
@@ -2290,6 +2314,7 @@ languages_array.forEach(function (element, index) {
 
     button_text.textContent = button_str;
     button_el.setAttribute('class', 'button');
+    button_el.setAttribute('tabindex', 0);
     button_el.appendChild(bg_el);
     button_el.appendChild(button_text);
     button_el.addEventListener('click', function () {
@@ -2305,6 +2330,7 @@ module.exports = {
     display: function (p_callBack_fun) {
         callBack_fun = p_callBack_fun;
         stage_el.appendChild(dom_el);
+        dom_el.childNodes[0].focus ();
         if (!explanationTextBlock_el) {
             explanationTextBlock_el =  SvgUtils.getMultilineText(
                 dom_el,
@@ -2338,8 +2364,8 @@ var
     stage_el = Config('game').dom_el,
     SvgUtils = __webpack_require__(1),
     callback_fun,
-
-
+    continueButton_el,
+    removeEnterClick_fun,
     popup_el = document.getElementsByClassName('levelPopup')[0],
     closePopup = function () {
         open_bool = false;
@@ -2362,11 +2388,8 @@ popup_el.parentNode.removeChild(popup_el);
 
 module.exports = function (p_callback_fun) {
     callback_fun = p_callback_fun;
-
-
     if (!open_bool) {
-        var
-            continueButton_el = popup_el.querySelector('.goButton');
+        continueButton_el = popup_el.querySelector('.goButton');
         stage_el.appendChild(popup_el);
         if (!textBlock) {
             textBlock = SvgUtils.getMultilineText(popup_el, Labels.getLabel('nice_work'),
@@ -2381,7 +2404,7 @@ module.exports = function (p_callback_fun) {
             )
         }
         open_bool = true;
-        SvgUtils.simulateEnterClick(continueButton_el, closePopup);
+        removeEnterClick_fun =  SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
         continueButton_el.addEventListener('touchstart', closePopup);
         document.body.addEventListener('keydown',listenKey);
@@ -6385,9 +6408,11 @@ module.exports = {
 
 __webpack_require__(28);
 __webpack_require__ (29);
+__webpack_require__ (39);
 
 
   var  languageChoice = __webpack_require__(26),
+
     Labels = __webpack_require__(3),
     setLabels = function () {
         var
@@ -6397,10 +6422,12 @@ __webpack_require__ (29);
         levelLabel_el.textContent = Labels.getLabel('level');
     },
     pageLanguage_str = document.querySelector('html').getAttribute('lang');
+
 if (String(pageLanguage_str) === 'undefined') {
     pageLanguage_str = 'en';
 }
 languageChoice.registerLanguage(pageLanguage_str);
+
 
 /*
 bundling of SVG  - does not work.
@@ -6491,6 +6518,9 @@ Labels.fetchLabels(pageLanguage_str, function () {
             };
 
         newGame();
+        app_el.querySelector('.homeButton').addEventListener('mousedown', function (evt) {
+            evt.stopPropagation();
+        });
      LiveManager.onLivesLost = function () {
             togglePauseButton(false);
             QuestionPopup.remove();
@@ -6529,7 +6559,7 @@ exports = module.exports = __webpack_require__(36)(undefined);
 
 
 // module
-exports.push([module.i, "@keyframes fade {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes wipeFromRight_kf {\r\n    0% {\r\n        opacity: 0;\r\n        transform: translate(-15px, 0);\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        transform: translate(0, 0);\r\n    }\r\n}\r\n\r\n@keyframes wipeFromLeft_kf  {\r\n    0% {\r\n        opacity: 0;\r\n        transform: translate(15px, 0);\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        transform: translate(0, 0);\r\n    }\r\n}\r\n\r\n.wipeFromRight {\r\n    animation: wipeFromRight_kf .5s;\r\n}\r\n\r\n.wipeFromLeft {\r\n    animation: wipeFromLeft_kf .5s;\r\n}\r\n\r\nhtml, body {\r\n    position: fixed;\r\n    height: 100%;\r\n    width: 100%\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    touch-action: none;\r\n    height: 99%;\r\n    background-color: #0071c0;\r\n\r\n}\r\n\r\n#linguagoApplication .languageChoice_popup .button[aria-disabled=true] {\r\n    pointer-events: none;\r\n    opacity: .8;\r\n}\r\n\r\n\r\n#linguagoApplication .pauseButton {\r\n    pointer-events: none;\r\n}\r\n#linguagoApplication.playing .pauseButton {\r\n    pointer-events:auto;\r\n}\r\n\r\n\r\n\r\n\r\n#linguagoApplication {\r\n    height: 100%;\r\n    width: 100%;\r\n    font-family: \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", Geneva, Verdana, sans-serif;\r\n}\r\n\r\n#linguagoApplication *:focus {\r\n    outline: none;\r\n}\r\n\r\n#linguagoApplication .button {\r\n    cursor: pointer;\r\n    display: block;\r\n}\r\n\r\n#linguagoApplication .button:focus .background {\r\n    stroke:white;\r\n    stroke-width: .5px;\r\n}\r\n\r\n#linguagoApplication .button:hover .background,\r\n#linguagoApplication .button:focus .background {\r\n    opacity: .9;\r\n}\r\n\r\n#linguagoApplication .button[aria-selected='true'] .background {\r\n    opacity: .2;\r\n}\r\n\r\n.question_popup ul {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.question_popup ul li {\r\nmargin:0;\r\n}\r\n\r\n#linguagoApplication svg {\r\n    user-select: none;\r\n    background: #0071c0;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#linguagoApplication #background {\r\n    fill: #0071c0;\r\n}\r\n\r\n.question_popup {\r\n    font-family: \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", Geneva, Verdana, sans-serif;\r\n    width:170px;\r\n    position: absolute;\r\n    min-height:80px;\r\n    background-color: #ffffff;\r\n    padding: 0;\r\n}\r\n\r\n.pauseButtonTriggered .question_popup  .answer  {\r\n    pointer-events: none;\r\n}\r\n\r\n\r\n.question_popup .question_title, .question_popup .answer {\r\n    font-size: 1em;\r\n    padding: 0 20px;\r\n    color: #0071bc;\r\n    display: block;\r\n}\r\n\r\n\r\n.question_popup .question_title {\r\n    margin-top: 20px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.question_popup {\r\n    border-radius: 30px;\r\n    padding-bottom: 30px;\r\n    border:1px solid #ffffff;\r\n    line-height: 15px;\r\n    font-size: 15px;\r\n}\r\n\r\n.question_popup:before {\r\n    content: ' ';\r\n\r\n    position: absolute;\r\n    display: block;\r\n    height: 50px;\r\n    width: 27px;\r\n    z-index: 1;\r\n    top: 40%;\r\n    background-size: 100%;\r\n    background-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3C%21--%20Generator%3A%20Adobe%20Illustrator%2016.0.3%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200%29%20%20--%3E%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20width%3D%2257.992px%22%20height%3D%22103.504px%22%20viewBox%3D%220%200%2057.992%20103.504%22%20enable-background%3D%22new%200%200%2057.992%20103.504%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M57.166%2C0C51.855%2C22.842%2C32.707%2C44.544%2C1.79%2C25.105c0%2C32.864%2C46.357%2C36.039%2C55.375%2C74.989V0z%22/%3E%0A%3C/svg%3E%0A);\r\n}\r\n\r\n.question_popup:focus {\r\n    outline:none;\r\n}\r\n\r\n.question_popup.top:before {\r\n    top: 15px;\r\n}\r\n\r\n.question_popup .answers {\r\n    position:relative;\r\n    z-index: 10;\r\n}\r\n\r\n.question_popup.bottom:before {\r\n    top:auto;\r\n    bottom: 20px;\r\n}\r\n\r\n.question_popup.wipeFromRight:before {\r\n    left: -23px;\r\n}\r\n\r\n.question_popup.wipeFromLeft:before {\r\n\r\n    transform: scaleX(-1);\r\n    right: -26px;\r\n}\r\n\r\n.question_popup .answer {\r\n    cursor: pointer;\r\n    background: white;\r\n    border: 1px solid lightGrey;\r\n    border-left:none;\r\n    border-right:none;\r\n    margin:-1px 0 0 0;\r\n    text-align: left;\r\n    width: 100%;\r\n    animation: fade 1s;\r\n    transition: background .2s;\r\n}\r\n\r\n.question_popup .answer:hover, .question_popup .answer:focus {\r\n    color: white;\r\n    background: #0071bc;\r\n}\r\n\r\n#linguagoApplication .gameover_popup {\r\n    min-width: 200px;\r\n    top: 100px;\r\n    left: 100px;\r\n}\r\n\r\n\r\n.answer:focus,\r\n.answer:hover {\r\n    background-color: #0071bc;\r\n}\r\n\r\n#linguagoApplication .live_icon {\r\n    fill: 'red'\r\n}", ""]);
+exports.push([module.i, "@keyframes fade {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes wipeFromRight_kf {\r\n    0% {\r\n        opacity: 0;\r\n        transform: translate(-15px, 0);\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        transform: translate(0, 0);\r\n    }\r\n}\r\n\r\n@keyframes wipeFromLeft_kf  {\r\n    0% {\r\n        opacity: 0;\r\n        transform: translate(15px, 0);\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n        transform: translate(0, 0);\r\n    }\r\n}\r\n\r\n.wipeFromRight {\r\n    animation: wipeFromRight_kf .5s;\r\n}\r\n\r\n.wipeFromLeft {\r\n    animation: wipeFromLeft_kf .5s;\r\n}\r\n\r\nhtml, body {\r\n    position: fixed;\r\n    height: 100%;\r\n    width: 100%\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    touch-action: none;\r\n    height: 99%;\r\n    background-color: #0071c0;\r\n\r\n}\r\n\r\n#linguagoApplication .languageChoice_popup .button[aria-disabled=true] {\r\n    pointer-events: none;\r\n    opacity: .8;\r\n}\r\n\r\n\r\n#linguagoApplication .pauseButton {\r\n    pointer-events: none;\r\n}\r\n#linguagoApplication.playing .pauseButton {\r\n    pointer-events:auto;\r\n}\r\n\r\n\r\n\r\n\r\n#linguagoApplication {\r\n    height: 100%;\r\n    width: 100%;\r\n    font-family: \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", Geneva, Verdana, sans-serif;\r\n}\r\n\r\n#linguagoApplication *:focus {\r\n    outline: none;\r\n}\r\n\r\n#linguagoApplication .button {\r\n    cursor: pointer;\r\n    display: block;\r\n}\r\n\r\n#linguagoApplication .button:focus .background {\r\n    stroke:white;\r\n    stroke-width: .5px;\r\n}\r\n\r\n#linguagoApplication .button:hover .background,\r\n#linguagoApplication .button:focus .background {\r\n    opacity: .9;\r\n}\r\n\r\n#linguagoApplication .button[aria-selected='true'] .background {\r\n    opacity: .2;\r\n}\r\n\r\n.question_popup ul {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.question_popup ul li {\r\nmargin:0;\r\n}\r\n\r\n#linguagoApplication svg {\r\n    user-select: none;\r\n    background: #0071c0;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#linguagoApplication #background {\r\n    fill: #0071c0;\r\n}\r\n\r\n.question_popup {\r\n    font-family: \"Lucida Grande\", \"Lucida Sans Unicode\", \"Lucida Sans\", Geneva, Verdana, sans-serif;\r\n    width:170px;\r\n    position: absolute;\r\n    min-height:80px;\r\n    background-color: #ffffff;\r\n    padding: 0;\r\n}\r\n\r\n.pauseButtonTriggered .question_popup  .answer  {\r\n    pointer-events: none;\r\n}\r\n\r\n\r\n.question_popup .question_title, .question_popup .answer {\r\n    font-size: 1em;\r\n    padding: 0 20px;\r\n    color: #0071bc;\r\n    display: block;\r\n}\r\n\r\n\r\n.question_popup .question_title {\r\n    margin-top: 20px;\r\n    margin-bottom: 5px;\r\n}\r\n\r\n.question_popup {\r\n    border-radius: 30px;\r\n    padding-bottom: 30px;\r\n    border:1px solid #ffffff;\r\n    line-height: 15px;\r\n    font-size: 15px;\r\n}\r\n\r\n.question_popup:before {\r\n    content: ' ';\r\n\r\n    position: absolute;\r\n    display: block;\r\n    height: 50px;\r\n    width: 27px;\r\n    z-index: 1;\r\n    top: 40%;\r\n    background-size: 100%;\r\n    background-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3C%21--%20Generator%3A%20Adobe%20Illustrator%2016.0.3%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200%29%20%20--%3E%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20width%3D%2257.992px%22%20height%3D%22103.504px%22%20viewBox%3D%220%200%2057.992%20103.504%22%20enable-background%3D%22new%200%200%2057.992%20103.504%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M57.166%2C0C51.855%2C22.842%2C32.707%2C44.544%2C1.79%2C25.105c0%2C32.864%2C46.357%2C36.039%2C55.375%2C74.989V0z%22/%3E%0A%3C/svg%3E%0A);\r\n}\r\n\r\n.question_popup:focus {\r\n    outline:none;\r\n}\r\n\r\n.question_popup.top:before {\r\n    top: 20px;\r\n}\r\n\r\n.question_popup .answers {\r\n    position:relative;\r\n    z-index: 10;\r\n}\r\n\r\n.question_popup.bottom:before {\r\n    top:auto;\r\n    bottom: 20px;\r\n}\r\n\r\n.question_popup.wipeFromRight:before {\r\n    left: -23px;\r\n}\r\n\r\n.question_popup.wipeFromLeft:before {\r\n\r\n    transform: scaleX(-1);\r\n    right: -26px;\r\n}\r\n\r\n.question_popup .answer {\r\n    cursor: pointer;\r\n    background: white;\r\n    border: 1px solid lightGrey;\r\n    border-left:none;\r\n    border-right:none;\r\n    margin:-1px 0 0 0;\r\n    text-align: left;\r\n    width: 100%;\r\n    animation: fade 1s;\r\n    transition: background .2s;\r\n}\r\n\r\n.question_popup .answer:hover, .question_popup .answer:focus {\r\n    color: white;\r\n    background: #0071bc;\r\n}\r\n\r\n#linguagoApplication .gameover_popup {\r\n    min-width: 200px;\r\n    top: 100px;\r\n    left: 100px;\r\n}\r\n\r\n\r\n.answer:focus,\r\n.answer:hover {\r\n    background-color: #0071bc;\r\n}\r\n\r\n#linguagoApplication .live_icon {\r\n    fill: 'red'\r\n}", ""]);
 
 // exports
 
@@ -7069,6 +7099,73 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+/**
+ * Created by Jean-Baptiste on 11/06/2017.
+ */
+// Source: https://gist.github.com/k-gun/c2ea7c49edf7b757fe9561ba37cb19ca
+(function() {
+    // helpers
+    var regExp = function(name) {
+        return new RegExp('(^| )'+ name +'( |$)');
+    };
+    var forEach = function(list, fn, scope) {
+        for (var i = 0; i < list.length; i++) {
+            fn.call(scope, list[i]);
+        }
+    };
+
+    // class list object with basic methods
+    function ClassList(element) {
+        this.element = element;
+    }
+
+    ClassList.prototype = {
+        add: function() {
+            forEach(arguments, function(name) {
+                if (!this.contains(name)) {
+                    this.element.className += this.element.className.length > 0 ? ' ' + name : name;
+                }
+            }, this);
+        },
+        remove: function() {
+            forEach(arguments, function(name) {
+                this.element.className =
+                    this.element.className.replace(regExp(name), '');
+            }, this);
+        },
+        toggle: function(name) {
+            return this.contains(name)
+                ? (this.remove(name), false) : (this.add(name), true);
+        },
+        contains: function(name) {
+            return regExp(name).test(this.element.className);
+        },
+        // bonus..
+        replace: function(oldName, newName) {
+            this.remove(oldName), this.add(newName);
+        }
+    };
+
+    // IE8/9, Safari
+    if (!('classList' in Element.prototype)) {
+        Object.defineProperty(Element.prototype, 'classList', {
+            get: function() {
+                return new ClassList(this);
+            }
+        });
+    }
+
+    // replace() support for others
+    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
+        DOMTokenList.prototype.replace = ClassList.prototype.replace;
+    }
+})();
+module.exports = {};
 
 /***/ })
 /******/ ]);

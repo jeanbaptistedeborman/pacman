@@ -6,7 +6,6 @@ var labels_json,
 
 function loadJSON(url_str, callback_fun) {
     var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
     xobj.open('GET', url_str, true);
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
