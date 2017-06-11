@@ -299,8 +299,14 @@ module.exports = {
         return container_g;
     },
     simulateEnterClick: function (svg_el, fun) {
-        var handleKey = function (evt) {
+        var
+            removeEnterClick = function () {
+                svg_el.removeEventListener('focus', listenEnter);
+                svg_el.removeEventListener('blur', stopListen);
+            },
+            handleKey = function (evt) {
                 if (evt.key === "Enter") {
+                    removeEnterClickremoveEnterClick ();
                     fun();
                 }
             },
@@ -312,6 +318,8 @@ module.exports = {
             };
         svg_el.addEventListener('focus', listenEnter);
         svg_el.addEventListener('blur', stopListen);
+        return removeEnterClick;
+
     },
     /**
      *
@@ -902,10 +910,18 @@ module.exports = {
         }
     },
     increment: function () {
+        if (lives_num < LIVES_NUM) {
         display(++lives_num);
+        }
     },
     set onLivesLost(fun) {
         onLivesLost_fun = fun;
+    },
+    get maxLives () {
+      return LIVES_NUM;
+    },
+    get lives (){
+      return lives_num;
     },
     reset: function () {
         lives_num = LIVES_NUM;
@@ -1012,7 +1028,6 @@ module.exports = {
 
                 var goodie = CollisionManager.isGoodie(temptativePosition_point);
                 if (goodie) {
-                    ScoreManager.increment();
                     var remaining_num = goodie.remove();
                     if (remaining_num === 0) {
                         IntervalManager.clearAll();
@@ -1821,15 +1836,12 @@ var
     stageConfig = Config('stage'),
     ObjectListManager = __webpack_require__(2),
     SvgUtils = __webpack_require__(1),
+    LiveManager = __webpack_require__(12),
+    ScoreManager = __webpack_require__(8),
     playSound = __webpack_require__(4),
+
     CollisionManager = __webpack_require__(10),
     layer_g = SvgUtils.createElement('g'),
-
-
-
-
-
-
     onCollected_fun,
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'goodie',
@@ -1838,10 +1850,12 @@ var
     add = function (point) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
+            bonusLive_bool = Math.random() < (LiveManager.maxLives - LiveManager.lives)/100,
             dom_el;
         config.position = point;
         config.position.width = gridSize_num;
         config.position.height = gridSize_num;
+        console.log('bonusLive_bool', bonusLive_bool);
         dom_el = config.dom_el = SvgUtils.createElement('use', {
                 width: 10,
                 height: 10,
@@ -1852,23 +1866,34 @@ var
                 {
                     nameSpace: "http://www.w3.org/1999/xlink",
                     name: "href",
-                    value: "#goodie"
-                }]);
-
+                    value: bonusLive_bool ? "#earth" : "#goodie"
+                }]
+        )
+        ;
         config.remove = function () {
+
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
+
+            if (!bonusLive_bool) {
+                ScoreManager.increment();
+
+            } else {
+                LiveManager.increment();
+            }
+
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
+
+                playSound('bon_2');
+                return items_array.length;
             }
-            playSound('bon_2');
-            return items_array.length;
         };
         items_array.push(config);
         parent_el.appendChild(dom_el);
     };
 
-stageConfig.dom_el.appendChild (layer_g);
+stageConfig.dom_el.appendChild(layer_g);
 
 module.exports = {
     set onCollected(fun) {
@@ -2290,6 +2315,7 @@ languages_array.forEach(function (element, index) {
 
     button_text.textContent = button_str;
     button_el.setAttribute('class', 'button');
+    button_el.setAttribute('tabindex', 0);
     button_el.appendChild(bg_el);
     button_el.appendChild(button_text);
     button_el.addEventListener('click', function () {
@@ -2305,6 +2331,7 @@ module.exports = {
     display: function (p_callBack_fun) {
         callBack_fun = p_callBack_fun;
         stage_el.appendChild(dom_el);
+        dom_el.childNodes[0].focus ();
         if (!explanationTextBlock_el) {
             explanationTextBlock_el =  SvgUtils.getMultilineText(
                 dom_el,
@@ -2338,8 +2365,8 @@ var
     stage_el = Config('game').dom_el,
     SvgUtils = __webpack_require__(1),
     callback_fun,
-
-
+    continueButton_el,
+    removeEnterClick_fun,
     popup_el = document.getElementsByClassName('levelPopup')[0],
     closePopup = function () {
         open_bool = false;
@@ -2362,11 +2389,8 @@ popup_el.parentNode.removeChild(popup_el);
 
 module.exports = function (p_callback_fun) {
     callback_fun = p_callback_fun;
-
-
     if (!open_bool) {
-        var
-            continueButton_el = popup_el.querySelector('.goButton');
+        continueButton_el = popup_el.querySelector('.goButton');
         stage_el.appendChild(popup_el);
         if (!textBlock) {
             textBlock = SvgUtils.getMultilineText(popup_el, Labels.getLabel('nice_work'),
@@ -2381,7 +2405,7 @@ module.exports = function (p_callback_fun) {
             )
         }
         open_bool = true;
-        SvgUtils.simulateEnterClick(continueButton_el, closePopup);
+        removeEnterClick_fun =  SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
         continueButton_el.addEventListener('touchstart', closePopup);
         document.body.addEventListener('keydown',listenKey);
@@ -6388,6 +6412,7 @@ __webpack_require__ (29);
 
 
   var  languageChoice = __webpack_require__(26),
+
     Labels = __webpack_require__(3),
     setLabels = function () {
         var
@@ -6397,10 +6422,12 @@ __webpack_require__ (29);
         levelLabel_el.textContent = Labels.getLabel('level');
     },
     pageLanguage_str = document.querySelector('html').getAttribute('lang');
+
 if (String(pageLanguage_str) === 'undefined') {
     pageLanguage_str = 'en';
 }
 languageChoice.registerLanguage(pageLanguage_str);
+
 
 /*
 bundling of SVG  - does not work.
@@ -6491,6 +6518,9 @@ Labels.fetchLabels(pageLanguage_str, function () {
             };
 
         newGame();
+        app_el.querySelector('.homeButton').addEventListener('mousedown', function (evt) {
+            evt.stopPropagation();
+        });
      LiveManager.onLivesLost = function () {
             togglePauseButton(false);
             QuestionPopup.remove();
