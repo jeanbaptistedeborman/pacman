@@ -28,7 +28,8 @@ var languages_array = require('../../../data/languages.json'),
             x: "0",
             y: "-35.583",
             transform: "scale (1,-1)",
-            overflow: "visible"
+            overflow: "visible",
+            tabindex:'0'
         },
         [
             {
@@ -86,6 +87,7 @@ languages_array.forEach(function (element, index) {
 
     button_text.textContent = button_str;
     button_el.setAttribute('class', 'button');
+    button_el.setAttribute('tabindex', 0);
     button_el.appendChild(bg_el);
     button_el.appendChild(button_text);
     button_el.addEventListener('click', function () {
@@ -101,6 +103,7 @@ module.exports = {
     display: function (p_callBack_fun) {
         callBack_fun = p_callBack_fun;
         stage_el.appendChild(dom_el);
+        dom_el.childNodes[0].focus ();
         if (!explanationTextBlock_el) {
             explanationTextBlock_el =  SvgUtils.getMultilineText(
                 dom_el,
