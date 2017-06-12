@@ -45,6 +45,7 @@ var
 
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
+               playSound('bon_2');
 
             if (!bonusLive_bool) {
                 ScoreManager.increment();
@@ -56,7 +57,7 @@ var
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
 
-                playSound('bon_2');
+             
                 return items_array.length;
             }
         };
