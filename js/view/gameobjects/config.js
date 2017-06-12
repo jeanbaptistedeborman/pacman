@@ -51,6 +51,7 @@ var configs_obj = {
         language: undefined,
         brick_array: [],
         blocked: false,
+        open:false,
         direction: undefined,
         position: {
             x: undefined,

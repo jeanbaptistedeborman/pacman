@@ -106,7 +106,8 @@ module.exports = {
         config.openDoor = function (openOrLock_bool) {
             if (!config.blocked) {
                 if (openOrLock_bool) {
-                    ObjectListManager.disableItemFromList(ID_STR, config);
+                    config.open = true;
+                    //ObjectListManager.disableItemFromList(ID_STR, config);
                 } else {
                     config.blocked = true;
                 }

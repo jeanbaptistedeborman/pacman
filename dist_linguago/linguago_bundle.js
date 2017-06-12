@@ -124,6 +124,7 @@ var configs_obj = {
         language: undefined,
         brick_array: [],
         blocked: false,
+        open:false,
         direction: undefined,
         position: {
             x: undefined,
@@ -1033,6 +1034,10 @@ module.exports = {
                     }
                 }
                 forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
+                if (forbidden_obj && forbidden_obj.open === true) {
+                    forbidden_obj =null;
+                }
+
                 if (temptativeDirection_obj && !forbidden_obj) {
                     started_bool = true;
                     direction_obj = temptativeDirection_obj;
@@ -1849,7 +1854,7 @@ var
     add = function (point) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
-            bonusLive_bool = Math.random() < (LiveManager.maxLives - LiveManager.lives)/100,
+            bonusLive_bool = Math.random() < (LiveManager.maxLives - LiveManager.lives)/70,
             dom_el;
         config.position = point;
         config.position.width = gridSize_num;
@@ -1873,6 +1878,7 @@ var
 
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
+               playSound('bon_2');
 
             if (!bonusLive_bool) {
                 ScoreManager.increment();
@@ -1884,7 +1890,7 @@ var
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
 
-                playSound('bon_2');
+             
                 return items_array.length;
             }
         };
@@ -2038,7 +2044,8 @@ module.exports = {
         config.openDoor = function (openOrLock_bool) {
             if (!config.blocked) {
                 if (openOrLock_bool) {
-                    ObjectListManager.disableItemFromList(ID_STR, config);
+                    config.open = true;
+                    //ObjectListManager.disableItemFromList(ID_STR, config);
                 } else {
                     config.blocked = true;
                 }
