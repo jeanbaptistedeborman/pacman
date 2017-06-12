@@ -21,7 +21,7 @@ var
     add = function (point) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
-            bonusLive_bool = Math.random() < (LiveManager.maxLives - LiveManager.lives)/50,
+            bonusLive_bool = Math.random() < (LiveManager.maxLives - LiveManager.lives)/70,
             dom_el;
         config.position = point;
         config.position.width = gridSize_num;
