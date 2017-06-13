@@ -107,7 +107,8 @@ module.exports = {
                 } else {
                     if (
                         forbidden_obj &&
-                        forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
+                        forbidden_obj.type === 'obstacle' &&
+                        !forbidden_obj.blocked) {
                         PauseManager.playing = false;
                         config.changeFrame('#avatarQuestion');
                         QuestionPopup.open (forbidden_obj,

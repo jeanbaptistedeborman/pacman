@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 34);
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -703,6 +703,60 @@ module.exports = {
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+/**
+ * Created by Jean-Baptiste on 11/04/2017.
+ */
+var
+    LIVES_NUM = 5,
+    lives_num = LIVES_NUM,
+    display = function (lives_num) {
+        var
+            livesEl_array = document.getElementsByClassName('liveIcon'),
+            n;
+        for (n = 0; n < livesEl_array.length; n++) {
+            var el = livesEl_array[n];
+            if (n < lives_num) {
+                el.setAttribute('display', 'inline');
+            } else {
+                el.setAttribute('display', 'none');
+            }
+        }
+    };
+display(LIVES_NUM);
+module.exports = {
+    decrement: function () {
+        display(--lives_num);
+        if (lives_num === 0) {
+            onLivesLost_fun();
+        }
+    },
+    increment: function () {
+        if (lives_num < LIVES_NUM) {
+        display(++lives_num);
+        }
+    },
+    set onLivesLost(fun) {
+        onLivesLost_fun = fun;
+    },
+    get maxLives () {
+      return LIVES_NUM;
+    },
+    get lives (){
+      return lives_num;
+    },
+    reset: function () {
+        lives_num = LIVES_NUM;
+        display(lives_num);
+    }
+};
+
+
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -750,7 +804,7 @@ module.exports = {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -828,7 +882,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -879,60 +933,6 @@ module.exports = {
 
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-/**
- * Created by Jean-Baptiste on 11/04/2017.
- */
-var
-    LIVES_NUM = 5,
-    lives_num = LIVES_NUM,
-    display = function (lives_num) {
-        var
-            livesEl_array = document.getElementsByClassName('liveIcon'),
-            n;
-        for (n = 0; n < livesEl_array.length; n++) {
-            var el = livesEl_array[n];
-            if (n < lives_num) {
-                el.setAttribute('display', 'inline');
-            } else {
-                el.setAttribute('display', 'none');
-            }
-        }
-    };
-display(LIVES_NUM);
-module.exports = {
-    decrement: function () {
-        display(--lives_num);
-        if (lives_num === 0) {
-            onLivesLost_fun();
-        }
-    },
-    increment: function () {
-        if (lives_num < LIVES_NUM) {
-        display(++lives_num);
-        }
-    },
-    set onLivesLost(fun) {
-        onLivesLost_fun = fun;
-    },
-    get maxLives () {
-      return LIVES_NUM;
-    },
-    get lives (){
-      return lives_num;
-    },
-    reset: function () {
-        lives_num = LIVES_NUM;
-        display(lives_num);
-    }
-};
-
-
-
-
-/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -946,8 +946,8 @@ var
     QuestionPopup = __webpack_require__(14),
     IntervalManager = __webpack_require__(7),
     ScoreManager = __webpack_require__(8),
-    CollisionManager = __webpack_require__(10),
-    TimoutManager = __webpack_require__(9),
+    CollisionManager = __webpack_require__(11),
+    TimoutManager = __webpack_require__(10),
     SvgUtils = __webpack_require__(1),
     playSound = __webpack_require__(4),
     PauseManager = __webpack_require__(6),
@@ -1045,7 +1045,8 @@ module.exports = {
                 } else {
                     if (
                         forbidden_obj &&
-                        forbidden_obj.type === 'obstacle' && !forbidden_obj.blocked) {
+                        forbidden_obj.type === 'obstacle' &&
+                        !forbidden_obj.blocked) {
                         PauseManager.playing = false;
                         config.changeFrame('#avatarQuestion');
                         QuestionPopup.open (forbidden_obj,
@@ -1097,7 +1098,7 @@ var
     Labels = __webpack_require__(3),
     SvgUtils = __webpack_require__(1),
     ArrayUtils = __webpack_require__(5),
-    TimeoutManager = __webpack_require__(9),
+    TimeoutManager = __webpack_require__(10),
     playSound = __webpack_require__(4),
     Config = __webpack_require__(0),
     UserControls = __webpack_require__(17),
@@ -1379,8 +1380,8 @@ module.exports = function (from_point, to_point, longestPath_bool) {
  */
 
 
-var MouseControl = __webpack_require__(32),
-    KeyControls = __webpack_require__(31),
+var MouseControl = __webpack_require__(33),
+    KeyControls = __webpack_require__(32),
     SvgUtils = __webpack_require__(1),
     directionFromTo = __webpack_require__(16),
     Config = __webpack_require__(0),
@@ -1535,7 +1536,6 @@ module.exports = {
                 }
             }()),
             api = {
-                /*@ todo :  harmonise : every call to config should go through config.*/
                 get dom_el() {
                     return config.dom_el;
                 },
@@ -1576,6 +1576,73 @@ module.exports = {
 /***/ (function(module, exports) {
 
 /**
+ * Created by Jean-Baptiste on 11/06/2017.
+ */
+// Source: https://gist.github.com/k-gun/c2ea7c49edf7b757fe9561ba37cb19ca
+(function() {
+    // helpers
+    var regExp = function(name) {
+        return new RegExp('(^| )'+ name +'( |$)');
+    };
+    var forEach = function(list, fn, scope) {
+        for (var i = 0; i < list.length; i++) {
+            fn.call(scope, list[i]);
+        }
+    };
+
+    // class list object with basic methods
+    function ClassList(element) {
+        this.element = element;
+    }
+
+    ClassList.prototype = {
+        add: function() {
+            forEach(arguments, function(name) {
+                if (!this.contains(name)) {
+                    this.element.className += this.element.className.length > 0 ? ' ' + name : name;
+                }
+            }, this);
+        },
+        remove: function() {
+            forEach(arguments, function(name) {
+                this.element.className =
+                    this.element.className.replace(regExp(name), '');
+            }, this);
+        },
+        toggle: function(name) {
+            return this.contains(name)
+                ? (this.remove(name), false) : (this.add(name), true);
+        },
+        contains: function(name) {
+            return regExp(name).test(this.element.className);
+        },
+        // bonus..
+        replace: function(oldName, newName) {
+            this.remove(oldName), this.add(newName);
+        }
+    };
+
+    // IE8/9, Safari
+    if (!('classList' in Element.prototype)) {
+        Object.defineProperty(Element.prototype, 'classList', {
+            get: function() {
+                return new ClassList(this);
+            }
+        });
+    }
+
+    // replace() support for others
+    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
+        DOMTokenList.prototype.replace = ClassList.prototype.replace;
+    }
+})();
+module.exports = {};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+/**
  * Created by Jean-Baptiste on 11/04/2017.
  */
 
@@ -1596,7 +1663,7 @@ module.exports = {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1667,7 +1734,7 @@ module.exports = {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1679,9 +1746,9 @@ var Configs = __webpack_require__(0),
     MovingObject = __webpack_require__(18),
     directionFromTo = __webpack_require__(16),
     PlayerAvatar = __webpack_require__(13);
-LivesManager = __webpack_require__(12),
+LivesManager = __webpack_require__(9),
     PauseManager = __webpack_require__(6),
-    CollisionManager = __webpack_require__(10),
+    CollisionManager = __webpack_require__(11),
     ID_STR = 'badGuy',
     gridSize_num = Configs('stage').gridSize,
     items_array = ObjectListManager.createList(ID_STR);
@@ -1827,7 +1894,7 @@ module.exports = {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1840,11 +1907,11 @@ var
     stageConfig = Config('stage'),
     ObjectListManager = __webpack_require__(2),
     SvgUtils = __webpack_require__(1),
-    LiveManager = __webpack_require__(12),
+    LiveManager = __webpack_require__(9),
     ScoreManager = __webpack_require__(8),
     playSound = __webpack_require__(4),
 
-    CollisionManager = __webpack_require__(10),
+    CollisionManager = __webpack_require__(11),
     layer_g = SvgUtils.createElement('g'),
     onCollected_fun,
     gridSize_num = stageConfig.gridSize,
@@ -1932,7 +1999,7 @@ module.exports = {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1945,14 +2012,14 @@ var
     stageConfig = Config('stage'),
     ObjectListManager = __webpack_require__(2),
     SvgUtils = __webpack_require__(1),
-    ColorUtils = __webpack_require__(33),
-    TimeoutManager = __webpack_require__(9),
+    ColorUtils = __webpack_require__(34),
+    TimeoutManager = __webpack_require__(10),
     ArrayUtils = __webpack_require__(5),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'obstacle',
     layer_g = SvgUtils.createElement('g'),
     playSound = __webpack_require__(4),
-    Languages = __webpack_require__(11),
+    Languages = __webpack_require__(12),
     COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#006830'],
     items_array = ObjectListManager.createList(ID_STR);
 
@@ -2078,14 +2145,14 @@ module.exports = {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * Created by Jean-Baptiste on 14/05/2017.
  */
 var
-    levels_array = __webpack_require__(30),
+    levels_array = __webpack_require__(31),
     ArrayUtils = __webpack_require__(5),
     randomLevels_array,
     setRandomArray = function () {
@@ -2115,7 +2182,7 @@ module.exports = {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2230,7 +2297,7 @@ module.exports = function (p_callback_fun) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -2359,7 +2426,7 @@ module.exports = {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2422,7 +2489,7 @@ module.exports = function (p_callback_fun) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2448,13 +2515,13 @@ module.exports = {};
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(35);
+var content = __webpack_require__(36);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -2462,7 +2529,7 @@ var transform;
 var options = {};
 options.transform = transform;
 // add the styles to the DOM
-var update = __webpack_require__(37)(content, options);
+var update = __webpack_require__(38)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -2479,7 +2546,7 @@ if(false) {
 }
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -6286,7 +6353,7 @@ module.exports = [
 ];
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6315,7 +6382,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6369,7 +6436,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 /**
@@ -6401,7 +6468,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6413,12 +6480,12 @@ module.exports = {
 
 
 
-__webpack_require__(28);
-__webpack_require__ (29);
-__webpack_require__ (39);
+__webpack_require__(29);
+__webpack_require__ (30);
+__webpack_require__ (19);
 
 
-  var  languageChoice = __webpack_require__(26),
+  var  languageChoice = __webpack_require__(27),
 
     Labels = __webpack_require__(3),
     setLabels = function () {
@@ -6452,23 +6519,23 @@ app_el.appendChild(svg_xml);
 Labels.fetchLabels(pageLanguage_str, function () {
     Labels.fetchLanguages(pageLanguage_str, function () {
         var
-            Obstacle = __webpack_require__(23),
-            Goodie = __webpack_require__(22),
-            BadGuy = __webpack_require__(21),
+            Obstacle = __webpack_require__(24),
+            Goodie = __webpack_require__(23),
+            BadGuy = __webpack_require__(22),
             PlayerAvatar = __webpack_require__(13),
             Config = __webpack_require__(0),
-            LevelOverPopup = __webpack_require__(27),
+            LevelOverPopup = __webpack_require__(28),
             QuestionPopup = __webpack_require__(14),
-            GameOverPopup = __webpack_require__(25),
+            GameOverPopup = __webpack_require__(26),
             IntervalManager = __webpack_require__(7),
             ScoreManager = __webpack_require__(8),
-            Timer = __webpack_require__(20),
-            LiveManager = __webpack_require__(12),
-            LevelCounter = __webpack_require__(19),
+            Timer = __webpack_require__(21),
+            LiveManager = __webpack_require__(9),
+            LevelCounter = __webpack_require__(20),
             playSound = __webpack_require__(4),
             ObjectlistManager = __webpack_require__(2),
-            LevelsManager = __webpack_require__(24),
-            Languages = __webpack_require__ (11),
+            LevelsManager = __webpack_require__(25),
+            Languages = __webpack_require__ (12),
             app_el = Config('app').dom_el,
             playerAvatar_obj,
             level_num = 0,
@@ -6558,10 +6625,10 @@ Labels.fetchLabels(pageLanguage_str, function () {
 module.exports = {};
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(36)(undefined);
+exports = module.exports = __webpack_require__(37)(undefined);
 // imports
 
 
@@ -6572,7 +6639,7 @@ exports.push([module.i, "@keyframes fade {\r\n    0% {\r\n        opacity: 0;\r\
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 /*
@@ -6654,7 +6721,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -6700,7 +6767,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(38);
+var	fixUrls = __webpack_require__(39);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -7013,7 +7080,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 
@@ -7106,73 +7173,6 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports) {
-
-/**
- * Created by Jean-Baptiste on 11/06/2017.
- */
-// Source: https://gist.github.com/k-gun/c2ea7c49edf7b757fe9561ba37cb19ca
-(function() {
-    // helpers
-    var regExp = function(name) {
-        return new RegExp('(^| )'+ name +'( |$)');
-    };
-    var forEach = function(list, fn, scope) {
-        for (var i = 0; i < list.length; i++) {
-            fn.call(scope, list[i]);
-        }
-    };
-
-    // class list object with basic methods
-    function ClassList(element) {
-        this.element = element;
-    }
-
-    ClassList.prototype = {
-        add: function() {
-            forEach(arguments, function(name) {
-                if (!this.contains(name)) {
-                    this.element.className += this.element.className.length > 0 ? ' ' + name : name;
-                }
-            }, this);
-        },
-        remove: function() {
-            forEach(arguments, function(name) {
-                this.element.className =
-                    this.element.className.replace(regExp(name), '');
-            }, this);
-        },
-        toggle: function(name) {
-            return this.contains(name)
-                ? (this.remove(name), false) : (this.add(name), true);
-        },
-        contains: function(name) {
-            return regExp(name).test(this.element.className);
-        },
-        // bonus..
-        replace: function(oldName, newName) {
-            this.remove(oldName), this.add(newName);
-        }
-    };
-
-    // IE8/9, Safari
-    if (!('classList' in Element.prototype)) {
-        Object.defineProperty(Element.prototype, 'classList', {
-            get: function() {
-                return new ClassList(this);
-            }
-        });
-    }
-
-    // replace() support for others
-    if (window.DOMTokenList && DOMTokenList.prototype.replace == null) {
-        DOMTokenList.prototype.replace = ClassList.prototype.replace;
-    }
-})();
-module.exports = {};
 
 /***/ })
 /******/ ]);
