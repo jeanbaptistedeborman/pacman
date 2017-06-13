@@ -66,7 +66,6 @@ module.exports = {
                 }
             }()),
             api = {
-                /*@ todo :  harmonise : every call to config should go through config.*/
                 get dom_el() {
                     return config.dom_el;
                 },
