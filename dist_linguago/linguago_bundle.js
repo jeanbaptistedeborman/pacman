@@ -1237,7 +1237,7 @@ module.exports = {
 module.exports = [
 	{
 		"id": "bg",
-		"label": "български"
+		"label": "БЪЛГАРСКИ"
 	},
 	{
 		"id": "cs",
@@ -1257,7 +1257,7 @@ module.exports = [
 	},
 	{
 		"id": "el",
-		"label": "ελληνικά"
+		"label": "ΕΛΛΗΝΙΚA"
 	},
 	{
 		"id": "en",
