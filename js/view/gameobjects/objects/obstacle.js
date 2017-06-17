@@ -80,15 +80,13 @@ module.exports = {
                                 height: gridSize_num,
                                 'text-anchor':'middle',
                                 fill: 'white',
-                                "font-family": "Arial narrow",
                                 "font-size": "9",
                                 x: gridSize_num/2 + config.position.x + n * gridSize_num * Number(config.direction === 'width'),
-                                y: textHeight_num-0.7 + config.position.y + n * gridSize_num * Number(config.direction === 'height')
+                                y: 0.5  + textHeight_num-0.7 + config.position.y + n * gridSize_num * Number(config.direction === 'height')
                             }
                         ),
                         text_node = document.createTextNode(string_array.shift().toUpperCase());
                     text_el.appendChild(text_node);
-
                 }
                 config.brick_array.push(
                     {
