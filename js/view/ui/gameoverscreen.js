@@ -87,9 +87,9 @@ module.exports = function (p_callback_fun) {
                     color: 'black',
                     'text-anchor': 'left',
                     width: 80,
-                    'font-weight': 'bold',
+                    'font-weight': '800',
                     'stroke': 'white',
-                    'stroke-width': 0.3,
+                    'stroke-width': 0.001,
                     lineHeight: 12,
                     'font-size': '12px'
                 }

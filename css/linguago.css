@@ -1,3 +1,5 @@
+
+
 @keyframes fade {
     0% {
         opacity: 0;
@@ -65,12 +67,10 @@ body {
 }
 
 
-
-
 #linguagoApplication {
     height: 100%;
     width: 100%;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    font-family: "AppFont", Geneva, Verdana, sans-serif;
 }
 
 #linguagoApplication *:focus {
@@ -87,16 +87,16 @@ body {
     stroke-width: .5px;
 }
 
-#linguagoApplication .button:hover .background,
 #linguagoApplication .button:focus .background {
     opacity: .9;
 }
 
 #linguagoApplication .button[aria-selected='true'] .background {
-    opacity: .2;
+    fill:#f05a28;
 }
 
 .question_popup ul {
+    font-family: "AppFont", Geneva, Verdana, sans-serif !important;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -117,12 +117,12 @@ margin:0;
 }
 
 .question_popup {
-    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
     width:170px;
     position: absolute;
     min-height:80px;
     background-color: #ffffff;
     padding: 0;
+    user-select:none;
 }
 
 .pauseButtonTriggered .question_popup  .answer  {
@@ -135,6 +135,7 @@ margin:0;
     padding: 0 20px;
     color: #0071bc;
     display: block;
+    font-family: AppFont, "sans-serif";
 }
 
 
