@@ -6,9 +6,22 @@
 
 
 
-require('./view/ui/pausebutton');
+
 require ('../css/linguago.css');
 require ('./polyfill/classlist');
+
+console.log ('index');
+
+var svgContent = require ('../img/svgcontent.txt');
+var svg_xml = (new DOMParser().parseFromString(svgContent, "application/xml"));
+svg_xml = document.importNode(svg_xml.documentElement,true);
+var app_el = document.getElementById('linguagoApplication');
+app_el.innerHTML ='';
+console.log ("svg_xml : ", svg_xml);
+app_el.appendChild(svg_xml);
+
+
+require('./view/ui/pausebutton');
 
 
   var  languageChoice = require('./view/ui/langageChoice'),
@@ -27,21 +40,6 @@ if (String(pageLanguage_str) === 'undefined') {
     pageLanguage_str = 'en';
 }
 languageChoice.registerLanguage(pageLanguage_str);
-
-
-/*
-bundling of SVG  - does not work.
-var svgContent = require ('../img/svgcontent.txt');
-var svg_xml = (new DOMParser().parseFromString(svgContent, "application/xml"));
-
-svg_xml = document.importNode(svg_xml.documentElement,true);
-
-var app_el = document.getElementById('linguagoApplication');
-app_el.innerHTML ='';
-app_el.appendChild(svg_xml);
-*/
-
-
 Labels.fetchLabels(pageLanguage_str, function () {
     Labels.fetchLanguages(pageLanguage_str, function () {
         var

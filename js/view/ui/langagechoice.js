@@ -1,3 +1,9 @@
+"use strict";
+/**
+ * @module languageChoice
+ * manages the dispplay of the language-menu
+ */
+
 
 var languages_array = require('../../../data/languages.json'),
     Labels = require('../../datatransform/labels'),
@@ -99,6 +105,11 @@ languages_array.forEach(function (element, index) {
 });
 
 module.exports = {
+    /**
+     * @method
+     * Displays the language menu
+     * @param {function} p_callBack_fun - The function called when the user has choosen the language;
+     */
     display: function (p_callBack_fun) {
         callBack_fun = p_callBack_fun;
         stage_el.appendChild(dom_el);
