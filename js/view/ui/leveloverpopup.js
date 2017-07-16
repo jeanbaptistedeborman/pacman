@@ -6,6 +6,7 @@ var
     Config = require('../gameobjects/config'),
     stage_el = Config('game').dom_el,
     SvgUtils = require('../../game/utils/svgutils'),
+    Animation = require('../../game/utils/animation'),
     callback_fun,
     continueButton_el,
     removeEnterClick_fun,
@@ -32,6 +33,7 @@ popup_el.parentNode.removeChild(popup_el);
 module.exports = function (p_callback_fun) {
     callback_fun = p_callback_fun;
     if (!open_bool) {
+        Animation.fadeIn (popup_el);
         continueButton_el = popup_el.querySelector('.goButton');
         stage_el.appendChild(popup_el);
         if (!textBlock) {

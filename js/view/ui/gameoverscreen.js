@@ -6,6 +6,7 @@ var
     Config = require('../gameobjects/config'),
     ScoreManager = require('../counters/scoremanager'),
     SvgUtils = require('../../game/utils/svgutils'),
+    Animation = require('../../game/utils/animation'),
     stage_el = Config('game').dom_el,
     TEXT_MARGIN_NUM = 150,
     callback_fun,
@@ -32,7 +33,7 @@ module.exports = function (p_callback_fun) {
         if (yourScore_block) {
             popup_el.removeChild(yourScore_block);
         }
-
+        Animation.fadeIn (popup_el);
         stage_el.appendChild(popup_el);
         (function setYourScore() {
             var

@@ -38,7 +38,7 @@ countDown = function () {
         if (remainTime_num) {
             clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
         }
-        text_el.textContent = remainTime_num || '';
+        text_el.textContent = remainTime_num!==undefined?remainTime_num:'';
     };
 
 clock_el.setAttribute('fill', '#b0b0b0');

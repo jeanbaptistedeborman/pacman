@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- PREVENTS CACHING FROM MOILE DEVIOCES. @todo: REMOVE IN PRODUCTION -->
+    <!-- PREVENTS CACHING FROM MOBILE DEVICES. @todo: REMOVE IN PRODUCTION -->
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
     <!-- END REMOVE -->
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <script>
+        /* DO NOT INCLUDE THIS SCRIPT IN PROD */
+        var hash_str = window.location.hash.split('#')[1];
+        document.querySelector('html').setAttribute('lang', hash_str);
+    </script>
+
 </head>
 <body>
 
-<div id="linguagoApplication">
-    <style>
-        @font-face {
-            font-family: 'AppFont';
-            src: url('dist_linguago/lucida_sans.ttf') format('truetype');
-        }
-    </style>
-</div>
+<!--  include this
+The App will adapt itself to the size of the div#linguagoApplication
+-->
 
-<script>
-    /* DO NOT INCLUDE THIS */
-    var hash_str = window.location.hash.split('#')[1];
-    document.querySelector('html').setAttribute('lang', hash_str);
-</script>
+<style>
+    @font-face {
+        font-family: 'AppFont';
+        src: url('dist_linguago/lucida_sans.ttf') format('truetype');
+    }
+</style>
+<div id="linguagoApplication">
+
+</div>
 <script src="dist_linguago/linguago_bundle.js"></script>
+<!-- end include -->
+
 </body>
 </html>
