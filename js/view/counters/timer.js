@@ -36,9 +36,9 @@ countDown = function () {
     display = function (remainTime_num) {
         var angle_num = 360 - (360 * (remainTime_num / startTime_num));
         if (remainTime_num) {
-        clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
+            clock_el.setAttribute('d', SvgUtils.getSliceAttribute(clockPos.x, clockPos.y, clockPos.radius, clockPos.holeRadius, 0, angle_num));
         }
-        text_el.textContent = remainTime_num;
+        text_el.textContent = remainTime_num || '';
     };
 
 clock_el.setAttribute('fill', '#b0b0b0');
