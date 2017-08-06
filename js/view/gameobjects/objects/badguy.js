@@ -1,13 +1,15 @@
 /**
  * Created by Jean-Baptiste on 26/02/2017.
  */
+"use strict";
+
 var Configs = require('../config'),
     ObjectListManager = require('../objectlistmanager'),
     SvgUtils = require('../../../game/utils/svgutils'),
     MovingObject = require('../movingobject'),
     directionFromTo = require('../../../game/directionfromto'),
-    PlayerAvatar = require('./playeravatar');
-LivesManager = require('../../counters/livemanager'),
+    PlayerAvatar = require('./playeravatar'),
+    LivesManager = require('../../counters/livemanager'),
     PauseManager = require('../../../game/utils/pausemanager'),
     CollisionManager = require('../collisionmanager'),
     ID_STR = 'badGuy',
@@ -25,15 +27,15 @@ module.exports = {
                     },
                     move = {
                         x: -2,
-                        y: -2,
+                        y: -2
                     };
                 return function (vibration_num) {
                     if (vibration_num) {
                         move.x = -2 + vibration_num;
                         move.y = -2 + vibration_num;
                     } else {
-                        move.x += STEP * direction.x,
-                            move.y += STEP * direction.y;
+                        move.x += STEP * direction.x;
+                        move.y += STEP * direction.y;
                         if (Math.abs(move.y + 2) > STEP * 5) {
                             direction.y *= -1;
                         }
@@ -41,7 +43,9 @@ module.exports = {
                             direction.x *= -1;
                         }
                     }
-                    config.dom_el.setAttribute('transform', 'translate(' + move.x + ',' + move.y + ')');
+                    window.requestAnimationFrame(function () {
+                        config.dom_el.setAttribute('transform', 'translate(' + move.x + ',' + move.y + ')');
+                    });
                 }
             }()),
             origin_point = point,
@@ -72,13 +76,14 @@ module.exports = {
         ]);
         config.setDirection = function (findPos) {
             var
+                direction_obj,
                 playerAvatar_api = ObjectListManager.getList('playerAvatar')[0],
                 forbidden_obj,
                 temptativePosition_point,
                 isMySelf = function () {
                     return forbidden_obj.config === config;
-                };
-            temptativeDirection_obj = directionFromTo(config.position, playerAvatar_api.position);
+                },
+                temptativeDirection_obj = directionFromTo(config.position, playerAvatar_api.position);
 
 
             temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);

@@ -3,6 +3,36 @@
  */
 "use strict";
 var
+
+    deltaTransformPoint = function (matrix, point) {
+
+        var dx = point.x * matrix.a + point.y * matrix.c + 0;
+        var dy = point.x * matrix.b + point.y * matrix.d + 0;
+        return {x: dx, y: dy};
+    },
+    decomposeMatrix = function (matrix) {
+
+        // @see https://gist.github.com/2052247
+
+        // calculate delta transform point
+        var px = deltaTransformPoint(matrix, {x: 0, y: 1});
+        var py = deltaTransformPoint(matrix, {x: 1, y: 0});
+
+        // calculate skew
+        var skewX = ((180 / Math.PI) * Math.atan2(px.y, px.x) - 90);
+        var skewY = ((180 / Math.PI) * Math.atan2(py.y, py.x));
+
+        return {
+
+            translateX: matrix.e,
+            translateY: matrix.f,
+            scaleX: Math.sqrt(matrix.a * matrix.a + matrix.b * matrix.b),
+            scaleY: Math.sqrt(matrix.c * matrix.c + matrix.d * matrix.d),
+            skewX: skewX,
+            skewY: skewY,
+            rotation: skewX // rotation is the same as skew x
+        }
+    },
     polarToCartesian = function (centerX, centerY, radius, angleInDegrees) {
         var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
         return {
@@ -11,7 +41,7 @@ var
         };
     },
     applyAttributes = function (el, params_obj, namespaceParams_array) {
-    if (params_obj) {
+        if (params_obj) {
             for (var n in params_obj) {
                 if (params_obj.hasOwnProperty(n)) {
                     el.setAttribute(n, params_obj[n]);
@@ -33,7 +63,9 @@ var
         var startAngle = p_startAngle,
             endAngle = p_endAngle,
             externalCurve_obj = getArc(centerX, centerY, radius, startAngle, endAngle),
-            internalCurve_obj = getArc(centerX, centerY, holeRadius, endAngle, startAngle, true), intToExtPath_str = " L" + externalCurve_obj.startPoint + " ", extToIntPath_str = "L" + internalCurve_obj.startPoint + " ";
+            internalCurve_obj = getArc(centerX, centerY, holeRadius, endAngle, startAngle, true),
+            intToExtPath_str = " L" + externalCurve_obj.startPoint + " ",
+            extToIntPath_str = "L" + internalCurve_obj.startPoint + " ";
         return internalCurve_obj.path + intToExtPath_str + externalCurve_obj.path + extToIntPath_str;
 
     },
@@ -70,27 +102,27 @@ module.exports = {
         return path;
     },
     getMultilineText: function (parentSvg_el, text_str, params) {
-        console.log ('params multiline : ', params);
+        console.log('params multiline : ', params);
         var
             forceLineBreakChar = params.forceLineBreakChar,
             forceLineBreakBool,
-            container_g = createElement('svg',{
-                x:params.x,
-                y:params.y
+            container_g = createElement('svg', {
+                x: params.x,
+                y: params.y
             }),
 
             line_num = 0,
             text_array = text_str.split(' '),
             createTextBlock = function () {
                 var line_span = createElement('text', {
-                    x: (params['text-anchor'] ===  'middle')?params.width/2:0,
-                    'width':params.width,
-                    'text-anchor':params['text-anchor'],
+                    x: (params['text-anchor'] === 'middle') ? params.width / 2 : 0,
+                    'width': params.width,
+                    'text-anchor': params['text-anchor'],
                     'font-size': params['font-size'],
-                    'fill':params.color,
-                    'stroke':params.stroke || null,
-                    'font-weight':params['font-weight'] || null,
-                    'stroke-width':params['stroke-width'] || null,
+                    'fill': params.color,
+                    'stroke': params.stroke || null,
+                    'font-weight': params['font-weight'] || null,
+                    'stroke-width': params['stroke-width'] || null,
                     'dy': (params.lineHeight * line_num) + params.lineHeight
                 });
 
@@ -106,7 +138,7 @@ module.exports = {
         text_array.forEach(function (word) {
             lineContent_str += word + ' ';
             block_el.textContent = lineContent_str;
-            if (block_el.getComputedTextLength() >  params.width || forceLineBreakBool) {
+            if (block_el.getComputedTextLength() > params.width || forceLineBreakBool) {
                 block_el.textContent = previousLineContent_str;
                 block_el = createTextBlock();
                 lineContent_str = word + ' ';
@@ -125,7 +157,7 @@ module.exports = {
             },
             handleKey = function (evt) {
                 if (evt.key === "Enter") {
-                    removeEnterClickremoveEnterClick ();
+                    removeEnterClickremoveEnterClick();
                     fun();
                 }
             },
@@ -158,8 +190,14 @@ module.exports = {
         var
             CTM = dom_svg.getScreenCTM(),
             svg_point = PointConversion.pointToSVG(dom_svg, svgCoordinate_point),
-            converted_point = svg_point.matrixTransform(CTM);
-        return PointConversion.SVGToPoint(converted_point);
+            converted_point = svg_point.matrixTransform(CTM),
+            matrixRead = decomposeMatrix(CTM),
+            point = {
+                x: matrixRead.translateX + (svgCoordinate_point.x * matrixRead.scaleX),
+                y: matrixRead.translateY + (svgCoordinate_point.y * matrixRead.scaleY)
+            };
+        console.log("point test : ", matrixRead);
+        return point;
     },
     applyAttributes: applyAttributes,
     createElement: createElement

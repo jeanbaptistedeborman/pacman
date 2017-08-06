@@ -1,7 +1,7 @@
 /**
  * Created by Jean-Baptiste on 18/04/2017.
  */
-
+"use strict";
 var
     MovingObject = require('../movingobject'),
     UserControls = require('../../../game/ui/usercontrol'),
@@ -16,6 +16,7 @@ var
     Configs = require('../config'),
     gridSize_num = Configs('stage').gridSize,
     started_bool = false,
+    playerAvatar_obj,
     XLINK_STR = "http://www.w3.org/1999/xlink",
     defaultParams_obj = {
         attr: {
@@ -78,12 +79,11 @@ module.exports = {
             var
                 forbidden_obj,
                 direction_obj,
+                temptativeDirection_obj,
                 temptativePosition_point;
 
             if (PauseManager.pauseButton) {
                 temptativeDirection_obj = UserControls.getDirection(config.position);
-
-
                 if (temptativeDirection_obj) {
                     temptativePosition_point = findPos(temptativeDirection_obj, gridSize_num);
                 }
@@ -97,7 +97,7 @@ module.exports = {
                 }
                 forbidden_obj = CollisionManager.isOccupied(temptativePosition_point);
                 if (forbidden_obj && forbidden_obj.open === true) {
-                    forbidden_obj =null;
+                    forbidden_obj = null;
                 }
 
                 if (temptativeDirection_obj && !forbidden_obj) {
@@ -111,7 +111,7 @@ module.exports = {
                         !forbidden_obj.blocked) {
                         PauseManager.playing = false;
                         config.changeFrame('#avatarQuestion');
-                        QuestionPopup.open (forbidden_obj,
+                        QuestionPopup.open(forbidden_obj,
                             function (answer_bool) {
                                 if (answer_bool !== undefined) {
                                     if (answer_bool) {
