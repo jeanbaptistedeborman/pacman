@@ -9,6 +9,7 @@
 
 require ('../css/linguago.css');
 require ('./polyfill/classlist');
+require ('./polyfill/requestanimationframe');
 
 console.log ('index');
 

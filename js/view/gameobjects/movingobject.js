@@ -15,6 +15,10 @@ module.exports = {
     add: function (config) {
         var
             position_rect = config.position,
+            move = function () {
+                config.dom_el.setAttribute("x", position_rect.x);
+                config.dom_el.setAttribute("y", position_rect.y);
+            },
             updatePos = function (point) {
                 for (var n in point) {
                     if (point.hasOwnProperty(n)) {
@@ -22,8 +26,7 @@ module.exports = {
                     }
                 }
                 if (config.dom_el) {
-                    config.dom_el.setAttribute("x", position_rect.x);
-                    config.dom_el.setAttribute("y", position_rect.y);
+                    window.requestAnimationFrame(move);
                 }
             },
             findPos = function (direction_obj, step_num) {
@@ -61,8 +64,8 @@ module.exports = {
                             setDirection();
                             incrementPos(direction_obj);
                         }
-                            incrementPos(direction_obj);
-                    }, 20);
+                        incrementPos(direction_obj);
+                    }, 16.667);
                 }
             }()),
             api = {
