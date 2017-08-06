@@ -65,7 +65,7 @@ module.exports = {
                             incrementPos(direction_obj);
                         }
                         incrementPos(direction_obj);
-                    }, 16.667);
+                    }, 20);
                 }
             }()),
             api = {
