@@ -10,9 +10,7 @@ var
     playSound = require('../../game/utils/playsound'),
     Config = require('../gameobjects/config'),
     UserControls = require('../../game/ui/usercontrol'),
-    stage_el = Config('app').dom_el,
     gameStage_obj = Config("stage"),
-    gameStage_el = gameStage_obj.dom_el,
         gridSize_num = gameStage_obj.gridSize,
     callback_fun,
     popup_el,
@@ -53,24 +51,23 @@ module.exports = {
         closePopup();
     },
     open: function (obstacle_obj, p_callback_fun) {
-        var answers_array,
+        var
+            INTERFACE_HEIGHT_NUM = 37,
+            answers_array,
             margin_num = gridSize_num,
             answers_el = document.createElement('ul'),
-            obstacle_rect = obstacle_obj.dom_el.getBoundingClientRect(),
-
-
             obstacleTL_point = SvgUtils.convertCoordinateFromSVGToDOM(
-                gameStage_el,
+                Config('game').dom_el,
                 {
                     x: obstacle_obj.position.x - margin_num,
-                    y: obstacle_obj.position.y - margin_num
+                    y: INTERFACE_HEIGHT_NUM + obstacle_obj.position.y - margin_num
                 }
             ),
             obstacleTR_point = SvgUtils.convertCoordinateFromSVGToDOM(
-                gameStage_el,
+                Config('game').dom_el,
                 {
                     x: obstacle_obj.position.x + obstacle_obj.position.width + margin_num,
-                    y: obstacle_obj.position.y + margin_num
+                    y: INTERFACE_HEIGHT_NUM + obstacle_obj.position.y + margin_num
                 }
             ),
 
