@@ -2,16 +2,10 @@
  * Created by Jean-Baptiste on 2/20/2017.
  */
 "use strict";
-
-
-
-
-
 require ('../css/linguago.css');
 require ('./polyfill/classlist');
 require ('./polyfill/requestanimationframe');
 
-console.log ('index');
 
 var svgContent = require ('../img/svgcontent.txt');
 var svg_xml = (new DOMParser().parseFromString(svgContent, "application/xml"));
