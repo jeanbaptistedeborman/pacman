@@ -1,5 +1,6 @@
 /**
  * Created by Jean-Baptiste on 11/04/2017.
+ * @module
  * @description Displays the screen the end of each level.
  * @param {function} p_callback_fun -The function called when the user closes the screen
  *
