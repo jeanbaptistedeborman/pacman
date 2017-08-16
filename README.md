@@ -9,4 +9,8 @@ http://linguagopreview.azurewebsites.net/index_europa.htm
 Dev / test URL  (Dev branch) :
 - http://devlinguago.azurewebsites.net/
 
+Documentation (Jsdoc) - work in progress :
+http://devlinguago.azurewebsites.net/documentation/
+
+
 Touch and adaptation to screen size works on:  Ipad2, Samsung galaxy Note 4. Mouse + Touch tested on Windows 10: IE, Chrome and Firefox. 
