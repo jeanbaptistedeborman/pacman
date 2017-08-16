@@ -1,13 +1,27 @@
 /**
  * Created by Jean-Baptiste on 2/22/2017.
+ * @module
+ * @description Aggregates inputs from keyboard, mouse and touch in order to give a consistent representation of user inputs.
+ *
  */
-"use strict";
+
+
 /**
- * An object containing a direection on x and y axis.
+ * An object describing a point on x and y axis.
+ * @typeDef {Object} Point
+ * @property {number} x The position on the x-axis
+ * @property {number} y The position on the y-axis
+ */
+
+/**
+ * An object containing a direction on x and y axis.
  * @typeDef {Object} Direction
- * @property {number} x  n integer ranging from -1 to 1 expressing the direction on the x-axis (-1 = left, 1= right, 0=no move)
+ * @property {number} x  An integer ranging from -1 to 1 expressing the direction on the x-axis (-1 = left, 1= right, 0=no move)
  * @property {number} y An integer ranging from -1 to 1 expressing the direction on the y-axis (-1 = up, 1= down, 0=no move)
  */
+
+
+"use strict";
 
 
 var MouseControl = require("./mouseandtouch"),
@@ -31,18 +45,22 @@ var MouseControl = require("./mouseandtouch"),
     };
 
 module.exports = {
+    /**
+     * @property onDirectionChange
+     * @description - Sets a callback called when the user changes direction.
+     * @type {function}
+     */
+
     set onDirectionChange(fun) {
         onDirectionChange_fun = fun;
     },
     /**
-     * @module
-     * @description - Aggregates inputs from keyboard, mouse and touch in order to give a consistent representation of user inputs.
-     * @param {Point} objectPosition_point - The position of the moving object in order to compare the mouse position with the objects position.
-     * @returns {Direction} - An object containing the direction to follow.
+     * @description - Gets the direction indepependently of the device used
+     * @param {Point} reference_point -The reference point used to get a direction when comparing with the mouse or touch position.
+     * @returns {Direction} -An object containing the direction to follow.
      *
      */
-
-    getDirection: function (objectPosition_point) {
+    getDirection: function (reference_point) {
         var
             direction_obj;
         if (KeyControls.pressedKey) {
@@ -87,7 +105,5 @@ module.exports = {
         }
 
     }
-
-}
-;
+};
 

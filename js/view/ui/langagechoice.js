@@ -60,12 +60,8 @@ var languages_array = require('../../../data/languages.json'),
     };
 dom_el.appendChild(logoContainer_el);
 logoContainer_el.appendChild(logo_el);
-
-
-
-
 languages_array.forEach(function (element, index) {
-    var button_str = element.label,
+    var
         col_num = index % COLS_NUM,
         line_num = Math.floor(index / COLS_NUM),
         button_el = SvgUtils.createElement('svg', {
@@ -91,7 +87,7 @@ languages_array.forEach(function (element, index) {
                 }
             ]);
 
-    button_text.textContent = button_str;
+    button_text.textContent = element.label;
     button_el.setAttribute('class', 'button');
     button_el.setAttribute('tabindex', 0);
     button_el.appendChild(bg_el);
