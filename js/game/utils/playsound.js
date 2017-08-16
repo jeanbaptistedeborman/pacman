@@ -2,7 +2,7 @@
  * Created by Jean-Baptiste on 04/05/2017.
  * @module
  * @descrition Preloads, loads, caches and plays the sounds used in the application.
- * @param fileName_str {string} - The name of the file, without the ".mp3" extension
+ * @param fileName_str {string} - The name of the file, without the folder path and ".mp3" extension
  * @param forceNewAudio_bool {boolean} - Forces the app to load the sound again -even if the sound was already cached (allows sounds overlaps).
  */
 
