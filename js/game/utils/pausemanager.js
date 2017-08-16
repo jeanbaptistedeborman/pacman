@@ -1,6 +1,11 @@
 /**
  * Created by Jean-Baptiste on 06/05/2017.
+ * @module
+ * @description Manages the pauses in the game (caused by popup displays, pause-button, ...)
+ *
  */
+
+"use strict";
 var
     app_el = require ('../../view/gameobjects/config')('app').dom_el,
     noPopup_bool = true,
@@ -15,10 +20,23 @@ var
     },
     pauseButton_bool = true;
 module.exports = {
+    /**
+     *
+     * @description Gets or sets wether the pause-pause-button is on or off.
+     * @type {Boolean}
+     */
     set pauseButton (boolean) {
         pauseButton_bool = !boolean;
         evaluatePause();
     },
+    get pauseButton ()  {
+        return pauseButton_bool;
+    },
+    /**
+     * @type {Boolean}
+     * @description Gets or sets wether the game is playing or not.
+     */
+
     set playing   (boolean) {
         if (boolean === undefined) {
             noPopup_bool = !noPopup_bool;
@@ -27,10 +45,8 @@ module.exports = {
         }
         evaluatePause();
     },
-    get pauseButton ()  {
-      return pauseButton_bool;
-    },
     get playing () {
         return evaluatePause ();
     }
+
 };
