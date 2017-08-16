@@ -1,5 +1,9 @@
 /**
  * Created by Jean-Baptiste on 11/04/2017.
+ * @module
+ * @description Displays the screen ate the end of the game.
+ * @param {function} p_callback_fun -The function called when the user closes the screen
+ *
  */
 var
     Labels = require('../../datatransform/labels'),
@@ -25,7 +29,6 @@ var
 
 popup_el.removeAttribute('style');
 popup_el.parentNode.removeChild(popup_el);
-
 module.exports = function (p_callback_fun) {
     callback_fun = p_callback_fun;
 
@@ -96,10 +99,8 @@ module.exports = function (p_callback_fun) {
                 }
             )
         }
-
         continueButton_el = popup_el.querySelector('.playAgain');
         open_bool = true;
-
         SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         continueButton_el.addEventListener('click', closePopup);
         continueButton_el.addEventListener('touchstart', closePopup);
