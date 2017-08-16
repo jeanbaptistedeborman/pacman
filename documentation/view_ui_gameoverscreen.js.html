@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/ui/gameoverscreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/ui/gameoverscreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by Jean-Baptiste on 11/04/2017.
+ */
+var
+    Labels = require('../../datatransform/labels'),
+    Config = require('../gameobjects/config'),
+    ScoreManager = require('../counters/scoremanager'),
+    SvgUtils = require('../../game/utils/svgutils'),
+    Animation = require('../../game/utils/animation'),
+    stage_el = Config('game').dom_el,
+    TEXT_MARGIN_NUM = 150,
+    callback_fun,
+    yesYouDidiIt_block,
+    yourScore_block,
+    playAgain_block,
+    popup_el = document.querySelector('.endScreen'),
+    closePopup = function () {
+        continueButton_el.removeEventListener('click', closePopup);
+        continueButton_el.removeEventListener('touchstart', closePopup);
+        open_bool = false;
+        stage_el.removeChild(popup_el);
+        callback_fun();
+    },
+    open_bool = false;
+
+popup_el.removeAttribute('style');
+popup_el.parentNode.removeChild(popup_el);
+
+module.exports = function (p_callback_fun) {
+    callback_fun = p_callback_fun;
+
+    if (!open_bool) {
+        if (yourScore_block) {
+            popup_el.removeChild(yourScore_block);
+        }
+        Animation.fadeIn (popup_el);
+        stage_el.appendChild(popup_el);
+        (function setYourScore() {
+            var
+                lineHeight_num = 8,
+                baseFormat_obj =
+                    {
+                        x: TEXT_MARGIN_NUM ,
+                        y: 160,
+                        fill: '#ffffff',
+                        'text-anchor': 'left',
+                        'font-size': '6px'
+                    },
+                yourScore_str = Labels.getLabel('you_scored'),
+                yourScore_array = yourScore_str.split('XXX'),
+                    firstLine_text = SvgUtils.createElement("text", baseFormat_obj),
+                secondLine_text = SvgUtils.createElement("text", baseFormat_obj),
+                suffix_tspan = SvgUtils.createElement("tspan"),
+                score_tspan = SvgUtils.createElement("tspan", {
+                    'font-size': '8px',
+                    'fill': '#f3d332'
+                });
+            yourScore_block = SvgUtils.createElement('g');
+            score_tspan.textContent = ScoreManager.score;
+            suffix_tspan.textContent = yourScore_array[1];
+
+            secondLine_text.setAttribute('dy', lineHeight_num);
+            firstLine_text.textContent = yourScore_array[0];
+            secondLine_text.appendChild(score_tspan);
+            secondLine_text.appendChild(suffix_tspan);
+            yourScore_block.appendChild(firstLine_text);
+            yourScore_block.appendChild(secondLine_text);
+            popup_el.appendChild(yourScore_block);
+        }());
+
+
+        if (!playAgain_block) {
+            playAgain_block = SvgUtils.getMultilineText(popup_el, Labels.getLabel("play_again"),
+                {
+                    x: TEXT_MARGIN_NUM + 24,
+                    y: 176, color: '#ffffff',
+                    'text-anchor': 'left',
+                    width: 20,
+                    lineHeight: 6,
+                    'font-size': '5px'
+                })
+        }
+        if (!yesYouDidiIt_block) {
+            yesYouDidiIt_block = SvgUtils.getMultilineText(popup_el, Labels.getLabel('you_did_it'), {
+                    x: TEXT_MARGIN_NUM ,
+                    y: 111,
+                    'forceLineBreakChar': '!',
+                    color: 'black',
+                    'text-anchor': 'left',
+                    width: 80,
+                    'font-weight': '800',
+                    'stroke': 'white',
+                    'stroke-width': 0.001,
+                    lineHeight: 12,
+                    'font-size': '12px'
+                }
+            )
+        }
+
+        continueButton_el = popup_el.querySelector('.playAgain');
+        open_bool = true;
+
+        SvgUtils.simulateEnterClick(continueButton_el, closePopup);
+        continueButton_el.addEventListener('click', closePopup);
+        continueButton_el.addEventListener('touchstart', closePopup);
+    }
+}
+;
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-datatransform_labels.html">datatransform/labels</a></li><li><a href="module-game_ui_usercontrol.html">game/ui/usercontrol</a></li><li><a href="module-game_utils_animation.html">game/utils/animation</a></li><li><a href="module-game_utils_pausemanager.html">game/utils/pausemanager</a></li><li><a href="module-view_ui_langagechoice.html">view/ui/langagechoice</a></li></ul><h3>Global</h3><ul><li><a href="global.html#display">display</a></li><li><a href="global.html#FOLDER_STR">FOLDER_STR</a></li><li><a href="global.html#getRandomCel">getRandomCel</a></li><li><a href="global.html#isItem">isItem</a></li><li><a href="global.html#Labels">Labels</a></li><li><a href="global.html#levels_array">levels_array</a></li><li><a href="global.html#list_obj">list_obj</a></li><li><a href="global.html#LIVES_NUM">LIVES_NUM</a></li><li><a href="global.html#paused_bool">paused_bool</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Wed Aug 16 2017 13:50:18 GMT+0200 (Romance Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
