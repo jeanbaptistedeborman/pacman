@@ -4,16 +4,20 @@
 
 "use Strict";
 
+/**
+ * @module
+ * @description Tests whether a given point on the grid is already occupied by anotehr object.
+ */
+
 var
     Config = require('./config'),
     ObjectListManager = require('./objectlistmanager'),
     /**
-     *
-     * @param itemType_str
-     * @param point
-     * @returns {*} The object at a given point (if exists)
+     * @private
+     * @param {string} itemType_str - The type of object to test.
+     * @param {Point} point The x and y coordinates
+     * @returns {booleans|*} false OR The object at a given point (if exists)
      */
-
     isItem = function (itemType_str, point) {
         var
             result_obj,
@@ -39,12 +43,30 @@ var
         return result_obj;
     };
 module.exports = {
+    /**
+     * Test wether there is a goodie at the given coordinate
+
+     * @param {Point} point The x and y coordinates
+     * @returns {booleans|Object} false OR The goodie at the given point (if exists)
+     */
+
     isGoodie: function (point) {
         return isItem("goodie", point);
     },
+
+    /**
+     * Test wether the player avatar is at the given coordinates
+     * @param {Point} point The x and y coordinates
+     * @returns {booleans|Object} false OR The player avatar at the given point (if exists)
+     */
     isAvatar: function (point) {
         return isItem("playerAvatar", point);
     },
+    /**
+     * Test wether any object occupies the coordinates And if the coordinates are out of the stage.
+     * @param {Point} point The x and y coordinates
+     * @returns {boolean|string|Object} false OR "out of screen" OR  the object already occupying the given point (if exists)
+     */
 
     isOccupied: function (point) {
         if (point) {
