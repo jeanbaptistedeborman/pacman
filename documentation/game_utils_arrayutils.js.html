@@ -28,6 +28,9 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * Created by Jean-Baptiste on 12/03/2017.
+ * @module
+ * @description A bunch of utility functions used to modify arrays.
+ *
  */
 var
     getRandomCel = function (array, remove_bool) {
@@ -47,14 +50,36 @@ var
 };
 
 module.exports = {
+    /**
+     * Creates a flat copy of an array
+     * @method
+     * @param {array} array -The source array.
+     * @return {array} -The copy
+     */
+
     clone: clone,
-    getRandomCel: getRandomCel,
+
+    /**
+     * Removes an element from an array
+     * @method
+     * @param {array} array -The source array.
+     * @param {*} item The object to find and remove
+     * @return {array} - A copy of the array without the elememnt given as attribute.
+     */
+
     remove: function (array, item) {
         result_array = array.filter(function (element) {
             return element !== item;
         });
         return result_array;
     },
+
+    /**
+     * Randomly sets the order of the cells of an array
+     * @param {array} array -The source array.
+     * @return {array} - The shuffled array
+     */
+
     shuffle: function (array) {
         var currentIndex = array.length,
             temporaryValue,
@@ -68,6 +93,13 @@ module.exports = {
         }
         return array;
     },
+
+    /**
+     * Converts the properties of an object into an array of value pairs with format {id:propertyName, value:propertyValue}.
+     * @param {Object} obj -The source Object.
+     * @return {Array&lt;Object>} - The resulting array.
+     */
+
     convertObjectToArray: function (obj) {
         var result_array = [];
         for (var n in obj) {
@@ -80,13 +112,29 @@ module.exports = {
         }
         return result_array;
     },
+
+    /**
+     * Gets a random cel of an array
+     * @method
+     * @param {array} array -The source array.
+     * @param {Boolean} remove_bool -Wether or not the selected cel should be removed from the source array.
+     * @return {*} -The content of the cel.
+     */
+
+    getRandomCel: getRandomCel,
+
+    /**
+     *  Picks random items into an array.
+     * @param source_array - The source array
+     * @param items_num - The number of random items to get from the array
+     * @returns {Array} The resulting selection
+     */
     pickRandomItems: function (source_array, items_num) {
         var result_array = [];
         source_array = clone(source_array);
         for (var n = 0; n &lt; items_num; n++) {
             result_array.push(getRandomCel(source_array, true));
         }
-
         return result_array;
     }
 };</code></pre>
@@ -99,13 +147,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-datatransform_labels.html">datatransform/labels</a></li><li><a href="module-game_ui_usercontrol.html">game/ui/usercontrol</a></li><li><a href="module-game_utils_animation.html">game/utils/animation</a></li><li><a href="module-game_utils_pausemanager.html">game/utils/pausemanager</a></li><li><a href="module-view_counters_levelcounter.html">view/counters/levelcounter</a></li><li><a href="module-view_ui_langagechoice.html">view/ui/langagechoice</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FOLDER_STR">FOLDER_STR</a></li><li><a href="global.html#getRandomCel">getRandomCel</a></li><li><a href="global.html#isItem">isItem</a></li><li><a href="global.html#Labels">Labels</a></li><li><a href="global.html#levels_array">levels_array</a></li><li><a href="global.html#list_obj">list_obj</a></li><li><a href="global.html#LIVES_NUM">LIVES_NUM</a></li><li><a href="global.html#paused_bool">paused_bool</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-datatransform_labels.html">datatransform/labels</a></li><li><a href="module-game_ui_usercontrol.html">game/ui/usercontrol</a></li><li><a href="module-game_utils_animation.html">game/utils/animation</a></li><li><a href="module-game_utils_arrayutils.html">game/utils/arrayutils</a></li><li><a href="module-game_utils_pausemanager.html">game/utils/pausemanager</a></li><li><a href="module-game_utils_playsound.html">game/utils/playsound</a></li><li><a href="module-view_counters_levelcounter.html">view/counters/levelcounter</a></li><li><a href="module-view_gameobjects_collisionmanager.html">view/gameobjects/collisionmanager</a></li><li><a href="module-view_gameobjects_objectlistmanager.html">view/gameobjects/objectlistmanager</a></li><li><a href="module-view_levelsmanager.html">view/levelsmanager</a></li><li><a href="module-view_ui_gameoverscreen.html">view/ui/gameoverscreen</a></li><li><a href="module-view_ui_langagechoice.html">view/ui/langagechoice</a></li><li><a href="module-view_ui_leveloverpopup.html">view/ui/leveloverpopup</a></li></ul><h3>Global</h3><ul><li><a href="global.html#LIVES_NUM">LIVES_NUM</a></li><li><a href="global.html#paused_bool">paused_bool</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Wed Aug 16 2017 13:55:49 GMT+0200 (Romance Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Wed Aug 16 2017 18:28:56 GMT+0200 (Romance Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

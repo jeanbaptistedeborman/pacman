@@ -1,6 +1,7 @@
 /**
  * Created by Jean-Baptiste on 14/05/2017.
- * Stores and manages the different levels
+ * @module
+ * @description Stores and distributes the different levels
  */
 var
     levels_array = require('../../data/levels/levels.json'),
