@@ -1,6 +1,22 @@
 /**
  * Created by Jean-Baptiste on 2/22/2017.
+ * @module
+ * @description A bunch of utility functions to handle SVG's.
+ *
  */
+
+/**
+ * An object describing a point on x and y axis.
+ * @typeDef {Object} Point
+ * @property {number} x The position on the x-axis
+ * @property {number} y The position on the y-axis
+ */
+
+/**
+ * A Dom Element object
+ */
+
+
 "use strict";
 var
 
@@ -94,15 +110,62 @@ var
         }
     };
 module.exports = {
-
+    /**
+     * Computes the path of a pie slice.
+     * @method
+     * @todo centerX and centerY should be structured as a Point-object.
+     * @param {number} centerX - The x coordinate of the center of the pie
+     * @param {number} centerY - The y coordinate of the center of the pie
+     * @param {number} radius - The radius of the slice
+     * @param {number}  holeRadius - The radius of the hole (if slice is a doughnut)
+     * @param {number}  p_startAngle - The start of the slice in degree.
+     * @param {number}  p_endAngle - The end of the slice in degree.
+     * @return {string} - the string to use as the "d"-attribute of an SVG path-element
+     */
     getSliceAttribute: getSliceAttribute,
+
+    /**
+     * Returns an SVG-path element of a pie-slice
+     * @todo centerX and centerY should be structured as a Point-object.
+     * @param {number} centerX - The x coordinate of the center of the pie
+     * @param {number} centerY - The y coordinate of the center of the pie
+     * @param {number} radius - The radius of the slice
+     * @param {number}  holeRadius - The radius of the hole (if slice is a doughnut)
+     * @param {number}  p_startAngle - The start of the slice in degree.
+     * @param {number}  p_endAngle - The end of the slice in degree.
+     * @return {DOMElement} - An SVG path-element.
+     */
+
     getSlice: function (centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle) {
         var path = createElement("path");
         path.setAttribute("d", getSliceAttribute(centerX, centerY, radius, holeRadius, p_startAngle, p_endAngle));
         return path;
     },
+    /**
+     * Draws a multiline text block based on a given width.
+     * @todo params.x and params.y should be structured as a point-object
+     * @todo params.color should be params.fill
+     * @todo params that implement svg properties should be structured in a separate "format"-object.
+     *
+     * @param {DOMElement} parentSvg_el -The SVG-element where to draw the text.
+     * @param {string} text_str  - The text
+     * @param {Object} params  - Parameters of the text
+     * @param {string=} params.forceLineBreakChar - If set, forces linebreak after the given string.
+     * @param {number} params.width -Sets the width of the textblok.
+     * @params {number} params.lineHeight - Sets the line height of the block
+     * @param {string} params.color - The color of the text
+     * @param {number} params.x - The x-position
+     * @param {number} params.y - The y-position
+     * @param {number} params.font-size - Implements the corresponding SVG-property
+     * @param {string} params.text-anchor - Implements the corresponding SVG-property
+     * @param {string=} params.stroke - Implements the corresponding SVG-property
+     * @param {string=} params.stroke-width - Implements the corresponding SVG-property
+     * @param {string=} params.font-weight - Implements the corresponding SVG-property
+     *
+     * @return {DOMElement} The SVG g-container of the textblock.
+     *
+     */
     getMultilineText: function (parentSvg_el, text_str, params) {
-        console.log('params multiline : ', params);
         var
             forceLineBreakChar = params.forceLineBreakChar,
             forceLineBreakBool,
@@ -149,6 +212,14 @@ module.exports = {
         });
         return container_g;
     },
+    /**
+     * Allows a focused SVG-Element to be actionned by enter-key.
+     * @param {DOMElement} svg_el -The svg-element
+     * @param {function} fun -The function called when the key is clicked.
+     *
+     * @return {function} A cleanup function allowing to disable the enter-key. When called, this function removes all listeners.
+     */
+
     simulateEnterClick: function (svg_el, fun) {
         var
             removeEnterClick = function () {
@@ -173,11 +244,10 @@ module.exports = {
 
     },
     /**
-     *
-     * Source: https://msdn.microsoft.com/en-us/library/hh535760(v=vs.85).aspx
-     * @param {Point} point
-     * @param dom_svg
-     * @returns {SVGPoint}
+     * Converts HTML-page coordinates to SVG coordinates.
+     * @param {Point} point - The coordinates in the html-page.
+     * @param {DOMElement} dom_svg - The svg container
+     * @returns {Point} The corresponding coordinates in the SVG-container
      */
     convertCoordinateFromDOMToSVG: function (dom_svg, point) {
         var
@@ -186,6 +256,12 @@ module.exports = {
             converted_point = svg_point.matrixTransform(CTM.inverse());
         return PointConversion.SVGToPoint(converted_point);
     },
+    /**
+     * Converts SVG coordinates in HTML page coordinates.
+     * @param {Point} svgCoordinate_point - The coordinates in the SVG-container
+     * @param {DOMElement} dom_svg - The svg-container
+     * @returns {Point} The corresponding coordinates in the HTML-page
+     */
     convertCoordinateFromSVGToDOM: function (dom_svg, svgCoordinate_point) {
         var
             CTM = dom_svg.getScreenCTM(),
