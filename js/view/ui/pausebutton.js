@@ -1,5 +1,7 @@
 /**
  * Created by Jean-Baptiste on 06/05/2017.
+ * @module
+ * @description This componenent manages the state and display of the pause button. It is managed by PauseManager.
  */
 
 var
