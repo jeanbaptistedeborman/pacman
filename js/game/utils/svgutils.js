@@ -272,7 +272,6 @@ module.exports = {
                 x: matrixRead.translateX + (svgCoordinate_point.x * matrixRead.scaleX),
                 y: matrixRead.translateY + (svgCoordinate_point.y * matrixRead.scaleY)
             };
-        console.log("point test : ", matrixRead);
         return point;
     },
     applyAttributes: applyAttributes,

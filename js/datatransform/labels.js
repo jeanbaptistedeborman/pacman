@@ -12,7 +12,7 @@ function loadJSON(url_str, callback_fun) {
     var xobj = new XMLHttpRequest();
     xobj.open('GET', url_str, true);
     xobj.onreadystatechange = function () {
-        if (xobj.readyState === 4 && xobj.status === "200") {
+        if (xobj.readyState === 4 && Number (xobj.status) === 200) {
             callback_fun(xobj.responseText);
         }
     };

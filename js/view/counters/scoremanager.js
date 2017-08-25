@@ -2,7 +2,6 @@
  * Created by Jean-Baptiste on 11/04/2017.
  */
 
-console.log ("score : ", document.getElementById ('score'));
 var
 
     score_num = 0,

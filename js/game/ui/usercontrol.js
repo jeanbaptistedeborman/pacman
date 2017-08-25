@@ -86,19 +86,21 @@ module.exports = {
             addChangeInfo(direction_obj);
             return direction_obj;
         }
-        if (objectPosition_point && stage_el && MouseControl.position) {
+        if (reference_point && stage_el && MouseControl.position) {
 
             var
                 mouseSVG_point = SvgUtils.convertCoordinateFromDOMToSVG(stage_el, MouseControl.position),
                 gridSize_num = Config('stage').gridSize;
-            if (mouseSVG_point.x >= objectPosition_point.x
-             && mouseSVG_point.y >= objectPosition_point.y
-             && mouseSVG_point.x < objectPosition_point.x + gridSize_num
-             && mouseSVG_point.y < objectPosition_point.y + gridSize_num) {
+            if (mouseSVG_point.x >= reference_point.x
+                && mouseSVG_point.y >= reference_point.y
+                && mouseSVG_point.x < reference_point.x + gridSize_num
+                && mouseSVG_point.y < reference_point.y + gridSize_num) {
                 direction_obj = {x: 0, y: 0};
             } else {
-                direction_obj = directionFromTo ({x: objectPosition_point.x + gridSize_num / 2,
-                                       y: objectPosition_point.y + gridSize_num / 2}, mouseSVG_point);
+                direction_obj = directionFromTo({
+                    x: reference_point.x + gridSize_num / 2,
+                    y: reference_point.y + gridSize_num / 2
+                }, mouseSVG_point);
             }
             addChangeInfo(direction_obj);
             return direction_obj;
