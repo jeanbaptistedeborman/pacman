@@ -25,7 +25,7 @@ The javascript code is commented inline using jsdoc standard.
 1: Download the latest version from github (or checkout the project):
     https://github.com/jeanbaptistedeborman/pacman/archive/master.zip
 
-2: Put the folder "dist_linguago" and its content next to the page. The other folders are not meant for production.
+2: Put the folder "dist_linguago" and its content next to the page. The other folders of the project are not meant for production.
 
 3: Add the fonts at the beginnig of the page.
 
