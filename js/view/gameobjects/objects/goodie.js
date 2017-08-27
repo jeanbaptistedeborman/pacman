@@ -51,9 +51,9 @@ var
             }
 
             if (items_array.length === 0 && onCollected_fun) {
-                console.log (items_array.length);
                 onCollected_fun();
             }
+            console.log ("goodies : " , items_array);
             return items_array.length;
         };
         items_array.push(config);

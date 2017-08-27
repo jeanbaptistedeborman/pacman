@@ -14,7 +14,7 @@
  */
 
 /**
- * An object containing a direction on x and y axis.
+ * An object describing a direction on x and y axis.
  * @typeDef {Object} Direction
  * @property {number} x  An integer ranging from -1 to 1 expressing the direction on the x-axis (-1 = left, 1= right, 0=no move)
  * @property {number} y An integer ranging from -1 to 1 expressing the direction on the y-axis (-1 = up, 1= down, 0=no move)

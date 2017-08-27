@@ -1,25 +1,33 @@
-pacman
+A pacmanlike javascript game on the languages in the EU.
+The javascript code is commented inline using jsdoc standard.
 
-A pacamanlike game on the languages in the EU.
-
-Preview URL (Master branch) :
-
-http://linguagopreview.azurewebsites.net/
-Integration in Europa template : http://linguagopreview.azurewebsites.net/index_europa.htm
-Dev / test URL (Dev branch) :
-
-http://devlinguago.azurewebsites.net/
-
-Documentation (Jsdoc) : http://devlinguago.azurewebsites.net/documentation/
+------
+*URLS*
+------
+* Github:
+        https://github.com/jeanbaptistedeborman/pacman/
+* Preview URL (Master branch):
+        http://linguagopreview.azurewebsites.net/
+* Integration in Europa template :
+        http://linguagopreview.azurewebsites.net/index_europa.htm
+* Dev / test URL (Dev branch) :
+        http://devlinguago.azurewebsites.net/
+* Documentation (Jsdoc) :
+        http://devlinguago.azurewebsites.net/documentation/
 
 ---------------------------
 * INTEGRATION IN WEB PAGE:*
 ---------------------------
-Use the page http://linguagopreview.azurewebsites.net/ as example.
 
-1: Put the folder "dist_linguago" and its content next to the page.
+* Example page:
+                http://linguagopreview.azurewebsites.net/index.html
 
-2: Add the fonts at the beginnig of the page.
+1: Download the latest version from github (or checkout the project):
+    https://github.com/jeanbaptistedeborman/pacman/archive/master.zip
+
+2: Put the folder "dist_linguago" and its content next to the page. The other folders are not meant for production.
+
+3: Add the fonts at the beginnig of the page.
 
     <style>
         @font-face {
@@ -28,16 +36,27 @@ Use the page http://linguagopreview.azurewebsites.net/ as example.
         }
     </style>
 
-3: Add an empty container for the application
+4: Add an empty container for the application
     - id attribute must be "linguagoApplication".
     - The application will adapt itself to the the size of the container.
 
     <div id="linguagoApplication"></div>
 
-4: After the container, add a script-tag to load the application:
+5: After the container, add the script-tag that loads the application:
 
     <script src="dist_linguago/linguago_bundle.js"></script>
 
-5: Set the language by using the "lang"-attribute of the HTML-tag. (Defaults to EN if not set)
+6: Set the language by using the "lang"-attribute of the HTML-tag of the page. (Defaults to EN if not set)
 
     <html lang="fr">
+
+
+------------
+* COMMANDS:*
+------------
+This application relies on node.js and npm. Run npm install to get the needed dependencies.
+  * npm run build: generates a new build
+  * npm run doc: regenerates the documentation
+
+
+

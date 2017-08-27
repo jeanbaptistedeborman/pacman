@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "webpack --watch",
-    "doc":"jsdoc js -d documentation -r"
+    "doc":"jsdoc js -d documentation -r README.md"
   },
   "dependencies": {
     "webpack": "^2.6.1"

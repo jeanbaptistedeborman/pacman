@@ -42,7 +42,6 @@ if (String(pageLanguage_str) === 'undefined') {
 
 languageChoice.registerLanguage(pageLanguage_str);
 Labels.fetchLabels(pageLanguage_str, function () {
-    console.log ("page language loaded");
     Labels.fetchLanguages(pageLanguage_str, function () {
         console.log ("loaded");
         var
@@ -58,6 +57,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
             ScoreManager = require('./view/counters/scoremanager'),
             Timer = require('./view/counters/timer'),
             LiveManager = require('./view/counters/livemanager'),
+            PauseManager = require ('./game/utils/pausemanager'),
             LevelCounter = require('./view/counters/levelcounter'),
             playSound = require('./game/utils/playsound'),
             ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
@@ -131,11 +131,9 @@ Labels.fetchLabels(pageLanguage_str, function () {
             GameOverPopup(newGame);
         };
         Goodie.onCollected = function () {
-            console.log("Goodies collected");
-
+            console.log("All Goodies collected");
             togglePauseButton(false);
             ScoreManager.add(Timer.remaining);
-
             LevelOverPopup(function () {
                     if (level_num % 4 === 0) {
                         ObjectlistManager.cleanAll();
