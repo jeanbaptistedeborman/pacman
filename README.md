@@ -1,3 +1,4 @@
+
 A pacmanlike javascript game on the languages in the EU.
 The javascript code is commented inline using jsdoc standard.
 
@@ -57,6 +58,4 @@ The javascript code is commented inline using jsdoc standard.
 This application relies on node.js and npm. Run npm install to get the needed dependencies.
   * npm run build: generates a new build
   * npm run doc: regenerates the documentation
-
-
 
