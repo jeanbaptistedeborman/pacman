@@ -2,7 +2,7 @@
   "name": "Linguagogame",
   "version": "0.0.1",
   "scripts": {
-    "webpack": "webpack --watch",
+    "build": "webpack --watch",
     "doc":"jsdoc js -d documentation -r"
   },
   "dependencies": {
