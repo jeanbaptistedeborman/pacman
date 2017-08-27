@@ -1,12 +1,30 @@
+/**
+ * @module
+ * @description This wrapper keeps a list of all timeouts used in tha application in order to clean them.
+ *
+ *
+ */
+
 "use strict";
 var timout_array = [];
 module.exports = {
+    /**
+     * Cleans all timeouts registred through this module.
+     */
     clearAll: function () {
         timout_array.forEach(function (timeout_api) {
             timeout_api.clear();
         });
         timout_array = [];
     },
+    /**
+     * Wrapper: sets and registers a timeout.
+     * @param {function} fun - The timeout's callback function.
+     * @param {number} delay_num - The timeout's delay.
+     * @todo replace private var "interval" by "timout"
+     * @todo create a single module that handles both intervals and timeouts in order to avoid code duplication.
+     */
+
     set: function (fun, delay_num) {
         (function () {
             var

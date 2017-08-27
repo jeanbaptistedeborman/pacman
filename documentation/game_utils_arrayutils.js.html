@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: game/utils/arrayutils.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: game/utils/arrayutils.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by Jean-Baptiste on 12/03/2017.
+ * @module
+ * @description A bunch of utility functions used to modify arrays.
+ *
+ */
+var
+    getRandomCel = function (array, remove_bool) {
+    var celIndex_num = Math.floor(Math.random() * array.length);
+    if (!remove_bool) {
+        return array[celIndex_num];
+    } else {
+        return array.splice(celIndex_num, 1)[0];
+    }
+},
+    clone = function (array) {
+    var new_array = [];
+    array.forEach(function (element, index) {
+        new_array.push(element);
+    });
+    return new_array;
+};
+
+module.exports = {
+    /**
+     * Creates a flat copy of an array
+     * @method
+     * @param {array} array -The source array.
+     * @return {array} -The copy
+     */
+
+    clone: clone,
+
+    /**
+     * Removes an element from an array
+     * @method
+     * @param {array} array -The source array.
+     * @param {*} item The object to find and remove
+     * @return {array} - A copy of the array without the elememnt given as attribute.
+     */
+
+    remove: function (array, item) {
+        result_array = array.filter(function (element) {
+            return element !== item;
+        });
+        return result_array;
+    },
+
+    /**
+     * Randomly sets the order of the cells of an array
+     * @param {array} array -The source array.
+     * @return {array} - The shuffled array
+     */
+
+    shuffle: function (array) {
+        var currentIndex = array.length,
+            temporaryValue,
+            randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    },
+
+    /**
+     * Converts the properties of an object into an array of value pairs with format {id:propertyName, value:propertyValue}.
+     * @param {Object} obj -The source Object.
+     * @return {Array&lt;Object>} - The resulting array.
+     */
+
+    convertObjectToArray: function (obj) {
+        var result_array = [];
+        for (var n in obj) {
+            result_array.push(
+                {
+                    "id": n,
+                    "value": obj[n]
+                }
+            )
+        }
+        return result_array;
+    },
+
+    /**
+     * Gets a random cel of an array
+     * @method
+     * @param {array} array -The source array.
+     * @param {Boolean} remove_bool -Wether or not the selected cel should be removed from the source array.
+     * @return {*} -The content of the cel.
+     */
+
+    getRandomCel: getRandomCel,
+
+    /**
+     *  Picks random items into an array.
+     * @param source_array - The source array
+     * @param items_num - The number of random items to get from the array
+     * @returns {Array} The resulting selection
+     */
+    pickRandomItems: function (source_array, items_num) {
+        var result_array = [];
+        source_array = clone(source_array);
+        for (var n = 0; n &lt; items_num; n++) {
+            result_array.push(getRandomCel(source_array, true));
+        }
+        return result_array;
+    }
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-datatransform_labels.html">datatransform/labels</a></li><li><a href="module-game_ui_usercontrol.html">game/ui/usercontrol</a></li><li><a href="module-game_utils_animation.html">game/utils/animation</a></li><li><a href="module-game_utils_arrayutils.html">game/utils/arrayutils</a></li><li><a href="module-game_utils_colorutils.html">game/utils/colorutils</a></li><li><a href="module-game_utils_intervalmanager.html">game/utils/intervalmanager</a></li><li><a href="module-game_utils_pausemanager.html">game/utils/pausemanager</a></li><li><a href="module-game_utils_playsound.html">game/utils/playsound</a></li><li><a href="module-game_utils_svgutils.html">game/utils/svgutils</a></li><li><a href="module-game_utils_timeoutmanager.html">game/utils/timeoutmanager</a></li><li><a href="module-index.html">index</a></li><li><a href="module-view_counters_levelcounter.html">view/counters/levelcounter</a></li><li><a href="module-view_counters_livemanager.html">view/counters/livemanager</a></li><li><a href="module-view_counters_scoremanager.html">view/counters/scoremanager</a></li><li><a href="module-view_gameobjects_collisionmanager.html">view/gameobjects/collisionmanager</a></li><li><a href="module-view_gameobjects_objectlistmanager.html">view/gameobjects/objectlistmanager</a></li><li><a href="module-view_levelsmanager.html">view/levelsmanager</a></li><li><a href="module-view_ui_gameoverscreen.html">view/ui/gameoverscreen</a></li><li><a href="module-view_ui_langagechoice.html">view/ui/langagechoice</a></li><li><a href="module-view_ui_leveloverpopup.html">view/ui/leveloverpopup</a></li><li><a href="module-view_ui_pausebutton.html">view/ui/pausebutton</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Sun Aug 27 2017 12:51:43 GMT+0200 (Romance Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

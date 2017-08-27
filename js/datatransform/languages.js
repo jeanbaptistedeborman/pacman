@@ -9,7 +9,6 @@ var
     languages_map = [],
     languagesClone_map,
     refresh = function () {
-    console.log ('REFERSH !');
         languagesClone_map = JSON.parse(JSON.stringify(languages_map));
     };
 languages_array.forEach(function (element) {

@@ -1,5 +1,7 @@
 /**
  * Created by Jean-Baptiste on 10/04/2017.
+ * @module
+ * @description Keeps a list of all objects currently displayed in the game, sorted by kind ("badGuy", "Goodie",  "playerAvatar") .
  */
 var list_obj = {disabled: []},
     ArrayUtils = require('../../game/utils/arrayutils'),
@@ -23,8 +25,27 @@ var list_obj = {disabled: []},
     };
 
 module.exports = {
+    /**
+     * Creates a list for a new kind of objects
+     * @method
+     * @param {string} id_str - The name of the list
+     * @param {array} array=[] -A list of objects to add into the new list
+     * @return {array} -The list
+
+     */
     createList: createList,
+
+    /**
+     * Gets a list based on the provided id.
+     * @method
+     *
+     * @return {array} The list.
+      */
     getList: getList,
+    /**
+     * Removes all the elements from the list and from the screen.
+     *
+     */
     cleanAll: function () {
         var
             items_array,
@@ -46,9 +67,19 @@ module.exports = {
             }
         }
     },
+    /**
+     * Adds an item to a given list
+     * @param {string} listId_str -The name of the list
+     * @param {object} item_obj The object to add.
+     */
     pushItem: function (listId_str, item_obj) {
         getList(listId_str).push(item_obj);
     },
+    /**
+     * Removes an object from a list so that it has no impact on the game anymore.
+     * @param {string} listId_str - The name of the list
+     * @param {object} item_obj The object to disable.
+     */
     disableItemFromList: function (listId_str, item_obj) {
         list_obj.disabled.push(item_obj);
         return createList(listId_str, ArrayUtils.remove(getList(listId_str), item_obj));

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><p>A pacmanlike javascript game on the languages in the EU.
+The javascript code is commented inline using jsdoc standard.</p>
+<hr>
+<h2><em>URLS</em></h2><ul>
+<li>Github:<pre class="prettyprint source"><code>  https://github.com/jeanbaptistedeborman/pacman/</code></pre></li>
+<li>Preview URL (Master branch):<pre class="prettyprint source"><code>  http://linguagopreview.azurewebsites.net/</code></pre></li>
+<li>Integration in Europa template :<pre class="prettyprint source"><code>  http://linguagopreview.azurewebsites.net/index_europa.htm</code></pre></li>
+<li>Dev / test URL (Dev branch) :<pre class="prettyprint source"><code>  http://devlinguago.azurewebsites.net/</code></pre></li>
+<li>Documentation (Jsdoc) :<pre class="prettyprint source"><code>  http://devlinguago.azurewebsites.net/documentation/</code></pre></li>
+</ul>
+<hr>
+<h2><em> INTEGRATION IN WEB PAGE:</em></h2><ul>
+<li>Example page:<pre class="prettyprint source"><code>          http://linguagopreview.azurewebsites.net/index.html</code></pre></li>
+</ul>
+<p>1: Download the latest version from github (or checkout the project):
+    https://github.com/jeanbaptistedeborman/pacman/archive/master.zip</p>
+<p>2: Put the folder &quot;dist_linguago&quot; and its content next to the page. The other folders are not meant for production.</p>
+<p>3: Add the fonts at the beginnig of the page.</p>
+<pre class="prettyprint source"><code>&lt;style>
+    @font-face {
+        font-family: 'AppFont';
+        src: url('dist_linguago/lucida_sans.ttf') format('truetype');
+    }
+&lt;/style></code></pre><p>4: Add an empty container for the application</p>
+<pre class="prettyprint source"><code>- id attribute must be &quot;linguagoApplication&quot;.
+- The application will adapt itself to the the size of the container.
+
+&lt;div id=&quot;linguagoApplication&quot;>&lt;/div></code></pre><p>5: After the container, add the script-tag that loads the application:</p>
+<pre class="prettyprint source"><code>&lt;script src=&quot;dist_linguago/linguago_bundle.js&quot;>&lt;/script></code></pre><p>6: Set the language by using the &quot;lang&quot;-attribute of the HTML-tag of the page. (Defaults to EN if not set)</p>
+<pre class="prettyprint source"><code>&lt;html lang=&quot;fr&quot;></code></pre><hr>
+<h2><em> COMMANDS:</em></h2><p>This application relies on node.js and npm. Run npm install to get the needed dependencies.</p>
+<ul>
+<li>npm run build: generates a new build</li>
+<li>npm run doc: regenerates the documentation</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-datatransform_labels.html">datatransform/labels</a></li><li><a href="module-game_ui_usercontrol.html">game/ui/usercontrol</a></li><li><a href="module-game_utils_animation.html">game/utils/animation</a></li><li><a href="module-game_utils_arrayutils.html">game/utils/arrayutils</a></li><li><a href="module-game_utils_colorutils.html">game/utils/colorutils</a></li><li><a href="module-game_utils_intervalmanager.html">game/utils/intervalmanager</a></li><li><a href="module-game_utils_pausemanager.html">game/utils/pausemanager</a></li><li><a href="module-game_utils_playsound.html">game/utils/playsound</a></li><li><a href="module-game_utils_svgutils.html">game/utils/svgutils</a></li><li><a href="module-game_utils_timeoutmanager.html">game/utils/timeoutmanager</a></li><li><a href="module-index.html">index</a></li><li><a href="module-view_counters_levelcounter.html">view/counters/levelcounter</a></li><li><a href="module-view_counters_livemanager.html">view/counters/livemanager</a></li><li><a href="module-view_counters_scoremanager.html">view/counters/scoremanager</a></li><li><a href="module-view_gameobjects_collisionmanager.html">view/gameobjects/collisionmanager</a></li><li><a href="module-view_gameobjects_objectlistmanager.html">view/gameobjects/objectlistmanager</a></li><li><a href="module-view_levelsmanager.html">view/levelsmanager</a></li><li><a href="module-view_ui_gameoverscreen.html">view/ui/gameoverscreen</a></li><li><a href="module-view_ui_langagechoice.html">view/ui/langagechoice</a></li><li><a href="module-view_ui_leveloverpopup.html">view/ui/leveloverpopup</a></li><li><a href="module-view_ui_pausebutton.html">view/ui/pausebutton</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Sun Aug 27 2017 12:51:43 GMT+0200 (Romance Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

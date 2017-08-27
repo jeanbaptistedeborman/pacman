@@ -1,7 +1,7 @@
 "use strict";
 /**
- * @module languageChoice
- * manages the dispplay of the language-menu
+ * @module
+ * @description Manages the display of the language-menu when the user must select another language for the languages displayed in the answers-menu.
  */
 
 
@@ -60,12 +60,8 @@ var languages_array = require('../../../data/languages.json'),
     };
 dom_el.appendChild(logoContainer_el);
 logoContainer_el.appendChild(logo_el);
-
-
-
-
 languages_array.forEach(function (element, index) {
-    var button_str = element.label,
+    var
         col_num = index % COLS_NUM,
         line_num = Math.floor(index / COLS_NUM),
         button_el = SvgUtils.createElement('svg', {
@@ -91,7 +87,7 @@ languages_array.forEach(function (element, index) {
                 }
             ]);
 
-    button_text.textContent = button_str;
+    button_text.textContent = element.label;
     button_el.setAttribute('class', 'button');
     button_el.setAttribute('tabindex', 0);
     button_el.appendChild(bg_el);
@@ -107,9 +103,8 @@ languages_array.forEach(function (element, index) {
 
 module.exports = {
     /**
-     * @method
      * Displays the language menu
-     * @param {function} p_callBack_fun - The function called when the user has choosen the language;
+     * @param {function} p_callBack_fun - The function called when the user has choosen his language;
      */
     display: function (p_callBack_fun) {
         callBack_fun = p_callBack_fun;
@@ -132,5 +127,11 @@ module.exports = {
         }
 
     },
+    /**
+     * @method
+     * @description The function called when the language of the popup changes. This method is called only once from outside this module : when the language is set to the page's language at the start of the application.
+     * @todo Check if the first language selection can be integrated in this moduleso this method does not need to be exposed anymore.
+     * @param {string} languageId_str - The selected language.
+     */
     registerLanguage: registerLanguage
 };

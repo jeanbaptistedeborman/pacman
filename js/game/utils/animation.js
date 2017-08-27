@@ -4,15 +4,15 @@
 
 
 /**
- * @module animation
+ * @module
  * @description Basic animations and transitions
  *
  */
 
 module.exports =  {
     /**
-     * Fades an element form 0 to 100 opacity
-     * @param dom_el
+     * @description Fades an element form 0 to 100 opacity
+     * @param {DomElement} dom_el - The element to animate
      */
     fadeIn:function (dom_el){
         var opacity_num = 0.1,

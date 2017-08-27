@@ -26,7 +26,6 @@ var
         config.position = point;
         config.position.width = gridSize_num;
         config.position.height = gridSize_num;
-        console.log('bonusLive_bool', bonusLive_bool);
         dom_el = config.dom_el = SvgUtils.createElement('use', {
                 width: 10,
                 height: 10,
@@ -39,14 +38,11 @@ var
                     name: "href",
                     value: bonusLive_bool ? "#earth" : "#goodie"
                 }]
-        )
-        ;
+        );
         config.remove = function () {
-
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
                playSound('bon_2');
-
             if (!bonusLive_bool) {
                 ScoreManager.increment();
 
@@ -56,10 +52,9 @@ var
 
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
-
-             
-                return items_array.length;
             }
+            console.log ("goodies : " , items_array);
+            return items_array.length;
         };
         items_array.push(config);
         parent_el.appendChild(dom_el);
@@ -70,7 +65,6 @@ stageConfig.dom_el.appendChild(layer_g);
 module.exports = {
     set onCollected(fun) {
         onCollected_fun = fun;
-
     },
     get itemList() {
         return items_array;

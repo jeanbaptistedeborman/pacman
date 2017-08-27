@@ -2,31 +2,30 @@
  * Created by Jean-Baptiste on 2/20/2017.
  */
 "use strict";
+require('../css/linguago.css');
+require('./polyfill/classlist');
+require('./polyfill/requestanimationframe');
 
+/**
+ * @module
+ * @description The core of the application. Manages the game framework:
+ * - Fetches the necessary ressources before launching the game.
+ * - Launches a new level when all goodies are collected.
+ * - Stops the game when the user has lost all is lives.
+ */
 
+var svgContent = require('../img/svgcontent.txt'),
+    svg_xml = (new DOMParser().parseFromString(svgContent, "application/xml")),
+    svg_xml = document.importNode(svg_xml.documentElement, true),
+    app_el = document.getElementById('linguagoApplication');
 
-
-
-require ('../css/linguago.css');
-require ('./polyfill/classlist');
-require ('./polyfill/requestanimationframe');
-
-console.log ('index');
-
-var svgContent = require ('../img/svgcontent.txt');
-var svg_xml = (new DOMParser().parseFromString(svgContent, "application/xml"));
-svg_xml = document.importNode(svg_xml.documentElement,true);
-var app_el = document.getElementById('linguagoApplication');
-app_el.innerHTML ='';
-console.log ("svg_xml : ", svg_xml);
+app_el.innerHTML = '';
 app_el.appendChild(svg_xml);
-
 
 require('./view/ui/pausebutton');
 
-
-  var  languageChoice = require('./view/ui/langageChoice'),
-
+var
+    languageChoice = require('./view/ui/langageChoice'),
     Labels = require('./datatransform/labels'),
     setLabels = function () {
         var
@@ -40,9 +39,11 @@ require('./view/ui/pausebutton');
 if (String(pageLanguage_str) === 'undefined') {
     pageLanguage_str = 'en';
 }
+
 languageChoice.registerLanguage(pageLanguage_str);
 Labels.fetchLabels(pageLanguage_str, function () {
     Labels.fetchLanguages(pageLanguage_str, function () {
+        console.log ("loaded");
         var
             Obstacle = require('./view/gameobjects/objects/obstacle'),
             Goodie = require('./view/gameobjects/objects/goodie'),
@@ -56,11 +57,12 @@ Labels.fetchLabels(pageLanguage_str, function () {
             ScoreManager = require('./view/counters/scoremanager'),
             Timer = require('./view/counters/timer'),
             LiveManager = require('./view/counters/livemanager'),
+            PauseManager = require ('./game/utils/pausemanager'),
             LevelCounter = require('./view/counters/levelcounter'),
             playSound = require('./game/utils/playsound'),
             ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
             LevelsManager = require('./view/levelsmanager'),
-            Languages = require ('./datatransform/languages'),
+            Languages = require('./datatransform/languages'),
             app_el = Config('app').dom_el,
             playerAvatar_obj,
             level_num = 0,
@@ -120,7 +122,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
         app_el.querySelector('.homeButton').addEventListener('mousedown', function (evt) {
             evt.stopPropagation();
         });
-     LiveManager.onLivesLost = function () {
+        LiveManager.onLivesLost = function () {
             togglePauseButton(false);
             QuestionPopup.remove();
             PauseManager.playing = true;
@@ -129,12 +131,11 @@ Labels.fetchLabels(pageLanguage_str, function () {
             GameOverPopup(newGame);
         };
         Goodie.onCollected = function () {
-
+            console.log("All Goodies collected");
             togglePauseButton(false);
             ScoreManager.add(Timer.remaining);
-
             LevelOverPopup(function () {
-                    if (level_num%4 === 0) {
+                    if (level_num % 4 === 0) {
                         ObjectlistManager.cleanAll();
                         languageChoice.display(createLevel);
                     } else {
