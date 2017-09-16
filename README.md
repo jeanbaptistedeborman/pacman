@@ -16,7 +16,7 @@ The javascript code is commented inline using jsdoc standard.
         http://devlinguago.azurewebsites.net/documentation/
 
 ---------------------------
-* INTEGRATION IN WEB PAGE:*
+*INTEGRATION IN WEB PAGE:*
 ---------------------------
 
 * Example page:
@@ -52,7 +52,7 @@ The javascript code is commented inline using jsdoc standard.
 
 
 ------------
-* COMMANDS:*
+*COMMANDS:*
 ------------
 This application relies on node.js and npm. Run npm install to get the needed dependencies.
   * npm run build: generates a new build
