@@ -27,6 +27,15 @@ require('./view/ui/pausebutton');
 var
     languageChoice = require('./view/ui/langageChoice'),
     Labels = require('./datatransform/labels'),
+    getParameterByName = function (name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    },
     setLabels = function () {
         var
             scoreLabel_el = document.querySelector('#linguagoApplication .scoreLabel'),
@@ -34,8 +43,7 @@ var
         scoreLabel_el.textContent = Labels.getLabel('score');
         levelLabel_el.textContent = Labels.getLabel('level');
     },
-    pageLanguage_str = document.querySelector('html').getAttribute('lang');
-
+    pageLanguage_str = getParameterByName("lang");
 if (String(pageLanguage_str) === 'undefined') {
     pageLanguage_str = 'en';
 }
@@ -43,7 +51,7 @@ if (String(pageLanguage_str) === 'undefined') {
 languageChoice.registerLanguage(pageLanguage_str);
 Labels.fetchLabels(pageLanguage_str, function () {
     Labels.fetchLanguages(pageLanguage_str, function () {
-        console.log ("loaded");
+        console.log("loaded");
         var
             Obstacle = require('./view/gameobjects/objects/obstacle'),
             Goodie = require('./view/gameobjects/objects/goodie'),
@@ -57,7 +65,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
             ScoreManager = require('./view/counters/scoremanager'),
             Timer = require('./view/counters/timer'),
             LiveManager = require('./view/counters/livemanager'),
-            PauseManager = require ('./game/utils/pausemanager'),
+            PauseManager = require('./game/utils/pausemanager'),
             LevelCounter = require('./view/counters/levelcounter'),
             playSound = require('./game/utils/playsound'),
             ObjectlistManager = require('./view/gameobjects/objectlistmanager'),
