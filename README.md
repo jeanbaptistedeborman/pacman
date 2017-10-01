@@ -47,11 +47,6 @@ The javascript code is commented inline using jsdoc standard.
 
     <script src="dist_linguago/linguago_bundle.js"></script>
 
-6: Set the language by using the "lang"-attribute of the HTML-tag of the page. (Defaults to EN if not set)
-
-    <html lang="fr">
-
-
 ------------
 *COMMANDS:*
 ------------
