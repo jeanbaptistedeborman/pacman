@@ -44,7 +44,7 @@ var
         levelLabel_el.textContent = Labels.getLabel('level');
     },
     pageLanguage_str = getParameterByName("lang");
-if (String(pageLanguage_str) === 'undefined') {
+if (!pageLanguage_str) {
     pageLanguage_str = 'en';
 }
 
