@@ -12,5 +12,8 @@
   "level": "Niveau",
   "nice_work": "Bien joué! Passe au niveau suivant!",
   "game_paused": "Jeu en pause",
-  "go": "GO!"
+  "go": "GO!",
+  "save_score": "Enregistre ton score",
+  "your_rank": "Ta place: XXX sur XXX",
+  "enter_name_hof": "Inscris ton nom ici pour figurer parmi les meilleurs scores!"
 }

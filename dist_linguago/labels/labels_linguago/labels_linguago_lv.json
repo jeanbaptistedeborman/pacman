@@ -12,5 +12,8 @@
   "level": "Līmenis",
   "nice_work": "Malacis! Dodies uz nākamo līmeni!",
   "game_paused": "Spēle apturēta",
-  "go": "STARTS!"
+  "go": "STARTS!",
+  "save_score": "Saglabā savu rezultātu",
+  "your_rank": "Tavas vietas numurs: XXX no XXX",
+  "enter_name_hof": "Ievadi savu vārdu un aplūko labākos rezultātus!"
 }

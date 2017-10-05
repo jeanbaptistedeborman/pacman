@@ -12,5 +12,8 @@
   "level": "Lygis",
   "nice_work": "Šauniai padirbėta! Pereik į kitą lygį!",
   "game_paused": "Pertrauka",
-  "go": "PRADĖTI"
+  "go": "PRADĖTI",
+  "save_score": "Išsaugoti savo rezultatą",
+  "your_rank": "Jūsų vieta XXX iš XXX",
+  "enter_name_hof": "Įrašykite savo vardą čia į Geriausius rezultatus!"
 }

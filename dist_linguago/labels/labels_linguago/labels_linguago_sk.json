@@ -12,5 +12,8 @@
   "level": "Level",
   "nice_work": "Výborne! Prejsť na ďalší level.",
   "game_paused": "Hra prerušená",
-  "go": "ŠTART"
+  "go": "ŠTART",
+  "save_score": "Ulož si skóre",
+  "your_rank": "Tvoje umiestnenie: XXX z XXX",
+  "enter_name_hof": "Zadaj svoje meno a vstúp do siene slávy!"
 }

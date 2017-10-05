@@ -12,5 +12,8 @@
   "level": "Level",
   "nice_work": "Gute Leistung! Weiter zum nächsten Level!",
   "game_paused": "Spiel unterbrochen",
-  "go": "LOS!"
+  "go": "LOS!",
+  "save_score": "Spielstand speichern",
+  "your_rank": "Dein Platz ist XXX von XXX.",
+  "enter_name_hof": "Nenne hier deinen Namen für die Liste der Rekordhalter"
 }

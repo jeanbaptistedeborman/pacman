@@ -12,5 +12,8 @@
   "level": "Szint",
   "nice_work": "Bravó! Lépj a következő szintre!",
   "game_paused": "Játék szüneteltetve",
-  "go": "MEHET!"
+  "go": "MEHET!",
+  "save_score": "Pontszám elmentése",
+  "your_rank": "Helyezésed: XXX. vagy az összesen XXX játékos közül",
+  "enter_name_hof": "Írd be a neved a legjobb játékosok közé!"
 }

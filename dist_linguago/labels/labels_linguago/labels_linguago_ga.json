@@ -12,5 +12,8 @@
   "level": "Leibhéal",
   "nice_work": "An-obair! Téigh go dtí an chéad leibhéal eile!",
   "game_paused": "Cluiche ar sos",
-  "go": "GABH!"
+  "go": "GABH!",
+  "save_score": "Do scór a shábháil",
+  "your_rank": "An rangú atá agat: XXX as XXX",
+  "enter_name_hof": "Cuir isteach d’ainm do na hArdscórálaithe"
 }

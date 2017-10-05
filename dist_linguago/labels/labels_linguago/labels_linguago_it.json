@@ -12,5 +12,8 @@
   "level": "Livello",
   "nice_work": "Ottimo lavoro! Passa al livello successivo!",
   "game_paused": "In pausa",
-  "go": "GO"
+  "go": "GO",
+  "save_score": "Salva il tuo punteggio",
+  "your_rank": "La tua posizione è XXX su XXX",
+  "enter_name_hof": "Inserisci qui il tuo nome per entrare nella classifica dei migliori"
 }

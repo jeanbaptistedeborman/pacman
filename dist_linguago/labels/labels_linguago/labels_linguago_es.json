@@ -12,5 +12,8 @@
   "level": "Nivel",
   "nice_work": "¡Buen trabajo! ¡Pasas al siguiente nivel!",
   "game_paused": "Pausa",
-  "go": "¡ADELANTE!"
+  "go": "¡ADELANTE!",
+  "save_score": "Registra tu puntuación",
+  "your_rank": "Tu clasificación: XXX de XXX",
+  "enter_name_hof": "Introduce aquí tu nombre para la Galería de la fama"
 }
