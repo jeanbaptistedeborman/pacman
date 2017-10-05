@@ -42,7 +42,7 @@ var
         config.remove = function () {
             parent_el.removeChild(dom_el);
             items_array = ObjectListManager.disableItemFromList(ID_STR, config);
-               playSound('bon_2');
+            playSound('bon_2');
             if (!bonusLive_bool) {
                 ScoreManager.increment();
 

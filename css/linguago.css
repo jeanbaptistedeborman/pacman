@@ -226,3 +226,16 @@ margin:0;
 #linguagoApplication .live_icon {
     fill: 'red'
 }
+
+/* End screen button manual transform */
+.button.sendScore path{
+    -ms-transform: translate(152px, 218px); 
+    -webkit-transform: translate(152px, 218px); 
+    transform: translate(152px, 218px);
+}
+
+.button.playAgain path {
+    -ms-transform: translate(0px, 20px); 
+    -webkit-transform: translate(0px, 20px); 
+    transform: translate(0px, 20px);
+}

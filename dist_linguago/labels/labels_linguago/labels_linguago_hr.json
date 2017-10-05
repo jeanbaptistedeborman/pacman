@@ -12,5 +12,8 @@
   "level": "Razina",
   "nice_work": "Bravo! Prijeđi na sljedeću razinu!",
   "game_paused": "Prekid igre",
-  "go": "KRENI!"
+  "go": "KRENI!",
+  "save_score": "Sačuvaj svoj rezultat",
+  "your_rank": "Na XXX si mjestu od XXX.",
+  "enter_name_hof": "Za uvrštenje među najbolje igrače, ovdje unesite svoje ime!"
 }

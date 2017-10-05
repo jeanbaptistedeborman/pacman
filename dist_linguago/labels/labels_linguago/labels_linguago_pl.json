@@ -12,5 +12,8 @@
   "level": "Poziom",
   "nice_work": "Nieźle! Przechodzisz do następnego poziomu!",
   "game_paused": "Gra została wstrzymana",
-  "go": "STARTUJ!"
+  "go": "STARTUJ!",
+  "save_score": "Zapisz wynik",
+  "your_rank": "Zająłeś miejsce XXX z XXX",
+  "enter_name_hof": "Wpisz swoje imię na listę najlepszych graczy!"
 }

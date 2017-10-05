@@ -12,5 +12,8 @@
   "level": "Taso",
   "nice_work": "Hienoa! Pääset seuraavalle tasolle.",
   "game_paused": "Peli on keskeytetty",
-  "go": "PELAA!"
+  "go": "PELAA!",
+  "save_score": "Tallenna pistemäärä",
+  "your_rank": "Olet sijalla XXX kaikkiaan XXX pelaajan joukosta.",
+  "enter_name_hof": "Voit lisätä nimesi tulostauluun tästä!"
 }

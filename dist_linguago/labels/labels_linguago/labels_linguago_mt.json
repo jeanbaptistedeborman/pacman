@@ -12,5 +12,8 @@
   "level": "Livell",
   "nice_work": "Prosit! Itla’ livell!",
   "game_paused": "Pawża",
-  "go": "TLAQNA!"
+  "go": "TLAQNA!",
+  "save_score": "Issejvja l-punteġġ tiegħek",
+  "your_rank": "Il-grad tiegħek huwa XXX minn XXX",
+  "enter_name_hof": "Daħħal ismek hawn għar-Riżultat globali!"
 }

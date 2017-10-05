@@ -12,5 +12,8 @@
   "level": "Tase",
   "nice_work": "Tubli! Liigu järgmisele tasemele!",
   "game_paused": "Mäng on peatatud",
-  "go": "LÄKS!"
+  "go": "LÄKS!",
+  "save_score": "Salvesta punktisumma",
+  "your_rank": "Oled pingereas XXX mängija hulgas kohal XXX",
+  "enter_name_hof": "Sisesta oma nimi edetabelisse!"
 }

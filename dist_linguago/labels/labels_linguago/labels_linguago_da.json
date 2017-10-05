@@ -12,5 +12,8 @@
   "level": "Niveau",
   "nice_work": "Flot klaret! Fortsæt til næste niveau!",
   "game_paused": "Spillet er sat på pause.",
-  "go": "SÆT IGANG!"
+  "go": "SÆT IGANG!",
+  "save_score": "Gem dine point",
+  "your_rank": "Du er nummer XXX ud af XXX",
+  "enter_name_hof": "Skriv dit navn her I topscorelisten"
 }

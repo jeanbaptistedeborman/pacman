@@ -12,5 +12,8 @@
   "level": "Level",
   "nice_work": "Sláva! Přejdi do dalšího levelu!",
   "game_paused": "Hra přerušena",
-  "go": "START!"
+  "go": "START!",
+  "save_score": "Uložit skóre",
+  "your_rank": "Tvé hodnocení: XXX z XXX",
+  "enter_name_hof": "Zapiš své jméno do Síně slávy!"
 }

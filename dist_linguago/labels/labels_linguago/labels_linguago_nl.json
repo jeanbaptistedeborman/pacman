@@ -12,5 +12,8 @@
   "level": "Niveau",
   "nice_work": "Goed gedaan! Ga door naar het volgende niveau!",
   "game_paused": "Spel gepauzeerd",
-  "go": "STARTUJ!"
+  "go": "STARTUJ!",
+  "save_score": "Score opslaan",
+  "your_rank": "Je staat op plaats XXX (van de XXX)",
+  "enter_name_hof": "Vul hier je naam in voor de Hall of fame!"
 }

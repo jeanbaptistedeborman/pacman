@@ -12,5 +12,8 @@
   "level": "Nivel",
   "nice_work": "Bine! Treci la nivelul următor!",
   "game_paused": "Pauză",
-  "go": "START!"
+  "go": "START!",
+  "save_score": "Salvează-ți punctajul",
+  "your_rank": "Te afli pe locul XXX din XXX.",
+  "enter_name_hof": "Introduceți-vă numele în Galeria de onoare!"
 }

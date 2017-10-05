@@ -12,5 +12,8 @@
   "level": "Stopnja",
   "nice_work": "Dobro ti je šlo! Nadaljuj na naslednji stopnji.",
   "game_paused": "Prekinitev igre",
-  "go": "ZAČNI"
+  "go": "ZAČNI",
+  "save_score": "Shrani rezultat",
+  "your_rank": "Tvoje mesto na lestvici: XXX od XXX",
+  "enter_name_hof": "Vpiši svoje ime za lestvico najboljših!"
 }

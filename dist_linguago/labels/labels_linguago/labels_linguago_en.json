@@ -12,5 +12,8 @@
   "level": "Level",
   "nice_work": "Nice work! Go up to the next level!",
   "game_paused": "Game paused",
-  "go": "GO!"
+  "go": "GO!",
+  "save_score": "Save your score",
+  "your_rank": "Your rank is XXX out XXX",
+  "enter_name_hof": "Enter your name here for Hall of fame!"
 }

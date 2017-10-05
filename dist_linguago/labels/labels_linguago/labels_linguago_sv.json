@@ -12,5 +12,8 @@
   "level": "Nivå",
   "nice_work": "Bra jobbat! Gå till nästa nivå!",
   "game_paused": "Spelet är pausat",
-  "go": "KÖR!"
+  "go": "KÖR!",
+  "save_score": "Spara dina poäng",
+  "your_rank": "Du är på plats XXX av XXX",
+  "enter_name_hof": "Skriv ditt namn här för Topplistan!"
 }
