@@ -16226,6 +16226,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
         app_el.querySelector('.homeButton').addEventListener('mousedown', function (evt) {
             evt.stopPropagation();
         });
+        app_el.querySelector('.homeButton').setAttribute("xlink:href", ".?lang="+pageLanguage_str); 
         LiveManager.onLivesLost = function () {
             togglePauseButton(false);
             QuestionPopup.remove();
