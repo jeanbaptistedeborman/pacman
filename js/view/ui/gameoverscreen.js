@@ -175,6 +175,9 @@ module.exports = function (p_callback_fun) {
         }
         continueButton_el = popup_el.querySelector('.playAgain');
         saveButton_el = popup_el.querySelector('.sendScore');
+
+        
+
         open_bool = true;
         SvgUtils.simulateEnterClick(continueButton_el, closePopup);
         SvgUtils.simulateEnterClick(saveButton_el, sendScore);
@@ -182,6 +185,21 @@ module.exports = function (p_callback_fun) {
         continueButton_el.addEventListener('touchstart', closePopup);
         saveButton_el.addEventListener('click', sendScore);
         saveButton_el.addEventListener('touchstart', sendScore);
+
+        continueButton_el_paths = popup_el.querySelectorAll('.playAgain path');
+        saveButton_el_paths = popup_el.querySelectorAll('.sendScore path');
+
+        transform1 = getComputedStyle(continueButton_el_paths[0]).getPropertyValue('transform');
+        transform2 = getComputedStyle(saveButton_el_paths[0]).getPropertyValue('transform');
+
+        for (i = 0; i < continueButton_el_paths.length; i++) { 
+           continueButton_el_paths[i].setAttribute('transform', transform1);
+        }
+
+        for (i = 0; i < saveButton_el_paths.length; i++) { 
+           saveButton_el_paths[i].setAttribute('transform', transform2);
+        }
+
     }
 }
 ;
