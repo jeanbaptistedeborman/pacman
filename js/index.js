@@ -43,7 +43,6 @@ if (String(pageLanguage_str) === 'undefined') {
 languageChoice.registerLanguage(pageLanguage_str);
 Labels.fetchLabels(pageLanguage_str, function () {
     Labels.fetchLanguages(pageLanguage_str, function () {
-        console.log ("loaded");
         var
             Obstacle = require('./view/gameobjects/objects/obstacle'),
             Goodie = require('./view/gameobjects/objects/goodie'),
@@ -131,7 +130,6 @@ Labels.fetchLabels(pageLanguage_str, function () {
             GameOverPopup(newGame);
         };
         Goodie.onCollected = function () {
-            console.log("All Goodies collected");
             togglePauseButton(false);
             ScoreManager.add(Timer.remaining);
             LevelOverPopup(function () {
