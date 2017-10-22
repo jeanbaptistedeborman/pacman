@@ -1,5 +1,17 @@
 /**
  * Created by Jean-Baptiste on 25/02/2017.
+ *
+ * @module
+ * @description The Factory generating obstacles: The walls encountered by the user
+ */
+/**
+ * @typedef Rectangle
+ * @description A rectangle used to convey coordinates.
+ * @property {Number} width - The width of the rectangle
+ * @property {Number} height - The height
+ * @property {Number} x - The position on the X-axis
+ * @property {Number} y - The position on the Y-axis
+ *
  */
 "use strict";
 var
@@ -21,9 +33,16 @@ var
 stageConfig.dom_el.appendChild (layer_g);
 
 module.exports = {
+    /**
+     * The list of obstacles on the screen
+     */
     get itemList() {
         return items_array;
     },
+    /**
+     * Creates a new obstacle and adds it to the Obstacle List.
+     * @param {Rectangle} rect -The coordinates of the wall.
+     */
     add: function (rect) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
@@ -133,5 +152,4 @@ module.exports = {
         items_array.push(config);
         layer_g.appendChild(dom_el);
     }
-}
-;
+};
