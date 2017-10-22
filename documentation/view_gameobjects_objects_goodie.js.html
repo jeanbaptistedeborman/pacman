@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/gameobjects/objects/goodie.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/gameobjects/objects/goodie.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by Jean-Baptiste on 25/02/2017.
+ * @module
+ * @description The goodies (scores and bonus lives) appearing in the game.
+ */
+"use strict";
+var
+    Config = require('../config'),
+    stageConfig = Config('stage'),
+    ObjectListManager = require('../objectlistmanager'),
+    SvgUtils = require('../../../game/utils/svgutils'),
+    LiveManager = require('../../counters/livemanager'),
+    ScoreManager = require('../../counters/scoremanager'),
+    playSound = require('../../../game/utils/playsound'),
+    CollisionManager = require('../collisionmanager'),
+    layer_g = SvgUtils.createElement('g'),
+    onCollected_fun,
+    gridSize_num = stageConfig.gridSize,
+    ID_STR = 'goodie',
+    parent_el = layer_g,
+    items_array = ObjectListManager.createList(ID_STR),
+    add = function (point) {
+        var
+            config = JSON.parse(JSON.stringify(Config(ID_STR))),
+            bonusLive_bool = Math.random() &lt; (LiveManager.maxLives - LiveManager.lives)/70,
+            dom_el;
+        config.position = point;
+        config.position.width = gridSize_num;
+        config.position.height = gridSize_num;
+        dom_el = config.dom_el = SvgUtils.createElement('use', {
+                width: 10,
+                height: 10,
+                x: config.position.x,
+                y: config.position.y
+            },
+            [
+                {
+                    nameSpace: "http://www.w3.org/1999/xlink",
+                    name: "href",
+                    value: bonusLive_bool ? "#earth" : "#goodie"
+                }]
+        );
+        config.remove = function () {
+            parent_el.removeChild(dom_el);
+            items_array = ObjectListManager.disableItemFromList(ID_STR, config);
+               playSound('bon_2');
+            if (!bonusLive_bool) {
+                ScoreManager.increment();
+
+            } else {
+                LiveManager.increment();
+            }
+
+            if (items_array.length === 0 &amp;&amp; onCollected_fun) {
+                onCollected_fun();
+            }
+            return items_array.length;
+        };
+        items_array.push(config);
+        parent_el.appendChild(dom_el);
+    };
+
+stageConfig.dom_el.appendChild(layer_g);
+
+module.exports = {
+    /**
+     * @type Function
+     * @writeonly
+     * @description Sets the callback called when all goodies are collected
+     */
+    set onCollected(fun) {
+        onCollected_fun = fun;
+    },
+    /**
+     * @type Array
+     * @readonly
+     * @description The list of goodies on the screen
+     */
+    get itemList() {
+        return items_array;
+    },
+    /**
+     * Add all the goodies on the stage on a grid of 6 by 6, when the square is not occupied by othjer objects (wall, ...).
+     */
+    addAll: function () {
+        var line_num,
+            column_num,
+            lineTotal_num = stageConfig.linesNum,
+            colTotal_num = stageConfig.columnsNum;
+        for (column_num = 0; column_num &lt; colTotal_num; column_num++) {
+            for (line_num = 0; line_num &lt; lineTotal_num; line_num++) {
+                if (line_num % 6 === 0 &amp;&amp; column_num % 6 === 0) {
+                    var position_point = {
+                        x: column_num * gridSize_num,
+                        y: line_num * gridSize_num
+                    };
+                    if (!CollisionManager.isOccupied(position_point)) {
+                        add(position_point);
+                    }
+                }
+
+            }
+        }
+    }
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-datatransform_labels.html">datatransform/labels</a></li><li><a href="module-game_directionfromto.html">game/directionfromto</a></li><li><a href="module-game_ui_keyboard.html">game/ui/keyboard</a></li><li><a href="module-game_ui_mouseandtouch.html">game/ui/mouseandtouch</a></li><li><a href="module-game_ui_usercontrol.html">game/ui/usercontrol</a></li><li><a href="module-game_utils_animation.html">game/utils/animation</a></li><li><a href="module-game_utils_arrayutils.html">game/utils/arrayutils</a></li><li><a href="module-game_utils_colorutils.html">game/utils/colorutils</a></li><li><a href="module-game_utils_intervalmanager.html">game/utils/intervalmanager</a></li><li><a href="module-game_utils_pausemanager.html">game/utils/pausemanager</a></li><li><a href="module-game_utils_playsound.html">game/utils/playsound</a></li><li><a href="module-game_utils_svgutils.html">game/utils/svgutils</a></li><li><a href="module-game_utils_timeoutmanager.html">game/utils/timeoutmanager</a></li><li><a href="module-index.html">index</a></li><li><a href="module-view_counters_levelcounter.html">view/counters/levelcounter</a></li><li><a href="module-view_counters_livemanager.html">view/counters/livemanager</a></li><li><a href="module-view_counters_scoremanager.html">view/counters/scoremanager</a></li><li><a href="module-view_gameobjects_collisionmanager.html">view/gameobjects/collisionmanager</a></li><li><a href="module-view_gameobjects_objectlistmanager.html">view/gameobjects/objectlistmanager</a></li><li><a href="module-view_gameobjects_objects_goodie.html">view/gameobjects/objects/goodie</a></li><li><a href="module-view_gameobjects_objects_obstacle.html">view/gameobjects/objects/obstacle</a></li><li><a href="module-view_levelsmanager.html">view/levelsmanager</a></li><li><a href="module-view_ui_gameoverscreen.html">view/ui/gameoverscreen</a></li><li><a href="module-view_ui_langagechoice.html">view/ui/langagechoice</a></li><li><a href="module-view_ui_leveloverpopup.html">view/ui/leveloverpopup</a></li><li><a href="module-view_ui_pausebutton.html">view/ui/pausebutton</a></li><li><a href="module-view_ui_questionpopup.html">view/ui/questionpopup</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Sun Oct 22 2017 15:21:12 GMT+0200 (Romance Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -468,13 +468,72 @@ module.exports = {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+/**
+ * Created by Jean-Baptiste on 06/05/2017.
+ * @module
+ * @description Manages the pauses in the game (caused by popup displays, pause-button, ...)
+ *
+ */
+
+
+var
+    app_el = __webpack_require__ (0)('app').dom_el,
+    noPopup_bool = true,
+    evaluatePause =  function (){
+        var paused_bool =  noPopup_bool && pauseButton_bool;
+        if (pauseButton_bool) {
+            app_el.classList.remove ('pauseButtonTriggered');
+        } else {
+            app_el.classList.add ('pauseButtonTriggered');
+        }
+        return paused_bool;
+    },
+    pauseButton_bool = true;
+module.exports = {
+    /**
+     *
+     * @description Gets or sets wether the pause-pause-button is on or off.
+     * @type {Boolean}
+     */
+    set pauseButton (boolean) {
+        pauseButton_bool = !boolean;
+        evaluatePause();
+    },
+    get pauseButton ()  {
+        return pauseButton_bool;
+    },
+    /**
+     * @type {Boolean}
+     * @description Gets or sets wether the game is playing or not.
+     */
+
+    set playing   (boolean) {
+        if (boolean === undefined) {
+            noPopup_bool = !noPopup_bool;
+        } else {
+            noPopup_bool = boolean;
+        }
+        evaluatePause();
+    },
+    get playing () {
+        return evaluatePause ();
+    }
+
+};
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /**
  * Created by Jean-Baptiste on 10/04/2017.
  * @module
  * @description Keeps a list of all objects currently displayed in the game, sorted by kind ("badGuy", "Goodie",  "playerAvatar") .
  */
 var list_obj = {disabled: []},
-    ArrayUtils = __webpack_require__(5),
+    ArrayUtils = __webpack_require__(6),
     getList = function (listId_str) {
         var result_array = list_obj[listId_str];
         if (!listId_str) {
@@ -559,7 +618,7 @@ module.exports = {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -644,7 +703,7 @@ module.exports = {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -681,7 +740,7 @@ module.exports = function (filename_str, forceNewAudio_bool) {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /**
@@ -796,65 +855,6 @@ module.exports = {
         return result_array;
     }
 };
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Created by Jean-Baptiste on 06/05/2017.
- * @module
- * @description Manages the pauses in the game (caused by popup displays, pause-button, ...)
- *
- */
-
-
-var
-    app_el = __webpack_require__ (0)('app').dom_el,
-    noPopup_bool = true,
-    evaluatePause =  function (){
-        var paused_bool =  noPopup_bool && pauseButton_bool;
-        if (pauseButton_bool) {
-            app_el.classList.remove ('pauseButtonTriggered');
-        } else {
-            app_el.classList.add ('pauseButtonTriggered');
-        }
-        return paused_bool;
-    },
-    pauseButton_bool = true;
-module.exports = {
-    /**
-     *
-     * @description Gets or sets wether the pause-pause-button is on or off.
-     * @type {Boolean}
-     */
-    set pauseButton (boolean) {
-        pauseButton_bool = !boolean;
-        evaluatePause();
-    },
-    get pauseButton ()  {
-        return pauseButton_bool;
-    },
-    /**
-     * @type {Boolean}
-     * @description Gets or sets wether the game is playing or not.
-     */
-
-    set playing   (boolean) {
-        if (boolean === undefined) {
-            noPopup_bool = !noPopup_bool;
-        } else {
-            noPopup_bool = boolean;
-        }
-        evaluatePause();
-    },
-    get playing () {
-        return evaluatePause ();
-    }
-
-};
-
 
 /***/ }),
 /* 7 */
@@ -1174,7 +1174,7 @@ module.exports = {
 
 var
     Config = __webpack_require__(0),
-    ObjectListManager = __webpack_require__(2),
+    ObjectListManager = __webpack_require__(3),
     /**
      * @private
      * @param {string} itemType_str - The type of object to test.
@@ -1269,7 +1269,7 @@ module.exports = {
 
 var
     languages_array = __webpack_require__(16),
-    ArrayUtils = __webpack_require__(5),
+    ArrayUtils = __webpack_require__(6),
     languages_map = [],
     languagesClone_map,
     refresh = function () {
@@ -1325,8 +1325,8 @@ var
     CollisionManager = __webpack_require__(12),
     TimoutManager = __webpack_require__(11),
     SvgUtils = __webpack_require__(1),
-    playSound = __webpack_require__(4),
-    PauseManager = __webpack_require__(6),
+    playSound = __webpack_require__(5),
+    PauseManager = __webpack_require__(2),
     Configs = __webpack_require__(0),
     gridSize_num = Configs('stage').gridSize,
     started_bool = false,
@@ -1468,14 +1468,20 @@ module.exports = {
 "use strict";
 /**
  * Created by Jean-Baptiste on 11/04/2017.
+ *
+ * Created by Jean-Baptiste on 11/04/2017.
+ * @module
+ * @description displays the module with the question.
+ *
  */
 
+
 var
-    Labels = __webpack_require__(3),
+    Labels = __webpack_require__(4),
     SvgUtils = __webpack_require__(1),
-    ArrayUtils = __webpack_require__(5),
+    ArrayUtils = __webpack_require__(6),
     TimeoutManager = __webpack_require__(11),
-    playSound = __webpack_require__(4),
+    playSound = __webpack_require__(5),
     Config = __webpack_require__(0),
     UserControls = __webpack_require__(18),
     gameStage_obj = Config("stage"),
@@ -1486,7 +1492,6 @@ var
         if (document.body.contains(popup_el)) {
             document.body.removeChild(popup_el);
         }
-
         callback_fun(correct_bool);
         open_bool = false;
     },
@@ -1513,12 +1518,22 @@ UserControls.onDirectionChange = function () {
     }
 };
 module.exports = {
+    /**
+     * Removes the popup
+     */
     remove: function () {
         callback_fun = function () {
         };
         closePopup();
     },
+    /**
+     * Opens the popup
+     * @param {Obstacle} obstacle_obj - An Obstacle: the wall encounterd by the user
+     * @param  {Function} p_callback_fun - The  function called when the user answers. The function receives a boolean as parameter, specifying wether or not the user answered correctly.
+     *
+     */
     open: function (obstacle_obj, p_callback_fun) {
+        if (!open_bool) {
         var
             INTERFACE_HEIGHT_NUM = 37,
             answers_array,
@@ -1559,9 +1574,6 @@ module.exports = {
                     popup_el.classList.add('wipeFromLeft');
                 }
             };
-
-
-        if (!open_bool) {
             open_bool = true;
             callback_fun = p_callback_fun;
             answers_array = buildAnswers(obstacle_obj);
@@ -1594,7 +1606,6 @@ module.exports = {
                     closePopup(element.id === obstacle_obj.language);
                 });
             });
-
             placePopup();
         }
     }
@@ -1712,6 +1723,7 @@ module.exports = [
 
 /**
  * Created by Jean-Baptiste on 26/02/2017.
+ * @module
  */
 module.exports = function (from_point, to_point, longestPath_bool) {
     var diffs_obj = {
@@ -1866,8 +1878,8 @@ module.exports = {
 var
     Config = __webpack_require__(0),
     IntervalManager = __webpack_require__(7),
-    PauseManager = __webpack_require__(6),
-    ObjectListManager = __webpack_require__(2),
+    PauseManager = __webpack_require__(2),
+    ObjectListManager = __webpack_require__(3),
     gridSize_num = Config('stage').gridSize,
     movingObjectsCounter_num = 0;
 
@@ -2091,7 +2103,7 @@ module.exports = {
 
 var
     IntervalManager = __webpack_require__(7),
-    PauseManager = __webpack_require__(6),
+    PauseManager = __webpack_require__(2),
     SvgUtils = __webpack_require__(1),
     startTime_num,
     time_num = 0,
@@ -2161,13 +2173,13 @@ module.exports = {
 
 
 var Configs = __webpack_require__(0),
-    ObjectListManager = __webpack_require__(2),
+    ObjectListManager = __webpack_require__(3),
     SvgUtils = __webpack_require__(1),
     MovingObject = __webpack_require__(19),
     directionFromTo = __webpack_require__(17),
     PlayerAvatar = __webpack_require__(14),
     LivesManager = __webpack_require__(9),
-    PauseManager = __webpack_require__(6),
+    PauseManager = __webpack_require__(2),
     CollisionManager = __webpack_require__(12),
     ID_STR = 'badGuy',
     gridSize_num = Configs('stage').gridSize,
@@ -2323,17 +2335,18 @@ module.exports = {
 "use strict";
 /**
  * Created by Jean-Baptiste on 25/02/2017.
+ * @module
+ * @description The goodies (scores and bonus lives) appearing in the game.
  */
 
 var
     Config = __webpack_require__(0),
     stageConfig = Config('stage'),
-    ObjectListManager = __webpack_require__(2),
+    ObjectListManager = __webpack_require__(3),
     SvgUtils = __webpack_require__(1),
     LiveManager = __webpack_require__(9),
     ScoreManager = __webpack_require__(8),
-    playSound = __webpack_require__(4),
-
+    playSound = __webpack_require__(5),
     CollisionManager = __webpack_require__(12),
     layer_g = SvgUtils.createElement('g'),
     onCollected_fun,
@@ -2376,7 +2389,6 @@ var
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
             }
-            console.log ("goodies : " , items_array);
             return items_array.length;
         };
         items_array.push(config);
@@ -2386,12 +2398,25 @@ var
 stageConfig.dom_el.appendChild(layer_g);
 
 module.exports = {
+    /**
+     * @type Function
+     * @writeonly
+     * @description Sets the callback called when all goodies are collected
+     */
     set onCollected(fun) {
         onCollected_fun = fun;
     },
+    /**
+     * @type Array
+     * @readonly
+     * @description The list of goodies on the screen
+     */
     get itemList() {
         return items_array;
     },
+    /**
+     * Add all the goodies on the stage on a grid of 6 by 6, if the square is not occupied by another object (wall, ...).
+     */
     addAll: function () {
         var line_num,
             column_num,
@@ -2422,20 +2447,32 @@ module.exports = {
 "use strict";
 /**
  * Created by Jean-Baptiste on 25/02/2017.
+ *
+ * @module
+ * @description The Factory generating obstacles: The walls encountered by the user
+ */
+/**
+ * @typedef Rectangle
+ * @description A rectangle used to convey coordinates.
+ * @property {Number} width - The width of the rectangle
+ * @property {Number} height - The height
+ * @property {Number} x - The position on the X-axis
+ * @property {Number} y - The position on the Y-axis
+ *
  */
 
 var
     Config = __webpack_require__(0),
     stageConfig = Config('stage'),
-    ObjectListManager = __webpack_require__(2),
+    ObjectListManager = __webpack_require__(3),
     SvgUtils = __webpack_require__(1),
     ColorUtils = __webpack_require__(37),
     TimeoutManager = __webpack_require__(11),
-    ArrayUtils = __webpack_require__(5),
+    ArrayUtils = __webpack_require__(6),
     gridSize_num = stageConfig.gridSize,
     ID_STR = 'obstacle',
     layer_g = SvgUtils.createElement('g'),
-    playSound = __webpack_require__(4),
+    playSound = __webpack_require__(5),
     Languages = __webpack_require__(13),
     COLORS_ARRAY = ['#170c59', '#752995', '#ff5a19', '#006830'],
     items_array = ObjectListManager.createList(ID_STR);
@@ -2443,9 +2480,16 @@ var
 stageConfig.dom_el.appendChild (layer_g);
 
 module.exports = {
+    /**
+     * The list of obstacles on the screen
+     */
     get itemList() {
         return items_array;
     },
+    /**
+     * Creates a new obstacle and adds it to the Obstacle List.
+     * @param {Rectangle} rect -The coordinates of the wall.
+     */
     add: function (rect) {
         var
             config = JSON.parse(JSON.stringify(Config(ID_STR))),
@@ -2570,7 +2614,7 @@ module.exports = {
  */
 var
     levels_array = __webpack_require__(34),
-    ArrayUtils = __webpack_require__(5),
+    ArrayUtils = __webpack_require__(6),
     randomLevels_array,
     setRandomArray = function () {
         randomLevels_array = levels_array.slice(2);
@@ -2620,7 +2664,7 @@ module.exports = {
  *
  */
 var
-    Labels = __webpack_require__(3),
+    Labels = __webpack_require__(4),
     Config = __webpack_require__(0),
     ScoreManager = __webpack_require__(8),
     SvgUtils = __webpack_require__(1),
@@ -2738,7 +2782,7 @@ module.exports = function (p_callback_fun) {
 
 
 var languages_array = __webpack_require__(16),
-    Labels = __webpack_require__(3),
+    Labels = __webpack_require__(4),
     Config = __webpack_require__(0),
     stage_el = Config('game').dom_el,
     Animation = __webpack_require__(10),
@@ -2882,7 +2926,7 @@ module.exports = {
  *
  */
 var
-    Labels = __webpack_require__(3),
+    Labels = __webpack_require__(4),
     Config = __webpack_require__(0),
     stage_el = Config('game').dom_el,
     SvgUtils = __webpack_require__(1),
@@ -2952,7 +2996,7 @@ module.exports = function (p_callback_fun) {
 var
     paused_bool = false,
     Config = __webpack_require__(0),
-    PauseManager = __webpack_require__(6),
+    PauseManager = __webpack_require__(2),
     SvgUtils = __webpack_require__(1),
     pauseButton = Config('interface').dom_el.querySelector('.pauseButton'),
     togglePause = function (evt) {
@@ -6818,6 +6862,8 @@ module.exports = [
 "use strict";
 /**
  * Created by Jean-Baptiste on 2/21/2017.
+ * @module
+ *
  */
 
 var pressedKey_str,
@@ -6847,6 +6893,8 @@ module.exports = {
 "use strict";
 /**
  * Created by Jean-Baptiste on 2/21/2017.
+ * @module
+ *
  */
 
 
@@ -6966,7 +7014,7 @@ __webpack_require__(31);
 
 var
     languageChoice = __webpack_require__(29),
-    Labels = __webpack_require__(3),
+    Labels = __webpack_require__(4),
     setLabels = function () {
         var
             scoreLabel_el = document.querySelector('#linguagoApplication .scoreLabel'),
@@ -6997,10 +7045,10 @@ Labels.fetchLabels(pageLanguage_str, function () {
             ScoreManager = __webpack_require__(8),
             Timer = __webpack_require__(23),
             LiveManager = __webpack_require__(9),
-            PauseManager = __webpack_require__ (6),
+            PauseManager = __webpack_require__ (2),
             LevelCounter = __webpack_require__(22),
-            playSound = __webpack_require__(4),
-            ObjectlistManager = __webpack_require__(2),
+            playSound = __webpack_require__(5),
+            ObjectlistManager = __webpack_require__(3),
             LevelsManager = __webpack_require__(27),
             Languages = __webpack_require__(13),
             app_el = Config('app').dom_el,

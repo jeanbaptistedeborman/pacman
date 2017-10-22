@@ -1,5 +1,7 @@
 /**
  * Created by Jean-Baptiste on 25/02/2017.
+ * @module
+ * @description The goodies (scores and bonus lives) appearing in the game.
  */
 "use strict";
 var
@@ -10,7 +12,6 @@ var
     LiveManager = require('../../counters/livemanager'),
     ScoreManager = require('../../counters/scoremanager'),
     playSound = require('../../../game/utils/playsound'),
-
     CollisionManager = require('../collisionmanager'),
     layer_g = SvgUtils.createElement('g'),
     onCollected_fun,
@@ -53,7 +54,6 @@ var
             if (items_array.length === 0 && onCollected_fun) {
                 onCollected_fun();
             }
-            console.log ("goodies : " , items_array);
             return items_array.length;
         };
         items_array.push(config);
@@ -63,12 +63,25 @@ var
 stageConfig.dom_el.appendChild(layer_g);
 
 module.exports = {
+    /**
+     * @type Function
+     * @writeonly
+     * @description Sets the callback called when all goodies are collected
+     */
     set onCollected(fun) {
         onCollected_fun = fun;
     },
+    /**
+     * @type Array
+     * @readonly
+     * @description The list of goodies on the screen
+     */
     get itemList() {
         return items_array;
     },
+    /**
+     * Add all the goodies on the stage on a grid of 6 by 6, if the square is not occupied by another object (wall, ...).
+     */
     addAll: function () {
         var line_num,
             column_num,

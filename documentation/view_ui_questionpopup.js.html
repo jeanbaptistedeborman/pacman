@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/ui/questionpopup.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/ui/questionpopup.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by Jean-Baptiste on 11/04/2017.
+ *
+ * Created by Jean-Baptiste on 11/04/2017.
+ * @module
+ * @description displays the module with the question.
+ *
+ */
+
+"use strict";
+var
+    Labels = require('../../datatransform/labels'),
+    SvgUtils = require('../../game/utils/svgutils'),
+    ArrayUtils = require('../../game/utils/arrayutils'),
+    TimeoutManager = require('../../game/utils/timeoutmanager'),
+    playSound = require('../../game/utils/playsound'),
+    Config = require('../gameobjects/config'),
+    UserControls = require('../../game/ui/usercontrol'),
+    gameStage_obj = Config("stage"),
+        gridSize_num = gameStage_obj.gridSize,
+    callback_fun,
+    popup_el,
+    closePopup = function (correct_bool) {
+        if (document.body.contains(popup_el)) {
+            document.body.removeChild(popup_el);
+        }
+        callback_fun(correct_bool);
+        open_bool = false;
+    },
+    open_bool = false,
+    buildAnswers = function (obstacle_obj) {
+        var languages_array = ArrayUtils.convertObjectToArray(Labels.getCurrentLanguages()),
+            correctLanguage_obj = languages_array.filter(function (language_obj) {
+                    return obstacle_obj.language === language_obj.id;
+                }
+            )[0],
+            languageSelection_array;
+        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
+        languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
+        correctLanguage_obj.correct = true;
+        languageSelection_array.push(correctLanguage_obj);
+        languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
+        return languageSelection_array;
+    };
+
+
+UserControls.onDirectionChange = function () {
+    if (open_bool) {
+        closePopup();
+    }
+};
+module.exports = {
+    /**
+     * Removes the popup
+     */
+    remove: function () {
+        callback_fun = function () {
+        };
+        closePopup();
+    },
+    /**
+     * Opens the popup
+     * @param {Obstacle} obstacle_obj - An Obstacle: the wall encounterd by the user
+     * @param  {Function} p_callback_fun - The  function called when the user answers. The function receives a boolean as parameter, specifying wether or not the user answered correctly.
+     *
+     */
+    open: function (obstacle_obj, p_callback_fun) {
+        if (!open_bool) {
+        var
+            INTERFACE_HEIGHT_NUM = 37,
+            answers_array,
+            margin_num = gridSize_num,
+            answers_el = document.createElement('ul'),
+            obstacleTL_point = SvgUtils.convertCoordinateFromSVGToDOM(
+                Config('game').dom_el,
+                {
+                    x: obstacle_obj.position.x - margin_num,
+                    y: INTERFACE_HEIGHT_NUM + obstacle_obj.position.y - margin_num
+                }
+            ),
+            obstacleTR_point = SvgUtils.convertCoordinateFromSVGToDOM(
+                Config('game').dom_el,
+                {
+                    x: obstacle_obj.position.x + obstacle_obj.position.width + margin_num,
+                    y: INTERFACE_HEIGHT_NUM + obstacle_obj.position.y + margin_num
+                }
+            ),
+
+            questionTitle_el = document.createElement('h2'),
+            questionTitleText_node = document.createTextNode(Labels.getLabel('what_language')),
+            placePopup = function () {
+                var size_rect = popup_el.getBoundingClientRect();
+                if (obstacle_obj.position.y &lt; gameStage_obj.position.height / 2) {
+                    popup_el.style.top = Math.round(obstacleTL_point.y) + 'px';
+                    popup_el.classList.add('top');
+
+                } else {
+                    popup_el.style.top = Math.round(-15 + obstacleTL_point.y - size_rect.height) + 'px';
+                    popup_el.classList.add('bottom');
+                }
+                if (obstacle_obj.position.x &lt; gameStage_obj.position.width / 2) {
+                    popup_el.style.left = Math.round(obstacleTR_point.x) + 'px';
+                    popup_el.classList.add('wipeFromRight');
+                } else {
+                    popup_el.style.left = Math.round(obstacleTL_point.x - size_rect.width) + 'px';
+                    popup_el.classList.add('wipeFromLeft');
+                }
+            };
+            open_bool = true;
+            callback_fun = p_callback_fun;
+            answers_array = buildAnswers(obstacle_obj);
+            playSound('question');
+            popup_el = document.createElement('div');
+            questionTitle_el.appendChild(questionTitleText_node);
+            document.body.appendChild(popup_el);
+            popup_el.setAttribute('tabindex', 0);
+            popup_el.focus ();
+            popup_el.appendChild(questionTitle_el);
+            popup_el.appendChild(answers_el);
+
+            popup_el.setAttribute('class', 'question_popup');
+            questionTitle_el.setAttribute('class', 'question_title');
+            answers_el.setAttribute('class', 'answers');
+            answers_array.forEach(function (element, index) {
+                var
+                    answer_el = document.createElement('li'),
+                    button_el = document.createElement('button'),
+                    text_node = document.createTextNode(element.value);
+                TimeoutManager.set(function () {
+                    answers_el.appendChild(answer_el);
+                }, 300 + 30 * index);
+
+                answer_el.appendChild(button_el);
+                button_el.appendChild(text_node);
+                button_el.setAttribute('class', 'answer');
+                button_el.setAttribute('tabindex', 0);
+                button_el.addEventListener('click', function () {
+                    closePopup(element.id === obstacle_obj.language);
+                });
+            });
+            placePopup();
+        }
+    }
+};
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-datatransform_labels.html">datatransform/labels</a></li><li><a href="module-game_directionfromto.html">game/directionfromto</a></li><li><a href="module-game_ui_keyboard.html">game/ui/keyboard</a></li><li><a href="module-game_ui_mouseandtouch.html">game/ui/mouseandtouch</a></li><li><a href="module-game_ui_usercontrol.html">game/ui/usercontrol</a></li><li><a href="module-game_utils_animation.html">game/utils/animation</a></li><li><a href="module-game_utils_arrayutils.html">game/utils/arrayutils</a></li><li><a href="module-game_utils_colorutils.html">game/utils/colorutils</a></li><li><a href="module-game_utils_intervalmanager.html">game/utils/intervalmanager</a></li><li><a href="module-game_utils_pausemanager.html">game/utils/pausemanager</a></li><li><a href="module-game_utils_playsound.html">game/utils/playsound</a></li><li><a href="module-game_utils_svgutils.html">game/utils/svgutils</a></li><li><a href="module-game_utils_timeoutmanager.html">game/utils/timeoutmanager</a></li><li><a href="module-index.html">index</a></li><li><a href="module-view_counters_levelcounter.html">view/counters/levelcounter</a></li><li><a href="module-view_counters_livemanager.html">view/counters/livemanager</a></li><li><a href="module-view_counters_scoremanager.html">view/counters/scoremanager</a></li><li><a href="module-view_gameobjects_collisionmanager.html">view/gameobjects/collisionmanager</a></li><li><a href="module-view_gameobjects_objectlistmanager.html">view/gameobjects/objectlistmanager</a></li><li><a href="module-view_gameobjects_objects_goodie.html">view/gameobjects/objects/goodie</a></li><li><a href="module-view_gameobjects_objects_obstacle.html">view/gameobjects/objects/obstacle</a></li><li><a href="module-view_levelsmanager.html">view/levelsmanager</a></li><li><a href="module-view_ui_gameoverscreen.html">view/ui/gameoverscreen</a></li><li><a href="module-view_ui_langagechoice.html">view/ui/langagechoice</a></li><li><a href="module-view_ui_leveloverpopup.html">view/ui/leveloverpopup</a></li><li><a href="module-view_ui_pausebutton.html">view/ui/pausebutton</a></li><li><a href="module-view_ui_questionpopup.html">view/ui/questionpopup</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Sun Oct 22 2017 15:21:12 GMT+0200 (Romance Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
