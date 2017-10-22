@@ -7031,7 +7031,6 @@ if (String(pageLanguage_str) === 'undefined') {
 languageChoice.registerLanguage(pageLanguage_str);
 Labels.fetchLabels(pageLanguage_str, function () {
     Labels.fetchLanguages(pageLanguage_str, function () {
-        console.log ("loaded");
         var
             Obstacle = __webpack_require__(26),
             Goodie = __webpack_require__(25),
@@ -7119,7 +7118,6 @@ Labels.fetchLabels(pageLanguage_str, function () {
             GameOverPopup(newGame);
         };
         Goodie.onCollected = function () {
-            console.log("All Goodies collected");
             togglePauseButton(false);
             ScoreManager.add(Timer.remaining);
             LevelOverPopup(function () {
