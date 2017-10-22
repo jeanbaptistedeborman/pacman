@@ -1,5 +1,7 @@
 /**
  * Created by Jean-Baptiste on 2/21/2017.
+ * @module
+ *
  */
 "use strict";
 var pressedKey_str,

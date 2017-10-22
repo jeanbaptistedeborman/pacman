@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: view/ui/leveloverpopup.js</title>
+    <title>JSDoc: Source: game/ui/mouseandtouch.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: view/ui/leveloverpopup.js</h1>
+    <h1 class="page-title">Source: game/ui/mouseandtouch.js</h1>
 
     
 
@@ -27,70 +27,55 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Created by Jean-Baptiste on 11/04/2017.
+ * Created by Jean-Baptiste on 2/21/2017.
  * @module
- * @description Displays the screen the end of each level.
- * @param {function} p_callback_fun -The function called when the user closes the screen
- *
  *
  */
-var
-    Labels = require('../../datatransform/labels'),
-    Config = require('../gameobjects/config'),
-    stage_el = Config('game').dom_el,
-    SvgUtils = require('../../game/utils/svgutils'),
-    Animation = require('../../game/utils/animation'),
-    callback_fun,
-    continueButton_el,
-    removeEnterClick_fun,
-    popup_el = document.getElementsByClassName('levelPopup')[0],
-    closePopup = function () {
-        open_bool = false;
-        stage_el.removeChild(popup_el);
-        callback_fun();
-        continueButton_el.removeEventListener('click', closePopup);
-        continueButton_el.removeEventListener('touchstart', closePopup);
-        document.body.removeEventListener('keydown',listenKey);
-    },
-    listenKey = function (evt) {
-        if (evt.key === "Enter") {
-            closePopup();
-        }
-    },
-    textBlock,
-    open_bool = false;
-popup_el.removeAttribute('style');
-popup_el.parentNode.removeChild(popup_el);
+"use strict";
 
-
-module.exports = function (p_callback_fun) {
-    callback_fun = p_callback_fun;
-    if (!open_bool) {
-        Animation.fadeIn (popup_el);
-        continueButton_el = popup_el.querySelector('.goButton');
-        stage_el.appendChild(popup_el);
-        if (!textBlock) {
-            textBlock = SvgUtils.getMultilineText(popup_el, Labels.getLabel('nice_work'),
-                {
-                    x: 125,
-                    y: 132,
-                    'text-anchor': 'middle',
-                    width: 80,
-                    lineHeight: 9,
-                    'font-size': '7px'
-                }
-            )
-        }
-        open_bool = true;
-        removeEnterClick_fun =  SvgUtils.simulateEnterClick(continueButton_el, closePopup);
-        continueButton_el.addEventListener('click', closePopup);
-        continueButton_el.addEventListener('touchstart', closePopup);
-        document.body.addEventListener('keydown',listenKey);
-    }
+var preventDefaults = function (evt) {
+    evt.preventDefault();
 };
 
+var
+    position_point = null,
+    app_el = document.getElementById('game_js'),
+    setCoordinates = function (evt) {
+        var isMouse_bool = !evt.changedTouches;
+        if (isMouse_bool) {
+            position_point = {x: evt.clientX, y: evt.clientY};
+        } else {
+            var touch = evt.changedTouches[0];
+            position_point = {x: touch.clientX, y: touch.clientY};
+        }
+    },
+    stopListening = function (evt) {
+        evt.preventDefault();
+        app_el.removeEventListener("mousemove", mouseMove);
+        app_el.removeEventListener("touchMove", mouseMove);
+        position_point = null;
+    },
+    mouseMove = function (evt) {
+        evt.preventDefault();
+        setCoordinates(evt);
+    },
+    mouseDown = function (evt) {
+        evt.preventDefault();
+        app_el.addEventListener("mousemove", mouseMove);
+        setCoordinates(evt);
+    };
+app_el.addEventListener("mouseleave", stopListening);
+app_el.addEventListener("touchmove", mouseMove);
+app_el.addEventListener("mousedown", mouseDown);
+app_el.addEventListener("touchstart", mouseDown);
+app_el.addEventListener("mouseup", stopListening);
+app_el.addEventListener("touchend", stopListening);
 
-</code></pre>
+module.exports = {
+    get position() {
+       return position_point;
+    }
+};</code></pre>
         </article>
     </section>
 

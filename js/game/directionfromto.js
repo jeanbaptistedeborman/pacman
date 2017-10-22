@@ -1,5 +1,6 @@
 /**
  * Created by Jean-Baptiste on 26/02/2017.
+ * @module
  */
 module.exports = function (from_point, to_point, longestPath_bool) {
     var diffs_obj = {
