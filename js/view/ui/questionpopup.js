@@ -1,6 +1,12 @@
 /**
  * Created by Jean-Baptiste on 11/04/2017.
+ *
+ * Created by Jean-Baptiste on 11/04/2017.
+ * @module
+ * @description displays the module with the question.
+ *
  */
+
 "use strict";
 var
     Labels = require('../../datatransform/labels'),
@@ -18,7 +24,6 @@ var
         if (document.body.contains(popup_el)) {
             document.body.removeChild(popup_el);
         }
-
         callback_fun(correct_bool);
         open_bool = false;
     },
@@ -45,12 +50,22 @@ UserControls.onDirectionChange = function () {
     }
 };
 module.exports = {
+    /**
+     * Removes the popup
+     */
     remove: function () {
         callback_fun = function () {
         };
         closePopup();
     },
+    /**
+     * Opens the popup
+     * @param {Obstacle} obstacle_obj - An Obstacle: the wall encounterd by the user
+     * @param  {Function} p_callback_fun - The  function called when the user answers. The function receives a boolean as parameter, specifying wether or not the user answered correctly.
+     *
+     */
     open: function (obstacle_obj, p_callback_fun) {
+        if (!open_bool) {
         var
             INTERFACE_HEIGHT_NUM = 37,
             answers_array,
@@ -91,9 +106,6 @@ module.exports = {
                     popup_el.classList.add('wipeFromLeft');
                 }
             };
-
-
-        if (!open_bool) {
             open_bool = true;
             callback_fun = p_callback_fun;
             answers_array = buildAnswers(obstacle_obj);
@@ -126,7 +138,6 @@ module.exports = {
                     closePopup(element.id === obstacle_obj.language);
                 });
             });
-
             placePopup();
         }
     }
