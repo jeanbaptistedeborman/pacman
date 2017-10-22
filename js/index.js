@@ -111,7 +111,7 @@ Labels.fetchLabels(pageLanguage_str, function () {
                             x: Math.round(element.rect.x),
                             y: Math.round(element.rect.y)
                         });
-                    }
+                  }
                     playSound('bon_1');
                 });
                 Goodie.addAll();
