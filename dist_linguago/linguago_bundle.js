@@ -10566,44 +10566,7 @@ var
         callback_fun(correct_bool);
         open_bool = false;
     },
-    open_bool = false,
-    buildAnswers = function (obstacle_obj) {
-        var languages_array = ArrayUtils.convertObjectToArray(Labels.getCurrentLanguages()),
-            correctLanguage_obj = languages_array.filter(function (language_obj) {
-                    return obstacle_obj.language === language_obj.id;
-                }
-            )[0],
-            languageSelection_array;
-        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
-        languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
-        correctLanguage_obj.correct = true;
-        languageSelection_array.push(correctLanguage_obj);
-        languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
-        return languageSelection_array;
-    };
-
-
-UserControls.onDirectionChange = function () {
-    if (open_bool) {
-        closePopup();
-    }
-};
-module.exports = {
-    /**
-     * Removes the popup
-     */
-    remove: function () {
-        callback_fun = function () {
-        };
-        closePopup();
-    },
-    /**
-     * Opens the popup
-     * @param {Obstacle} obstacle_obj - An Obstacle: the wall encounterd by the user
-     * @param  {Function} p_callback_fun - The  function called when the user answers. The function receives a boolean as parameter, specifying wether or not the user answered correctly.
-     *
-     */
-    open: function (obstacle_obj, p_callback_fun) {
+    openPopup = function (obstacle_obj, p_callback_fun) {
         if (!open_bool) {
             var
                 INTERFACE_HEIGHT_NUM = 37,
@@ -10653,7 +10616,7 @@ module.exports = {
             questionTitle_el.appendChild(questionTitleText_node);
             document.body.appendChild(popup_el);
             popup_el.setAttribute('tabindex', 0);
-            popup_el.focus ();
+            popup_el.focus();
             popup_el.appendChild(questionTitle_el);
             popup_el.appendChild(answers_el);
 
@@ -10678,6 +10641,48 @@ module.exports = {
                 });
             });
             placePopup();
+        }
+    },
+    open_bool = false,
+    buildAnswers = function (obstacle_obj) {
+        var languages_array = ArrayUtils.convertObjectToArray(Labels.getCurrentLanguages()),
+            correctLanguage_obj = languages_array.filter(function (language_obj) {
+                    return obstacle_obj.language === language_obj.id;
+                }
+            )[0],
+            languageSelection_array;
+        languages_array = ArrayUtils.remove(languages_array, correctLanguage_obj);
+        languageSelection_array = ArrayUtils.pickRandomItems(languages_array, 4);
+        correctLanguage_obj.correct = true;
+        languageSelection_array.push(correctLanguage_obj);
+        languageSelection_array = ArrayUtils.shuffle(languageSelection_array);
+        return languageSelection_array;
+    };
+
+
+UserControls.onDirectionChange = function () {
+    if (open_bool) {
+        closePopup();
+    }
+};
+module.exports = {
+    /**
+     * Removes the popup
+     */
+    remove: function () {
+        callback_fun = function () {
+        };
+        closePopup();
+    },
+    /**
+     * Opens the popup
+     * @param {Obstacle} obstacle_obj - An Obstacle: the wall encounterd by the user
+     * @param  {Function} p_callback_fun - The  function called when the user answers. The function receives a boolean as parameter, specifying wether or not the user answered correctly.
+     *
+     */
+    open: function (obstacle_obj, p_callback_fun) {
+        if (!open_bool) {
+            openPopup(obstacle_obj, p_callback_fun);
         }
     }
 };
