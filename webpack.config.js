@@ -25,11 +25,11 @@ module.exports = {
     }
     ,
     plugins: [
-        /*
         new webpack.optimize.UglifyJsPlugin({
-            minimize: true
-        })
-        */
-    ]
-}
-;
+            compress: {warnings: false},
+            sourceMap: true
+        }),
+        new webpack.SourceMapDevToolPlugin({
+            filename: "[file].map"
+        })]
+};
